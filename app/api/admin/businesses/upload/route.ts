@@ -111,10 +111,14 @@ export async function POST(request: NextRequest) {
           const seoFileName = `${business.slug}-mobile-tire-repair-${fileIndex + 1}.${ext}`;
           const key = `business-photos/${seoFileName}`;
 
+          const uploadBytes = imageBuffer instanceof Uint8Array
+            ? imageBuffer
+            : new Uint8Array(imageBuffer);
+
           const command = new PutObjectCommand({
             Bucket: BUCKET_NAME,
             Key: key,
-            Body: imageBuffer instanceof ArrayBuffer ? new Uint8Array(imageBuffer) : imageBuffer,
+            Body: uploadBytes,
             ContentType: file.type,
           });
 
