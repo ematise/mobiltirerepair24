@@ -1,0 +1,23 @@
+{
+  "texas": {
+    "slug": "texas",
+    "name": "Texas",
+    "code": "TX",
+    "intro": "Texas is one of the most vehicle-dependent states in the country. With sprawling metro areas, long highways, and extreme summer heat that can quickly degrade tires, having access to a reliable mobile tire repair service is essential for Texas drivers.",
+    "cities": ["dallas", "houston", "austin", "san-antonio", "fort-worth"]
+  },
+  "florida": {
+    "slug": "florida",
+    "name": "Florida",
+    "code": "FL",
+    "intro": "Florida's year-round heat, frequent tropical storms, and high tourist traffic make tire blowouts and flat tires a common roadside emergency. Mobile tire repair services across Florida ensure you're never stranded far from help.",
+    "cities": ["miami", "orlando", "tampa", "jacksonville", "fort-lauderdale"]
+  },
+  "california": {
+    "slug": "california",
+    "name": "California",
+    "code": "CA",
+    "intro": "From the congested freeways of Los Angeles to the long stretches of Highway 1, California drivers face unique tire challenges. Mobile tire repair services across the state offer fast, on-site solutions without the hassle of a tow.",
+    "cities": ["los-angeles", "san-diego", "san-jose", "sacramento", "fresno"]
+  }
+}

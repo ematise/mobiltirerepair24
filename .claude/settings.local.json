@@ -1,17 +1,32 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3 \"C:/Users/Emanuel/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"local service directory auto tire repair professional trustworthy\" --design-system --persist -p \"MobilTireRepair24\" -f markdown)",
+      "Bash(python3 \"C:/Users/Emanuel/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"local service directory auto tire repair professional trustworthy\" --design-system --persist -p \"MobileTireRepair24\" -f markdown)",
       "Bash(where python3:*)",
       "Bash(where python:*)",
       "Read(//c/Users/Emanuel/.claude/skills/ui-ux-pro-max/**)",
       "Read(//c/Users/Emanuel/.claude/src/ui-ux-pro-max/**)",
       "Read(//c/Users/Emanuel/.claude/**)",
-      "Bash(C:/Users/Emanuel/AppData/Local/Programs/Python/Python312/python.exe \"C:/Users/Emanuel/AppData/Local/nvm/v22.12.0/node_modules/uipro-cli/assets/scripts/search.py\" \"local service directory auto tire repair professional trustworthy\" --design-system --persist -p \"MobilTireRepair24\")",
+      "Bash(C:/Users/Emanuel/AppData/Local/Programs/Python/Python312/python.exe \"C:/Users/Emanuel/AppData/Local/nvm/v22.12.0/node_modules/uipro-cli/assets/scripts/search.py\" \"local service directory auto tire repair professional trustworthy\" --design-system --persist -p \"MobileTireRepair24\")",
       "Bash(C:/Users/Emanuel/AppData/Local/Programs/Python/Python312/python.exe \"C:/Users/Emanuel/AppData/Local/nvm/v22.12.0/node_modules/uipro-cli/assets/scripts/search.py\" \"SSR static generation routing performance\" --stack nextjs)",
       "Bash(npx create-next-app@latest . --typescript --tailwind --app --no-src-dir --no-eslint --import-alias \"@/*\" --yes)",
       "Bash(mv PLAN.md /tmp/PLAN.md)",
-      "Bash(mv design-system:*)"
+      "Bash(mv design-system:*)",
+      "Bash(mv /tmp/PLAN.md c:/xampp/htdocs/mobiletirerepair24/PLAN.md)",
+      "Bash(mv /tmp/design-system c:/xampp/htdocs/mobiletirerepair24/design-system)",
+      "Bash(npm run:*)",
+      "Bash(ls c:/xampp/htdocs/mobiltirerepair24/.env*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsx:*)",
+      "Bash(npx tsc *)",
+      "Bash(node -e ' *)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(taskkill /PID 14704 /F)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000/admin/login)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

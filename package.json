@@ -1,5 +1,5 @@
 {
-  "name": "mobiltirerepair24",
+  "name": "mobiletirerepair24",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,16 +8,26 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.627.0",
+    "@aws-sdk/s3-request-presigner": "^3.627.0",
+    "jose": "^5.4.1",
+    "jsonwebtoken": "^9.0.0",
+    "lucide-react": "^1.8.0",
+    "mongodb": "^7.1.1",
     "next": "16.2.2",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.4.1",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

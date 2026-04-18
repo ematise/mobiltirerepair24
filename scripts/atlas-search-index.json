@@ -1,0 +1,54 @@
+{
+  "_comment": "Create this index in Atlas UI → your cluster → Search → Create Search Index → JSON editor",
+  "_comment2": "Apply the same index definition to BOTH 'businesses' and 'cities' collections",
+
+  "businesses": {
+    "name": "businesses_search",
+    "definition": {
+      "mappings": {
+        "dynamic": false,
+        "fields": {
+          "name": [
+            {
+              "type": "autocomplete",
+              "analyzer": "lucene.standard",
+              "tokenization": "edgeGram",
+              "minGrams": 2,
+              "maxGrams": 15
+            },
+            { "type": "string" }
+          ],
+          "city": { "type": "string" },
+          "state": { "type": "string" },
+          "stateCode": { "type": "string" },
+          "description": { "type": "string" },
+          "slug": { "type": "string" }
+        }
+      }
+    }
+  },
+
+  "cities": {
+    "name": "cities_search",
+    "definition": {
+      "mappings": {
+        "dynamic": false,
+        "fields": {
+          "name": [
+            {
+              "type": "autocomplete",
+              "analyzer": "lucene.standard",
+              "tokenization": "edgeGram",
+              "minGrams": 2,
+              "maxGrams": 15
+            },
+            { "type": "string" }
+          ],
+          "state": { "type": "string" },
+          "stateCode": { "type": "string" },
+          "slug": { "type": "string" }
+        }
+      }
+    }
+  }
+}

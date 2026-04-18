@@ -1,0 +1,83 @@
+{
+  "mobile-tire-repair": {
+    "slug": "mobile-tire-repair",
+    "name": "Mobile Tire Repair",
+    "shortName": "Tire Repair",
+    "description": "On-site tire repair wherever you are — no tow truck needed.",
+    "h1Template": "Mobile Tire Repair in {city}, {stateCode}",
+    "metaTitleTemplate": "Mobile Tire Repair in {city}, {stateCode} | MobileTireRepair24",
+    "metaDescTemplate": "Find top-rated mobile tire repair services in {city}, {stateCode}. Fast on-site service — technicians come to you.",
+    "faqs": [
+      {
+        "q": "How fast can a mobile tire repair tech reach me in {city}?",
+        "a": "Most mobile tire technicians in {city} arrive within 30–60 minutes depending on your location and traffic conditions."
+      },
+      {
+        "q": "How much does mobile tire repair cost in {city}, {stateCode}?",
+        "a": "Mobile tire repair in {city} typically costs $50–$150 depending on the type of repair, tire size, and provider."
+      },
+      {
+        "q": "Do mobile tire services work on highways in {city}?",
+        "a": "Yes — most mobile tire repair technicians in {city} are equipped to safely service vehicles on highways and major roads."
+      },
+      {
+        "q": "What does mobile tire repair include?",
+        "a": "Services typically include flat tire repair, plug and patch, tire inflation, and tire replacement on-site at your location."
+      }
+    ]
+  },
+  "flat-tire-repair": {
+    "slug": "flat-tire-repair",
+    "name": "Flat Tire Repair",
+    "shortName": "Flat Repair",
+    "description": "Emergency flat tire repair with fast on-site response.",
+    "h1Template": "Flat Tire Repair in {city}, {stateCode}",
+    "metaTitleTemplate": "Flat Tire Repair in {city}, {stateCode} | MobileTireRepair24",
+    "metaDescTemplate": "Emergency flat tire repair in {city}, {stateCode}. Mobile technicians come to your location fast.",
+    "faqs": [
+      {
+        "q": "How long does flat tire repair take in {city}?",
+        "a": "A flat tire repair typically takes 20–45 minutes on-site in {city}, depending on the damage and tire type."
+      },
+      {
+        "q": "Can every flat tire be repaired in {city}?",
+        "a": "Not all flats can be repaired — tires with sidewall damage or large punctures usually require full replacement."
+      },
+      {
+        "q": "Is emergency flat tire repair available 24/7 in {city}?",
+        "a": "Many mobile tire repair services in {city} offer 24/7 emergency flat tire response. Check individual provider hours."
+      },
+      {
+        "q": "How much does flat tire repair cost in {city}, {stateCode}?",
+        "a": "Flat tire repair in {city} usually ranges from $40–$100 for a standard puncture repair, with replacement costing more."
+      }
+    ]
+  },
+  "tire-installation": {
+    "slug": "tire-installation",
+    "name": "Tire Installation",
+    "shortName": "Installation",
+    "description": "Mobile tire installation — new tires mounted and balanced at your location.",
+    "h1Template": "Mobile Tire Installation in {city}, {stateCode}",
+    "metaTitleTemplate": "Mobile Tire Installation in {city}, {stateCode}",
+    "metaDescTemplate": "Mobile tire installation in {city}, {stateCode}. Get new tires mounted and balanced wherever you are.",
+    "faqs": [
+      {
+        "q": "Can tires be installed at my home or office in {city}?",
+        "a": "Yes — mobile tire installation services in {city} bring all the equipment needed to mount and balance tires at any location."
+      },
+      {
+        "q": "Do I need to buy tires in advance for mobile installation in {city}?",
+        "a": "Most mobile tire technicians in {city} either supply tires or can work with tires you've purchased separately."
+      },
+      {
+        "q": "How much does mobile tire installation cost in {city}, {stateCode}?",
+        "a": "Mobile tire installation in {city} typically costs $25–$50 per tire for mounting and balancing, not including the tire cost."
+      },
+      {
+        "q": "Is mobile tire installation as reliable as a shop in {city}?",
+        "a": "Yes — licensed mobile tire technicians in {city} use professional-grade equipment comparable to traditional tire shops."
+      }
+    ]
+  }
+}

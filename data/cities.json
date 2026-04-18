@@ -1,0 +1,152 @@
+{
+  "dallas": {
+    "slug": "dallas",
+    "name": "Dallas",
+    "state": "texas",
+    "stateCode": "TX",
+    "lat": 32.7767,
+    "lng": -96.797,
+    "intro": "Dallas drivers deal with everything from scorching summer heat to sudden hailstorms — both of which put serious stress on tires. Whether you're stranded on I-35 or in a parking lot in Uptown, mobile tire repair services in Dallas bring professional help directly to you.",
+    "nearbyCities": ["fort-worth", "arlington", "irving", "garland", "plano"]
+  },
+  "houston": {
+    "slug": "houston",
+    "name": "Houston",
+    "state": "texas",
+    "stateCode": "TX",
+    "lat": 29.7604,
+    "lng": -95.3698,
+    "intro": "Houston's massive highway network and intense subtropical heat make it one of the toughest cities for tire longevity in the US. Mobile tire repair in Houston gets you back on Beltway 8 or the Ship Channel roads without waiting for a tow.",
+    "nearbyCities": ["dallas", "austin", "san-antonio", "fort-worth", "pasadena-tx"]
+  },
+  "austin": {
+    "slug": "austin",
+    "name": "Austin",
+    "state": "texas",
+    "stateCode": "TX",
+    "lat": 30.2672,
+    "lng": -97.7431,
+    "intro": "Austin's rapid growth has brought more vehicles, more road construction, and more tire hazards. Whether you're on MoPac, South Congress, or a suburban street in Round Rock, mobile tire repair in Austin gets you rolling again fast.",
+    "nearbyCities": ["dallas", "houston", "san-antonio", "round-rock", "cedar-park"]
+  },
+  "san-antonio": {
+    "slug": "san-antonio",
+    "name": "San Antonio",
+    "state": "texas",
+    "stateCode": "TX",
+    "lat": 29.4241,
+    "lng": -98.4936,
+    "intro": "San Antonio's mix of military traffic, tourist activity, and sprawling suburban roads creates constant demand for roadside tire services. Mobile tire repair in San Antonio means expert help comes to you, wherever you are in the metro.",
+    "nearbyCities": ["austin", "houston", "dallas", "new-braunfels", "schertz"]
+  },
+  "fort-worth": {
+    "slug": "fort-worth",
+    "name": "Fort Worth",
+    "state": "texas",
+    "stateCode": "TX",
+    "lat": 32.7555,
+    "lng": -97.3308,
+    "intro": "Fort Worth sits at the western edge of the Metroplex, where long commutes and busy freight corridors put extra wear on tires. Mobile tire repair in Fort Worth serves everyone from downtown commuters to ranch and industrial workers on the outskirts.",
+    "nearbyCities": ["dallas", "arlington", "burleson", "weatherford", "mansfield"]
+  },
+  "miami": {
+    "slug": "miami",
+    "name": "Miami",
+    "state": "florida",
+    "stateCode": "FL",
+    "lat": 25.7617,
+    "lng": -80.1918,
+    "intro": "Miami's intense heat, heavy tourist traffic, and road debris from construction make flat tires a routine occurrence. Mobile tire repair in Miami means you don't have to abandon your car on I-95 or a busy South Beach street.",
+    "nearbyCities": ["fort-lauderdale", "homestead", "miami-gardens", "hialeah", "coral-gables"]
+  },
+  "orlando": {
+    "slug": "orlando",
+    "name": "Orlando",
+    "state": "florida",
+    "stateCode": "FL",
+    "lat": 28.5383,
+    "lng": -81.3792,
+    "intro": "Orlando sees tens of millions of visitors every year, and with that comes heavy road traffic on I-4 and the tourist corridors near the parks. Mobile tire repair in Orlando gets locals and visitors back on the road without the hassle.",
+    "nearbyCities": ["tampa", "kissimmee", "sanford", "winter-park", "altamonte-springs"]
+  },
+  "tampa": {
+    "slug": "tampa",
+    "name": "Tampa",
+    "state": "florida",
+    "stateCode": "FL",
+    "lat": 27.9506,
+    "lng": -82.4572,
+    "intro": "Tampa's growing population and frequent afternoon thunderstorms mean road hazards are a daily reality. Mobile tire repair in Tampa serves drivers across the bay area, from downtown to Brandon and beyond.",
+    "nearbyCities": ["orlando", "clearwater", "st-petersburg", "brandon", "lakeland"]
+  },
+  "jacksonville": {
+    "slug": "jacksonville",
+    "name": "Jacksonville",
+    "state": "florida",
+    "stateCode": "FL",
+    "lat": 30.3322,
+    "lng": -81.6557,
+    "intro": "As one of the largest cities by area in the contiguous US, Jacksonville has a lot of road to cover. Mobile tire repair in Jacksonville reaches you whether you're in the urban core, the beaches, or the far suburbs.",
+    "nearbyCities": ["miami", "orlando", "st-augustine", "orange-park", "fernandina-beach"]
+  },
+  "fort-lauderdale": {
+    "slug": "fort-lauderdale",
+    "name": "Fort Lauderdale",
+    "state": "florida",
+    "stateCode": "FL",
+    "lat": 26.1224,
+    "lng": -80.1373,
+    "intro": "Fort Lauderdale's mix of dense urban traffic, beach roads, and marine industry workers creates constant demand for fast tire services. Mobile tire repair in Fort Lauderdale brings the shop to you — fast.",
+    "nearbyCities": ["miami", "boca-raton", "pompano-beach", "deerfield-beach", "hollywood-fl"]
+  },
+  "los-angeles": {
+    "slug": "los-angeles",
+    "name": "Los Angeles",
+    "state": "california",
+    "stateCode": "CA",
+    "lat": 34.0522,
+    "lng": -118.2437,
+    "intro": "Los Angeles has some of the most congested and pothole-riddled freeways in the country. A flat tire on the 405 or the 10 can mean hours of lost time — mobile tire repair in Los Angeles gets a tech to you fast, wherever you're stuck.",
+    "nearbyCities": ["long-beach", "pasadena", "burbank", "torrance", "inglewood"]
+  },
+  "san-diego": {
+    "slug": "san-diego",
+    "name": "San Diego",
+    "state": "california",
+    "stateCode": "CA",
+    "lat": 32.7157,
+    "lng": -117.1611,
+    "intro": "San Diego's spread-out geography and military bases mean drivers cover a lot of road daily. Mobile tire repair in San Diego reaches you quickly from Chula Vista to Miramar without the need for a tow truck.",
+    "nearbyCities": ["los-angeles", "chula-vista", "el-cajon", "escondido", "santee"]
+  },
+  "san-jose": {
+    "slug": "san-jose",
+    "name": "San Jose",
+    "state": "california",
+    "stateCode": "CA",
+    "lat": 37.3382,
+    "lng": -121.8863,
+    "intro": "San Jose sits at the heart of Silicon Valley, where tech workers commute long hours on congested corridors. Mobile tire repair in San Jose means a fast response whether you're stranded near the airport or in the suburbs.",
+    "nearbyCities": ["los-angeles", "san-francisco", "santa-clara", "sunnyvale", "fremont"]
+  },
+  "sacramento": {
+    "slug": "sacramento",
+    "name": "Sacramento",
+    "state": "california",
+    "stateCode": "CA",
+    "lat": 38.5816,
+    "lng": -121.4944,
+    "intro": "Sacramento serves as a major transit hub between Northern California's major metros. Hot summers and heavy highway use put tires to the test — mobile tire repair in Sacramento provides fast relief on I-5, I-80, and beyond.",
+    "nearbyCities": ["san-jose", "stockton", "elk-grove", "roseville", "folsom"]
+  },
+  "fresno": {
+    "slug": "fresno",
+    "name": "Fresno",
+    "state": "california",
+    "stateCode": "CA",
+    "lat": 36.7378,
+    "lng": -119.7871,
+    "intro": "Fresno sits in the heart of the San Joaquin Valley, with long agricultural roads and extreme summer heat that can blow out tires fast. Mobile tire repair in Fresno is a practical necessity for both city and rural drivers.",
+    "nearbyCities": ["los-angeles", "sacramento", "clovis", "visalia", "madera"]
+  }
+}
