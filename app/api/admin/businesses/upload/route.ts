@@ -91,17 +91,16 @@ export async function POST(request: NextRequest) {
         }
 
         try {
-          let buffer = await file.arrayBuffer();
+          let imageBuffer: Buffer | ArrayBuffer = await file.arrayBuffer();
 
           // Resize image to max width 1024 with auto height
           try {
-            const resizedBuffer = await sharp(Buffer.from(buffer))
+            imageBuffer = await sharp(Buffer.from(imageBuffer))
               .resize(1024, undefined, {
                 fit: 'inside',
                 withoutEnlargement: true,
               })
               .toBuffer();
-            buffer = resizedBuffer;
           } catch (err) {
             console.error('Image resize error:', err);
             // Continue with original buffer if resize fails
@@ -115,7 +114,7 @@ export async function POST(request: NextRequest) {
           const command = new PutObjectCommand({
             Bucket: BUCKET_NAME,
             Key: key,
-            Body: new Uint8Array(buffer),
+            Body: imageBuffer instanceof ArrayBuffer ? new Uint8Array(imageBuffer) : imageBuffer,
             ContentType: file.type,
           });
 

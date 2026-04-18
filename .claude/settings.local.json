@@ -26,7 +26,8 @@
       "Bash(npm run *)",
       "Bash(curl -s http://localhost:3000/admin/login)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git commit -m 'Fix TypeScript Buffer type compatibility issue for Vercel deployment *)"
     ]
   }
 }

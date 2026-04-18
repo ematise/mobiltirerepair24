@@ -32,18 +32,17 @@ export async function POST(request: NextRequest) {
       file.type
     );
 
-    // Convert file to Uint8Array and resize image for S3 upload
-    let buffer = await file.arrayBuffer();
+    // Convert file to buffer and resize image for S3 upload
+    let imageBuffer: Buffer | ArrayBuffer = await file.arrayBuffer();
 
     // Resize image to max width 1024 with auto height
     try {
-      const resizedBuffer = await sharp(Buffer.from(buffer))
+      imageBuffer = await sharp(Buffer.from(imageBuffer))
         .resize(1024, undefined, {
           fit: 'inside',
           withoutEnlargement: true,
         })
         .toBuffer();
-      buffer = resizedBuffer;
     } catch (err) {
       console.error('Image resize error:', err);
       // Continue with original buffer if resize fails
@@ -52,7 +51,7 @@ export async function POST(request: NextRequest) {
     // Upload file to S3 using the signed URL
     const uploadResponse = await fetch(signedUrl, {
       method: 'PUT',
-      body: new Uint8Array(buffer),
+      body: imageBuffer instanceof ArrayBuffer ? new Uint8Array(imageBuffer) : imageBuffer,
       headers: {
         'Content-Type': file.type,
       },
