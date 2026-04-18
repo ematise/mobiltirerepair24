@@ -1,9 +1,7 @@
 import { MongoClient, type Db } from 'mongodb';
 
-const uri = process.env.MONGODB_URI!;
+const uri = process.env.MONGODB_URI;
 const DB_NAME = 'mobiltirerepair24';
-
-if (!uri) throw new Error('MONGODB_URI is not set in environment variables');
 
 // Singleton pattern for Next.js — reuse connection across hot reloads in dev
 declare global {
@@ -11,18 +9,24 @@ declare global {
   var _mongoClient: MongoClient | undefined;
 }
 
-let client: MongoClient;
-
-if (process.env.NODE_ENV === 'development') {
-  if (!global._mongoClient) {
-    global._mongoClient = new MongoClient(uri);
-  }
-  client = global._mongoClient;
-} else {
-  client = new MongoClient(uri);
-}
+let client: MongoClient | null = null;
 
 export async function getDb(): Promise<Db> {
+  if (!uri) {
+    throw new Error('MONGODB_URI is not set in environment variables');
+  }
+
+  if (!client) {
+    if (process.env.NODE_ENV === 'development') {
+      if (!global._mongoClient) {
+        global._mongoClient = new MongoClient(uri);
+      }
+      client = global._mongoClient;
+    } else {
+      client = new MongoClient(uri);
+    }
+  }
+
   await client.connect();
   return client.db(DB_NAME);
 }
