@@ -13,6 +13,8 @@ export default function ImageUploader({ photos, onPhotosChange, businessSlug }: 
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
   const [dragActive, setDragActive] = useState(false);
+  const [urlInput, setUrlInput] = useState('');
+  const [addingUrl, setAddingUrl] = useState(false);
 
   const handleUpload = async (files: FileList | null) => {
     if (!files) return;
@@ -97,6 +99,44 @@ export default function ImageUploader({ photos, onPhotosChange, businessSlug }: 
     onPhotosChange(photos.filter((_, i) => i !== index));
   };
 
+  const handleAddUrl = async () => {
+    if (!urlInput.trim()) {
+      setUploadError('Please enter a URL');
+      return;
+    }
+
+    setAddingUrl(true);
+    setUploadError('');
+
+    try {
+      // Validate URL format
+      const url = new URL(urlInput);
+
+      // Check if URL is HTTPS
+      if (url.protocol !== 'https:') {
+        throw new Error('URL must use HTTPS protocol');
+      }
+
+      // Try to verify the URL is accessible
+      const response = await fetch(urlInput, { method: 'HEAD' });
+      if (!response.ok) {
+        throw new Error('URL is not accessible or not an image');
+      }
+
+      // Add URL to photos
+      onPhotosChange([...photos, urlInput]);
+      setUrlInput('');
+    } catch (error) {
+      if (error instanceof TypeError) {
+        setUploadError('Invalid URL format');
+      } else {
+        setUploadError(error instanceof Error ? error.message : 'Failed to add URL');
+      }
+    } finally {
+      setAddingUrl(false);
+    }
+  };
+
   return (
     <div className="space-y-4">
       {/* Upload Area */}
@@ -147,6 +187,37 @@ export default function ImageUploader({ photos, onPhotosChange, businessSlug }: 
           {uploadError}
         </div>
       )}
+
+      {/* URL Input Section */}
+      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <h4 className="font-medium text-gray-900 mb-3">Or add by URL</h4>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={urlInput}
+            onChange={(e) => setUrlInput(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleAddUrl();
+              }
+            }}
+            placeholder="https://example.com/image.jpg (HTTPS required)"
+            disabled={addingUrl || uploading}
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+          />
+          <button
+            type="button"
+            onClick={handleAddUrl}
+            disabled={addingUrl || uploading || !urlInput.trim()}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition text-sm font-medium"
+          >
+            {addingUrl ? 'Adding...' : 'Add URL'}
+          </button>
+        </div>
+        <p className="text-xs text-gray-600 mt-2">
+          Must be a publicly accessible HTTPS URL. Images will be resized to max 1024px width.
+        </p>
+      </div>
 
       {/* Photos Grid */}
       {photos.length > 0 && (
