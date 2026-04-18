@@ -29,7 +29,8 @@
       "Bash(git commit -m ' *)",
       "Bash(git commit -m 'Fix TypeScript Buffer type compatibility issue for Vercel deployment *)",
       "Bash(git commit -m 'Fix fetch body type error - convert all buffers to Uint8Array *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git commit -m 'Fix Buffer type checking - use Buffer.isBuffer\\(\\) for proper type narrowing *)"
     ]
   }
 }

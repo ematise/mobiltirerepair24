@@ -49,9 +49,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Upload file to S3 using the signed URL
-    const uploadBytes = imageBuffer instanceof Uint8Array
-      ? imageBuffer
-      : new Uint8Array(imageBuffer);
+    // Convert to Uint8Array (Buffer is a subclass, so always convert to ensure proper type)
+    const uploadBytes = Buffer.isBuffer(imageBuffer)
+      ? new Uint8Array(imageBuffer)
+      : new Uint8Array(imageBuffer as ArrayBuffer);
 
     const uploadResponse = await fetch(signedUrl, {
       method: 'PUT',
