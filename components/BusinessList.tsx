@@ -22,7 +22,7 @@ export default function BusinessList({
       )}
       <div className="flex flex-col gap-4">
         {businesses.map((biz) => (
-          <BusinessCard key={biz.id} biz={biz} />
+          <BusinessCard key={biz.slug} biz={biz} />
         ))}
       </div>
     </section>

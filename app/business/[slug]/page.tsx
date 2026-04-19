@@ -4,6 +4,7 @@ import Link from 'next/link';
 import {
   getAllBusinesses,
   getBusinessBySlug,
+  getBusinessesByCity,
   getCityBySlug,
   getStateBySlug,
 } from '@/lib/data';
@@ -16,6 +17,7 @@ import {
 import Breadcrumb from '@/components/Breadcrumb';
 import SchemaOrg from '@/components/SchemaOrg';
 import ReviewSection from '@/components/ReviewSection';
+import BusinessCard from '@/components/BusinessCard';
 import RatingBadge from '@/components/listing/RatingBadge';
 import StatusBadge from '@/components/listing/StatusBadge';
 import HeroMetrics from '@/components/listing/HeroMetrics';
@@ -56,11 +58,16 @@ export default async function BusinessPage({ params }: Props) {
   const biz = await getBusinessBySlug(slug);
   if (!biz) notFound();
 
-  const [city, state] = await Promise.all([
+  const [city, state, allCityBusinesses] = await Promise.all([
     getCityBySlug(biz.city),
     getStateBySlug(biz.state),
+    getBusinessesByCity(biz.city, biz.state),
   ]);
   if (!city || !state) notFound();
+
+  const relatedBusinesses = allCityBusinesses
+    .filter((b) => b.slug !== biz.slug)
+    .slice(0, 3);
 
   const crumbs = businessBreadcrumbs(biz, city, state);
 
@@ -161,14 +168,21 @@ export default async function BusinessPage({ params }: Props) {
 
         {/* Related Businesses */}
         <SectionContainer divider={false}>
-          <h2 className="text-base font-semibold text-slate-700 mb-3">
+          <h2 className="text-base font-semibold text-slate-700 mb-4 mt-6">
             More in {city.name}
           </h2>
+          {relatedBusinesses.length > 0 && (
+            <div className="grid grid-cols-1 gap-4 mb-4">
+              {relatedBusinesses.map((b) => (
+                <BusinessCard key={b.slug} biz={b} />
+              ))}
+            </div>
+          )}
           <Link
             href={`/${state.slug}/${city.slug}/`}
             className="text-blue-700 hover:underline text-sm font-medium cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
           >
-            Mobile Tire Repair in {city.name}, {state.code}
+            View all mobile tire services in {city.name}, {state.code}
           </Link>
         </SectionContainer>
       </div>

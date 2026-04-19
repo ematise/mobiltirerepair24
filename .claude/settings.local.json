@@ -31,7 +31,10 @@
       "Bash(git commit -m 'Fix fetch body type error - convert all buffers to Uint8Array *)",
       "Bash(git push *)",
       "Bash(git commit -m 'Fix Buffer type checking - use Buffer.isBuffer\\(\\) for proper type narrowing *)",
-      "Bash(git commit -m 'Make MongoDB connection initialization lazy to allow builds without MONGODB_URI *)"
+      "Bash(git commit -m 'Make MongoDB connection initialization lazy to allow builds without MONGODB_URI *)",
+      "Bash(git commit -m 'Add comprehensive agent prompt for business information research *)",
+      "Bash(git commit -m 'Add image URL input to ImageUploader component *)",
+      "Bash(git diff *)"
     ]
   }
 }

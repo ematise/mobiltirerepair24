@@ -106,9 +106,16 @@ export default function ReviewSection({ businessSlug }: { businessSlug: string }
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [hasReviewed, setHasReviewed] = useState(false);
 
   const captchaRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<number | null>(null);
+
+  // Check if user already reviewed this business
+  useEffect(() => {
+    const reviewed = localStorage.getItem(`reviewed_${businessSlug}`);
+    setHasReviewed(!!reviewed);
+  }, [businessSlug]);
 
   // Load existing reviews
   useEffect(() => {
@@ -185,10 +192,14 @@ export default function ReviewSection({ businessSlug }: { businessSlug: string }
         window.grecaptcha?.reset(widgetIdRef.current ?? undefined);
       } else {
         setSubmitted(true);
+        setHasReviewed(true);
+        localStorage.setItem(`reviewed_${businessSlug}`, 'true');
         setReviews((prev) => [
           { businessSlug, displayName: resolvedName, comment, rating, createdAt: new Date().toISOString() },
           ...prev,
         ]);
+        // Reload page after 2 seconds to show updated rating
+        setTimeout(() => window.location.reload(), 2000);
       }
     } catch {
       setError('Something went wrong. Please try again.');
@@ -206,6 +217,10 @@ export default function ReviewSection({ businessSlug }: { businessSlug: string }
       {submitted ? (
         <div className="bg-green-50 border border-green-200 text-green-800 rounded-lg px-4 py-3 text-sm mb-8">
           Thank you for your review!
+        </div>
+      ) : hasReviewed ? (
+        <div className="bg-blue-50 border border-blue-200 text-blue-800 rounded-lg px-4 py-3 text-sm mb-8">
+          You've already reviewed this business. Thank you for your feedback!
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-8 space-y-4">
@@ -271,8 +286,8 @@ export default function ReviewSection({ businessSlug }: { businessSlug: string }
         <p className="text-slate-400 text-sm">No reviews yet. Be the first!</p>
       ) : (
         <div className="space-y-4">
-          {reviews.filter((r) => r.comment?.trim()).map((r, i) => (
-            <ReviewCard key={i} review={r} />
+          {reviews.filter((r) => r.comment?.trim()).map((r) => (
+            <ReviewCard key={r.createdAt} review={r} />
           ))}
         </div>
       )}

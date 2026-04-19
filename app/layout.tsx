@@ -29,10 +29,10 @@ export default async function RootLayout({
       <body className="flex flex-col min-h-screen">
         {/* Header */}
         <header className="bg-slate-900 text-white shadow-sm">
-          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4 group/header">
             <Link
               href="/"
-              className="font-semibold text-lg tracking-tight hover:text-blue-300 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded shrink-0"
+              className="font-semibold text-lg tracking-tight hover:text-blue-300 transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded shrink-0 group-focus-within/header:hidden md:group-focus-within/header:block"
               aria-label="MobileTireRepair24 — Home"
             >
               MobileTireRepair<span className="text-blue-400">24</span>
@@ -40,7 +40,7 @@ export default async function RootLayout({
 
             <SearchBar />
 
-            <nav aria-label="Main navigation">
+            <nav class=" hidden md-flex" aria-label="Main navigation">
               <ul className="flex items-center gap-4 text-sm" role="list">
                 {states.map((state) => (
                   <li key={state.slug}>

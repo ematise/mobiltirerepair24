@@ -32,9 +32,11 @@ export default async function StatePage({ params }: Props) {
   if (!state) notFound();
 
   const allCities = await getCitiesByState(stateSlug);
+  console.log(`[DEBUG] stateSlug: ${stateSlug}, allCities: ${allCities.length}`);
   const indexable = await Promise.all(
     allCities.map((c) => isCityIndexable(c.slug, stateSlug))
   );
+  console.log(`[DEBUG] indexable: ${indexable}`);
   const cities = allCities.filter((_, i) => indexable[i]);
 
   const crumbs = [
@@ -59,6 +61,7 @@ export default async function StatePage({ params }: Props) {
         <h2 className="text-2xl font-semibold text-slate-900 mb-5">
           Cities in {state.name}
         </h2>
+        {cities.length === 0 && <p className="text-slate-600">No cities found (allCities: {allCities.length})</p>}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
           {cities.map((city) => (
             <div

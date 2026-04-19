@@ -85,7 +85,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-sm">
+    <div ref={containerRef} className="relative w-full md:max-w-sm focus-within:flex-1 md:focus-within:max-w-sm" style={{ transition: 'flex 150ms' }}>
       <div className="relative">
         <input
           ref={inputRef}

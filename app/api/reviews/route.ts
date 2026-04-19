@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb, COLLECTIONS } from '@/lib/db';
+import { updateBusiness, getBusinessBySlug } from '@/lib/data';
 
 export const runtime = 'nodejs';
 
@@ -82,6 +83,35 @@ export async function POST(req: NextRequest) {
 
     const db = await getDb();
     await db.collection(COLLECTIONS.reviews).insertOne(review);
+
+    // Get original business rating and count (from admin panel)
+    const business = await getBusinessBySlug(businessSlug.trim());
+    const initialRating = business?.rating ?? 0;
+    const initialCount = business?.reviewCount ?? 0;
+
+    // Get all user-submitted reviews
+    const agg = await db
+      .collection(COLLECTIONS.reviews)
+      .aggregate([
+        { $match: { businessSlug: businessSlug.trim() } },
+        { $group: { _id: null, sum: { $sum: '$rating' }, count: { $sum: 1 } } },
+      ])
+      .toArray();
+
+    if (agg[0]) {
+      const userReviewSum = agg[0].sum;
+      const userReviewCount = agg[0].count;
+
+      // Combine initial admin rating with user reviews
+      const totalSum = (initialRating * initialCount) + userReviewSum;
+      const totalCount = initialCount + userReviewCount;
+      const combinedRating = Math.round((totalSum / totalCount) * 10) / 10;
+
+      await updateBusiness(businessSlug.trim(), {
+        rating: combinedRating,
+        reviewCount: totalCount,
+      });
+    }
 
     return NextResponse.json({ ok: true });
   } catch {

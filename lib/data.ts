@@ -243,7 +243,7 @@ export async function isCityIndexable(
   const count = await db
     .collection(COLLECTIONS.businesses)
     .countDocuments({ city: citySlug, state: stateSlug });
-  return count >= 3;
+  return count >= 1;
 }
 
 // ── Template interpolation ───────────────────────────────────────────────────
