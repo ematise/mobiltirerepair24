@@ -51,7 +51,8 @@
       "Bash(curl -s \"http://localhost:3000/california/clovis/\")",
       "Bash(curl -s \"http://localhost:3000/california/\")",
       "Bash(curl -s \"http://localhost:3000/api/search?q=clovis\")",
-      "Bash(curl -s -L \"http://localhost:3000/california\")"
+      "Bash(curl -s -L \"http://localhost:3000/california\")",
+      "Bash(git commit -m 'Add first business photo as 150x150 background image on desktop only *)"
     ]
   }
 }
