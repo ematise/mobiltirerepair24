@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createBusiness } from '@/lib/data';
+import { createBusiness, ensureBusinessLocation } from '@/lib/data';
 import { Business } from '@/lib/data';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import sharp from 'sharp';
+import { reHostPhotosToS3 } from '@/lib/s3';
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION || 'us-east-1',
@@ -61,6 +62,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    await ensureBusinessLocation(business);
 
     // Handle file uploads
     const files = formData.getAll('photos') as File[];
@@ -134,6 +137,13 @@ export async function POST(request: NextRequest) {
           );
         }
       }
+    }
+
+    // Re-host any external URLs from the JSON
+    if (business.photos && business.photos.length > 0) {
+      const rehostedUrls = await reHostPhotosToS3(business.photos, business.slug, uploadedPhotos.length + 1);
+      // Replace original URLs with rehosted ones
+      business.photos = rehostedUrls;
     }
 
     // Merge uploaded photos with any existing photos in JSON

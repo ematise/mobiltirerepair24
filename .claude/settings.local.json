@@ -34,7 +34,24 @@
       "Bash(git commit -m 'Make MongoDB connection initialization lazy to allow builds without MONGODB_URI *)",
       "Bash(git commit -m 'Add comprehensive agent prompt for business information research *)",
       "Bash(git commit -m 'Add image URL input to ImageUploader component *)",
-      "Bash(git diff *)"
+      "Bash(git diff *)",
+      "Bash(curl -s \"http://localhost:3000/api/search?q=fresno\")",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill *)",
+      "Bash(curl -s -X POST http://localhost:3000/api/admin/businesses -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(taskkill /PID 2408 /F)",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s \"http://localhost:3000/api/search?q=visalia\")",
+      "Bash(curl -s \"http://localhost:3000/business/test-city-auto-create-ca\")",
+      "Bash(curl -s -X DELETE \"http://localhost:3000/api/admin/businesses?slug=fresno-mobile-tire-clovis-ca\")",
+      "Bash(curl -s -X DELETE \"http://localhost:3000/api/admin/businesses?slug=test-fresno-mobile-tire-ca\")",
+      "Bash(curl -s -X DELETE \"http://localhost:3000/api/admin/businesses?slug=fresno-mobile-actual-ca\")",
+      "Bash(curl -s \"http://localhost:3000/business/fresno-mobile-tire-clovis-ca\")",
+      "Bash(curl -s \"http://localhost:3000/california/clovis/\")",
+      "Bash(curl -s \"http://localhost:3000/california/\")",
+      "Bash(curl -s \"http://localhost:3000/api/search?q=clovis\")",
+      "Bash(curl -s -L \"http://localhost:3000/california\")"
     ]
   }
 }

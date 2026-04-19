@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createBusiness, updateBusiness, deleteBusiness, getAllBusinesses } from '@/lib/data';
+import { createBusiness, updateBusiness, deleteBusiness, getAllBusinesses, ensureBusinessLocation } from '@/lib/data';
 import { Business } from '@/lib/data';
+import { reHostPhotosToS3 } from '@/lib/s3';
 
 export async function GET() {
   try {
@@ -19,6 +20,12 @@ export async function POST(request: NextRequest) {
 
     if (!business.slug || !business.name || !business.city || !business.state) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    await ensureBusinessLocation(business);
+
+    if (business.photos && business.photos.length > 0) {
+      business.photos = await reHostPhotosToS3(business.photos, business.slug);
     }
 
     const result = await createBusiness(business);

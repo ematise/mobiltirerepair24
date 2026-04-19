@@ -128,6 +128,46 @@ export async function deleteBusiness(slug: string): Promise<boolean> {
   return result.deletedCount > 0;
 }
 
+export async function ensureBusinessLocation(business: Business): Promise<void> {
+  const db = await getDb();
+
+  function titleCase(slug: string) {
+    return slug.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+  }
+
+  const existingState = await getStateBySlug(business.state);
+  if (!existingState) {
+    const stateName = titleCase(business.state);
+    await db.collection(COLLECTIONS.states).insertOne({
+      slug: business.state,
+      name: stateName,
+      code: business.stateCode,
+      intro: `Find mobile tire repair services across ${stateName}.`,
+      cities: [business.city],
+    });
+  } else if (!existingState.cities.includes(business.city)) {
+    await db.collection(COLLECTIONS.states).updateOne(
+      { slug: business.state },
+      { $addToSet: { cities: business.city } }
+    );
+  }
+
+  const existingCity = await getCityBySlug(business.city);
+  if (!existingCity) {
+    const cityName = titleCase(business.city);
+    await db.collection(COLLECTIONS.cities).insertOne({
+      slug: business.city,
+      name: cityName,
+      state: business.state,
+      stateCode: business.stateCode,
+      lat: 0,
+      lng: 0,
+      intro: `Find mobile tire repair services in ${cityName}, ${business.stateCode}.`,
+      nearbyCities: [],
+    });
+  }
+}
+
 // ── Cities ───────────────────────────────────────────────────────────────────
 
 export async function getAllCities(): Promise<City[]> {

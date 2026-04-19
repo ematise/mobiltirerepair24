@@ -40,7 +40,7 @@ export default async function RootLayout({
 
             <SearchBar />
 
-            <nav class=" hidden md-flex" aria-label="Main navigation">
+            <nav className="hidden md:flex" aria-label="Main navigation">
               <ul className="flex items-center gap-4 text-sm" role="list">
                 {states.map((state) => (
                   <li key={state.slug}>

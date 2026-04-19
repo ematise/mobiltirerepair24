@@ -1,5 +1,6 @@
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import sharp from 'sharp';
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION || 'us-east-1',
@@ -87,4 +88,54 @@ export function validateImageFile(file: File): { valid: boolean; error?: string 
   }
 
   return { valid: true };
+}
+
+/**
+ * Download external photo URLs and re-host them to S3
+ */
+export async function reHostPhotosToS3(
+  photos: string[],
+  slug: string,
+  startIndex = 1
+): Promise<string[]> {
+  if (!BUCKET_NAME) throw new Error('S3 bucket is not configured');
+
+  const result: string[] = [];
+
+  for (let i = 0; i < photos.length; i++) {
+    const url = photos[i];
+
+    if (url.includes('.s3.amazonaws.com/')) {
+      result.push(url);
+      continue;
+    }
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const contentType = res.headers.get('content-type') || 'image/jpeg';
+      const ext = url.split('?')[0].split('.').pop() || 'jpg';
+
+      const resized = await sharp(Buffer.from(await res.arrayBuffer()))
+        .resize(1024, undefined, { fit: 'inside', withoutEnlargement: true })
+        .toBuffer();
+
+      const key = `business-photos/${slug}-mobile-tire-repair-${startIndex + i}.${ext}`;
+
+      await s3Client.send(new PutObjectCommand({
+        Bucket: BUCKET_NAME,
+        Key: key,
+        Body: new Uint8Array(resized),
+        ContentType: contentType,
+      }));
+
+      result.push(`https://${BUCKET_NAME}.s3.amazonaws.com/${key}`);
+    } catch (err) {
+      console.error(`reHostPhotosToS3: failed for ${url}:`, err);
+      result.push(url);
+    }
+  }
+
+  return result;
 }
