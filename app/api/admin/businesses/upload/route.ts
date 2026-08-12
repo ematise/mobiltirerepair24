@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { createBusiness, ensureBusinessLocation } from '@/lib/data';
 import { Business } from '@/lib/data';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
@@ -159,6 +160,7 @@ export async function POST(request: NextRequest) {
 
     // Create business in database
     const created = await createBusiness(business);
+    revalidatePath('/', 'layout');
 
     return NextResponse.json(
       {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { createBusiness, updateBusiness, deleteBusiness, getAllBusinesses, ensureBusinessLocation } from '@/lib/data';
 import { Business } from '@/lib/data';
 import { reHostPhotosToS3 } from '@/lib/s3';
@@ -29,6 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await createBusiness(business);
+    revalidatePath('/', 'layout');
     return NextResponse.json(result, { status: 201 });
   } catch (error) {
     console.error('Error creating business:', error);
@@ -50,6 +52,7 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Business not found' }, { status: 404 });
     }
 
+    revalidatePath('/', 'layout');
     return NextResponse.json(result);
   } catch (error) {
     console.error('Error updating business:', error);
@@ -71,6 +74,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Business not found' }, { status: 404 });
     }
 
+    revalidatePath('/', 'layout');
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting business:', error);
