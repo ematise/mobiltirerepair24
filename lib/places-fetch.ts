@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import { slugify } from './slugify';
+import { mapGoogleOpeningHours, type GoogleOpeningHours } from './hours';
 import {
   getAllCities,
   upsertBusiness,
@@ -23,12 +24,7 @@ type PlaceResult = {
   websiteUri?: string;
   rating?: number;
   userRatingCount?: number;
-  regularOpeningHours?: {
-    periods?: Array<{
-      open?: { day: number; hour: number; minute: number };
-      close?: { day: number; hour: number; minute: number };
-    }>;
-  };
+  regularOpeningHours?: GoogleOpeningHours;
 };
 
 type SearchResponse = { places?: PlaceResult[]; nextPageToken?: string };
@@ -47,8 +43,6 @@ const FIELD_MASK = [
   'places.regularOpeningHours',
   'nextPageToken',
 ].join(',');
-
-const DAY_NAMES = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
 export type FetchBusinessesOptions = {
   citySlugs?: string[];
@@ -69,24 +63,6 @@ export type FetchBusinessesResult = {
 
 function getCacheDir(): string {
   return path.join(os.tmpdir(), 'mobiltirerepair24-places-cache');
-}
-
-function mapHours(hours?: PlaceResult['regularOpeningHours']): Business['hours'] | undefined {
-  if (!hours?.periods?.length) return undefined;
-  const out: NonNullable<Business['hours']> = {};
-  for (const p of hours.periods) {
-    if (!p.open) continue;
-    const day = DAY_NAMES[p.open.day];
-    const fmt = (t: { hour: number; minute: number }) =>
-      `${String(t.hour).padStart(2, '0')}:${String(t.minute).padStart(2, '0')}`;
-    out[day] = p.close
-      ? { open: fmt(p.open), close: fmt(p.close) }
-      : { open: '00:00', close: '23:59' };
-  }
-  for (const day of DAY_NAMES) {
-    if (!out[day]) out[day] = { open: '', close: '', closed: true };
-  }
-  return out;
 }
 
 function inferServices(name: string): string[] {
@@ -112,6 +88,7 @@ function isRelevant(place: PlaceResult): boolean {
 function toBusiness(place: PlaceResult, city: City): Business {
   const name = place.displayName!.text;
   const phoneIntl = (place.internationalPhoneNumber ?? '').replace(/[^\d+]/g, '');
+  const hours = mapGoogleOpeningHours(place.regularOpeningHours);
   return {
     id: `g-${place.id}`,
     name,
@@ -128,7 +105,7 @@ function toBusiness(place: PlaceResult, city: City): Business {
     rating: place.rating ?? 0,
     reviewCount: place.userRatingCount ?? 0,
     ...(place.websiteUri ? { website: place.websiteUri } : {}),
-    ...(mapHours(place.regularOpeningHours) ? { hours: mapHours(place.regularOpeningHours) } : {}),
+    ...(hours ? { hours } : {}),
   };
 }
 

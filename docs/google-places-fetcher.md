@@ -219,7 +219,18 @@ Places are deduplicated by Google Place ID across all cities in one run. The sam
 | `description` | Auto-generated template text |
 | `rating`, `reviewCount` | Google |
 | `website` | Google (if available) |
-| `hours` | Google opening hours (if available) |
+| `hours` | Google opening hours (if available). **24/7** places are encoded by Google as a single period with `open` at Sunday 00:00 and **no** `close` field — we map that to every day `00:00–23:59`. |
+
+### Hours repair
+
+If an earlier import showed **Sunday only 00:00–23:59** and Closed Mon–Sat for 24/7 businesses, repair with:
+
+```bash
+npx tsx scripts/fix-hours.ts --file businesses.fetched.json
+npx tsx scripts/fix-hours.ts --db   # after setting MONGODB_URI
+```
+
+Add `--dry-run` to preview counts without writing.
 
 ### Upsert behavior
 
