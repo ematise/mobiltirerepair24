@@ -24,9 +24,9 @@ export default async function RootLayout({
   const states = await getAllStates();
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head />
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen" suppressHydrationWarning>
         {/* Header */}
         <header className="bg-slate-900 text-white shadow-sm">
           <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4 group/header">

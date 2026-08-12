@@ -114,6 +114,23 @@ export async function createBusiness(business: Business): Promise<Business> {
   return business;
 }
 
+export async function upsertBusiness(
+  business: Business
+): Promise<{ business: Business; created: boolean }> {
+  const db = await getDb();
+  const existing = await db.collection(COLLECTIONS.businesses).findOne({ slug: business.slug });
+
+  if (existing) {
+    const result = await db
+      .collection(COLLECTIONS.businesses)
+      .findOneAndUpdate({ slug: business.slug }, { $set: business }, { returnDocument: 'after' });
+    return { business: clean<Business>(result as never), created: false };
+  }
+
+  await db.collection(COLLECTIONS.businesses).insertOne(business as never);
+  return { business, created: true };
+}
+
 export async function updateBusiness(slug: string, updates: Partial<Business>): Promise<Business | null> {
   const db = await getDb();
   const result = await db

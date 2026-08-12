@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Business } from '@/lib/data';
 import BusinessFormFull from '@/components/admin/BusinessFormFull';
 import BusinessFormJSON from '@/components/admin/BusinessFormJSON';
+import BusinessFetcher from '@/components/admin/BusinessFetcher';
 
 export default function BusinessesPage() {
   const [businesses, setBusinesses] = useState<Business[]>([]);
@@ -131,6 +132,8 @@ export default function BusinessesPage() {
       </div>
 
       {error && <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded">{error}</div>}
+
+      <BusinessFetcher onComplete={fetchBusinesses} />
 
       {/* Form */}
       {showForm && (

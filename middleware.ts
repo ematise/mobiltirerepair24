@@ -10,25 +10,32 @@ const PUBLIC_PATHS = ['/admin/login', '/api/admin/auth/login', '/api/admin/auth/
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Allow public paths
   if (PUBLIC_PATHS.includes(pathname)) {
     return NextResponse.next();
   }
 
-  // Protect admin routes
-  if (pathname.startsWith('/admin')) {
+  const isAdminRoute =
+    pathname.startsWith('/admin') || pathname.startsWith('/api/admin');
+
+  if (isAdminRoute) {
     const token = request.cookies.get('admin_session')?.value;
 
     if (!token) {
+      if (pathname.startsWith('/api/')) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
       return NextResponse.redirect(new URL('/admin/login', request.url));
     }
 
     try {
-      // Verify token
       await jwtVerify(token, JWT_SECRET);
       return NextResponse.next();
-    } catch (error) {
-      // Token is invalid or expired
+    } catch {
+      if (pathname.startsWith('/api/')) {
+        const response = NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        response.cookies.delete('admin_session');
+        return response;
+      }
       const response = NextResponse.redirect(new URL('/admin/login', request.url));
       response.cookies.delete('admin_session');
       return response;

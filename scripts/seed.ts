@@ -1,69 +1,83 @@
 /**
- * Seed script — migrates JSON data files to MongoDB Atlas
+ * Seed script — ensures MongoDB has indexes and default service catalog.
+ * All runtime data lives in MongoDB; manage states, cities, and businesses via /admin.
+ *
  * Run with: npx tsx scripts/seed.ts
+ *
+ * One-time migration from legacy JSON files (optional):
+ *   npx tsx scripts/seed.ts --import-json
  */
-import 'dotenv/config';
-import { MongoClient } from 'mongodb';
-import businesses from '../data/businesses.json';
-import cities from '../data/cities.json';
-import services from '../data/services.json';
-import states from '../data/states.json';
+import fs from 'node:fs';
+import path from 'node:path';
+import dotenv from 'dotenv';
+import { MongoClient, type Db } from 'mongodb';
+import { ensureDbIndexes, COLLECTIONS } from '../lib/db';
+import { DEFAULT_SERVICES } from '../lib/default-services';
+
+dotenv.config({ path: ['.env.local', '.env'] });
 
 const uri = process.env.MONGODB_URI!;
 const DB_NAME = 'mobiltirerepair24';
+const DATA_DIR = path.join(__dirname, '..', 'data');
+
+async function seedServices(db: Db) {
+  const svcCol = db.collection(COLLECTIONS.services);
+  const count = await svcCol.countDocuments();
+
+  if (count === 0) {
+    await svcCol.insertMany(DEFAULT_SERVICES);
+    console.log(`✓ Seeded ${DEFAULT_SERVICES.length} services`);
+  } else {
+    console.log(`✓ Services collection already has ${count} records — skipped`);
+  }
+}
+
+async function importFromJson(db: Db) {
+  const files = ['businesses.json', 'cities.json', 'states.json'] as const;
+
+  for (const file of files) {
+    const filePath = path.join(DATA_DIR, file);
+    if (!fs.existsSync(filePath)) {
+      console.log(`  — ${file} not found, skipping`);
+      continue;
+    }
+
+    const raw = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const collection = file.replace('.json', '') as keyof typeof COLLECTIONS;
+    const colName = COLLECTIONS[collection as 'businesses' | 'cities' | 'states'];
+    const docs = Array.isArray(raw) ? raw : Object.values(raw);
+
+    const col = db.collection(colName);
+    await col.deleteMany({});
+    if (docs.length) await col.insertMany(docs);
+    console.log(`✓ Imported ${docs.length} ${colName} from ${file}`);
+  }
+}
 
 async function seed() {
   if (!uri) throw new Error('MONGODB_URI not set — add it to .env.local');
 
+  const importJson = process.argv.includes('--import-json');
   const client = new MongoClient(uri);
 
   try {
     await client.connect();
-    console.log('Connected to MongoDB Atlas');
+    console.log('Connected to MongoDB');
 
     const db = client.db(DB_NAME);
+    await ensureDbIndexes();
+    console.log('✓ Indexes ensured');
 
-    // ── Businesses ────────────────────────────────────────────────
-    const bizCol = db.collection('businesses');
-    await bizCol.dropIndexes().catch(() => {});
-    await bizCol.deleteMany({});
-    await bizCol.insertMany(businesses);
-    await bizCol.createIndex({ slug: 1 }, { unique: true });
-    await bizCol.createIndex({ city: 1, state: 1 });
-    console.log(`✓ Inserted ${businesses.length} businesses`);
+    await seedServices(db);
 
-    // ── Cities ────────────────────────────────────────────────────
-    const cityCol = db.collection('cities');
-    await cityCol.dropIndexes().catch(() => {});
-    await cityCol.deleteMany({});
-    const cityDocs = Object.values(cities);
-    await cityCol.insertMany(cityDocs);
-    await cityCol.createIndex({ slug: 1 }, { unique: true });
-    await cityCol.createIndex({ state: 1 });
-    console.log(`✓ Inserted ${cityDocs.length} cities`);
-
-    // ── States ────────────────────────────────────────────────────
-    const stateCol = db.collection('states');
-    await stateCol.dropIndexes().catch(() => {});
-    await stateCol.deleteMany({});
-    const stateDocs = Object.values(states);
-    await stateCol.insertMany(stateDocs);
-    await stateCol.createIndex({ slug: 1 }, { unique: true });
-    console.log(`✓ Inserted ${stateDocs.length} states`);
-
-    // ── Services ──────────────────────────────────────────────────
-    const svcCol = db.collection('services');
-    await svcCol.dropIndexes().catch(() => {});
-    await svcCol.deleteMany({});
-    const svcDocs = Object.values(services);
-    await svcCol.insertMany(svcDocs);
-    await svcCol.createIndex({ slug: 1 }, { unique: true });
-    console.log(`✓ Inserted ${svcDocs.length} services`);
+    if (importJson) {
+      console.log('\nImporting legacy JSON files (one-time migration)...');
+      await importFromJson(db);
+    }
 
     console.log('\n✅ Seed complete.');
-    console.log('\nNext step — create Atlas Search indexes in the Atlas UI:');
-    console.log('  Collection: businesses  → see scripts/atlas-search-index.json');
-    console.log('  Collection: cities      → see scripts/atlas-search-index.json');
+    console.log('Manage states, cities, and businesses at /admin');
+    console.log('Fetch businesses: npm run fetch:businesses');
   } finally {
     await client.close();
   }

@@ -24,7 +24,7 @@
 .DS_Store
 *.pem
 
-# places api raw response cache (avoids re-billing on re-runs)
+# places api raw response cache (temp only — avoids re-billing on re-runs)
 /data/.places-cache/
 
 # debug
