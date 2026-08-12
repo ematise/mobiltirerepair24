@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Business } from '@/lib/data';
 
 export default function BusinessCard({ biz }: { biz: Business }) {
@@ -6,11 +7,15 @@ export default function BusinessCard({ biz }: { biz: Business }) {
     <article className="border border-slate-200 rounded-lg p-5 bg-white hover:border-blue-300 hover:shadow-md transition-all duration-200 cursor-pointer">
       <div className="flex gap-4">
         {biz.photos?.[0] && (
-          <div
-            className="hidden md:block w-36 h-36 shrink-0 rounded-lg bg-cover bg-center"
-            style={{ backgroundImage: `url(${biz.photos[0]})` }}
-            aria-hidden="true"
-          />
+          <div className="hidden md:block w-36 h-36 shrink-0 rounded-lg overflow-hidden relative">
+            <Image
+              src={biz.photos[0]}
+              alt={`${biz.name} photo`}
+              fill
+              className="object-cover"
+              sizes="144px"
+            />
+          </div>
         )}
         <div className="flex-1">
           <div className="flex items-start justify-between gap-4">
