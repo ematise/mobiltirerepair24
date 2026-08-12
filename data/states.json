@@ -19,5 +19,40 @@
     "code": "CA",
     "intro": "From the congested freeways of Los Angeles to the long stretches of Highway 1, California drivers face unique tire challenges. Mobile tire repair services across the state offer fast, on-site solutions without the hassle of a tow.",
     "cities": ["los-angeles", "san-diego", "san-jose", "sacramento", "fresno"]
+  },
+  "arizona": {
+    "slug": "arizona",
+    "name": "Arizona",
+    "code": "AZ",
+    "intro": "Arizona's extreme desert heat, monsoon storms, and long stretches of interstate make tire failures especially dangerous. Mobile tire repair across Arizona brings fast roadside help to Phoenix, Tucson, and the growing East Valley metros.",
+    "cities": ["phoenix", "tucson", "mesa", "scottsdale", "chandler"]
+  },
+  "georgia": {
+    "slug": "georgia",
+    "name": "Georgia",
+    "code": "GA",
+    "intro": "Georgia drivers cover everything from Atlanta's congested interstates to coastal and rural highways. Hot summers and busy freight corridors increase tire wear — mobile tire repair services across Georgia get you moving again without a tow.",
+    "cities": ["atlanta", "savannah", "augusta", "columbus", "macon"]
+  },
+  "new-york": {
+    "slug": "new-york",
+    "name": "New York",
+    "code": "NY",
+    "intro": "From dense city streets to long Upstate corridors, New York drivers face potholes, winter road damage, and heavy traffic that punish tires. Mobile tire repair across New York means help comes to you — in the five boroughs or far beyond.",
+    "cities": ["new-york-city", "buffalo", "rochester", "albany", "syracuse"]
+  },
+  "illinois": {
+    "slug": "illinois",
+    "name": "Illinois",
+    "code": "IL",
+    "intro": "Illinois winters, freeze-thaw potholes, and Chicago-area congestion create constant tire emergencies. Mobile tire repair across Illinois reaches drivers from downtown Chicago to Springfield and the suburbs without waiting on a tow truck.",
+    "cities": ["chicago", "springfield", "peoria", "rockford", "naperville"]
+  },
+  "north-carolina": {
+    "slug": "north-carolina",
+    "name": "North Carolina",
+    "code": "NC",
+    "intro": "North Carolina's fast-growing metros and long I-40 / I-85 corridors keep drivers on the road year-round. Mobile tire repair across the state offers on-site flat fixes and replacements from Charlotte to the Triangle and Triad.",
+    "cities": ["charlotte", "raleigh", "greensboro", "durham", "winston-salem"]
   }
 }

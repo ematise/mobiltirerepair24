@@ -6,6 +6,10 @@
  *
  * One-time migration from legacy JSON files (optional):
  *   npx tsx scripts/seed.ts --import-json
+ *
+ * Upsert states/cities from JSON without wiping businesses:
+ *   npx tsx scripts/seed.ts --upsert-geography
+ *   (or use the Admin Dashboard "Run geography seed" button)
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -13,6 +17,7 @@ import dotenv from 'dotenv';
 import { MongoClient, type Db } from 'mongodb';
 import { ensureDbIndexes, COLLECTIONS } from '../lib/db';
 import { DEFAULT_SERVICES } from '../lib/default-services';
+import { upsertGeographyFromJson } from '../lib/seed-geography';
 
 dotenv.config({ path: ['.env.local', '.env'] });
 
@@ -58,6 +63,7 @@ async function seed() {
   if (!uri) throw new Error('MONGODB_URI not set — add it to .env.local');
 
   const importJson = process.argv.includes('--import-json');
+  const upsertGeo = process.argv.includes('--upsert-geography');
   const client = new MongoClient(uri);
 
   try {
@@ -73,6 +79,12 @@ async function seed() {
     if (importJson) {
       console.log('\nImporting legacy JSON files (one-time migration)...');
       await importFromJson(db);
+    }
+
+    if (upsertGeo) {
+      console.log('\nUpserting states and cities from JSON (businesses untouched)...');
+      const result = await upsertGeographyFromJson();
+      console.log(`✓ Upserted ${result.states} states and ${result.cities} cities`);
     }
 
     console.log('\n✅ Seed complete.');

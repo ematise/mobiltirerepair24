@@ -205,13 +205,15 @@ Example: `business-photos/1704067200000-tire-shop.jpg`
 - Name (e.g., "Texas")
 - Code (e.g., "TX")
 - Intro (state description)
+- Main Cities (comma-separated city slugs shown on homepage/footer)
 
 **Actions:**
 - ✅ Create new state
 - ✅ View all states
-- ✅ Edit state details
+- ✅ Edit state details (including main cities list)
 - ✅ Delete state
 
+Creating or updating a city also syncs its slug onto the parent state's main cities list. Deleting a city removes it from that list.
 ### Cities (`/admin/cities`)
 
 **Fields to manage:**
@@ -404,7 +406,7 @@ export function middleware(request: NextRequest) {
 - Slugs should be URL-safe (lowercase, hyphens)
 - Photos array is unlimited in size (but keep under 100 for performance)
 - Complex fields (hours, pricing) require tab-based form UI
-
+- To sync `data/states.json` + `data/cities.json` into MongoDB without wiping businesses: use **Admin → Seed Geography → Run geography seed**, or `npm run seed:geography`
 ---
 
 ## 🚀 Next Steps
