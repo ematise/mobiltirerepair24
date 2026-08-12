@@ -13,7 +13,9 @@ import {
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mobiletirerepair24.com';
 
-export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
+// Always build from live MongoDB — avoids stale ISR/build snapshots on Vercel.
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [states, cities, businessSlugs, services, indexableCities, indexableServiceCities] =
