@@ -114,8 +114,17 @@ export async function reHostPhotosToS3(
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      const contentType = res.headers.get('content-type') || 'image/jpeg';
-      const ext = url.split('?')[0].split('.').pop() || 'jpg';
+      const contentType = (res.headers.get('content-type') || 'image/jpeg').split(';')[0].trim();
+      const typeExt = contentType.includes('png')
+        ? 'png'
+        : contentType.includes('webp')
+          ? 'webp'
+          : contentType.includes('gif')
+            ? 'gif'
+            : 'jpg';
+      const urlExt = url.split('?')[0].split('.').pop() ?? '';
+      // Google photo URIs often lack a real file extension — prefer content-type.
+      const ext = /^[a-zA-Z0-9]{2,4}$/.test(urlExt) ? urlExt : typeExt;
 
       const resized = await sharp(Buffer.from(await res.arrayBuffer()))
         .resize(1024, undefined, { fit: 'inside', withoutEnlargement: true })

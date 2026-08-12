@@ -9,6 +9,7 @@ type FetchResult = {
   businessesFound: number;
   created: number;
   updated: number;
+  photosAdded: number;
   apiCalls: number;
   cacheHits: number;
   cityResults: Array<{ city: string; stateCode: string; count: number }>;
@@ -55,7 +56,8 @@ export default function BusinessFetcher({ onComplete }: { onComplete?: () => voi
         <h2 className="text-lg font-bold text-gray-900">Fetch from Google Places</h2>
         <p className="text-sm text-gray-600 mt-1">
           Pulls mobile tire repair businesses and saves them directly to the database.
-          Cities with no businesses are fetched first. Add cities in{' '}
+          Cities with no businesses are fetched first, and each new listing gets a
+          Google Places photo when available. Add cities in{' '}
           <a href="/admin/cities" className="text-blue-600 hover:underline">
             Cities
           </a>{' '}
@@ -119,7 +121,11 @@ export default function BusinessFetcher({ onComplete }: { onComplete?: () => voi
             <strong>{result.dryRun ? 'Preview' : 'Saved'}:</strong>{' '}
             {result.businessesFound} businesses across {result.citiesProcessed} cities
             {!result.dryRun && (
-              <> · {result.created} created · {result.updated} updated</>
+              <>
+                {' '}
+                · {result.created} created · {result.updated} updated ·{' '}
+                {result.photosAdded} photos added
+              </>
             )}
           </p>
           <p className="text-gray-600">
