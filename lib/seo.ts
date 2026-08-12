@@ -16,6 +16,7 @@ export function homeMetadata(): Metadata {
     description,
     alternates: { canonical: url },
     openGraph: { title, description, url, siteName: SITE_NAME, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
 
@@ -29,6 +30,7 @@ export function cityMetadata(city: City, state: State): Metadata {
     description,
     alternates: { canonical: url },
     openGraph: { title, description, url, siteName: SITE_NAME, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
 
@@ -46,6 +48,7 @@ export function serviceCityMetadata(
     description,
     alternates: { canonical: url },
     openGraph: { title, description, url, siteName: SITE_NAME, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
 
@@ -63,6 +66,7 @@ export function businessMetadata(
     description,
     alternates: { canonical: url },
     openGraph: { title, description, url, siteName: SITE_NAME, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
 
@@ -76,6 +80,7 @@ export function stateMetadata(state: State): Metadata {
     description,
     alternates: { canonical: url },
     openGraph: { title, description, url, siteName: SITE_NAME, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
 

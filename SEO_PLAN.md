@@ -135,7 +135,7 @@ export const metadata = homeMetadata();
 
 ### Task 1.4 — Twitter cards on every page
 
-- [ ] Done
+- [x] Done
 
 **File:** `lib/seo.ts`
 
