@@ -379,7 +379,7 @@ const offeredServices = services.filter((svc) =>
 
 ### Task 2.4 — Link service pages from business pages
 
-- [ ] Done
+- [x] Done
 
 **File:** `app/business/[slug]/page.tsx`
 
@@ -407,7 +407,7 @@ const offeredServices = allServices.filter((s) => biz.services.includes(s.slug))
 
 ### Task 2.5 — Add service-city URLs to the sitemap
 
-- [ ] Done
+- [x] Done
 
 **File:** `app/sitemap.ts`
 
