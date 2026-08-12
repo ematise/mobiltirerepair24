@@ -267,23 +267,67 @@ export async function getCitiesBySlugs(slugs: string[]): Promise<City[]> {
     .map((d) => clean<City>(d as never));
 }
 
+/** Keep State.cities (homepage/footer "main cities") in sync with city docs. */
+async function addCityToStateList(stateSlug: string, citySlug: string): Promise<void> {
+  if (!stateSlug || !citySlug) return;
+  const db = await getDb();
+  await db.collection(COLLECTIONS.states).updateOne(
+    { slug: stateSlug },
+    { $addToSet: { cities: citySlug } }
+  );
+}
+
+async function removeCityFromStateList(stateSlug: string, citySlug: string): Promise<void> {
+  if (!stateSlug || !citySlug) return;
+  const db = await getDb();
+  await db.collection(COLLECTIONS.states).updateOne(
+    { slug: stateSlug },
+    { $pull: { cities: citySlug } } as never
+  );
+}
+
 export async function createCity(city: City): Promise<City> {
   const db = await getDb();
-  await db.collection(COLLECTIONS.cities).insertOne(city as never);
-  return city;
+  const nearbyCities = (city.nearbyCities ?? []).map((s) => s.trim()).filter(Boolean);
+  const doc: City = { ...city, nearbyCities };
+  await db.collection(COLLECTIONS.cities).insertOne(doc as never);
+  await addCityToStateList(doc.state, doc.slug);
+  return doc;
 }
 
 export async function updateCity(slug: string, updates: Partial<City>): Promise<City | null> {
   const db = await getDb();
+  const existing = await getCityBySlug(slug);
+  if (!existing) return null;
+
+  const normalized: Partial<City> = { ...updates };
+  if (updates.nearbyCities) {
+    normalized.nearbyCities = updates.nearbyCities.map((s) => s.trim()).filter(Boolean);
+  }
+
   const result = await db
     .collection(COLLECTIONS.cities)
-    .findOneAndUpdate({ slug }, { $set: updates }, { returnDocument: 'after' });
-  return result ? clean<City>(result as never) : null;
+    .findOneAndUpdate({ slug }, { $set: normalized }, { returnDocument: 'after' });
+  if (!result) return null;
+
+  const updated = clean<City>(result as never);
+  const previousState = existing.state;
+  const nextState = updated.state;
+
+  if (previousState !== nextState) {
+    await removeCityFromStateList(previousState, slug);
+  }
+  await addCityToStateList(nextState, slug);
+  return updated;
 }
 
 export async function deleteCity(slug: string): Promise<boolean> {
   const db = await getDb();
+  const existing = await getCityBySlug(slug);
   const result = await db.collection(COLLECTIONS.cities).deleteOne({ slug });
+  if (result.deletedCount > 0 && existing) {
+    await removeCityFromStateList(existing.state, slug);
+  }
   return result.deletedCount > 0;
 }
 
@@ -315,17 +359,27 @@ export async function getStateBySlug(slug: string): Promise<State | null> {
   return doc ? clean<State>(doc as never) : null;
 }
 
+function normalizeCitySlugList(cities: string[] | undefined): string[] {
+  if (!cities) return [];
+  return [...new Set(cities.map((s) => s.trim()).filter(Boolean))];
+}
+
 export async function createState(state: State): Promise<State> {
   const db = await getDb();
-  const result = await db.collection(COLLECTIONS.states).insertOne(state as never);
-  return { ...state };
+  const doc: State = { ...state, cities: normalizeCitySlugList(state.cities) };
+  await db.collection(COLLECTIONS.states).insertOne(doc as never);
+  return doc;
 }
 
 export async function updateState(slug: string, updates: Partial<State>): Promise<State | null> {
   const db = await getDb();
+  const normalized: Partial<State> = { ...updates };
+  if (updates.cities) {
+    normalized.cities = normalizeCitySlugList(updates.cities);
+  }
   const result = await db
     .collection(COLLECTIONS.states)
-    .findOneAndUpdate({ slug }, { $set: updates }, { returnDocument: 'after' });
+    .findOneAndUpdate({ slug }, { $set: normalized }, { returnDocument: 'after' });
   return result ? clean<State>(result as never) : null;
 }
 

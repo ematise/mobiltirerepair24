@@ -137,7 +137,10 @@ export default function CityForm({ city, onSubmit }: CityFormProps) {
           onChange={(e) =>
             setFormData({
               ...formData,
-              nearbyCities: e.target.value.split(',').map((s) => s.trim()),
+              nearbyCities: e.target.value
+                .split(',')
+                .map((s) => s.trim())
+                .filter(Boolean),
             })
           }
           placeholder="e.g., fort-worth, irving, garland"

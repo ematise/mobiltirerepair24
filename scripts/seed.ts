@@ -6,6 +6,9 @@
  *
  * One-time migration from legacy JSON files (optional):
  *   npx tsx scripts/seed.ts --import-json
+ *
+ * Upsert states/cities from JSON without wiping businesses:
+ *   npx tsx scripts/seed.ts --upsert-geography
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -54,10 +57,34 @@ async function importFromJson(db: Db) {
   }
 }
 
+async function upsertGeography(db: Db) {
+  for (const file of ['states.json', 'cities.json'] as const) {
+    const filePath = path.join(DATA_DIR, file);
+    if (!fs.existsSync(filePath)) {
+      console.log(`  — ${file} not found, skipping`);
+      continue;
+    }
+
+    const raw = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const docs = (Array.isArray(raw) ? raw : Object.values(raw)) as Array<{ slug: string }>;
+    const colName = COLLECTIONS[file.replace('.json', '') as 'states' | 'cities'];
+    const col = db.collection(colName);
+
+    let upserted = 0;
+    for (const doc of docs) {
+      if (!doc?.slug) continue;
+      await col.updateOne({ slug: doc.slug }, { $set: doc }, { upsert: true });
+      upserted += 1;
+    }
+    console.log(`✓ Upserted ${upserted} ${colName} from ${file}`);
+  }
+}
+
 async function seed() {
   if (!uri) throw new Error('MONGODB_URI not set — add it to .env.local');
 
   const importJson = process.argv.includes('--import-json');
+  const upsertGeo = process.argv.includes('--upsert-geography');
   const client = new MongoClient(uri);
 
   try {
@@ -73,6 +100,11 @@ async function seed() {
     if (importJson) {
       console.log('\nImporting legacy JSON files (one-time migration)...');
       await importFromJson(db);
+    }
+
+    if (upsertGeo) {
+      console.log('\nUpserting states and cities from JSON (businesses untouched)...');
+      await upsertGeography(db);
     }
 
     console.log('\n✅ Seed complete.');

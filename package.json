@@ -10,6 +10,7 @@
     "fix:hours": "tsx scripts/fix-hours.ts",
     "seed": "tsx scripts/seed.ts",
     "seed:import": "tsx scripts/seed.ts --import-json",
+    "seed:geography": "tsx scripts/seed.ts --upsert-geography",
     "import:businesses": "tsx scripts/import-businesses.ts"
   },
   "dependencies": {

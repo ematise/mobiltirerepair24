@@ -7,7 +7,7 @@
     "lat": 32.7767,
     "lng": -96.797,
     "intro": "Dallas drivers deal with everything from scorching summer heat to sudden hailstorms — both of which put serious stress on tires. Whether you're stranded on I-35 or in a parking lot in Uptown, mobile tire repair services in Dallas bring professional help directly to you.",
-    "nearbyCities": ["fort-worth", "arlington", "irving", "garland", "plano"]
+    "nearbyCities": ["fort-worth", "houston", "austin", "san-antonio"]
   },
   "houston": {
     "slug": "houston",
@@ -17,7 +17,7 @@
     "lat": 29.7604,
     "lng": -95.3698,
     "intro": "Houston's massive highway network and intense subtropical heat make it one of the toughest cities for tire longevity in the US. Mobile tire repair in Houston gets you back on Beltway 8 or the Ship Channel roads without waiting for a tow.",
-    "nearbyCities": ["dallas", "austin", "san-antonio", "fort-worth", "pasadena-tx"]
+    "nearbyCities": ["dallas", "austin", "san-antonio", "fort-worth"]
   },
   "austin": {
     "slug": "austin",
@@ -27,7 +27,7 @@
     "lat": 30.2672,
     "lng": -97.7431,
     "intro": "Austin's rapid growth has brought more vehicles, more road construction, and more tire hazards. Whether you're on MoPac, South Congress, or a suburban street in Round Rock, mobile tire repair in Austin gets you rolling again fast.",
-    "nearbyCities": ["dallas", "houston", "san-antonio", "round-rock", "cedar-park"]
+    "nearbyCities": ["san-antonio", "houston", "dallas", "fort-worth"]
   },
   "san-antonio": {
     "slug": "san-antonio",
@@ -37,7 +37,7 @@
     "lat": 29.4241,
     "lng": -98.4936,
     "intro": "San Antonio's mix of military traffic, tourist activity, and sprawling suburban roads creates constant demand for roadside tire services. Mobile tire repair in San Antonio means expert help comes to you, wherever you are in the metro.",
-    "nearbyCities": ["austin", "houston", "dallas", "new-braunfels", "schertz"]
+    "nearbyCities": ["austin", "houston", "dallas", "fort-worth"]
   },
   "fort-worth": {
     "slug": "fort-worth",
@@ -47,7 +47,7 @@
     "lat": 32.7555,
     "lng": -97.3308,
     "intro": "Fort Worth sits at the western edge of the Metroplex, where long commutes and busy freight corridors put extra wear on tires. Mobile tire repair in Fort Worth serves everyone from downtown commuters to ranch and industrial workers on the outskirts.",
-    "nearbyCities": ["dallas", "arlington", "burleson", "weatherford", "mansfield"]
+    "nearbyCities": ["dallas", "houston", "austin", "san-antonio"]
   },
   "miami": {
     "slug": "miami",
@@ -57,7 +57,7 @@
     "lat": 25.7617,
     "lng": -80.1918,
     "intro": "Miami's intense heat, heavy tourist traffic, and road debris from construction make flat tires a routine occurrence. Mobile tire repair in Miami means you don't have to abandon your car on I-95 or a busy South Beach street.",
-    "nearbyCities": ["fort-lauderdale", "homestead", "miami-gardens", "hialeah", "coral-gables"]
+    "nearbyCities": ["fort-lauderdale", "orlando", "tampa", "jacksonville"]
   },
   "orlando": {
     "slug": "orlando",
@@ -67,7 +67,7 @@
     "lat": 28.5383,
     "lng": -81.3792,
     "intro": "Orlando sees tens of millions of visitors every year, and with that comes heavy road traffic on I-4 and the tourist corridors near the parks. Mobile tire repair in Orlando gets locals and visitors back on the road without the hassle.",
-    "nearbyCities": ["tampa", "kissimmee", "sanford", "winter-park", "altamonte-springs"]
+    "nearbyCities": ["tampa", "jacksonville", "miami", "fort-lauderdale"]
   },
   "tampa": {
     "slug": "tampa",
@@ -77,7 +77,7 @@
     "lat": 27.9506,
     "lng": -82.4572,
     "intro": "Tampa's growing population and frequent afternoon thunderstorms mean road hazards are a daily reality. Mobile tire repair in Tampa serves drivers across the bay area, from downtown to Brandon and beyond.",
-    "nearbyCities": ["orlando", "clearwater", "st-petersburg", "brandon", "lakeland"]
+    "nearbyCities": ["orlando", "jacksonville", "miami", "fort-lauderdale"]
   },
   "jacksonville": {
     "slug": "jacksonville",
@@ -87,7 +87,7 @@
     "lat": 30.3322,
     "lng": -81.6557,
     "intro": "As one of the largest cities by area in the contiguous US, Jacksonville has a lot of road to cover. Mobile tire repair in Jacksonville reaches you whether you're in the urban core, the beaches, or the far suburbs.",
-    "nearbyCities": ["miami", "orlando", "st-augustine", "orange-park", "fernandina-beach"]
+    "nearbyCities": ["orlando", "tampa", "miami", "fort-lauderdale"]
   },
   "fort-lauderdale": {
     "slug": "fort-lauderdale",
@@ -97,7 +97,7 @@
     "lat": 26.1224,
     "lng": -80.1373,
     "intro": "Fort Lauderdale's mix of dense urban traffic, beach roads, and marine industry workers creates constant demand for fast tire services. Mobile tire repair in Fort Lauderdale brings the shop to you — fast.",
-    "nearbyCities": ["miami", "boca-raton", "pompano-beach", "deerfield-beach", "hollywood-fl"]
+    "nearbyCities": ["miami", "orlando", "tampa", "jacksonville"]
   },
   "los-angeles": {
     "slug": "los-angeles",
@@ -107,7 +107,7 @@
     "lat": 34.0522,
     "lng": -118.2437,
     "intro": "Los Angeles has some of the most congested and pothole-riddled freeways in the country. A flat tire on the 405 or the 10 can mean hours of lost time — mobile tire repair in Los Angeles gets a tech to you fast, wherever you're stuck.",
-    "nearbyCities": ["long-beach", "pasadena", "burbank", "torrance", "inglewood"]
+    "nearbyCities": ["san-diego", "san-jose", "sacramento", "fresno"]
   },
   "san-diego": {
     "slug": "san-diego",
@@ -117,7 +117,7 @@
     "lat": 32.7157,
     "lng": -117.1611,
     "intro": "San Diego's spread-out geography and military bases mean drivers cover a lot of road daily. Mobile tire repair in San Diego reaches you quickly from Chula Vista to Miramar without the need for a tow truck.",
-    "nearbyCities": ["los-angeles", "chula-vista", "el-cajon", "escondido", "santee"]
+    "nearbyCities": ["los-angeles", "san-jose", "sacramento", "fresno"]
   },
   "san-jose": {
     "slug": "san-jose",
@@ -127,7 +127,7 @@
     "lat": 37.3382,
     "lng": -121.8863,
     "intro": "San Jose sits at the heart of Silicon Valley, where tech workers commute long hours on congested corridors. Mobile tire repair in San Jose means a fast response whether you're stranded near the airport or in the suburbs.",
-    "nearbyCities": ["los-angeles", "san-francisco", "santa-clara", "sunnyvale", "fremont"]
+    "nearbyCities": ["sacramento", "fresno", "los-angeles", "san-diego"]
   },
   "sacramento": {
     "slug": "sacramento",
@@ -137,7 +137,7 @@
     "lat": 38.5816,
     "lng": -121.4944,
     "intro": "Sacramento serves as a major transit hub between Northern California's major metros. Hot summers and heavy highway use put tires to the test — mobile tire repair in Sacramento provides fast relief on I-5, I-80, and beyond.",
-    "nearbyCities": ["san-jose", "stockton", "elk-grove", "roseville", "folsom"]
+    "nearbyCities": ["san-jose", "fresno", "los-angeles", "san-diego"]
   },
   "fresno": {
     "slug": "fresno",
@@ -147,6 +147,256 @@
     "lat": 36.7378,
     "lng": -119.7871,
     "intro": "Fresno sits in the heart of the San Joaquin Valley, with long agricultural roads and extreme summer heat that can blow out tires fast. Mobile tire repair in Fresno is a practical necessity for both city and rural drivers.",
-    "nearbyCities": ["los-angeles", "sacramento", "clovis", "visalia", "madera"]
+    "nearbyCities": ["sacramento", "san-jose", "los-angeles", "san-diego"]
+  },
+  "phoenix": {
+    "slug": "phoenix",
+    "name": "Phoenix",
+    "state": "arizona",
+    "stateCode": "AZ",
+    "lat": 33.4484,
+    "lng": -112.074,
+    "intro": "Phoenix summers routinely push pavement temperatures past 150°F, cooking tires and raising blowout risk on the Loop 101 and I-10. Mobile tire repair in Phoenix comes to you across the Valley so you're not stuck in the heat.",
+    "nearbyCities": ["mesa", "scottsdale", "chandler", "tucson"]
+  },
+  "tucson": {
+    "slug": "tucson",
+    "name": "Tucson",
+    "state": "arizona",
+    "stateCode": "AZ",
+    "lat": 32.2226,
+    "lng": -110.9747,
+    "intro": "Tucson's desert highways, monsoon debris, and long I-10 stretches make roadside tire trouble common. Mobile tire repair in Tucson reaches downtown, the foothills, and surrounding corridors without a tow.",
+    "nearbyCities": ["phoenix", "mesa", "chandler", "scottsdale"]
+  },
+  "mesa": {
+    "slug": "mesa",
+    "name": "Mesa",
+    "state": "arizona",
+    "stateCode": "AZ",
+    "lat": 33.4152,
+    "lng": -111.8315,
+    "intro": "Mesa is one of the East Valley's busiest driving markets, with heat, construction, and freeway traffic wearing tires down fast. Mobile tire repair in Mesa gets locals back on US-60 and the Loop 202 quickly.",
+    "nearbyCities": ["phoenix", "chandler", "scottsdale", "tucson"]
+  },
+  "scottsdale": {
+    "slug": "scottsdale",
+    "name": "Scottsdale",
+    "state": "arizona",
+    "stateCode": "AZ",
+    "lat": 33.4942,
+    "lng": -111.9261,
+    "intro": "Scottsdale drivers face desert heat, tourist traffic, and long suburban corridors that punish tires year-round. Mobile tire repair in Scottsdale brings on-site service to Old Town, North Scottsdale, and nearby freeways.",
+    "nearbyCities": ["phoenix", "mesa", "chandler", "tucson"]
+  },
+  "chandler": {
+    "slug": "chandler",
+    "name": "Chandler",
+    "state": "arizona",
+    "stateCode": "AZ",
+    "lat": 33.3062,
+    "lng": -111.8413,
+    "intro": "Chandler's tech campuses and East Valley commute corridors keep thousands of vehicles on the road daily. Mobile tire repair in Chandler handles flats and replacements on-site so you can skip the shop wait.",
+    "nearbyCities": ["mesa", "phoenix", "scottsdale", "tucson"]
+  },
+  "atlanta": {
+    "slug": "atlanta",
+    "name": "Atlanta",
+    "state": "georgia",
+    "stateCode": "GA",
+    "lat": 33.749,
+    "lng": -84.388,
+    "intro": "Atlanta's notorious interstate congestion and hot summers create constant tire emergencies on I-75, I-85, and the Perimeter. Mobile tire repair in Atlanta comes to you wherever you're stranded in the metro.",
+    "nearbyCities": ["savannah", "augusta", "columbus", "macon"]
+  },
+  "savannah": {
+    "slug": "savannah",
+    "name": "Savannah",
+    "state": "georgia",
+    "stateCode": "GA",
+    "lat": 32.0809,
+    "lng": -81.0912,
+    "intro": "Savannah's mix of historic downtown streets, port traffic, and coastal heat keeps tire demand high. Mobile tire repair in Savannah reaches drivers across the Historic District, islands, and I-95 corridors.",
+    "nearbyCities": ["atlanta", "augusta", "columbus", "macon"]
+  },
+  "augusta": {
+    "slug": "augusta",
+    "name": "Augusta",
+    "state": "georgia",
+    "stateCode": "GA",
+    "lat": 33.4735,
+    "lng": -82.0105,
+    "intro": "Augusta drivers deal with humid summers, military and medical traffic, and long regional highways. Mobile tire repair in Augusta brings fast roadside help across the CSRA without waiting for a tow.",
+    "nearbyCities": ["atlanta", "savannah", "macon", "columbus"]
+  },
+  "columbus": {
+    "slug": "columbus",
+    "name": "Columbus",
+    "state": "georgia",
+    "stateCode": "GA",
+    "lat": 32.461,
+    "lng": -84.9877,
+    "intro": "Columbus sits along major west Georgia corridors where freight and military traffic put heavy wear on tires. Mobile tire repair in Columbus gets you back on I-185 and local roads without a shop visit.",
+    "nearbyCities": ["atlanta", "macon", "savannah", "augusta"]
+  },
+  "macon": {
+    "slug": "macon",
+    "name": "Macon",
+    "state": "georgia",
+    "stateCode": "GA",
+    "lat": 32.8407,
+    "lng": -83.6324,
+    "intro": "Macon's central location on I-75 makes it a key Georgia travel hub — and a frequent spot for roadside tire trouble. Mobile tire repair in Macon serves city streets and the interstate exits around town.",
+    "nearbyCities": ["atlanta", "columbus", "savannah", "augusta"]
+  },
+  "new-york-city": {
+    "slug": "new-york-city",
+    "name": "New York City",
+    "state": "new-york",
+    "stateCode": "NY",
+    "lat": 40.7128,
+    "lng": -74.006,
+    "intro": "New York City's dense traffic, potholes, and curb damage make flats a weekly reality for drivers and fleets. Mobile tire repair in New York City comes to you across the boroughs so you're not stuck circling for a shop.",
+    "nearbyCities": ["buffalo", "rochester", "albany", "syracuse"]
+  },
+  "buffalo": {
+    "slug": "buffalo",
+    "name": "Buffalo",
+    "state": "new-york",
+    "stateCode": "NY",
+    "lat": 42.8864,
+    "lng": -78.8784,
+    "intro": "Buffalo winters and lake-effect road salt take a hard toll on tires and wheels. Mobile tire repair in Buffalo reaches drivers across the city and suburbs when cold-weather flats strike.",
+    "nearbyCities": ["rochester", "syracuse", "albany", "new-york-city"]
+  },
+  "rochester": {
+    "slug": "rochester",
+    "name": "Rochester",
+    "state": "new-york",
+    "stateCode": "NY",
+    "lat": 43.1566,
+    "lng": -77.6088,
+    "intro": "Rochester drivers face harsh winters, potholes, and busy I-490 corridors that punish tires year-round. Mobile tire repair in Rochester brings on-site service so you can skip the tow and the wait.",
+    "nearbyCities": ["buffalo", "syracuse", "albany", "new-york-city"]
+  },
+  "albany": {
+    "slug": "albany",
+    "name": "Albany",
+    "state": "new-york",
+    "stateCode": "NY",
+    "lat": 42.6526,
+    "lng": -73.7562,
+    "intro": "Albany sits at the crossroads of the Capital Region's highways, where winter damage and commute traffic create frequent tire emergencies. Mobile tire repair in Albany gets you moving again on I-87, I-90, and local roads.",
+    "nearbyCities": ["syracuse", "rochester", "buffalo", "new-york-city"]
+  },
+  "syracuse": {
+    "slug": "syracuse",
+    "name": "Syracuse",
+    "state": "new-york",
+    "stateCode": "NY",
+    "lat": 43.0481,
+    "lng": -76.1474,
+    "intro": "Syracuse's heavy snowfall and I-81 / I-90 traffic make roadside tire failures common. Mobile tire repair in Syracuse reaches campus, downtown, and suburban drivers without a trip to the shop.",
+    "nearbyCities": ["rochester", "albany", "buffalo", "new-york-city"]
+  },
+  "chicago": {
+    "slug": "chicago",
+    "name": "Chicago",
+    "state": "illinois",
+    "stateCode": "IL",
+    "lat": 41.8781,
+    "lng": -87.6298,
+    "intro": "Chicago winters, freeze-thaw potholes, and Expressway congestion make tire damage inevitable. Mobile tire repair in Chicago comes to you on the Dan Ryan, Kennedy, or a neighborhood street — no tow required.",
+    "nearbyCities": ["naperville", "rockford", "peoria", "springfield"]
+  },
+  "springfield": {
+    "slug": "springfield",
+    "name": "Springfield",
+    "state": "illinois",
+    "stateCode": "IL",
+    "lat": 39.7817,
+    "lng": -89.6501,
+    "intro": "Springfield drivers cover capital-area streets and long central Illinois highways where weather and road wear take a toll. Mobile tire repair in Springfield provides fast on-site flats and replacements.",
+    "nearbyCities": ["peoria", "chicago", "rockford", "naperville"]
+  },
+  "peoria": {
+    "slug": "peoria",
+    "name": "Peoria",
+    "state": "illinois",
+    "stateCode": "IL",
+    "lat": 40.6936,
+    "lng": -89.589,
+    "intro": "Peoria's river-city roads and I-74 corridor see year-round tire wear from weather and freight traffic. Mobile tire repair in Peoria gets locals back on the road without waiting for a shop bay.",
+    "nearbyCities": ["springfield", "chicago", "rockford", "naperville"]
+  },
+  "rockford": {
+    "slug": "rockford",
+    "name": "Rockford",
+    "state": "illinois",
+    "stateCode": "IL",
+    "lat": 42.2711,
+    "lng": -89.094,
+    "intro": "Rockford's northern Illinois winters and I-90 access make roadside tire help especially valuable. Mobile tire repair in Rockford serves city streets and the surrounding commute corridors.",
+    "nearbyCities": ["chicago", "naperville", "peoria", "springfield"]
+  },
+  "naperville": {
+    "slug": "naperville",
+    "name": "Naperville",
+    "state": "illinois",
+    "stateCode": "IL",
+    "lat": 41.7508,
+    "lng": -88.1535,
+    "intro": "Naperville's busy suburban commute routes and winter road damage create frequent tire emergencies. Mobile tire repair in Naperville reaches drivers across the western suburbs without a tow truck.",
+    "nearbyCities": ["chicago", "rockford", "peoria", "springfield"]
+  },
+  "charlotte": {
+    "slug": "charlotte",
+    "name": "Charlotte",
+    "state": "north-carolina",
+    "stateCode": "NC",
+    "lat": 35.2271,
+    "lng": -80.8431,
+    "intro": "Charlotte's rapid growth has packed I-77, I-85, and the beltway with traffic — and more tire hazards. Mobile tire repair in Charlotte brings on-site service to Uptown, South End, and the wider metro.",
+    "nearbyCities": ["raleigh", "greensboro", "durham", "winston-salem"]
+  },
+  "raleigh": {
+    "slug": "raleigh",
+    "name": "Raleigh",
+    "state": "north-carolina",
+    "stateCode": "NC",
+    "lat": 35.7796,
+    "lng": -78.6382,
+    "intro": "Raleigh's Research Triangle commute and expanding suburbs keep tires under constant stress. Mobile tire repair in Raleigh gets you back on the Beltline and local roads without a shop appointment.",
+    "nearbyCities": ["durham", "greensboro", "charlotte", "winston-salem"]
+  },
+  "greensboro": {
+    "slug": "greensboro",
+    "name": "Greensboro",
+    "state": "north-carolina",
+    "stateCode": "NC",
+    "lat": 36.0726,
+    "lng": -79.792,
+    "intro": "Greensboro sits at the heart of the Triad, where I-40 and I-85 traffic and seasonal weather create frequent flats. Mobile tire repair in Greensboro reaches downtown and surrounding communities fast.",
+    "nearbyCities": ["winston-salem", "durham", "raleigh", "charlotte"]
+  },
+  "durham": {
+    "slug": "durham",
+    "name": "Durham",
+    "state": "north-carolina",
+    "stateCode": "NC",
+    "lat": 35.994,
+    "lng": -78.8986,
+    "intro": "Durham's growing tech and medical corridors mean more vehicles on the road every year. Mobile tire repair in Durham handles roadside flats across downtown, RTP-adjacent routes, and nearby neighborhoods.",
+    "nearbyCities": ["raleigh", "greensboro", "charlotte", "winston-salem"]
+  },
+  "winston-salem": {
+    "slug": "winston-salem",
+    "name": "Winston-Salem",
+    "state": "north-carolina",
+    "stateCode": "NC",
+    "lat": 36.0999,
+    "lng": -80.2442,
+    "intro": "Winston-Salem drivers share Triad highways that see heavy daily use and weather-related road damage. Mobile tire repair in Winston-Salem provides fast on-site help across the city and nearby corridors.",
+    "nearbyCities": ["greensboro", "charlotte", "raleigh", "durham"]
   }
 }
