@@ -17,6 +17,9 @@ export default function BusinessesPage() {
   const [filterState, setFilterState] = useState<string>('');
   const editFormRef = useRef<HTMLDivElement>(null);
 
+  const [fixingHours, setFixingHours] = useState(false);
+  const [fixHoursMsg, setFixHoursMsg] = useState('');
+
   useEffect(() => {
     fetchBusinesses();
   }, []);
@@ -38,6 +41,23 @@ export default function BusinessesPage() {
       setError(err instanceof Error ? err.message : 'Failed to fetch businesses');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleFixHours = async () => {
+    setFixingHours(true);
+    setFixHoursMsg('');
+    setError('');
+    try {
+      const response = await fetch('/api/admin/businesses/fix-hours', { method: 'POST' });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Failed to fix hours');
+      setFixHoursMsg(`Repaired hours on ${data.updated} of ${data.scanned} businesses.`);
+      await fetchBusinesses();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fix hours');
+    } finally {
+      setFixingHours(false);
     }
   };
 
@@ -123,15 +143,27 @@ export default function BusinessesPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-900">Businesses</h1>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-        >
-          {showForm ? 'Cancel' : 'Add Business'}
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={handleFixHours}
+            disabled={fixingHours}
+            className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition disabled:opacity-50"
+          >
+            {fixingHours ? 'Repairing…' : 'Repair 24/7 hours'}
+          </button>
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
+            {showForm ? 'Cancel' : 'Add Business'}
+          </button>
+        </div>
       </div>
 
       {error && <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded">{error}</div>}
+      {fixHoursMsg && (
+        <div className="p-4 bg-green-50 border border-green-200 text-green-700 rounded">{fixHoursMsg}</div>
+      )}
 
       <BusinessFetcher onComplete={fetchBusinesses} />
 

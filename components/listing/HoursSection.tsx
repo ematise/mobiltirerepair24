@@ -3,7 +3,11 @@
 import { Clock } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import SectionContainer from './SectionContainer';
-import { formatDayHoursLabel, type BusinessHours } from '@/lib/hours';
+import {
+  fixMisencodedHours,
+  formatDayHoursLabel,
+  type BusinessHours,
+} from '@/lib/hours';
 
 export interface HoursSectionProps {
   hours?: BusinessHours;
@@ -17,17 +21,18 @@ function getTodayDay(): string {
 }
 
 export default function HoursSection({ hours }: HoursSectionProps) {
-  if (!hours || Object.keys(hours).length === 0) return null;
+  const normalized = fixMisencodedHours(hours);
+  if (!normalized || Object.keys(normalized).length === 0) return null;
 
   const todayDay = getTodayDay();
-  const sortedDays = daysOrder.filter((d) => hours[d]);
+  const sortedDays = daysOrder.filter((d) => normalized[d]);
 
   return (
     <SectionContainer>
       <SectionHeading>Hours of Operation</SectionHeading>
       <div className="space-y-2">
         {sortedDays.map((day) => {
-          const dayHours = hours[day];
+          const dayHours = normalized[day];
           if (!dayHours) return null;
 
           const isToday = day === todayDay;

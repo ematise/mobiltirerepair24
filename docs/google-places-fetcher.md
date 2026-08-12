@@ -232,6 +232,8 @@ npx tsx scripts/fix-hours.ts --db   # after setting MONGODB_URI
 
 Add `--dry-run` to preview counts without writing.
 
+The site also **self-heals** on read: listing pages normalize and persist corrected hours. Admins can click **Repair 24/7 hours** on `/admin/businesses`, or `POST /api/admin/businesses/fix-hours`.
+
 ### Upsert behavior
 
 - Match key: **`slug`**

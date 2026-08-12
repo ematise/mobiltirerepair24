@@ -1,4 +1,5 @@
 import { getDb, COLLECTIONS } from './db';
+import { fixMisencodedHours, type BusinessHours } from './hours';
 
 export type Business = {
   id: string;
@@ -70,7 +71,7 @@ export type State = {
   cities: string[];
 };
 
-// Strip MongoDB _id from results
+// Strip MongoDB _id from results and repair known bad hours shapes
 function clean<T>(doc: T & { _id?: unknown }): T {
   if (!doc) return doc;
   const { _id, ...rest } = doc as Record<string, unknown>;
@@ -78,8 +79,36 @@ function clean<T>(doc: T & { _id?: unknown }): T {
   return rest as T;
 }
 
+function cleanBusiness(doc: Business & { _id?: unknown }): Business {
+  const business = clean<Business>(doc);
+  if (!business.hours) return business;
+  const fixed = fixMisencodedHours(business.hours as BusinessHours);
+  if (!fixed || fixed === business.hours) return business;
+  if (JSON.stringify(fixed) === JSON.stringify(business.hours)) return business;
+  return { ...business, hours: fixed };
+}
+
+function cleanAllBusinesses(docs: (Business & { _id?: unknown })[]): Business[] {
+  return docs.map(cleanBusiness);
+}
+
 function cleanAll<T>(docs: (T & { _id?: unknown })[]): T[] {
   return docs.map(clean);
+}
+
+/** Persist repairs for misencoded hours so MongoDB catches up with the UI. */
+async function persistHoursRepair(business: Business, originalHours: Business['hours']): Promise<void> {
+  if (!business.hours || JSON.stringify(business.hours) === JSON.stringify(originalHours)) {
+    return;
+  }
+  try {
+    const db = await getDb();
+    await db
+      .collection(COLLECTIONS.businesses)
+      .updateOne({ slug: business.slug }, { $set: { hours: business.hours } });
+  } catch (err) {
+    console.error(`Failed to persist hours repair for ${business.slug}:`, err);
+  }
 }
 
 // ── Businesses ───────────────────────────────────────────────────────────────
@@ -87,13 +116,23 @@ function cleanAll<T>(docs: (T & { _id?: unknown })[]): T[] {
 export async function getAllBusinesses(): Promise<Business[]> {
   const db = await getDb();
   const docs = await db.collection(COLLECTIONS.businesses).find({}).toArray();
-  return cleanAll<Business>(docs as never);
+  const businesses = cleanAllBusinesses(docs as never);
+  // Self-heal bad imports during reads (e.g. Next.js build / page render)
+  await Promise.all(
+    (docs as (Business & { _id?: unknown })[]).map((doc, i) =>
+      persistHoursRepair(businesses[i], doc.hours),
+    ),
+  );
+  return businesses;
 }
 
 export async function getBusinessBySlug(slug: string): Promise<Business | null> {
   const db = await getDb();
   const doc = await db.collection(COLLECTIONS.businesses).findOne({ slug });
-  return doc ? clean<Business>(doc as never) : null;
+  if (!doc) return null;
+  const business = cleanBusiness(doc as unknown as Business & { _id?: unknown });
+  await persistHoursRepair(business, (doc as unknown as Business).hours);
+  return business;
 }
 
 export async function getBusinessesByCity(
@@ -105,7 +144,13 @@ export async function getBusinessesByCity(
     .collection(COLLECTIONS.businesses)
     .find({ city: citySlug, state: stateSlug })
     .toArray();
-  return cleanAll<Business>(docs as never);
+  const businesses = cleanAllBusinesses(docs as never);
+  await Promise.all(
+    (docs as (Business & { _id?: unknown })[]).map((doc, i) =>
+      persistHoursRepair(businesses[i], doc.hours),
+    ),
+  );
+  return businesses;
 }
 
 export async function createBusiness(business: Business): Promise<Business> {
