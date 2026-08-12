@@ -153,6 +153,16 @@ export async function getBusinessesByCity(
   return businesses;
 }
 
+/** Returns photo URLs for a business, or `undefined` if the business does not exist. */
+export async function getBusinessPhotos(slug: string): Promise<string[] | undefined> {
+  const db = await getDb();
+  const doc = await db
+    .collection(COLLECTIONS.businesses)
+    .findOne({ slug }, { projection: { photos: 1 } });
+  if (!doc) return undefined;
+  return Array.isArray(doc.photos) ? (doc.photos as string[]) : [];
+}
+
 /** Map of `${citySlug}:${stateSlug}` → business count for fetch prioritization. */
 export async function getBusinessCountsByCity(): Promise<Map<string, number>> {
   const db = await getDb();
