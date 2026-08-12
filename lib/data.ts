@@ -153,6 +153,24 @@ export async function getBusinessesByCity(
   return businesses;
 }
 
+/** Map of `${citySlug}:${stateSlug}` → business count for fetch prioritization. */
+export async function getBusinessCountsByCity(): Promise<Map<string, number>> {
+  const db = await getDb();
+  const rows = await db
+    .collection(COLLECTIONS.businesses)
+    .aggregate<{ _id: { city: string; state: string }; count: number }>([
+      { $group: { _id: { city: '$city', state: '$state' }, count: { $sum: 1 } } },
+    ])
+    .toArray();
+
+  const map = new Map<string, number>();
+  for (const row of rows) {
+    if (!row._id?.city || !row._id?.state) continue;
+    map.set(`${row._id.city}:${row._id.state}`, row.count);
+  }
+  return map;
+}
+
 export async function createBusiness(business: Business): Promise<Business> {
   const db = await getDb();
   await db.collection(COLLECTIONS.businesses).insertOne(business as never);

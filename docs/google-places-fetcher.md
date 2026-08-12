@@ -6,7 +6,7 @@ The Google Places fetcher searches Google’s **Places API (New)** for mobile ti
 
 ## What it does (in one sentence)
 
-For each city in your database, it runs a Google search like *“mobile tire repair in Dallas, TX”*, filters the results, converts them into business records, and **creates or updates** them in MongoDB.
+For each city in your database, it runs a Google search like *“mobile tire repair in Dallas, TX”*, filters the results, converts them into business records, and **creates or updates** them in MongoDB. Cities with fewer existing businesses are processed first so empty coverage fills before cities that already have listings.
 
 ---
 
@@ -155,8 +155,9 @@ flowchart TD
     B --> C{City slugs specified?}
     C -->|Yes| D[Filter to matching cities]
     C -->|No| E[Use all cities]
-    D --> F[For each city...]
-    E --> F
+    D --> S[Sort by existing business count ascending]
+    E --> S
+    S --> F[For each city — empty cities first...]
     F --> G["Google Text Search: mobile tire repair in {city}, {stateCode}"]
     G --> H{Cache hit?}
     H -->|Yes| I[Use cached JSON]
@@ -329,7 +330,8 @@ Use that only if you have a pre-built JSON array of businesses (manual export, o
 
 | File | Role |
 |---|---|
-| `lib/places-fetch.ts` | Core fetch logic, filtering, caching, upsert |
+| `lib/places-fetch.ts` | Core fetch logic, empty-city-first ordering, filtering, caching, upsert |
+| `lib/data.ts` (`getBusinessCountsByCity`) | Per-city business counts used to prioritize empty cities |
 | `scripts/fetch-businesses.ts` | CLI entry point |
 | `app/api/admin/businesses/fetch/route.ts` | Admin API endpoint |
 | `components/admin/BusinessFetcher.tsx` | Admin UI panel |
