@@ -675,7 +675,7 @@ Optionally add `app/[state]/opengraph-image.tsx` following the same pattern with
 
 ### Task 5.1 — Time-based revalidation on all public pages
 
-- [ ] Done
+- [x] Done
 
 **Files:** `app/page.tsx`, `app/[state]/page.tsx`, `app/[state]/[city]/page.tsx`, `app/[state]/[city]/[service]/page.tsx`, `app/business/[slug]/page.tsx`, `app/sitemap.ts`
 
@@ -691,7 +691,7 @@ This keeps pages statically served but re-renders them in the background at most
 
 ### Task 5.2 (optional, only if Task 5.1 verified) — Instant revalidation on admin writes
 
-- [ ] Done
+- [x] Done
 
 **Files:** the admin CRUD route handlers under `app/api/admin/businesses/`, `app/api/admin/cities/`, `app/api/admin/states/` (locate the POST/PUT/PATCH/DELETE handlers with `rg "deleteBusiness|upsertBusiness|updateBusiness|createBusiness" app/api/admin`)
 

@@ -11,6 +11,8 @@ import Breadcrumb from '@/components/Breadcrumb';
 import SchemaOrg from '@/components/SchemaOrg';
 import { buildBreadcrumbSchema } from '@/lib/schema';
 
+export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
+
 type Props = { params: Promise<{ state: string }> };
 
 export async function generateStaticParams() {

@@ -4,6 +4,8 @@ import { homeMetadata } from '@/lib/seo';
 import { buildWebSiteSchema, buildOrganizationSchema } from '@/lib/schema';
 import SchemaOrg from '@/components/SchemaOrg';
 
+export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
+
 export const metadata = homeMetadata();
 
 export default async function HomePage() {

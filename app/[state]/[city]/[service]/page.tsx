@@ -24,6 +24,8 @@ import BusinessList from '@/components/BusinessList';
 import FAQSection from '@/components/FAQSection';
 import SchemaOrg from '@/components/SchemaOrg';
 
+export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
+
 type Props = {
   params: Promise<{ state: string; city: string; service: string }>;
 };

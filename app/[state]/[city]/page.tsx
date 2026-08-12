@@ -21,6 +21,8 @@ import CityLinks from '@/components/CityLinks';
 import ServiceLinks from '@/components/ServiceLinks';
 import SchemaOrg from '@/components/SchemaOrg';
 
+export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
+
 type Props = { params: Promise<{ state: string; city: string }> };
 
 export async function generateStaticParams() {

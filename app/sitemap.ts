@@ -11,6 +11,8 @@ import {
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mobiletirerepair24.com';
 
+export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [states, cities, businesses, services] = await Promise.all([
     getAllStates(),

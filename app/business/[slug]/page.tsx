@@ -36,6 +36,8 @@ import CTAButtonGroup from '@/components/listing/CTAButtonGroup';
 import SectionContainer from '@/components/listing/SectionContainer';
 import SectionHeading from '@/components/listing/SectionHeading';
 
+export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
