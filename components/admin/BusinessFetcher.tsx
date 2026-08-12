@@ -55,7 +55,7 @@ export default function BusinessFetcher({ onComplete }: { onComplete?: () => voi
         <h2 className="text-lg font-bold text-gray-900">Fetch from Google Places</h2>
         <p className="text-sm text-gray-600 mt-1">
           Pulls mobile tire repair businesses and saves them directly to the database.
-          Cities come from your database — add them in{' '}
+          Cities with no businesses are fetched first. Add cities in{' '}
           <a href="/admin/cities" className="text-blue-600 hover:underline">
             Cities
           </a>{' '}

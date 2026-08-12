@@ -5,6 +5,7 @@ import { slugify } from './slugify';
 import { mapGoogleOpeningHours, type GoogleOpeningHours } from './hours';
 import {
   getAllCities,
+  getBusinessCountsByCity,
   upsertBusiness,
   ensureBusinessLocation,
   type Business,
@@ -179,6 +180,18 @@ export async function fetchBusinessesFromPlaces(
         : 'No cities in database — add cities in admin first',
     );
   }
+
+  // Prefer cities with no (or fewer) businesses so sparse coverage fills first.
+  const businessCounts = await getBusinessCountsByCity();
+  targets.sort((a, b) => {
+    const countA = businessCounts.get(`${a.slug}:${a.state}`) ?? 0;
+    const countB = businessCounts.get(`${b.slug}:${b.state}`) ?? 0;
+    if (countA !== countB) return countA - countB;
+    // Stable-ish tiebreak: name then state
+    const byName = a.name.localeCompare(b.name);
+    if (byName !== 0) return byName;
+    return a.stateCode.localeCompare(b.stateCode);
+  });
 
   const stats = { apiCalls: 0, cacheHits: 0 };
   const seen = new Set<string>();
