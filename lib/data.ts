@@ -39,6 +39,8 @@ export type Business = {
   email?: string;
   zipCode?: string;
   acceptedPayment?: string[];
+  lat?: number;
+  lng?: number;
 };
 
 export type City = {
@@ -112,6 +114,35 @@ async function persistHoursRepair(business: Business, originalHours: Business['h
 }
 
 // ── Businesses ───────────────────────────────────────────────────────────────
+
+export async function getBusinessCount(): Promise<number> {
+  const db = await getDb();
+  return db.collection(COLLECTIONS.businesses).countDocuments();
+}
+
+/** Highest-rated businesses with a meaningful number of reviews, for the homepage. */
+export async function getTopRatedBusinesses(limit = 6): Promise<Business[]> {
+  const db = await getDb();
+  const docs = await db
+    .collection(COLLECTIONS.businesses)
+    .find({ rating: { $gte: 4.5 }, reviewCount: { $gte: 10 } })
+    .sort({ rating: -1, reviewCount: -1 })
+    .limit(limit)
+    .toArray();
+  return cleanAllBusinesses(docs as never);
+}
+
+/** Cities ordered by number of listed businesses (for "popular cities" chips). */
+export async function getPopularCities(limit = 8): Promise<City[]> {
+  const counts = await getBusinessCountsByCity();
+  const cities = await getAllCities();
+  return cities
+    .map((c) => ({ city: c, count: counts.get(`${c.slug}:${c.state}`) ?? 0 }))
+    .filter((x) => x.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit)
+    .map((x) => x.city);
+}
 
 export async function getAllBusinesses(): Promise<Business[]> {
   const db = await getDb();

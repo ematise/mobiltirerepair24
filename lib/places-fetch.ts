@@ -35,6 +35,7 @@ type PlaceResult = {
   userRatingCount?: number;
   regularOpeningHours?: GoogleOpeningHours;
   photos?: PlacePhoto[];
+  location?: { latitude: number; longitude: number };
 };
 
 type SearchResponse = { places?: PlaceResult[]; nextPageToken?: string };
@@ -52,6 +53,7 @@ const FIELD_MASK = [
   'places.userRatingCount',
   'places.regularOpeningHours',
   'places.photos',
+  'places.location',
   'nextPageToken',
 ].join(',');
 
@@ -126,6 +128,9 @@ function toBusiness(place: PlaceResult, city: City): Business {
     reviewCount: place.userRatingCount ?? 0,
     ...(place.websiteUri ? { website: place.websiteUri } : {}),
     ...(hours ? { hours } : {}),
+    ...(place.location
+      ? { lat: place.location.latitude, lng: place.location.longitude }
+      : {}),
   };
 }
 
@@ -282,9 +287,9 @@ export async function fetchBusinessesFromPlaces(
     let cityCount = 0;
 
     for (let page = 0; page < pages; page++) {
-      // Cache key includes "photos" so older Text Search caches (without photo
-      // resource names) are not reused after this feature was added.
-      const cacheKey = `${city.slug}-${city.stateCode.toLowerCase()}-p${page + 1}-photos`;
+      // Cache key includes "photos-loc" so older Text Search caches (without photo
+      // resource names or location) are not reused after this feature was added.
+      const cacheKey = `${city.slug}-${city.stateCode.toLowerCase()}-p${page + 1}-photos-loc`;
       let data: SearchResponse;
       try {
         data = await searchTextPage(apiKey, query, cacheKey, useCache, stats, pageToken);
