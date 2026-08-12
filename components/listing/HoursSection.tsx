@@ -3,15 +3,10 @@
 import { Clock } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import SectionContainer from './SectionContainer';
+import { formatDayHoursLabel, type BusinessHours } from '@/lib/hours';
 
 export interface HoursSectionProps {
-  hours?: {
-    [day: string]: {
-      open: string;
-      close: string;
-      closed?: boolean;
-    };
-  };
+  hours?: BusinessHours;
 }
 
 const daysOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
@@ -49,9 +44,7 @@ export default function HoursSection({ hours }: HoursSectionProps) {
                 {dayName}
               </span>
               <span className={isToday ? 'text-blue-700 font-medium' : 'text-slate-600'}>
-                {dayHours.closed
-                  ? 'Closed'
-                  : `${dayHours.open} – ${dayHours.close}`}
+                {formatDayHoursLabel(dayHours)}
               </span>
             </div>
           );

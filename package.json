@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "fetch:businesses": "tsx scripts/fetch-businesses.ts",
+    "fix:hours": "tsx scripts/fix-hours.ts",
     "seed": "tsx scripts/seed.ts",
     "seed:import": "tsx scripts/seed.ts --import-json",
     "import:businesses": "tsx scripts/import-businesses.ts"
