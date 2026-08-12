@@ -790,7 +790,7 @@ Import `Image from 'next/image'` in both files.
 
 ### Task 7.1 — Web app manifest
 
-- [ ] Done
+- [x] Done
 
 **File (new):** `app/manifest.ts`
 
@@ -816,7 +816,7 @@ export default function manifest(): MetadataRoute.Manifest {
 
 ### Task 7.2 — Custom 404 with recovery links
 
-- [ ] Done
+- [x] Done
 
 **File (new):** `app/not-found.tsx`
 
@@ -826,7 +826,7 @@ Server component. Render an H1 ("Page Not Found"), one sentence of copy, a link 
 
 ### Task 7.3 — Rename deprecated `middleware.ts` to `proxy.ts`
 
-- [ ] Done
+- [x] Done
 
 **Files:** `middleware.ts` → `proxy.ts`
 
