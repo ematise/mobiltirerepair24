@@ -565,7 +565,7 @@ Next.js file convention: an `opengraph-image.tsx` in a route segment auto-inject
 
 ### Task 4.1 — Site-default OG image
 
-- [ ] Done
+- [x] Done
 
 **File (new):** `app/opengraph-image.tsx`
 
@@ -607,7 +607,7 @@ export default async function Image() {
 
 ### Task 4.2 — Dynamic OG images for city and business pages
 
-- [ ] Done
+- [x] Done
 
 **Files (new):** `app/[state]/[city]/opengraph-image.tsx`, `app/business/[slug]/opengraph-image.tsx`
 
