@@ -54,7 +54,7 @@
 
 ### Task 1.1 — Enforce trailing slashes at the framework level
 
-- [ ] Done
+- [x] Done
 
 **File:** `next.config.ts`
 
@@ -79,7 +79,7 @@ const nextConfig: NextConfig = {
 
 ### Task 1.2 — Block admin and API from crawlers
 
-- [ ] Done
+- [x] Done
 
 **File:** `app/robots.ts`
 
