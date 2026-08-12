@@ -1,40 +1,30 @@
-import { MapPin } from 'lucide-react';
+import { Map } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import SectionContainer from './SectionContainer';
 
 export interface ServiceAreaSectionProps {
+  cityName: string;
   serviceRadius?: string;
   areasServed?: string[];
 }
 
 export default function ServiceAreaSection({
+  cityName,
   serviceRadius,
-  areasServed,
 }: ServiceAreaSectionProps) {
-  if (!serviceRadius && (!areasServed || areasServed.length === 0)) return null;
+  const copy = `We come to you anywhere in ${cityName} and surrounding areas`;
 
   return (
     <SectionContainer>
-      <SectionHeading>Service Area</SectionHeading>
-      <div className="space-y-4">
-        {serviceRadius && (
-          <div className="flex items-start gap-3">
-            <MapPin className="w-5 h-5 text-blue-700 flex-shrink-0 mt-0.5" aria-hidden="true" />
-            <div>
-              <p className="text-sm text-slate-600 font-medium">Service Radius</p>
-              <p className="text-base text-slate-900 font-medium">{serviceRadius}</p>
-            </div>
-          </div>
-        )}
-
-        {areasServed && areasServed.length > 0 && (
-          <div>
-            <p className="text-sm text-slate-600 font-medium mb-2">Areas Served</p>
-            <p className="text-base text-slate-900">
-              {areasServed.join(' · ')}
-            </p>
-          </div>
-        )}
+      <SectionHeading>Service area</SectionHeading>
+      <div className="flex items-center gap-3.5 rounded-[14px] border border-gray-200 bg-white px-3.5 py-3.5">
+        <span className="icon-circle">
+          <Map className="w-5 h-5" strokeWidth={2} aria-hidden="true" />
+        </span>
+        <p className="text-[14px] text-gray-600 leading-relaxed">
+          {copy}
+          {serviceRadius ? ` (${serviceRadius})` : ''}
+        </p>
       </div>
     </SectionContainer>
   );

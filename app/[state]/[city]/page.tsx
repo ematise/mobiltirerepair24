@@ -15,11 +15,14 @@ import {
   cityBreadcrumbs,
 } from '@/lib/schema';
 import { getNearbyCities } from '@/lib/nearby';
+import { enrichProviders } from '@/lib/provider-list';
 import Breadcrumb from '@/components/Breadcrumb';
-import BusinessList from '@/components/BusinessList';
 import CityLinks from '@/components/CityLinks';
-import ServiceLinks from '@/components/ServiceLinks';
 import SchemaOrg from '@/components/SchemaOrg';
+import ReadMoreText from '@/components/listing/ReadMoreText';
+import CityProviderList from '@/components/listing/CityProviderList';
+import SectionContainer from '@/components/listing/SectionContainer';
+import SectionHeading from '@/components/listing/SectionHeading';
 
 export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
 
@@ -57,6 +60,7 @@ export default async function CityPage({ params }: Props) {
   const offeredServices = services.filter((svc) =>
     businesses.some((b) => b.services.includes(svc.slug))
   );
+  const providers = enrichProviders(businesses, city, state.code);
 
   const crumbs = cityBreadcrumbs(city, state);
 
@@ -67,37 +71,27 @@ export default async function CityPage({ params }: Props) {
         data={buildItemListSchema(businesses.map((b) => `/business/${b.slug}/`))}
       />
 
-      <div className="max-w-4xl mx-auto px-4 py-10">
-        <Breadcrumb crumbs={crumbs} />
+      <div className="bg-surface min-h-screen">
+        <div className="max-w-lg mx-auto px-4 pt-4 pb-12">
+          <Breadcrumb crumbs={crumbs} variant="muted" />
 
-        <h1 className="text-4xl font-bold text-slate-900 mb-3">
-          Mobile Tire Repair in {city.name}, {state.code}
-        </h1>
-        <p className="text-slate-600 text-lg leading-relaxed mb-10">
-          {city.intro}
-        </p>
+          <h1 className="text-[1.75rem] font-bold text-heading leading-[1.15] tracking-tight">
+            Mobile tire repair in {city.name}, {state.code}
+          </h1>
 
-        <div className="flex flex-col gap-12">
-          <BusinessList
-            businesses={businesses}
-            heading={`Top Mobile Tire Repair Services in ${city.name}`}
+          <ReadMoreText text={city.intro} />
+
+          <CityProviderList
+            providers={providers}
+            services={offeredServices}
+            cityName={city.name}
           />
 
-          {offeredServices.length > 0 && (
-            <ServiceLinks
-              services={offeredServices}
-              citySlug={citySlug}
-              stateSlug={stateSlug}
-              heading={`Services Available in ${city.name}`}
-            />
-          )}
-
           {nearby.length > 0 && (
-            <CityLinks
-              cities={nearby}
-              stateSlug={stateSlug}
-              heading="Nearby Cities with Mobile Tire Services"
-            />
+            <SectionContainer>
+              <SectionHeading>Nearby cities</SectionHeading>
+              <CityLinks cities={nearby} stateSlug={stateSlug} />
+            </SectionContainer>
           )}
         </div>
       </div>

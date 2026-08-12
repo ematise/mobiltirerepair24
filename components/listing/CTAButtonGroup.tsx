@@ -1,25 +1,35 @@
 'use client';
 
-import { Phone, MessageSquare, MapPin, Share2 } from 'lucide-react';
+import { Phone, MessageSquare, MapPin, Share } from 'lucide-react';
 import { useState } from 'react';
+import Button from '@/components/ui/Button';
 
 export interface CTAButtonGroupProps {
   phone: string;
   slug: string;
   name: string;
   address: string;
+  responseTime?: string;
 }
 
 export default function CTAButtonGroup({
   phone,
-  slug,
   name,
   address,
+  responseTime,
 }: CTAButtonGroupProps) {
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
-    const url = `${typeof window !== 'undefined' ? window.location.origin : ''}${typeof window !== 'undefined' ? window.location.pathname : ''}`;
+    const url = window.location.href;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: name, url });
+        return;
+      }
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') return;
+    }
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
@@ -35,48 +45,45 @@ export default function CTAButtonGroup({
   };
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-      {/* Call button */}
-      <a
+    <div>
+      <Button
+        id="business-primary-cta"
         href={`tel:${phone}`}
-        className="flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-4 py-3 rounded-lg transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+        variant="primary"
+        size="lg"
+        block
+        aria-label={`Call ${name}`}
       >
-        <Phone className="w-4 h-4" aria-hidden="true" />
-        <span className="hidden sm:inline">Call Now</span>
-      </a>
+        <Phone className="w-5 h-5" strokeWidth={2} fill="currentColor" aria-hidden="true" />
+        Call now
+      </Button>
 
-      {/* Directions */}
-      <button
-        onClick={handleDirections}
-        className="flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold px-4 py-3 rounded-lg transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-        aria-label="Get directions"
-      >
-        <MapPin className="w-4 h-4" aria-hidden="true" />
-        <span className="hidden sm:inline">Directions</span>
-      </button>
+      <p className="text-center text-[13px] text-muted mt-2.5">
+        Average response time: {responseTime || '30–45 min'}
+      </p>
 
-      {/* Request quote */}
-      <button
-        onClick={() => {
-          // Scroll to review section (assumes ReviewSection exists)
-          const reviewSection = document.getElementById('review-form');
-          if (reviewSection) reviewSection.scrollIntoView({ behavior: 'smooth' });
-        }}
-        className="flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold px-4 py-3 rounded-lg transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-      >
-        <MessageSquare className="w-4 h-4" aria-hidden="true" />
-        <span className="hidden sm:inline">Comment</span>
-      </button>
+      <div className="grid grid-cols-3 gap-2.5 mt-4">
+        <Button href={`sms:${phone}`} variant="secondary" tile aria-label={`Text ${name}`}>
+          <MessageSquare className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" />
+          Text
+        </Button>
 
-      {/* Share */}
-      <button
-        onClick={handleShare}
-        className="flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold px-4 py-3 rounded-lg transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-        aria-label={copied ? 'Copied!' : 'Share listing'}
-      >
-        <Share2 className="w-4 h-4" aria-hidden="true" />
-        <span className="hidden sm:inline">{copied ? 'Copied!' : 'Share'}</span>
-      </button>
+        <Button type="button" variant="secondary" tile onClick={handleDirections} aria-label="Get directions">
+          <MapPin className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" />
+          Directions
+        </Button>
+
+        <Button
+          type="button"
+          variant="secondary"
+          tile
+          onClick={handleShare}
+          aria-label={copied ? 'Link copied' : 'Share listing'}
+        >
+          <Share className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" />
+          {copied ? 'Copied' : 'Share'}
+        </Button>
+      </div>
     </div>
   );
 }

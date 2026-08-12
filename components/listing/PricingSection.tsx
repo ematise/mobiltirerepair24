@@ -21,33 +21,34 @@ export default function PricingSection({
 
   return (
     <SectionContainer>
-      <SectionHeading>Pricing (Estimated)</SectionHeading>
-      <div className="overflow-x-auto">
+      <SectionHeading>Pricing</SectionHeading>
+      <div className="rounded-[14px] border border-gray-200 bg-white overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-200">
-              <th className="text-left font-semibold text-slate-900 px-4 py-3">Service</th>
-              <th className="text-right font-semibold text-slate-900 px-4 py-3">Price Range</th>
-              <th className="text-left font-semibold text-slate-900 px-4 py-3 max-w-xs">Notes</th>
+            <tr className="border-b border-gray-100">
+              <th className="text-left font-semibold text-gray-900 px-4 py-3 [font-family:var(--font-body)]">Service</th>
+              <th className="text-right font-semibold text-gray-900 px-4 py-3 [font-family:var(--font-body)]">Price</th>
             </tr>
           </thead>
           <tbody>
             {pricing.map((item, idx) => (
               <tr
                 key={idx}
-                className="border-b border-slate-100 hover:bg-slate-50 transition-colors duration-150"
+                className={idx !== 0 ? 'border-t border-gray-100' : ''}
               >
-                <td className="px-4 py-3 text-slate-900 font-medium">{item.service}</td>
-                <td className="px-4 py-3 text-right text-slate-600 font-medium">
+                <td className="px-4 py-3">
+                  <p className="text-gray-900 font-medium [font-family:var(--font-body)]">{item.service}</p>
+                  {item.note && <p className="text-gray-400 text-xs mt-0.5">{item.note}</p>}
+                </td>
+                <td className="px-4 py-3 text-right text-gray-600 font-medium whitespace-nowrap [font-family:var(--font-body)]">
                   ${item.minPrice}–${item.maxPrice}
                 </td>
-                <td className="px-4 py-3 text-slate-600 text-xs">{item.note}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p className="text-xs text-slate-500 mt-4 p-3 bg-slate-50 rounded-lg border border-slate-200">
+      <p className="text-xs text-gray-400 mt-3">
         {disclaimer}
       </p>
     </SectionContainer>

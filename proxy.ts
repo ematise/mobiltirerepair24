@@ -7,8 +7,15 @@ const JWT_SECRET = new TextEncoder().encode(
 
 const PUBLIC_PATHS = ['/admin/login', '/api/admin/auth/login', '/api/admin/auth/token-login'];
 
+function normalizePath(pathname: string): string {
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    return pathname.slice(0, -1);
+  }
+  return pathname;
+}
+
 export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const pathname = normalizePath(request.nextUrl.pathname);
 
   if (PUBLIC_PATHS.includes(pathname)) {
     return NextResponse.next();
@@ -24,7 +31,7 @@ export async function proxy(request: NextRequest) {
       if (pathname.startsWith('/api/')) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }
-      return NextResponse.redirect(new URL('/admin/login', request.url));
+      return NextResponse.redirect(new URL('/admin/login/', request.url));
     }
 
     try {
@@ -36,7 +43,7 @@ export async function proxy(request: NextRequest) {
         response.cookies.delete('admin_session');
         return response;
       }
-      const response = NextResponse.redirect(new URL('/admin/login', request.url));
+      const response = NextResponse.redirect(new URL('/admin/login/', request.url));
       response.cookies.delete('admin_session');
       return response;
     }

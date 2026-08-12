@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Button from '@/components/ui/Button';
 
 export default function SeedGeographyButton() {
   const router = useRouter();
@@ -50,14 +51,9 @@ export default function SeedGeographyButton() {
         <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-800 rounded text-sm">{message}</div>
       )}
 
-      <button
-        type="button"
-        onClick={handleRun}
-        disabled={loading}
-        className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition font-medium"
-      >
+      <Button type="button" onClick={handleRun} disabled={loading} variant="primary">
         {loading ? 'Seeding…' : 'Run geography seed'}
-      </button>
+      </Button>
     </div>
   );
 }

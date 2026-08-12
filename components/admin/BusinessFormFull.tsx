@@ -3,6 +3,7 @@
 import { FormEvent, useState } from 'react';
 import { Business } from '@/lib/data';
 import ImageUploader from './ImageUploader';
+import Button from '@/components/ui/Button';
 
 interface BusinessFormFullProps {
   business?: Business;
@@ -135,18 +136,16 @@ export default function BusinessFormFull({ business, onSubmit }: BusinessFormFul
       {/* Tabs */}
       <div className="flex gap-2 border-b">
         {['basic', 'hours', 'pricing', 'gallery', 'details'].map((tab) => (
-          <button
+          <Button
             key={tab}
             type="button"
-            onClick={() => setActiveTab(tab as any)}
-            className={`px-4 py-2 capitalize font-medium border-b-2 transition ${
-              activeTab === tab
-                ? 'border-blue-600 text-blue-600'
-                : 'border-transparent text-gray-600 hover:text-gray-900'
-            }`}
+            variant="tab"
+            onClick={() => setActiveTab(tab as 'basic' | 'hours' | 'pricing' | 'gallery' | 'details')}
+            data-active={activeTab === tab}
+            className="capitalize"
           >
             {tab}
-          </button>
+          </Button>
         ))}
       </div>
 
@@ -393,17 +392,14 @@ export default function BusinessFormFull({ business, onSubmit }: BusinessFormFul
                       <div className="flex-1 flex items-center text-gray-500 font-medium">Closed</div>
                     )}
                   </div>
-                  <button
+                  <Button
                     type="button"
+                    variant={dayHours.closed ? 'danger' : 'secondary'}
+                    size="sm"
                     onClick={() => handleToggleClosed(day)}
-                    className={`px-3 py-2 rounded text-sm font-medium transition ${
-                      dayHours.closed
-                        ? 'bg-red-100 text-red-700 hover:bg-red-200'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                    }`}
                   >
                     {dayHours.closed ? 'Open' : 'Close'}
-                  </button>
+                  </Button>
                 </div>
               );
             })}
@@ -452,13 +448,9 @@ export default function BusinessFormFull({ business, onSubmit }: BusinessFormFul
                 onChange={(e) => setNewPricingItem({ ...newPricingItem, note: e.target.value })}
                 className="col-span-2 px-3 py-2 border border-gray-300 rounded"
               />
-              <button
-                type="button"
-                onClick={handleAddPricingItem}
-                className="col-span-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-              >
+              <Button type="button" variant="primary" size="sm" className="col-span-2" onClick={handleAddPricingItem}>
                 Add Item
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -483,13 +475,9 @@ export default function BusinessFormFull({ business, onSubmit }: BusinessFormFul
                       <td className="px-4 py-2 text-right">${item.maxPrice}</td>
                       <td className="px-4 py-2 text-sm text-gray-600">{item.note}</td>
                       <td className="px-4 py-2">
-                        <button
-                          type="button"
-                          onClick={() => handleRemovePricingItem(idx)}
-                          className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200"
-                        >
+                        <Button type="button" variant="danger" size="sm" onClick={() => handleRemovePricingItem(idx)}>
                           Remove
-                        </button>
+                        </Button>
                       </td>
                     </tr>
                   ))}
@@ -570,13 +558,9 @@ export default function BusinessFormFull({ business, onSubmit }: BusinessFormFul
       )}
 
       {/* Submit Button */}
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition font-medium"
-      >
+      <Button type="submit" disabled={loading} variant="primary" block>
         {loading ? 'Saving...' : business ? 'Update Business' : 'Create Business'}
-      </button>
+      </Button>
     </form>
   );
 }

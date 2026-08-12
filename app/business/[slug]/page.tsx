@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { MapPin } from 'lucide-react';
 import {
   getAllBusinesses,
   getAllServices,
@@ -15,16 +16,15 @@ import {
   buildBreadcrumbSchema,
   businessBreadcrumbs,
 } from '@/lib/schema';
+import { getOpenStatus } from '@/lib/open-now';
+import { timezoneForStateCode } from '@/lib/timezones';
 import Breadcrumb from '@/components/Breadcrumb';
 import SchemaOrg from '@/components/SchemaOrg';
 import ReviewSection from '@/components/ReviewSection';
 import BusinessCard from '@/components/BusinessCard';
 import RatingBadge from '@/components/listing/RatingBadge';
-import StatusBadge from '@/components/listing/StatusBadge';
-import HeroMetrics from '@/components/listing/HeroMetrics';
 import PhotoGallery from '@/components/listing/PhotoGallery';
 import ServiceSection from '@/components/listing/ServiceSection';
-import ServiceLinks from '@/components/ServiceLinks';
 import ContactSection from '@/components/listing/ContactSection';
 import HoursSection from '@/components/listing/HoursSection';
 import PricingSection from '@/components/listing/PricingSection';
@@ -35,6 +35,9 @@ import ReviewHighlights from '@/components/listing/ReviewHighlights';
 import CTAButtonGroup from '@/components/listing/CTAButtonGroup';
 import SectionContainer from '@/components/listing/SectionContainer';
 import SectionHeading from '@/components/listing/SectionHeading';
+import FeatureTags from '@/components/listing/FeatureTags';
+import StickyBusinessCTA from '@/components/listing/StickyBusinessCTA';
+import BusinessHeroBanner from '@/components/listing/BusinessHeroBanner';
 
 export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
 
@@ -77,131 +80,123 @@ export default async function BusinessPage({ params }: Props) {
     .slice(0, 3);
 
   const crumbs = businessBreadcrumbs(biz, city, state);
+  const openStatus = getOpenStatus(biz.hours, timezoneForStateCode(biz.stateCode));
+  const licensed =
+    (biz.certifications ?? []).some((c) => /licen[cs]ed|insured/i.test(c)) ||
+    /licen[cs]ed|insured/i.test(biz.description ?? '');
 
   return (
     <>
       <SchemaOrg data={buildLocalBusinessSchema(biz, city)} />
       <SchemaOrg data={buildBreadcrumbSchema(crumbs)} />
 
-      <div className="max-w-3xl mx-auto px-4 py-10">
-        <Breadcrumb crumbs={crumbs} />
+      <div className="bg-white min-h-screen pb-28">
+        <BusinessHeroBanner openNow={openStatus?.openNow ?? null} />
 
-        {/* Header Section */}
-        <div className="mb-8">
-          <div className="flex flex-wrap gap-2 items-center mb-3">
-            <h1 className="text-4xl font-bold text-slate-900">{biz.name}</h1>
-            {/* Status badges */}
-            {biz.photos && biz.photos.length > 0 && (
-              <StatusBadge status="featured" size="sm" />
-            )}
-            <StatusBadge status="mobile" size="sm" />
-          </div>
-          <p className="text-slate-500 text-base mb-3">
+        <div className="max-w-lg mx-auto px-4 pt-4">
+          <Breadcrumb crumbs={crumbs.slice(0, -1)} variant="muted" />
+
+          <h1 className="text-[1.75rem] font-bold text-gray-950 leading-[1.15] tracking-tight">
+            {biz.name}
+          </h1>
+
+          <p className="flex items-center gap-1.5 text-[15px] text-gray-500 mt-2 [font-family:var(--font-body)]">
+            <MapPin className="w-4 h-4 shrink-0" strokeWidth={2} aria-hidden="true" />
             {city.name}, {state.code}
           </p>
-          <RatingBadge rating={biz.rating} count={biz.reviewCount} />
-        </div>
 
-        {/* Photo Gallery */}
-        {biz.photos && biz.photos.length > 0 && (
+          {biz.rating > 0 && (
+            <div className="mt-2.5">
+              <RatingBadge rating={biz.rating} count={biz.reviewCount} />
+            </div>
+          )}
+
+          <div className="mt-3.5">
+            <FeatureTags licensed={licensed} />
+          </div>
+
+          <div className="mt-5 mb-8">
+            <CTAButtonGroup
+              phone={biz.phone}
+              slug={biz.slug}
+              name={biz.name}
+              address={biz.address}
+              responseTime={biz.responseTime}
+            />
+          </div>
+
           <SectionContainer>
-            <PhotoGallery photos={biz.photos} businessName={biz.name} />
+            <SectionHeading>About</SectionHeading>
+            <p className="text-[15px] text-gray-600 leading-relaxed [font-family:var(--font-body)]">
+              {biz.description}
+            </p>
           </SectionContainer>
-        )}
 
-        {/* Hero Metrics */}
-        <SectionContainer divider={false}>
-          <HeroMetrics
-            responseTime={biz.responseTime}
-            serviceRadius={biz.serviceRadius}
-            startingPrice={biz.pricing ? `$${biz.pricing[0]?.minPrice ?? 0}+` : undefined}
-            availability={biz.acceptedPayment ? '24/7' : undefined}
-          />
-        </SectionContainer>
-
-        {/* CTA Buttons */}
-        <div className="mb-8">
-          <CTAButtonGroup
-            phone={biz.phone}
-            slug={biz.slug}
-            name={biz.name}
-            address={biz.address}
-          />
-        </div>
-
-        {/* Description */}
-        <SectionContainer>
-          <SectionHeading>About</SectionHeading>
-          <p className="text-slate-600 leading-relaxed">{biz.description}</p>
-        </SectionContainer>
-
-        {/* Services */}
-        <ServiceSection services={biz.services} />
-
-        {offeredServices.length > 0 && (
-          <ServiceLinks
+          <ServiceSection
             services={offeredServices}
             citySlug={biz.city}
             stateSlug={biz.state}
-            heading={`Find These Services in ${city.name}`}
           />
-        )}
 
-        {/* Vehicle Types */}
-        <VehicleTypesSection vehicleTypes={biz.vehicleTypes || []} />
+          <ReviewHighlights
+            businessSlug={biz.slug}
+            totalCount={biz.reviewCount}
+            limit={2}
+          />
 
-        {/* Service Area */}
-        <ServiceAreaSection
-          serviceRadius={biz.serviceRadius}
-          areasServed={biz.areasServed}
-        />
+          <ServiceAreaSection
+            cityName={city.name}
+            serviceRadius={biz.serviceRadius}
+            areasServed={biz.areasServed}
+          />
 
-        {/* Contact */}
-        <ContactSection
-          phone={biz.phone}
-          phoneDisplay={biz.phoneDisplay}
-          address={biz.address}
-          website={biz.website}
-          email={biz.email}
-        />
-
-        {/* Hours */}
-        <HoursSection hours={biz.hours} />
-
-        {/* Pricing */}
-        <PricingSection pricing={biz.pricing || []} />
-
-        {/* Certifications */}
-        <CertificationBadges certifications={biz.certifications || []} />
-
-        {/* Review Highlights */}
-        <ReviewHighlights businessSlug={biz.slug} limit={3} />
-
-        {/* Full Review Section */}
-        <div id="review-form">
-          <ReviewSection businessSlug={biz.slug} />
-        </div>
-
-        {/* Related Businesses */}
-        <SectionContainer divider={false}>
-          <h2 className="text-base font-semibold text-slate-700 mb-4 mt-6">
-            More in {city.name}
-          </h2>
-          {relatedBusinesses.length > 0 && (
-            <div className="grid grid-cols-1 gap-4 mb-4">
-              {relatedBusinesses.map((b) => (
-                <BusinessCard key={b.slug} biz={b} />
-              ))}
-            </div>
+          {biz.photos && biz.photos.length > 0 && (
+            <SectionContainer>
+              <SectionHeading>Photos</SectionHeading>
+              <PhotoGallery photos={biz.photos} businessName={biz.name} />
+            </SectionContainer>
           )}
-          <Link
-            href={`/${state.slug}/${city.slug}/`}
-            className="text-blue-700 hover:underline text-sm font-medium cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
-          >
-            View all mobile tire services in {city.name}, {state.code}
-          </Link>
-        </SectionContainer>
+
+          <VehicleTypesSection vehicleTypes={biz.vehicleTypes || []} />
+
+          <ContactSection
+            phone={biz.phone}
+            phoneDisplay={biz.phoneDisplay}
+            address={biz.address}
+            website={biz.website}
+            email={biz.email}
+          />
+
+          <HoursSection hours={biz.hours} />
+
+          <PricingSection pricing={biz.pricing || []} />
+
+          <CertificationBadges certifications={biz.certifications || []} />
+
+          <div id="review-form">
+            <ReviewSection businessSlug={biz.slug} />
+          </div>
+
+          <SectionContainer>
+            <SectionHeading>More in {city.name}</SectionHeading>
+            {relatedBusinesses.length > 0 && (
+              <div className="grid grid-cols-1 gap-3 mb-4">
+                {relatedBusinesses.map((b) => (
+                  <BusinessCard key={b.slug} biz={b} />
+                ))}
+              </div>
+            )}
+            <Link
+              href={`/${state.slug}/${city.slug}/`}
+              className="text-cta hover:underline text-sm font-medium cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cta rounded"
+            >
+              View all mobile tire services in {city.name}, {state.code}
+            </Link>
+          </SectionContainer>
+        </div>
       </div>
+
+      <StickyBusinessCTA phone={biz.phone} name={biz.name} />
     </>
   );
 }

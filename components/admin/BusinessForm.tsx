@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import { Business } from '@/lib/data';
+import Button from '@/components/ui/Button';
 
 interface BusinessFormProps {
   business?: Business;
@@ -330,13 +331,9 @@ export default function BusinessForm({ business, onSubmit }: BusinessFormProps) 
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition"
-      >
+      <Button type="submit" disabled={loading} variant="primary" block>
         {loading ? 'Saving...' : business ? 'Update Business' : 'Create Business'}
-      </button>
+      </Button>
     </form>
   );
 }

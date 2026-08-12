@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import { City } from '@/lib/data';
+import Button from '@/components/ui/Button';
 
 interface CityFormProps {
   city?: City;
@@ -148,13 +149,9 @@ export default function CityForm({ city, onSubmit }: CityFormProps) {
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition"
-      >
+      <Button type="submit" disabled={loading} variant="primary" block>
         {loading ? 'Saving...' : city ? 'Update City' : 'Create City'}
-      </button>
+      </Button>
     </form>
   );
 }

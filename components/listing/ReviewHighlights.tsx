@@ -14,30 +14,26 @@ export interface Review {
 
 export interface ReviewHighlightsProps {
   businessSlug: string;
-  limit?: 3 | 5;
+  totalCount: number;
+  limit?: 2 | 3 | 5;
 }
 
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-  if (diffDays === 0) return 'Today';
-  if (diffDays === 1) return 'Yesterday';
-  if (diffDays < 7) return `${diffDays} days ago`;
-  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
-  if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
-  return `${Math.floor(diffDays / 365)} years ago`;
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return '?';
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-0.5">
+    <div className="flex gap-0.5" aria-label={`${rating} out of 5 stars`}>
       {[1, 2, 3, 4, 5].map((i) => (
         <Star
           key={i}
-          className={`w-4 h-4 ${i <= rating ? 'fill-amber-400 text-amber-400' : 'text-slate-300'}`}
+          className={`w-3.5 h-3.5 ${i <= rating ? 'text-star' : 'text-gray-300'}`}
+          strokeWidth={1.7}
+          fill="none"
           aria-hidden="true"
         />
       ))}
@@ -47,7 +43,8 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function ReviewHighlights({
   businessSlug,
-  limit = 3,
+  totalCount,
+  limit = 2,
 }: ReviewHighlightsProps) {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
@@ -56,7 +53,8 @@ export default function ReviewHighlights({
     fetch(`/api/reviews?slug=${encodeURIComponent(businessSlug)}`)
       .then((r) => r.json())
       .then((data) => {
-        setReviews(data.reviews.slice(0, limit));
+        const withComments = (data.reviews as Review[]).filter((r) => r.comment?.trim());
+        setReviews(withComments.slice(0, limit));
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -64,23 +62,35 @@ export default function ReviewHighlights({
 
   if (loading || reviews.length === 0) return null;
 
+  const shownOf = Math.max(totalCount, reviews.length);
+
   return (
     <SectionContainer>
-      <SectionHeading>Recent Reviews</SectionHeading>
-      <div className="space-y-3">
+      <SectionHeading>What customers say</SectionHeading>
+      <div className="flex flex-col gap-2.5">
         {reviews.map((review, idx) => (
-          <div key={idx} className="bg-slate-50 border border-slate-200 rounded-lg p-4">
-            <div className="flex items-start justify-between mb-2">
-              <div>
-                <p className="font-medium text-slate-900">{review.displayName}</p>
-                <p className="text-xs text-slate-500">{formatDate(review.createdAt)}</p>
-              </div>
+          <div
+            key={`${review.createdAt}-${idx}`}
+            className="flex items-start gap-3 rounded-[14px] border border-gray-200 bg-white px-3.5 py-3.5"
+          >
+            <span
+              className="flex items-center justify-center w-11 h-11 rounded-full bg-cta-soft text-cta text-[13px] font-bold shrink-0"
+              aria-hidden="true"
+            >
+              {initials(review.displayName)}
+            </span>
+            <div className="min-w-0 pt-0.5">
               <StarRating rating={review.rating} />
+              <p className="text-[14px] text-gray-600 leading-relaxed mt-1.5">
+                {review.comment}
+              </p>
             </div>
-            <p className="text-sm text-slate-600 leading-relaxed">{review.comment}</p>
           </div>
         ))}
       </div>
+      <p className="text-[13px] text-gray-400 mt-3">
+        Showing {reviews.length} of {shownOf} {shownOf === 1 ? 'review' : 'reviews'}
+      </p>
     </SectionContainer>
   );
 }

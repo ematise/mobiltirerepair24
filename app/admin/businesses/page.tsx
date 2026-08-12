@@ -5,6 +5,7 @@ import { Business } from '@/lib/data';
 import BusinessFormFull from '@/components/admin/BusinessFormFull';
 import BusinessFormJSON from '@/components/admin/BusinessFormJSON';
 import BusinessFetcher from '@/components/admin/BusinessFetcher';
+import Button from '@/components/ui/Button';
 
 export default function BusinessesPage() {
   const [businesses, setBusinesses] = useState<Business[]>([]);
@@ -144,19 +145,12 @@ export default function BusinessesPage() {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-900">Businesses</h1>
         <div className="flex gap-2">
-          <button
-            onClick={handleFixHours}
-            disabled={fixingHours}
-            className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition disabled:opacity-50"
-          >
+          <Button type="button" variant="secondary" onClick={handleFixHours} disabled={fixingHours}>
             {fixingHours ? 'Repairing…' : 'Repair 24/7 hours'}
-          </button>
-          <button
-            onClick={() => setShowForm(!showForm)}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-          >
+          </Button>
+          <Button type="button" variant={showForm ? 'secondary' : 'primary'} onClick={() => setShowForm(!showForm)}>
             {showForm ? 'Cancel' : 'Add Business'}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -172,36 +166,29 @@ export default function BusinessesPage() {
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900">Create New Business</h2>
-            <button
-              onClick={() => setShowForm(false)}
-              className="text-2xl text-gray-400 hover:text-gray-600"
-            >
+            <Button type="button" variant="icon" onClick={() => setShowForm(false)} aria-label="Close">
               ✕
-            </button>
+            </Button>
           </div>
 
           {/* Form Type Tabs */}
           <div className="flex gap-2 mb-6 border-b">
-            <button
+            <Button
+              type="button"
+              variant="tab"
               onClick={() => setFormType('json')}
-              className={`px-4 py-2 font-medium border-b-2 transition ${
-                formType === 'json'
-                  ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-gray-600 hover:text-gray-900'
-              }`}
+              data-active={formType === 'json'}
             >
-              📋 JSON (API/Automation)
-            </button>
-            <button
+              JSON (API/Automation)
+            </Button>
+            <Button
+              type="button"
+              variant="tab"
               onClick={() => setFormType('form')}
-              className={`px-4 py-2 font-medium border-b-2 transition ${
-                formType === 'form'
-                  ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-gray-600 hover:text-gray-900'
-              }`}
+              data-active={formType === 'form'}
             >
-              📝 Form (Manual Entry)
-            </button>
+              Form (Manual Entry)
+            </Button>
           </div>
 
           {/* Forms */}
@@ -220,12 +207,9 @@ export default function BusinessesPage() {
         <div ref={editFormRef} className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900">Edit Business</h2>
-            <button
-              onClick={() => setEditingSlug(null)}
-              className="text-2xl text-gray-400 hover:text-gray-600"
-            >
+            <Button type="button" variant="icon" onClick={() => setEditingSlug(null)} aria-label="Close">
               ✕
-            </button>
+            </Button>
           </div>
           {editingBusiness ? (
             <BusinessFormFull
@@ -319,18 +303,12 @@ export default function BusinessesPage() {
                     )}
                   </td>
                   <td className="px-6 py-4 space-x-2">
-                    <button
-                      onClick={() => setEditingSlug(business.slug)}
-                      className="px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition text-sm"
-                    >
+                    <Button type="button" variant="soft" size="sm" onClick={() => setEditingSlug(business.slug)}>
                       Edit
-                    </button>
-                    <button
-                      onClick={() => handleDeleteBusiness(business.slug)}
-                      className="px-3 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition text-sm"
-                    >
+                    </Button>
+                    <Button type="button" variant="danger" size="sm" onClick={() => handleDeleteBusiness(business.slug)}>
                       Delete
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               ))}

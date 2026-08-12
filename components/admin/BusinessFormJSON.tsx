@@ -2,6 +2,7 @@
 
 import { FormEvent, useState, ChangeEvent } from 'react';
 import { Business } from '@/lib/data';
+import Button from '@/components/ui/Button';
 
 interface BusinessFormJSONProps {
   onSubmit: (business: Business) => Promise<void>;
@@ -215,13 +216,9 @@ export default function BusinessFormJSON({ onSubmit, onCancel }: BusinessFormJSO
           <li><code className="bg-white px-1 rounded">hours</code> - Day-by-day operating hours</li>
           <li><code className="bg-white px-1 rounded">pricing</code> - Service pricing array</li>
         </ul>
-        <button
-          type="button"
-          onClick={fillExample}
-          className="mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium"
-        >
+        <Button type="button" variant="ghost" size="sm" onClick={fillExample}>
           View Full Example JSON →
-        </button>
+        </Button>
       </div>
 
       <div>
@@ -239,21 +236,13 @@ export default function BusinessFormJSON({ onSubmit, onCancel }: BusinessFormJSO
       </div>
 
       <div className="flex gap-2">
-        <button
-          type="submit"
-          disabled={loading}
-          className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition font-medium"
-        >
+        <Button type="submit" disabled={loading} variant="primary" className="flex-1">
           {loading ? 'Creating...' : 'Create Business from JSON'}
-        </button>
+        </Button>
         {onCancel && (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition"
-          >
+          <Button type="button" onClick={onCancel} variant="secondary">
             Cancel
-          </button>
+          </Button>
         )}
       </div>
     </form>

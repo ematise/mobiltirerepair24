@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import { State } from '@/lib/data';
+import Button from '@/components/ui/Button';
 
 interface StateFormProps {
   state?: State;
@@ -106,13 +107,9 @@ export default function StateForm({ state, onSubmit }: StateFormProps) {
         </p>
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition"
-      >
+      <Button type="submit" disabled={loading} variant="primary" block>
         {loading ? 'Saving...' : state ? 'Update State' : 'Create State'}
-      </button>
+      </Button>
     </form>
   );
 }

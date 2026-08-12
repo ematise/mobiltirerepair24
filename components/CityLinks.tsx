@@ -28,13 +28,13 @@ export default function CityLinks({ cities, stateSlug, serviceSlug, heading }: P
                 .split('-')
                 .map((w) => w[0].toUpperCase() + w.slice(1))
                 .join(' ')} in ${city.name}, ${city.stateCode}`
-            : `Mobile Tire Repair in ${city.name}, ${city.stateCode}`;
+            : `Mobile tire repair in ${city.name}, ${city.stateCode}`;
 
           return (
             <li key={city.slug}>
               <Link
                 href={href}
-                className="inline-flex items-center gap-1.5 text-blue-700 hover:text-blue-800 hover:underline text-sm font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-cta hover:underline text-sm font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-cta rounded cursor-pointer [font-family:var(--font-body)]"
               >
                 <svg
                   className="w-3.5 h-3.5 shrink-0 text-slate-400"

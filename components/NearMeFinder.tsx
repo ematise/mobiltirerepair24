@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import Link from 'next/link';
 import { LocateFixed, Loader2, Phone } from 'lucide-react';
 import type { NearbyResponse } from '@/app/api/nearby/route';
+import Button from '@/components/ui/Button';
 
 type PopularCity = { name: string; href: string };
 
@@ -51,7 +52,7 @@ function CityChips({ cities }: { cities: PopularCity[] }) {
         <Link
           key={city.href}
           href={city.href}
-          className="inline-flex items-center bg-slate-800 border border-slate-700 rounded-full px-4 py-2 text-sm text-white hover:bg-slate-700 transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          className="btn btn-secondary btn-sm"
         >
           {city.name}
         </Link>
@@ -122,12 +123,13 @@ export default function NearMeFinder({ popularCities }: { popularCities: Popular
 
   return (
     <div id="near-me-finder" className="mt-8">
-      <button
+      <Button
         type="button"
         onClick={startLocate}
         disabled={isBusy}
         aria-busy={isBusy}
-        className="inline-flex items-center justify-center gap-2 w-full sm:w-auto min-h-12 px-8 py-3.5 bg-blue-700 hover:bg-blue-600 disabled:opacity-70 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+        variant="primary"
+        size="lg"
       >
         {state.status === 'locating' ? (
           <>
@@ -140,7 +142,7 @@ export default function NearMeFinder({ popularCities }: { popularCities: Popular
             Find Tire Repair Near Me
           </>
         )}
-      </button>
+      </Button>
 
       {state.status === 'loading' && <SkeletonCards />}
 
@@ -167,13 +169,9 @@ export default function NearMeFinder({ popularCities }: { popularCities: Popular
               <p className="text-slate-300 text-sm mb-3">
                 We couldn&apos;t get your location. Try again or search for your city below.
               </p>
-              <button
-                type="button"
-                onClick={startLocate}
-                className="inline-flex items-center justify-center min-h-11 px-6 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white text-sm font-medium rounded-lg transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              >
+              <Button type="button" onClick={startLocate} variant="secondary">
                 Try again
-              </button>
+              </Button>
             </>
           )}
         </div>
@@ -191,7 +189,7 @@ export default function NearMeFinder({ popularCities }: { popularCities: Popular
           ) : (
             <>
               <div className="mb-4">
-                <h2 className="text-lg font-semibold text-white">Closest options to you</h2>
+                <h2 className="text-lg font-semibold !text-white">Closest options to you</h2>
                 <p className="text-slate-400 text-xs mt-1">Sorted by open now, then distance</p>
               </div>
               <ul className="flex flex-col gap-3" role="list">
@@ -217,14 +215,15 @@ export default function NearMeFinder({ popularCities }: { popularCities: Popular
                         <StarRating rating={biz.rating} reviewCount={biz.reviewCount} />
                       )}
                     </div>
-                    <a
+                    <Button
                       href={`tel:${biz.phone}`}
-                      className="flex items-center justify-center gap-2 w-full min-h-11 px-4 py-2.5 bg-blue-700 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                      variant="primary"
+                      block
                       aria-label={`Call ${biz.name} at ${biz.phoneDisplay}`}
                     >
                       <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
                       Call {biz.phoneDisplay}
-                    </a>
+                    </Button>
                   </li>
                 ))}
               </ul>

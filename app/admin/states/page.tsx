@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { State } from '@/lib/data';
 import StateForm from '@/components/admin/StateForm';
 import Link from 'next/link';
+import Button from '@/components/ui/Button';
 
 export default function StatesPage() {
   const [states, setStates] = useState<State[]>([]);
@@ -96,12 +97,9 @@ export default function StatesPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-900">States</h1>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-        >
+        <Button type="button" variant={showForm ? 'secondary' : 'primary'} onClick={() => setShowForm(!showForm)}>
           {showForm ? 'Cancel' : 'Add State'}
-        </button>
+        </Button>
       </div>
 
       {error && <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded">{error}</div>}
@@ -149,18 +147,12 @@ export default function StatesPage() {
                   <td className="px-6 py-4 text-gray-600">{state.code}</td>
                   <td className="px-6 py-4 text-gray-600">{state.cities.length}</td>
                   <td className="px-6 py-4 space-x-2">
-                    <button
-                      onClick={() => setEditingSlug(state.slug)}
-                      className="px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition text-sm"
-                    >
+                    <Button type="button" variant="soft" size="sm" onClick={() => setEditingSlug(state.slug)}>
                       Edit
-                    </button>
-                    <button
-                      onClick={() => handleDeleteState(state.slug)}
-                      className="px-3 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition text-sm"
-                    >
+                    </Button>
+                    <Button type="button" variant="danger" size="sm" onClick={() => handleDeleteState(state.slug)}>
                       Delete
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               ))}

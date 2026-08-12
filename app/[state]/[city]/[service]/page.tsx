@@ -7,6 +7,7 @@ import {
   getStateBySlug,
   getCityBySlug,
   getServiceBySlug,
+  getBusinessesByCity,
   getBusinessesByCityAndService,
   isServiceCityIndexable,
   fillTemplate,
@@ -19,10 +20,14 @@ import {
   serviceCityBreadcrumbs,
 } from '@/lib/schema';
 import { getNearbyCities } from '@/lib/nearby';
+import { enrichProviders } from '@/lib/provider-list';
 import Breadcrumb from '@/components/Breadcrumb';
-import BusinessList from '@/components/BusinessList';
 import FAQSection from '@/components/FAQSection';
 import SchemaOrg from '@/components/SchemaOrg';
+import ReadMoreText from '@/components/listing/ReadMoreText';
+import CityProviderList from '@/components/listing/CityProviderList';
+import SectionContainer from '@/components/listing/SectionContainer';
+import SectionHeading from '@/components/listing/SectionHeading';
 
 export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
 
@@ -63,10 +68,17 @@ export default async function ServiceCityPage({ params }: Props) {
   ]);
   if (!state || !city || !service) notFound();
 
-  const [businesses, nearby] = await Promise.all([
+  const [serviceBusinesses, allCityBusinesses, nearby, allServices] = await Promise.all([
     getBusinessesByCityAndService(citySlug, stateSlug, serviceSlug),
+    getBusinessesByCity(citySlug, stateSlug),
     getNearbyCities(citySlug),
+    getAllServices(),
   ]);
+
+  const offeredServices = allServices.filter((svc) =>
+    allCityBusinesses.some((b) => b.services.includes(svc.slug))
+  );
+  const providers = enrichProviders(allCityBusinesses, city, state.code);
 
   const faqs = service.faqs.map((f) => ({
     q: fillTemplate(f.q, city, state),
@@ -74,54 +86,57 @@ export default async function ServiceCityPage({ params }: Props) {
   }));
 
   const crumbs = serviceCityBreadcrumbs(city, state, service);
+  const intro = `${service.description} Available now in ${city.name}, ${state.code}.`;
 
   return (
     <>
       <SchemaOrg data={buildBreadcrumbSchema(crumbs)} />
       <SchemaOrg
-        data={buildItemListSchema(businesses.map((b) => `/business/${b.slug}/`))}
+        data={buildItemListSchema(serviceBusinesses.map((b) => `/business/${b.slug}/`))}
       />
       {faqs.length > 0 && <SchemaOrg data={buildFAQSchema(faqs)} />}
 
-      <div className="max-w-4xl mx-auto px-4 py-10">
-        <Breadcrumb crumbs={crumbs} />
+      <div className="bg-surface min-h-screen">
+        <div className="max-w-lg mx-auto px-4 pt-4 pb-12">
+          <Breadcrumb crumbs={crumbs} variant="muted" />
 
-        <h1 className="text-4xl font-bold text-slate-900 mb-3">
-          {fillTemplate(service.h1Template, city, state)}
-        </h1>
-        <p className="text-slate-600 text-lg leading-relaxed mb-10">
-          {service.description} Available now in {city.name}, {state.code}.
-        </p>
+          <h1 className="text-[1.75rem] font-bold text-heading leading-[1.15] tracking-tight">
+            {fillTemplate(service.h1Template, city, state)}
+          </h1>
 
-        <div className="flex flex-col gap-12">
-          <BusinessList
-            businesses={businesses}
-            heading={`Businesses Offering ${service.name} in ${city.name}`}
+          <ReadMoreText text={intro} />
+
+          <CityProviderList
+            providers={providers}
+            services={offeredServices}
+            cityName={city.name}
+            initialServiceSlug={serviceSlug}
           />
 
-          {faqs.length > 0 && <FAQSection faqs={faqs} />}
+          {faqs.length > 0 && (
+            <SectionContainer>
+              <FAQSection faqs={faqs} />
+            </SectionContainer>
+          )}
 
           {nearby.length > 0 && (
-            <section aria-labelledby="nearby-service-heading">
-              <h2
-                id="nearby-service-heading"
-                className="text-xl font-semibold text-slate-900 mb-4"
-              >
-                {service.name} Near {city.name}
-              </h2>
+            <SectionContainer>
+              <SectionHeading>
+                {service.name} near {city.name}
+              </SectionHeading>
               <ul className="flex flex-col gap-2" role="list">
                 {nearby.map((c) => (
                   <li key={c.slug}>
                     <Link
                       href={`/${c.state}/${c.slug}/${service.slug}/`}
-                      className="text-blue-700 hover:text-blue-800 hover:underline text-sm font-medium"
+                      className="text-cta hover:underline text-sm font-medium [font-family:var(--font-body)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cta rounded"
                     >
                       {service.name} in {c.name}, {c.stateCode}
                     </Link>
                   </li>
                 ))}
               </ul>
-            </section>
+            </SectionContainer>
           )}
         </div>
       </div>

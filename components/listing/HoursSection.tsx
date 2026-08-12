@@ -29,9 +29,9 @@ export default function HoursSection({ hours }: HoursSectionProps) {
 
   return (
     <SectionContainer>
-      <SectionHeading>Hours of Operation</SectionHeading>
-      <div className="space-y-2">
-        {sortedDays.map((day) => {
+      <SectionHeading>Hours of operation</SectionHeading>
+      <div className="rounded-[14px] border border-gray-200 bg-white overflow-hidden">
+        {sortedDays.map((day, idx) => {
           const dayHours = normalized[day];
           if (!dayHours) return null;
 
@@ -41,21 +41,21 @@ export default function HoursSection({ hours }: HoursSectionProps) {
           return (
             <div
               key={day}
-              className={`flex justify-between items-center p-3 rounded-lg ${
-                isToday ? 'bg-blue-50 border border-blue-200' : 'bg-slate-50'
-              }`}
+              className={`flex justify-between items-center px-4 py-3 ${
+                idx !== 0 ? 'border-t border-gray-100' : ''
+              } ${isToday ? 'bg-cta-soft' : ''}`}
             >
-              <span className={`font-medium ${isToday ? 'text-blue-900' : 'text-slate-900'}`}>
+              <span className={`text-[14px] font-medium ${isToday ? 'text-cta' : 'text-heading'}`}>
                 {dayName}
               </span>
-              <span className={isToday ? 'text-blue-700 font-medium' : 'text-slate-600'}>
+              <span className={`text-[14px] ${isToday ? 'text-cta font-medium' : 'text-muted'}`}>
                 {formatDayHoursLabel(dayHours)}
               </span>
             </div>
           );
         })}
       </div>
-      <p className="text-xs text-slate-500 mt-3 flex items-center gap-1">
+      <p className="text-xs text-gray-400 mt-2.5 flex items-center gap-1">
         <Clock className="w-3.5 h-3.5" aria-hidden="true" />
         Times shown in local time zone
       </p>

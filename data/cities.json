@@ -7,7 +7,12 @@
     "lat": 32.7767,
     "lng": -96.797,
     "intro": "Dallas drivers deal with everything from scorching summer heat to sudden hailstorms — both of which put serious stress on tires. Whether you're stranded on I-35 or in a parking lot in Uptown, mobile tire repair services in Dallas bring professional help directly to you.",
-    "nearbyCities": ["fort-worth", "houston", "austin", "san-antonio"]
+    "nearbyCities": [
+      "fort-worth",
+      "houston",
+      "austin",
+      "san-antonio"
+    ]
   },
   "houston": {
     "slug": "houston",
@@ -17,7 +22,12 @@
     "lat": 29.7604,
     "lng": -95.3698,
     "intro": "Houston's massive highway network and intense subtropical heat make it one of the toughest cities for tire longevity in the US. Mobile tire repair in Houston gets you back on Beltway 8 or the Ship Channel roads without waiting for a tow.",
-    "nearbyCities": ["dallas", "austin", "san-antonio", "fort-worth"]
+    "nearbyCities": [
+      "dallas",
+      "austin",
+      "san-antonio",
+      "fort-worth"
+    ]
   },
   "austin": {
     "slug": "austin",
@@ -27,7 +37,12 @@
     "lat": 30.2672,
     "lng": -97.7431,
     "intro": "Austin's rapid growth has brought more vehicles, more road construction, and more tire hazards. Whether you're on MoPac, South Congress, or a suburban street in Round Rock, mobile tire repair in Austin gets you rolling again fast.",
-    "nearbyCities": ["san-antonio", "houston", "dallas", "fort-worth"]
+    "nearbyCities": [
+      "san-antonio",
+      "houston",
+      "dallas",
+      "fort-worth"
+    ]
   },
   "san-antonio": {
     "slug": "san-antonio",
@@ -37,7 +52,12 @@
     "lat": 29.4241,
     "lng": -98.4936,
     "intro": "San Antonio's mix of military traffic, tourist activity, and sprawling suburban roads creates constant demand for roadside tire services. Mobile tire repair in San Antonio means expert help comes to you, wherever you are in the metro.",
-    "nearbyCities": ["austin", "houston", "dallas", "fort-worth"]
+    "nearbyCities": [
+      "austin",
+      "houston",
+      "dallas",
+      "fort-worth"
+    ]
   },
   "fort-worth": {
     "slug": "fort-worth",
@@ -47,7 +67,12 @@
     "lat": 32.7555,
     "lng": -97.3308,
     "intro": "Fort Worth sits at the western edge of the Metroplex, where long commutes and busy freight corridors put extra wear on tires. Mobile tire repair in Fort Worth serves everyone from downtown commuters to ranch and industrial workers on the outskirts.",
-    "nearbyCities": ["dallas", "houston", "austin", "san-antonio"]
+    "nearbyCities": [
+      "dallas",
+      "houston",
+      "austin",
+      "san-antonio"
+    ]
   },
   "miami": {
     "slug": "miami",
@@ -57,7 +82,12 @@
     "lat": 25.7617,
     "lng": -80.1918,
     "intro": "Miami's intense heat, heavy tourist traffic, and road debris from construction make flat tires a routine occurrence. Mobile tire repair in Miami means you don't have to abandon your car on I-95 or a busy South Beach street.",
-    "nearbyCities": ["fort-lauderdale", "orlando", "tampa", "jacksonville"]
+    "nearbyCities": [
+      "fort-lauderdale",
+      "orlando",
+      "tampa",
+      "jacksonville"
+    ]
   },
   "orlando": {
     "slug": "orlando",
@@ -67,7 +97,12 @@
     "lat": 28.5383,
     "lng": -81.3792,
     "intro": "Orlando sees tens of millions of visitors every year, and with that comes heavy road traffic on I-4 and the tourist corridors near the parks. Mobile tire repair in Orlando gets locals and visitors back on the road without the hassle.",
-    "nearbyCities": ["tampa", "jacksonville", "miami", "fort-lauderdale"]
+    "nearbyCities": [
+      "tampa",
+      "jacksonville",
+      "miami",
+      "fort-lauderdale"
+    ]
   },
   "tampa": {
     "slug": "tampa",
@@ -77,7 +112,12 @@
     "lat": 27.9506,
     "lng": -82.4572,
     "intro": "Tampa's growing population and frequent afternoon thunderstorms mean road hazards are a daily reality. Mobile tire repair in Tampa serves drivers across the bay area, from downtown to Brandon and beyond.",
-    "nearbyCities": ["orlando", "jacksonville", "miami", "fort-lauderdale"]
+    "nearbyCities": [
+      "orlando",
+      "jacksonville",
+      "miami",
+      "fort-lauderdale"
+    ]
   },
   "jacksonville": {
     "slug": "jacksonville",
@@ -87,7 +127,12 @@
     "lat": 30.3322,
     "lng": -81.6557,
     "intro": "As one of the largest cities by area in the contiguous US, Jacksonville has a lot of road to cover. Mobile tire repair in Jacksonville reaches you whether you're in the urban core, the beaches, or the far suburbs.",
-    "nearbyCities": ["orlando", "tampa", "miami", "fort-lauderdale"]
+    "nearbyCities": [
+      "orlando",
+      "tampa",
+      "miami",
+      "fort-lauderdale"
+    ]
   },
   "fort-lauderdale": {
     "slug": "fort-lauderdale",
@@ -97,7 +142,12 @@
     "lat": 26.1224,
     "lng": -80.1373,
     "intro": "Fort Lauderdale's mix of dense urban traffic, beach roads, and marine industry workers creates constant demand for fast tire services. Mobile tire repair in Fort Lauderdale brings the shop to you — fast.",
-    "nearbyCities": ["miami", "orlando", "tampa", "jacksonville"]
+    "nearbyCities": [
+      "miami",
+      "orlando",
+      "tampa",
+      "jacksonville"
+    ]
   },
   "los-angeles": {
     "slug": "los-angeles",
@@ -107,7 +157,12 @@
     "lat": 34.0522,
     "lng": -118.2437,
     "intro": "Los Angeles has some of the most congested and pothole-riddled freeways in the country. A flat tire on the 405 or the 10 can mean hours of lost time — mobile tire repair in Los Angeles gets a tech to you fast, wherever you're stuck.",
-    "nearbyCities": ["san-diego", "san-jose", "sacramento", "fresno"]
+    "nearbyCities": [
+      "san-diego",
+      "san-jose",
+      "sacramento",
+      "fresno"
+    ]
   },
   "san-diego": {
     "slug": "san-diego",
@@ -117,7 +172,12 @@
     "lat": 32.7157,
     "lng": -117.1611,
     "intro": "San Diego's spread-out geography and military bases mean drivers cover a lot of road daily. Mobile tire repair in San Diego reaches you quickly from Chula Vista to Miramar without the need for a tow truck.",
-    "nearbyCities": ["los-angeles", "san-jose", "sacramento", "fresno"]
+    "nearbyCities": [
+      "los-angeles",
+      "san-jose",
+      "sacramento",
+      "fresno"
+    ]
   },
   "san-jose": {
     "slug": "san-jose",
@@ -127,7 +187,12 @@
     "lat": 37.3382,
     "lng": -121.8863,
     "intro": "San Jose sits at the heart of Silicon Valley, where tech workers commute long hours on congested corridors. Mobile tire repair in San Jose means a fast response whether you're stranded near the airport or in the suburbs.",
-    "nearbyCities": ["sacramento", "fresno", "los-angeles", "san-diego"]
+    "nearbyCities": [
+      "sacramento",
+      "fresno",
+      "los-angeles",
+      "san-diego"
+    ]
   },
   "sacramento": {
     "slug": "sacramento",
@@ -137,7 +202,12 @@
     "lat": 38.5816,
     "lng": -121.4944,
     "intro": "Sacramento serves as a major transit hub between Northern California's major metros. Hot summers and heavy highway use put tires to the test — mobile tire repair in Sacramento provides fast relief on I-5, I-80, and beyond.",
-    "nearbyCities": ["san-jose", "fresno", "los-angeles", "san-diego"]
+    "nearbyCities": [
+      "san-jose",
+      "fresno",
+      "los-angeles",
+      "san-diego"
+    ]
   },
   "fresno": {
     "slug": "fresno",
@@ -147,7 +217,12 @@
     "lat": 36.7378,
     "lng": -119.7871,
     "intro": "Fresno sits in the heart of the San Joaquin Valley, with long agricultural roads and extreme summer heat that can blow out tires fast. Mobile tire repair in Fresno is a practical necessity for both city and rural drivers.",
-    "nearbyCities": ["sacramento", "san-jose", "los-angeles", "san-diego"]
+    "nearbyCities": [
+      "sacramento",
+      "san-jose",
+      "los-angeles",
+      "san-diego"
+    ]
   },
   "phoenix": {
     "slug": "phoenix",
@@ -157,7 +232,12 @@
     "lat": 33.4484,
     "lng": -112.074,
     "intro": "Phoenix summers routinely push pavement temperatures past 150°F, cooking tires and raising blowout risk on the Loop 101 and I-10. Mobile tire repair in Phoenix comes to you across the Valley so you're not stuck in the heat.",
-    "nearbyCities": ["mesa", "scottsdale", "chandler", "tucson"]
+    "nearbyCities": [
+      "mesa",
+      "scottsdale",
+      "chandler",
+      "tucson"
+    ]
   },
   "tucson": {
     "slug": "tucson",
@@ -167,7 +247,12 @@
     "lat": 32.2226,
     "lng": -110.9747,
     "intro": "Tucson's desert highways, monsoon debris, and long I-10 stretches make roadside tire trouble common. Mobile tire repair in Tucson reaches downtown, the foothills, and surrounding corridors without a tow.",
-    "nearbyCities": ["phoenix", "mesa", "chandler", "scottsdale"]
+    "nearbyCities": [
+      "phoenix",
+      "mesa",
+      "chandler",
+      "scottsdale"
+    ]
   },
   "mesa": {
     "slug": "mesa",
@@ -177,7 +262,12 @@
     "lat": 33.4152,
     "lng": -111.8315,
     "intro": "Mesa is one of the East Valley's busiest driving markets, with heat, construction, and freeway traffic wearing tires down fast. Mobile tire repair in Mesa gets locals back on US-60 and the Loop 202 quickly.",
-    "nearbyCities": ["phoenix", "chandler", "scottsdale", "tucson"]
+    "nearbyCities": [
+      "phoenix",
+      "chandler",
+      "scottsdale",
+      "tucson"
+    ]
   },
   "scottsdale": {
     "slug": "scottsdale",
@@ -187,7 +277,12 @@
     "lat": 33.4942,
     "lng": -111.9261,
     "intro": "Scottsdale drivers face desert heat, tourist traffic, and long suburban corridors that punish tires year-round. Mobile tire repair in Scottsdale brings on-site service to Old Town, North Scottsdale, and nearby freeways.",
-    "nearbyCities": ["phoenix", "mesa", "chandler", "tucson"]
+    "nearbyCities": [
+      "phoenix",
+      "mesa",
+      "chandler",
+      "tucson"
+    ]
   },
   "chandler": {
     "slug": "chandler",
@@ -197,7 +292,12 @@
     "lat": 33.3062,
     "lng": -111.8413,
     "intro": "Chandler's tech campuses and East Valley commute corridors keep thousands of vehicles on the road daily. Mobile tire repair in Chandler handles flats and replacements on-site so you can skip the shop wait.",
-    "nearbyCities": ["mesa", "phoenix", "scottsdale", "tucson"]
+    "nearbyCities": [
+      "mesa",
+      "phoenix",
+      "scottsdale",
+      "tucson"
+    ]
   },
   "atlanta": {
     "slug": "atlanta",
@@ -207,7 +307,12 @@
     "lat": 33.749,
     "lng": -84.388,
     "intro": "Atlanta's notorious interstate congestion and hot summers create constant tire emergencies on I-75, I-85, and the Perimeter. Mobile tire repair in Atlanta comes to you wherever you're stranded in the metro.",
-    "nearbyCities": ["savannah", "augusta", "columbus", "macon"]
+    "nearbyCities": [
+      "savannah",
+      "augusta",
+      "columbus",
+      "macon"
+    ]
   },
   "savannah": {
     "slug": "savannah",
@@ -217,7 +322,12 @@
     "lat": 32.0809,
     "lng": -81.0912,
     "intro": "Savannah's mix of historic downtown streets, port traffic, and coastal heat keeps tire demand high. Mobile tire repair in Savannah reaches drivers across the Historic District, islands, and I-95 corridors.",
-    "nearbyCities": ["atlanta", "augusta", "columbus", "macon"]
+    "nearbyCities": [
+      "atlanta",
+      "augusta",
+      "columbus",
+      "macon"
+    ]
   },
   "augusta": {
     "slug": "augusta",
@@ -227,7 +337,12 @@
     "lat": 33.4735,
     "lng": -82.0105,
     "intro": "Augusta drivers deal with humid summers, military and medical traffic, and long regional highways. Mobile tire repair in Augusta brings fast roadside help across the CSRA without waiting for a tow.",
-    "nearbyCities": ["atlanta", "savannah", "macon", "columbus"]
+    "nearbyCities": [
+      "atlanta",
+      "savannah",
+      "macon",
+      "columbus"
+    ]
   },
   "columbus": {
     "slug": "columbus",
@@ -237,7 +352,12 @@
     "lat": 32.461,
     "lng": -84.9877,
     "intro": "Columbus sits along major west Georgia corridors where freight and military traffic put heavy wear on tires. Mobile tire repair in Columbus gets you back on I-185 and local roads without a shop visit.",
-    "nearbyCities": ["atlanta", "macon", "savannah", "augusta"]
+    "nearbyCities": [
+      "atlanta",
+      "macon",
+      "savannah",
+      "augusta"
+    ]
   },
   "macon": {
     "slug": "macon",
@@ -247,7 +367,12 @@
     "lat": 32.8407,
     "lng": -83.6324,
     "intro": "Macon's central location on I-75 makes it a key Georgia travel hub — and a frequent spot for roadside tire trouble. Mobile tire repair in Macon serves city streets and the interstate exits around town.",
-    "nearbyCities": ["atlanta", "columbus", "savannah", "augusta"]
+    "nearbyCities": [
+      "atlanta",
+      "columbus",
+      "savannah",
+      "augusta"
+    ]
   },
   "new-york-city": {
     "slug": "new-york-city",
@@ -257,7 +382,12 @@
     "lat": 40.7128,
     "lng": -74.006,
     "intro": "New York City's dense traffic, potholes, and curb damage make flats a weekly reality for drivers and fleets. Mobile tire repair in New York City comes to you across the boroughs so you're not stuck circling for a shop.",
-    "nearbyCities": ["buffalo", "rochester", "albany", "syracuse"]
+    "nearbyCities": [
+      "buffalo",
+      "rochester",
+      "albany",
+      "syracuse"
+    ]
   },
   "buffalo": {
     "slug": "buffalo",
@@ -267,7 +397,12 @@
     "lat": 42.8864,
     "lng": -78.8784,
     "intro": "Buffalo winters and lake-effect road salt take a hard toll on tires and wheels. Mobile tire repair in Buffalo reaches drivers across the city and suburbs when cold-weather flats strike.",
-    "nearbyCities": ["rochester", "syracuse", "albany", "new-york-city"]
+    "nearbyCities": [
+      "rochester",
+      "syracuse",
+      "albany",
+      "new-york-city"
+    ]
   },
   "rochester": {
     "slug": "rochester",
@@ -277,7 +412,12 @@
     "lat": 43.1566,
     "lng": -77.6088,
     "intro": "Rochester drivers face harsh winters, potholes, and busy I-490 corridors that punish tires year-round. Mobile tire repair in Rochester brings on-site service so you can skip the tow and the wait.",
-    "nearbyCities": ["buffalo", "syracuse", "albany", "new-york-city"]
+    "nearbyCities": [
+      "buffalo",
+      "syracuse",
+      "albany",
+      "new-york-city"
+    ]
   },
   "albany": {
     "slug": "albany",
@@ -287,7 +427,12 @@
     "lat": 42.6526,
     "lng": -73.7562,
     "intro": "Albany sits at the crossroads of the Capital Region's highways, where winter damage and commute traffic create frequent tire emergencies. Mobile tire repair in Albany gets you moving again on I-87, I-90, and local roads.",
-    "nearbyCities": ["syracuse", "rochester", "buffalo", "new-york-city"]
+    "nearbyCities": [
+      "syracuse",
+      "rochester",
+      "buffalo",
+      "new-york-city"
+    ]
   },
   "syracuse": {
     "slug": "syracuse",
@@ -297,7 +442,12 @@
     "lat": 43.0481,
     "lng": -76.1474,
     "intro": "Syracuse's heavy snowfall and I-81 / I-90 traffic make roadside tire failures common. Mobile tire repair in Syracuse reaches campus, downtown, and suburban drivers without a trip to the shop.",
-    "nearbyCities": ["rochester", "albany", "buffalo", "new-york-city"]
+    "nearbyCities": [
+      "rochester",
+      "albany",
+      "buffalo",
+      "new-york-city"
+    ]
   },
   "chicago": {
     "slug": "chicago",
@@ -307,7 +457,12 @@
     "lat": 41.8781,
     "lng": -87.6298,
     "intro": "Chicago winters, freeze-thaw potholes, and Expressway congestion make tire damage inevitable. Mobile tire repair in Chicago comes to you on the Dan Ryan, Kennedy, or a neighborhood street — no tow required.",
-    "nearbyCities": ["naperville", "rockford", "peoria", "springfield"]
+    "nearbyCities": [
+      "naperville",
+      "rockford",
+      "peoria",
+      "springfield"
+    ]
   },
   "springfield": {
     "slug": "springfield",
@@ -317,7 +472,12 @@
     "lat": 39.7817,
     "lng": -89.6501,
     "intro": "Springfield drivers cover capital-area streets and long central Illinois highways where weather and road wear take a toll. Mobile tire repair in Springfield provides fast on-site flats and replacements.",
-    "nearbyCities": ["peoria", "chicago", "rockford", "naperville"]
+    "nearbyCities": [
+      "peoria",
+      "chicago",
+      "rockford",
+      "naperville"
+    ]
   },
   "peoria": {
     "slug": "peoria",
@@ -327,7 +487,12 @@
     "lat": 40.6936,
     "lng": -89.589,
     "intro": "Peoria's river-city roads and I-74 corridor see year-round tire wear from weather and freight traffic. Mobile tire repair in Peoria gets locals back on the road without waiting for a shop bay.",
-    "nearbyCities": ["springfield", "chicago", "rockford", "naperville"]
+    "nearbyCities": [
+      "springfield",
+      "chicago",
+      "rockford",
+      "naperville"
+    ]
   },
   "rockford": {
     "slug": "rockford",
@@ -337,7 +502,12 @@
     "lat": 42.2711,
     "lng": -89.094,
     "intro": "Rockford's northern Illinois winters and I-90 access make roadside tire help especially valuable. Mobile tire repair in Rockford serves city streets and the surrounding commute corridors.",
-    "nearbyCities": ["chicago", "naperville", "peoria", "springfield"]
+    "nearbyCities": [
+      "chicago",
+      "naperville",
+      "peoria",
+      "springfield"
+    ]
   },
   "naperville": {
     "slug": "naperville",
@@ -347,7 +517,12 @@
     "lat": 41.7508,
     "lng": -88.1535,
     "intro": "Naperville's busy suburban commute routes and winter road damage create frequent tire emergencies. Mobile tire repair in Naperville reaches drivers across the western suburbs without a tow truck.",
-    "nearbyCities": ["chicago", "rockford", "peoria", "springfield"]
+    "nearbyCities": [
+      "chicago",
+      "rockford",
+      "peoria",
+      "springfield"
+    ]
   },
   "charlotte": {
     "slug": "charlotte",
@@ -357,7 +532,12 @@
     "lat": 35.2271,
     "lng": -80.8431,
     "intro": "Charlotte's rapid growth has packed I-77, I-85, and the beltway with traffic — and more tire hazards. Mobile tire repair in Charlotte brings on-site service to Uptown, South End, and the wider metro.",
-    "nearbyCities": ["raleigh", "greensboro", "durham", "winston-salem"]
+    "nearbyCities": [
+      "raleigh",
+      "greensboro",
+      "durham",
+      "winston-salem"
+    ]
   },
   "raleigh": {
     "slug": "raleigh",
@@ -367,7 +547,12 @@
     "lat": 35.7796,
     "lng": -78.6382,
     "intro": "Raleigh's Research Triangle commute and expanding suburbs keep tires under constant stress. Mobile tire repair in Raleigh gets you back on the Beltline and local roads without a shop appointment.",
-    "nearbyCities": ["durham", "greensboro", "charlotte", "winston-salem"]
+    "nearbyCities": [
+      "durham",
+      "greensboro",
+      "charlotte",
+      "winston-salem"
+    ]
   },
   "greensboro": {
     "slug": "greensboro",
@@ -377,7 +562,12 @@
     "lat": 36.0726,
     "lng": -79.792,
     "intro": "Greensboro sits at the heart of the Triad, where I-40 and I-85 traffic and seasonal weather create frequent flats. Mobile tire repair in Greensboro reaches downtown and surrounding communities fast.",
-    "nearbyCities": ["winston-salem", "durham", "raleigh", "charlotte"]
+    "nearbyCities": [
+      "winston-salem",
+      "durham",
+      "raleigh",
+      "charlotte"
+    ]
   },
   "durham": {
     "slug": "durham",
@@ -387,7 +577,12 @@
     "lat": 35.994,
     "lng": -78.8986,
     "intro": "Durham's growing tech and medical corridors mean more vehicles on the road every year. Mobile tire repair in Durham handles roadside flats across downtown, RTP-adjacent routes, and nearby neighborhoods.",
-    "nearbyCities": ["raleigh", "greensboro", "charlotte", "winston-salem"]
+    "nearbyCities": [
+      "raleigh",
+      "greensboro",
+      "charlotte",
+      "winston-salem"
+    ]
   },
   "winston-salem": {
     "slug": "winston-salem",
@@ -397,6 +592,3161 @@
     "lat": 36.0999,
     "lng": -80.2442,
     "intro": "Winston-Salem drivers share Triad highways that see heavy daily use and weather-related road damage. Mobile tire repair in Winston-Salem provides fast on-site help across the city and nearby corridors.",
-    "nearbyCities": ["greensboro", "charlotte", "raleigh", "durham"]
+    "nearbyCities": [
+      "greensboro",
+      "charlotte",
+      "raleigh",
+      "durham"
+    ]
+  },
+  "philadelphia": {
+    "slug": "philadelphia",
+    "name": "Philadelphia",
+    "state": "pennsylvania",
+    "stateCode": "PA",
+    "lat": 39.9526,
+    "lng": -75.1652,
+    "intro": "Philadelphia's narrow streets, Schuylkill Expressway congestion, and brutal winter potholes make flat tires a routine headache. Mobile tire repair in Philadelphia reaches you across Center City, the Northeast, and the suburbs without a tow.",
+    "nearbyCities": [
+      "pittsburgh",
+      "allentown",
+      "reading",
+      "erie"
+    ]
+  },
+  "pittsburgh": {
+    "slug": "pittsburgh",
+    "name": "Pittsburgh",
+    "state": "pennsylvania",
+    "stateCode": "PA",
+    "lat": 40.4406,
+    "lng": -79.9959,
+    "intro": "Pittsburgh's hills, bridges, and freeze-thaw road damage create unique tire challenges for daily commuters. Mobile tire repair in Pittsburgh serves the Golden Triangle, South Hills, and the surrounding parkways.",
+    "nearbyCities": [
+      "philadelphia",
+      "allentown",
+      "reading",
+      "erie"
+    ]
+  },
+  "allentown": {
+    "slug": "allentown",
+    "name": "Allentown",
+    "state": "pennsylvania",
+    "stateCode": "PA",
+    "lat": 40.6084,
+    "lng": -75.4902,
+    "intro": "Allentown sits in the Lehigh Valley where I-78 freight traffic and harsh winters wear tires down fast. Mobile tire repair in Allentown gets drivers back on Route 22 and local corridors without waiting for a shop.",
+    "nearbyCities": [
+      "philadelphia",
+      "reading",
+      "pittsburgh",
+      "erie"
+    ]
+  },
+  "reading": {
+    "slug": "reading",
+    "name": "Reading",
+    "state": "pennsylvania",
+    "stateCode": "PA",
+    "lat": 40.3356,
+    "lng": -75.9269,
+    "intro": "Reading's mix of urban streets and Berks County highways sees year-round tire wear from weather and heavy truck traffic. Mobile tire repair in Reading brings on-site service to downtown and the surrounding communities.",
+    "nearbyCities": [
+      "allentown",
+      "philadelphia",
+      "pittsburgh",
+      "erie"
+    ]
+  },
+  "erie": {
+    "slug": "erie",
+    "name": "Erie",
+    "state": "pennsylvania",
+    "stateCode": "PA",
+    "lat": 42.1292,
+    "lng": -80.0851,
+    "intro": "Erie's lake-effect snow, road salt, and I-90 corridor traffic make winter tire emergencies especially common. Mobile tire repair in Erie reaches drivers across the city and the lakeshore without a tow truck.",
+    "nearbyCities": [
+      "pittsburgh",
+      "philadelphia",
+      "allentown",
+      "reading"
+    ]
+  },
+  "columbus-oh": {
+    "slug": "columbus-oh",
+    "name": "Columbus",
+    "state": "ohio",
+    "stateCode": "OH",
+    "lat": 39.9612,
+    "lng": -82.9988,
+    "intro": "Columbus is one of the fastest-growing metros in the Midwest, with I-71, I-70, and the Outerbelt seeing constant tire hazards. Mobile tire repair in Columbus comes to you across the city and suburbs fast.",
+    "nearbyCities": [
+      "cleveland",
+      "cincinnati",
+      "toledo",
+      "akron"
+    ]
+  },
+  "cleveland": {
+    "slug": "cleveland",
+    "name": "Cleveland",
+    "state": "ohio",
+    "stateCode": "OH",
+    "lat": 41.4993,
+    "lng": -81.6944,
+    "intro": "Cleveland winters and Shoreway / I-90 congestion punish tires harder than most cities. Mobile tire repair in Cleveland gets you back on the road from downtown to the West Side and inner-ring suburbs.",
+    "nearbyCities": [
+      "akron",
+      "columbus-oh",
+      "toledo",
+      "cincinnati"
+    ]
+  },
+  "cincinnati": {
+    "slug": "cincinnati",
+    "name": "Cincinnati",
+    "state": "ohio",
+    "stateCode": "OH",
+    "lat": 39.1031,
+    "lng": -84.512,
+    "intro": "Cincinnati's hills, river corridors, and I-71 / I-75 interchange traffic create frequent roadside tire trouble. Mobile tire repair in Cincinnati serves the metro from Over-the-Rhine to Northern Kentucky-adjacent routes.",
+    "nearbyCities": [
+      "columbus-oh",
+      "cleveland",
+      "toledo",
+      "akron"
+    ]
+  },
+  "toledo": {
+    "slug": "toledo",
+    "name": "Toledo",
+    "state": "ohio",
+    "stateCode": "OH",
+    "lat": 41.6528,
+    "lng": -83.5379,
+    "intro": "Toledo's position on I-75 and the Ohio Turnpike means heavy freight and commuter traffic that wears tires down quickly. Mobile tire repair in Toledo reaches drivers across Lucas County without a shop visit.",
+    "nearbyCities": [
+      "cleveland",
+      "columbus-oh",
+      "cincinnati",
+      "akron"
+    ]
+  },
+  "akron": {
+    "slug": "akron",
+    "name": "Akron",
+    "state": "ohio",
+    "stateCode": "OH",
+    "lat": 41.0814,
+    "lng": -81.519,
+    "intro": "Akron sits between Cleveland and Canton on busy northeast Ohio corridors where winter potholes and highway debris are daily hazards. Mobile tire repair in Akron provides fast on-site help across the Rubber City.",
+    "nearbyCities": [
+      "cleveland",
+      "columbus-oh",
+      "cincinnati",
+      "toledo"
+    ]
+  },
+  "detroit": {
+    "slug": "detroit",
+    "name": "Detroit",
+    "state": "michigan",
+    "stateCode": "MI",
+    "lat": 42.3314,
+    "lng": -83.0458,
+    "intro": "Detroit's sprawling metro, harsh winters, and heavy I-75 / I-94 traffic make tire emergencies a constant risk. Mobile tire repair in Detroit comes to you across the city and Wayne County without waiting on a tow.",
+    "nearbyCities": [
+      "warren",
+      "grand-rapids",
+      "lansing",
+      "ann-arbor"
+    ]
+  },
+  "grand-rapids": {
+    "slug": "grand-rapids",
+    "name": "Grand Rapids",
+    "state": "michigan",
+    "stateCode": "MI",
+    "lat": 42.9634,
+    "lng": -85.6681,
+    "intro": "Grand Rapids drivers face lake-effect snow, I-96 commute traffic, and West Michigan road salt that shortens tire life. Mobile tire repair in Grand Rapids gets you moving again on-site across Kent County.",
+    "nearbyCities": [
+      "lansing",
+      "detroit",
+      "warren",
+      "ann-arbor"
+    ]
+  },
+  "warren": {
+    "slug": "warren",
+    "name": "Warren",
+    "state": "michigan",
+    "stateCode": "MI",
+    "lat": 42.5145,
+    "lng": -83.0147,
+    "intro": "Warren anchors Macomb County's dense suburban commute, where winter damage and Van Dyke / M-59 traffic create frequent flats. Mobile tire repair in Warren serves the east side metro without a trip to the shop.",
+    "nearbyCities": [
+      "detroit",
+      "ann-arbor",
+      "lansing",
+      "grand-rapids"
+    ]
+  },
+  "lansing": {
+    "slug": "lansing",
+    "name": "Lansing",
+    "state": "michigan",
+    "stateCode": "MI",
+    "lat": 42.7325,
+    "lng": -84.5555,
+    "intro": "Lansing's capital-area streets and I-96 / US-127 corridors see year-round tire wear from weather and state traffic. Mobile tire repair in Lansing brings roadside help to downtown and the surrounding tri-county area.",
+    "nearbyCities": [
+      "ann-arbor",
+      "grand-rapids",
+      "detroit",
+      "warren"
+    ]
+  },
+  "ann-arbor": {
+    "slug": "ann-arbor",
+    "name": "Ann Arbor",
+    "state": "michigan",
+    "stateCode": "MI",
+    "lat": 42.2808,
+    "lng": -83.743,
+    "intro": "Ann Arbor's university traffic, I-94 corridor, and Washtenaw County winters keep tire demand high year-round. Mobile tire repair in Ann Arbor reaches campus, downtown, and suburban drivers without a tow.",
+    "nearbyCities": [
+      "detroit",
+      "warren",
+      "lansing",
+      "grand-rapids"
+    ]
+  },
+  "newark": {
+    "slug": "newark",
+    "name": "Newark",
+    "state": "new-jersey",
+    "stateCode": "NJ",
+    "lat": 40.7357,
+    "lng": -74.1724,
+    "intro": "Newark's airport traffic, port freight, and dense urban streets make tire damage and flats a daily occurrence. Mobile tire repair in Newark comes to you across the Ironbound, downtown, and nearby turnpike exits.",
+    "nearbyCities": [
+      "jersey-city",
+      "elizabeth",
+      "paterson",
+      "edison"
+    ]
+  },
+  "jersey-city": {
+    "slug": "jersey-city",
+    "name": "Jersey City",
+    "state": "new-jersey",
+    "stateCode": "NJ",
+    "lat": 40.7178,
+    "lng": -74.0431,
+    "intro": "Jersey City's tight streets, Holland Tunnel traffic, and waterfront construction zones punish tires constantly. Mobile tire repair in Jersey City gets you back on the road without circling for a shop or waiting on a tow.",
+    "nearbyCities": [
+      "newark",
+      "elizabeth",
+      "paterson",
+      "edison"
+    ]
+  },
+  "paterson": {
+    "slug": "paterson",
+    "name": "Paterson",
+    "state": "new-jersey",
+    "stateCode": "NJ",
+    "lat": 40.9168,
+    "lng": -74.1718,
+    "intro": "Paterson's urban hills, Route 80 access, and heavy commuter traffic create frequent roadside tire emergencies. Mobile tire repair in Paterson serves Passaic County drivers on-site across the city.",
+    "nearbyCities": [
+      "newark",
+      "jersey-city",
+      "elizabeth",
+      "edison"
+    ]
+  },
+  "elizabeth": {
+    "slug": "elizabeth",
+    "name": "Elizabeth",
+    "state": "new-jersey",
+    "stateCode": "NJ",
+    "lat": 40.664,
+    "lng": -74.2107,
+    "intro": "Elizabeth sits at the crossroads of the NJ Turnpike, Newark Airport, and port traffic — one of the busiest tire-stress zones in the state. Mobile tire repair in Elizabeth reaches you fast across Union County.",
+    "nearbyCities": [
+      "newark",
+      "jersey-city",
+      "edison",
+      "paterson"
+    ]
+  },
+  "edison": {
+    "slug": "edison",
+    "name": "Edison",
+    "state": "new-jersey",
+    "stateCode": "NJ",
+    "lat": 40.5187,
+    "lng": -74.4121,
+    "intro": "Edison's suburban commute corridors, Route 1 traffic, and winter potholes keep tire repair demand high across Middlesex County. Mobile tire repair in Edison brings the shop to your driveway or roadside location.",
+    "nearbyCities": [
+      "newark",
+      "jersey-city",
+      "elizabeth",
+      "paterson"
+    ]
+  },
+  "virginia-beach": {
+    "slug": "virginia-beach",
+    "name": "Virginia Beach",
+    "state": "virginia",
+    "stateCode": "VA",
+    "lat": 36.8529,
+    "lng": -75.978,
+    "intro": "Virginia Beach's resort traffic, oceanfront roads, and I-264 corridors see heavy year-round tire wear. Mobile tire repair in Virginia Beach reaches you from the Oceanfront to the suburbs without a tow.",
+    "nearbyCities": [
+      "norfolk",
+      "chesapeake",
+      "newport-news",
+      "richmond"
+    ]
+  },
+  "chesapeake": {
+    "slug": "chesapeake",
+    "name": "Chesapeake",
+    "state": "virginia",
+    "stateCode": "VA",
+    "lat": 36.7682,
+    "lng": -76.2875,
+    "intro": "Chesapeake's spread-out suburbs and I-64 / I-464 traffic make roadside tire help especially valuable across Hampton Roads. Mobile tire repair in Chesapeake comes to you wherever you're stranded in the city.",
+    "nearbyCities": [
+      "virginia-beach",
+      "norfolk",
+      "newport-news",
+      "richmond"
+    ]
+  },
+  "norfolk": {
+    "slug": "norfolk",
+    "name": "Norfolk",
+    "state": "virginia",
+    "stateCode": "VA",
+    "lat": 36.8508,
+    "lng": -76.2859,
+    "intro": "Norfolk's naval base traffic, downtown tunnels, and coastal humidity create constant tire stress for commuters and fleet drivers. Mobile tire repair in Norfolk provides fast on-site service across the city.",
+    "nearbyCities": [
+      "virginia-beach",
+      "chesapeake",
+      "newport-news",
+      "richmond"
+    ]
+  },
+  "richmond": {
+    "slug": "richmond",
+    "name": "Richmond",
+    "state": "virginia",
+    "stateCode": "VA",
+    "lat": 37.5407,
+    "lng": -77.436,
+    "intro": "Richmond's I-95 / I-64 interchange, historic downtown streets, and humid summers make tire emergencies common. Mobile tire repair in Richmond gets you back on the road from the Fan to the suburbs.",
+    "nearbyCities": [
+      "virginia-beach",
+      "norfolk",
+      "chesapeake",
+      "newport-news"
+    ]
+  },
+  "newport-news": {
+    "slug": "newport-news",
+    "name": "Newport News",
+    "state": "virginia",
+    "stateCode": "VA",
+    "lat": 37.0871,
+    "lng": -76.473,
+    "intro": "Newport News drivers cover shipyard corridors, Peninsula commutes, and I-64 access where road debris and heat wear tires fast. Mobile tire repair in Newport News brings help to your location without a shop wait.",
+    "nearbyCities": [
+      "norfolk",
+      "virginia-beach",
+      "chesapeake",
+      "richmond"
+    ]
+  },
+  "seattle": {
+    "slug": "seattle",
+    "name": "Seattle",
+    "state": "washington",
+    "stateCode": "WA",
+    "lat": 47.6062,
+    "lng": -122.3321,
+    "intro": "Seattle's I-5 congestion, wet roads, and steep hills make flats a regular commute headache. Mobile tire repair in Seattle reaches you from downtown to the Eastside without a tow.",
+    "nearbyCities": [
+      "spokane",
+      "tacoma",
+      "vancouver",
+      "bellevue"
+    ]
+  },
+  "spokane": {
+    "slug": "spokane",
+    "name": "Spokane",
+    "state": "washington",
+    "stateCode": "WA",
+    "lat": 47.6588,
+    "lng": -117.426,
+    "intro": "Spokane winters and I-90 traffic punish tires across the Inland Northwest. Mobile tire repair in Spokane gets you back on the road from downtown to the Valley.",
+    "nearbyCities": [
+      "seattle",
+      "tacoma",
+      "vancouver",
+      "bellevue"
+    ]
+  },
+  "tacoma": {
+    "slug": "tacoma",
+    "name": "Tacoma",
+    "state": "washington",
+    "stateCode": "WA",
+    "lat": 47.2529,
+    "lng": -122.4443,
+    "intro": "Tacoma's port traffic, I-5 corridor, and wet winters create constant tire wear. Mobile tire repair in Tacoma comes to you across the city and nearby Pierce County routes.",
+    "nearbyCities": [
+      "seattle",
+      "spokane",
+      "vancouver",
+      "bellevue"
+    ]
+  },
+  "vancouver": {
+    "slug": "vancouver",
+    "name": "Vancouver",
+    "state": "washington",
+    "stateCode": "WA",
+    "lat": 45.6387,
+    "lng": -122.6615,
+    "intro": "Vancouver's I-5 / I-205 commute and wet Columbia River weather keep tire demand high. Mobile tire repair in Vancouver serves Clark County drivers on-site.",
+    "nearbyCities": [
+      "seattle",
+      "spokane",
+      "tacoma",
+      "bellevue"
+    ]
+  },
+  "bellevue": {
+    "slug": "bellevue",
+    "name": "Bellevue",
+    "state": "washington",
+    "stateCode": "WA",
+    "lat": 47.6101,
+    "lng": -122.2015,
+    "intro": "Bellevue's Eastside commute, I-405 congestion, and wet roads wear tires down fast. Mobile tire repair in Bellevue brings on-site help across downtown and the suburbs.",
+    "nearbyCities": [
+      "seattle",
+      "spokane",
+      "tacoma",
+      "vancouver"
+    ]
+  },
+  "boston": {
+    "slug": "boston",
+    "name": "Boston",
+    "state": "massachusetts",
+    "stateCode": "MA",
+    "lat": 42.3601,
+    "lng": -71.0589,
+    "intro": "Boston's narrow streets, potholes, and I-93 congestion make tire damage a weekly reality. Mobile tire repair in Boston comes to you across the city without circling for a shop.",
+    "nearbyCities": [
+      "worcester",
+      "springfield-ma",
+      "cambridge",
+      "lowell"
+    ]
+  },
+  "worcester": {
+    "slug": "worcester",
+    "name": "Worcester",
+    "state": "massachusetts",
+    "stateCode": "MA",
+    "lat": 42.2626,
+    "lng": -71.8023,
+    "intro": "Worcester winters and I-290 traffic create frequent roadside tire emergencies. Mobile tire repair in Worcester reaches downtown and the surrounding Central Mass corridors.",
+    "nearbyCities": [
+      "boston",
+      "springfield-ma",
+      "cambridge",
+      "lowell"
+    ]
+  },
+  "springfield-ma": {
+    "slug": "springfield-ma",
+    "name": "Springfield",
+    "state": "massachusetts",
+    "stateCode": "MA",
+    "lat": 42.1015,
+    "lng": -72.5898,
+    "intro": "Springfield's I-91 corridor, winter potholes, and Pioneer Valley commutes punish tires year-round. Mobile tire repair in Springfield gets you moving again on-site.",
+    "nearbyCities": [
+      "boston",
+      "worcester",
+      "cambridge",
+      "lowell"
+    ]
+  },
+  "cambridge": {
+    "slug": "cambridge",
+    "name": "Cambridge",
+    "state": "massachusetts",
+    "stateCode": "MA",
+    "lat": 42.3736,
+    "lng": -71.1097,
+    "intro": "Cambridge's dense streets, construction, and Mass Ave traffic make flats especially inconvenient. Mobile tire repair in Cambridge brings the shop to you across the city.",
+    "nearbyCities": [
+      "boston",
+      "worcester",
+      "springfield-ma",
+      "lowell"
+    ]
+  },
+  "lowell": {
+    "slug": "lowell",
+    "name": "Lowell",
+    "state": "massachusetts",
+    "stateCode": "MA",
+    "lat": 42.6334,
+    "lng": -71.3162,
+    "intro": "Lowell's Merrimack Valley commute and freeze-thaw road damage create constant tire wear. Mobile tire repair in Lowell serves city streets and nearby highway exits fast.",
+    "nearbyCities": [
+      "boston",
+      "worcester",
+      "springfield-ma",
+      "cambridge"
+    ]
+  },
+  "nashville": {
+    "slug": "nashville",
+    "name": "Nashville",
+    "state": "tennessee",
+    "stateCode": "TN",
+    "lat": 36.1627,
+    "lng": -86.7816,
+    "intro": "Nashville's rapid growth has packed I-24, I-40, and I-65 with traffic — and more tire hazards. Mobile tire repair in Nashville comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "memphis",
+      "knoxville",
+      "chattanooga",
+      "clarksville"
+    ]
+  },
+  "memphis": {
+    "slug": "memphis",
+    "name": "Memphis",
+    "state": "tennessee",
+    "stateCode": "TN",
+    "lat": 35.1495,
+    "lng": -90.049,
+    "intro": "Memphis heat, I-40 / I-55 freight traffic, and city potholes make tire failures common. Mobile tire repair in Memphis reaches downtown, Midtown, and the suburbs on-site.",
+    "nearbyCities": [
+      "nashville",
+      "knoxville",
+      "chattanooga",
+      "clarksville"
+    ]
+  },
+  "knoxville": {
+    "slug": "knoxville",
+    "name": "Knoxville",
+    "state": "tennessee",
+    "stateCode": "TN",
+    "lat": 35.9606,
+    "lng": -83.9207,
+    "intro": "Knoxville's I-40 / I-75 interchange and Smoky Mountain weather create frequent roadside tire trouble. Mobile tire repair in Knoxville gets you back on the road fast.",
+    "nearbyCities": [
+      "nashville",
+      "memphis",
+      "chattanooga",
+      "clarksville"
+    ]
+  },
+  "chattanooga": {
+    "slug": "chattanooga",
+    "name": "Chattanooga",
+    "state": "tennessee",
+    "stateCode": "TN",
+    "lat": 35.0456,
+    "lng": -85.3097,
+    "intro": "Chattanooga's mountain grades, I-24 traffic, and humid summers wear tires down quickly. Mobile tire repair in Chattanooga serves the city and nearby corridors without a shop wait.",
+    "nearbyCities": [
+      "nashville",
+      "memphis",
+      "knoxville",
+      "clarksville"
+    ]
+  },
+  "clarksville": {
+    "slug": "clarksville",
+    "name": "Clarksville",
+    "state": "tennessee",
+    "stateCode": "TN",
+    "lat": 36.5298,
+    "lng": -87.3595,
+    "intro": "Clarksville's military traffic, I-24 commute, and summer heat keep tire demand high. Mobile tire repair in Clarksville brings on-site help across the city and Fort Campbell-area routes.",
+    "nearbyCities": [
+      "nashville",
+      "memphis",
+      "knoxville",
+      "chattanooga"
+    ]
+  },
+  "indianapolis": {
+    "slug": "indianapolis",
+    "name": "Indianapolis",
+    "state": "indiana",
+    "stateCode": "IN",
+    "lat": 39.7684,
+    "lng": -86.1581,
+    "intro": "Indianapolis congestion on I-465 and downtown streets makes a flat tire a serious delay. Mobile tire repair in Indianapolis comes to you across the Circle City without a tow.",
+    "nearbyCities": [
+      "fort-wayne",
+      "evansville",
+      "south-bend",
+      "carmel"
+    ]
+  },
+  "fort-wayne": {
+    "slug": "fort-wayne",
+    "name": "Fort Wayne",
+    "state": "indiana",
+    "stateCode": "IN",
+    "lat": 41.0793,
+    "lng": -85.1394,
+    "intro": "Fort Wayne winters and I-69 traffic create frequent tire emergencies. Mobile tire repair in Fort Wayne reaches downtown and the surrounding Allen County corridors.",
+    "nearbyCities": [
+      "indianapolis",
+      "evansville",
+      "south-bend",
+      "carmel"
+    ]
+  },
+  "evansville": {
+    "slug": "evansville",
+    "name": "Evansville",
+    "state": "indiana",
+    "stateCode": "IN",
+    "lat": 37.9716,
+    "lng": -87.5711,
+    "intro": "Evansville's Ohio River weather, I-69 access, and summer heat punish tires year-round. Mobile tire repair in Evansville gets locals back on the road on-site.",
+    "nearbyCities": [
+      "indianapolis",
+      "fort-wayne",
+      "south-bend",
+      "carmel"
+    ]
+  },
+  "south-bend": {
+    "slug": "south-bend",
+    "name": "South Bend",
+    "state": "indiana",
+    "stateCode": "IN",
+    "lat": 41.6764,
+    "lng": -86.252,
+    "intro": "South Bend winters, I-80 / I-90 traffic, and campus-area streets make roadside tire help essential. Mobile tire repair in South Bend serves the city without a shop appointment.",
+    "nearbyCities": [
+      "indianapolis",
+      "fort-wayne",
+      "evansville",
+      "carmel"
+    ]
+  },
+  "carmel": {
+    "slug": "carmel",
+    "name": "Carmel",
+    "state": "indiana",
+    "stateCode": "IN",
+    "lat": 39.9784,
+    "lng": -86.118,
+    "intro": "Carmel's busy suburban commute and Keystone corridor traffic wear tires down fast. Mobile tire repair in Carmel brings on-site service across Hamilton County.",
+    "nearbyCities": [
+      "indianapolis",
+      "fort-wayne",
+      "evansville",
+      "south-bend"
+    ]
+  },
+  "kansas-city": {
+    "slug": "kansas-city",
+    "name": "Kansas City",
+    "state": "missouri",
+    "stateCode": "MO",
+    "lat": 39.0997,
+    "lng": -94.5786,
+    "intro": "Kansas City's I-70 / I-35 interchange, summer heat, and winter ice create constant tire emergencies. Mobile tire repair in Kansas City comes to you across both sides of the metro.",
+    "nearbyCities": [
+      "st-louis",
+      "springfield-mo",
+      "columbia-mo",
+      "independence"
+    ]
+  },
+  "st-louis": {
+    "slug": "st-louis",
+    "name": "St. Louis",
+    "state": "missouri",
+    "stateCode": "MO",
+    "lat": 38.627,
+    "lng": -90.1994,
+    "intro": "St. Louis potholes, I-64 / I-70 congestion, and freeze-thaw winters punish tires citywide. Mobile tire repair in St. Louis reaches downtown, the county, and nearby corridors.",
+    "nearbyCities": [
+      "kansas-city",
+      "springfield-mo",
+      "columbia-mo",
+      "independence"
+    ]
+  },
+  "springfield-mo": {
+    "slug": "springfield-mo",
+    "name": "Springfield",
+    "state": "missouri",
+    "stateCode": "MO",
+    "lat": 37.209,
+    "lng": -93.2923,
+    "intro": "Springfield's I-44 traffic, Ozarks weather, and growing metro roads keep tire demand high. Mobile tire repair in Springfield gets you moving again without a tow.",
+    "nearbyCities": [
+      "kansas-city",
+      "st-louis",
+      "columbia-mo",
+      "independence"
+    ]
+  },
+  "columbia-mo": {
+    "slug": "columbia-mo",
+    "name": "Columbia",
+    "state": "missouri",
+    "stateCode": "MO",
+    "lat": 38.9517,
+    "lng": -92.3341,
+    "intro": "Columbia's I-70 corridor and campus traffic create frequent roadside tire trouble. Mobile tire repair in Columbia serves downtown, campus, and the surrounding mid-Missouri routes.",
+    "nearbyCities": [
+      "kansas-city",
+      "st-louis",
+      "springfield-mo",
+      "independence"
+    ]
+  },
+  "independence": {
+    "slug": "independence",
+    "name": "Independence",
+    "state": "missouri",
+    "stateCode": "MO",
+    "lat": 39.0911,
+    "lng": -94.4155,
+    "intro": "Independence sits in the Kansas City metro where I-70 traffic and seasonal weather wear tires fast. Mobile tire repair in Independence brings on-site help across the city.",
+    "nearbyCities": [
+      "kansas-city",
+      "st-louis",
+      "springfield-mo",
+      "columbia-mo"
+    ]
+  },
+  "baltimore": {
+    "slug": "baltimore",
+    "name": "Baltimore",
+    "state": "maryland",
+    "stateCode": "MD",
+    "lat": 39.2904,
+    "lng": -76.6122,
+    "intro": "Baltimore's harbor traffic, Beltway congestion, and winter potholes make flats a routine headache. Mobile tire repair in Baltimore comes to you across the city without circling for a shop.",
+    "nearbyCities": [
+      "columbia-md",
+      "germantown",
+      "silver-spring",
+      "frederick"
+    ]
+  },
+  "columbia-md": {
+    "slug": "columbia-md",
+    "name": "Columbia",
+    "state": "maryland",
+    "stateCode": "MD",
+    "lat": 39.2037,
+    "lng": -76.861,
+    "intro": "Columbia's planned-community roads and I-95 / Route 29 commute corridors see constant tire wear. Mobile tire repair in Columbia reaches Howard County drivers on-site.",
+    "nearbyCities": [
+      "baltimore",
+      "germantown",
+      "silver-spring",
+      "frederick"
+    ]
+  },
+  "germantown": {
+    "slug": "germantown",
+    "name": "Germantown",
+    "state": "maryland",
+    "stateCode": "MD",
+    "lat": 39.1732,
+    "lng": -77.2717,
+    "intro": "Germantown's I-270 commute and Montgomery County winters create frequent tire emergencies. Mobile tire repair in Germantown gets you back on the road without a shop wait.",
+    "nearbyCities": [
+      "baltimore",
+      "columbia-md",
+      "silver-spring",
+      "frederick"
+    ]
+  },
+  "silver-spring": {
+    "slug": "silver-spring",
+    "name": "Silver Spring",
+    "state": "maryland",
+    "stateCode": "MD",
+    "lat": 38.9907,
+    "lng": -77.0261,
+    "intro": "Silver Spring's Beltway access, Metro-area traffic, and urban streets punish tires year-round. Mobile tire repair in Silver Spring brings the shop to your location fast.",
+    "nearbyCities": [
+      "baltimore",
+      "columbia-md",
+      "germantown",
+      "frederick"
+    ]
+  },
+  "frederick": {
+    "slug": "frederick",
+    "name": "Frederick",
+    "state": "maryland",
+    "stateCode": "MD",
+    "lat": 39.4143,
+    "lng": -77.4105,
+    "intro": "Frederick's I-70 / I-270 interchange and growing suburban traffic keep tire demand high. Mobile tire repair in Frederick serves downtown and the surrounding corridors.",
+    "nearbyCities": [
+      "baltimore",
+      "columbia-md",
+      "germantown",
+      "silver-spring"
+    ]
+  },
+  "milwaukee": {
+    "slug": "milwaukee",
+    "name": "Milwaukee",
+    "state": "wisconsin",
+    "stateCode": "WI",
+    "lat": 43.0389,
+    "lng": -87.9065,
+    "intro": "Milwaukee winters, lake-effect snow, and I-94 congestion make tire damage inevitable. Mobile tire repair in Milwaukee comes to you across the city and inner suburbs.",
+    "nearbyCities": [
+      "madison",
+      "green-bay",
+      "kenosha",
+      "racine"
+    ]
+  },
+  "madison": {
+    "slug": "madison",
+    "name": "Madison",
+    "state": "wisconsin",
+    "stateCode": "WI",
+    "lat": 43.0731,
+    "lng": -89.4012,
+    "intro": "Madison's Beltline traffic, campus streets, and harsh winters create frequent flats. Mobile tire repair in Madison reaches downtown, campus, and the surrounding isthmus routes.",
+    "nearbyCities": [
+      "milwaukee",
+      "green-bay",
+      "kenosha",
+      "racine"
+    ]
+  },
+  "green-bay": {
+    "slug": "green-bay",
+    "name": "Green Bay",
+    "state": "wisconsin",
+    "stateCode": "WI",
+    "lat": 44.5133,
+    "lng": -88.0133,
+    "intro": "Green Bay winters and I-43 / I-41 traffic take a hard toll on tires. Mobile tire repair in Green Bay gets you back on the road across Brown County.",
+    "nearbyCities": [
+      "milwaukee",
+      "madison",
+      "kenosha",
+      "racine"
+    ]
+  },
+  "kenosha": {
+    "slug": "kenosha",
+    "name": "Kenosha",
+    "state": "wisconsin",
+    "stateCode": "WI",
+    "lat": 42.5847,
+    "lng": -87.8212,
+    "intro": "Kenosha's I-94 corridor and freeze-thaw potholes create constant tire wear. Mobile tire repair in Kenosha serves the city and nearby southeast Wisconsin routes.",
+    "nearbyCities": [
+      "milwaukee",
+      "madison",
+      "green-bay",
+      "racine"
+    ]
+  },
+  "racine": {
+    "slug": "racine",
+    "name": "Racine",
+    "state": "wisconsin",
+    "stateCode": "WI",
+    "lat": 42.7261,
+    "lng": -87.7829,
+    "intro": "Racine's lakeshore roads and winter weather punish tires year-round. Mobile tire repair in Racine brings on-site help across the city without a tow.",
+    "nearbyCities": [
+      "milwaukee",
+      "madison",
+      "green-bay",
+      "kenosha"
+    ]
+  },
+  "denver": {
+    "slug": "denver",
+    "name": "Denver",
+    "state": "colorado",
+    "stateCode": "CO",
+    "lat": 39.7392,
+    "lng": -104.9903,
+    "intro": "Denver's I-25 / I-70 congestion, altitude, and freeze-thaw cycles wear tires down fast. Mobile tire repair in Denver comes to you across the metro without a shop appointment.",
+    "nearbyCities": [
+      "colorado-springs",
+      "aurora",
+      "fort-collins",
+      "lakewood"
+    ]
+  },
+  "colorado-springs": {
+    "slug": "colorado-springs",
+    "name": "Colorado Springs",
+    "state": "colorado",
+    "stateCode": "CO",
+    "lat": 38.8339,
+    "lng": -104.8214,
+    "intro": "Colorado Springs mountain weather, I-25 traffic, and steep grades create frequent tire emergencies. Mobile tire repair in Colorado Springs reaches the city and nearby corridors.",
+    "nearbyCities": [
+      "denver",
+      "aurora",
+      "fort-collins",
+      "lakewood"
+    ]
+  },
+  "aurora": {
+    "slug": "aurora",
+    "name": "Aurora",
+    "state": "colorado",
+    "stateCode": "CO",
+    "lat": 39.7294,
+    "lng": -104.8319,
+    "intro": "Aurora's E-470 / I-225 commute and Front Range winters keep tire demand high. Mobile tire repair in Aurora brings on-site service across the eastern metro.",
+    "nearbyCities": [
+      "denver",
+      "colorado-springs",
+      "fort-collins",
+      "lakewood"
+    ]
+  },
+  "fort-collins": {
+    "slug": "fort-collins",
+    "name": "Fort Collins",
+    "state": "colorado",
+    "stateCode": "CO",
+    "lat": 40.5853,
+    "lng": -105.0844,
+    "intro": "Fort Collins I-25 access, campus traffic, and freeze-thaw potholes punish tires year-round. Mobile tire repair in Fort Collins gets you moving again on-site.",
+    "nearbyCities": [
+      "denver",
+      "colorado-springs",
+      "aurora",
+      "lakewood"
+    ]
+  },
+  "lakewood": {
+    "slug": "lakewood",
+    "name": "Lakewood",
+    "state": "colorado",
+    "stateCode": "CO",
+    "lat": 39.7047,
+    "lng": -105.0814,
+    "intro": "Lakewood's west-metro commute and mountain-adjacent weather create constant tire wear. Mobile tire repair in Lakewood serves drivers across Jefferson County corridors.",
+    "nearbyCities": [
+      "denver",
+      "colorado-springs",
+      "aurora",
+      "fort-collins"
+    ]
+  },
+  "minneapolis": {
+    "slug": "minneapolis",
+    "name": "Minneapolis",
+    "state": "minnesota",
+    "stateCode": "MN",
+    "lat": 44.9778,
+    "lng": -93.265,
+    "intro": "Minneapolis winters, I-35W / I-94 congestion, and freeze-thaw potholes make flats a seasonal certainty. Mobile tire repair in Minneapolis comes to you across the city without a tow.",
+    "nearbyCities": [
+      "st-paul",
+      "rochester-mn",
+      "bloomington",
+      "duluth"
+    ]
+  },
+  "st-paul": {
+    "slug": "st-paul",
+    "name": "St. Paul",
+    "state": "minnesota",
+    "stateCode": "MN",
+    "lat": 44.9537,
+    "lng": -93.09,
+    "intro": "St. Paul's capital-area streets and Twin Cities winters punish tires year-round. Mobile tire repair in St. Paul reaches downtown, the East Side, and nearby corridors.",
+    "nearbyCities": [
+      "minneapolis",
+      "rochester-mn",
+      "bloomington",
+      "duluth"
+    ]
+  },
+  "rochester-mn": {
+    "slug": "rochester-mn",
+    "name": "Rochester",
+    "state": "minnesota",
+    "stateCode": "MN",
+    "lat": 44.0121,
+    "lng": -92.4802,
+    "intro": "Rochester's medical-campus traffic and southern Minnesota winters create frequent tire emergencies. Mobile tire repair in Rochester gets you back on the road on-site.",
+    "nearbyCities": [
+      "minneapolis",
+      "st-paul",
+      "bloomington",
+      "duluth"
+    ]
+  },
+  "bloomington": {
+    "slug": "bloomington",
+    "name": "Bloomington",
+    "state": "minnesota",
+    "stateCode": "MN",
+    "lat": 44.8408,
+    "lng": -93.2983,
+    "intro": "Bloomington's I-494 corridor and Mall of America traffic keep tire demand high. Mobile tire repair in Bloomington brings on-site help across the south metro.",
+    "nearbyCities": [
+      "minneapolis",
+      "st-paul",
+      "rochester-mn",
+      "duluth"
+    ]
+  },
+  "duluth": {
+    "slug": "duluth",
+    "name": "Duluth",
+    "state": "minnesota",
+    "stateCode": "MN",
+    "lat": 46.7867,
+    "lng": -92.1005,
+    "intro": "Duluth's hills, lake-effect snow, and I-35 access make roadside tire help essential. Mobile tire repair in Duluth serves the city and North Shore-adjacent routes.",
+    "nearbyCities": [
+      "minneapolis",
+      "st-paul",
+      "rochester-mn",
+      "bloomington"
+    ]
+  },
+  "charleston": {
+    "slug": "charleston",
+    "name": "Charleston",
+    "state": "south-carolina",
+    "stateCode": "SC",
+    "lat": 32.7765,
+    "lng": -79.9311,
+    "intro": "Charleston's heat, tourist traffic, and I-26 corridor create frequent tire emergencies. Mobile tire repair in Charleston comes to you from downtown to the surrounding Lowcountry.",
+    "nearbyCities": [
+      "columbia-sc",
+      "north-charleston",
+      "mount-pleasant",
+      "rock-hill"
+    ]
+  },
+  "columbia-sc": {
+    "slug": "columbia-sc",
+    "name": "Columbia",
+    "state": "south-carolina",
+    "stateCode": "SC",
+    "lat": 34.0007,
+    "lng": -81.0348,
+    "intro": "Columbia's I-20 / I-26 / I-77 interchange and humid summers wear tires down fast. Mobile tire repair in Columbia reaches downtown and the Midlands without a tow.",
+    "nearbyCities": [
+      "charleston",
+      "north-charleston",
+      "mount-pleasant",
+      "rock-hill"
+    ]
+  },
+  "north-charleston": {
+    "slug": "north-charleston",
+    "name": "North Charleston",
+    "state": "south-carolina",
+    "stateCode": "SC",
+    "lat": 32.8546,
+    "lng": -79.9748,
+    "intro": "North Charleston's port traffic, I-26 congestion, and industrial corridors punish tires daily. Mobile tire repair in North Charleston brings on-site service across the city.",
+    "nearbyCities": [
+      "charleston",
+      "columbia-sc",
+      "mount-pleasant",
+      "rock-hill"
+    ]
+  },
+  "mount-pleasant": {
+    "slug": "mount-pleasant",
+    "name": "Mount Pleasant",
+    "state": "south-carolina",
+    "stateCode": "SC",
+    "lat": 32.8323,
+    "lng": -79.8284,
+    "intro": "Mount Pleasant's Ravenel Bridge commute and growing suburban roads keep tire demand high. Mobile tire repair in Mount Pleasant gets you moving again without a shop wait.",
+    "nearbyCities": [
+      "charleston",
+      "columbia-sc",
+      "north-charleston",
+      "rock-hill"
+    ]
+  },
+  "rock-hill": {
+    "slug": "rock-hill",
+    "name": "Rock Hill",
+    "state": "south-carolina",
+    "stateCode": "SC",
+    "lat": 34.9249,
+    "lng": -81.0251,
+    "intro": "Rock Hill's I-77 Charlotte commute and Upstate weather create frequent roadside flats. Mobile tire repair in Rock Hill serves York County drivers on-site.",
+    "nearbyCities": [
+      "charleston",
+      "columbia-sc",
+      "north-charleston",
+      "mount-pleasant"
+    ]
+  },
+  "huntsville": {
+    "slug": "huntsville",
+    "name": "Huntsville",
+    "state": "alabama",
+    "stateCode": "AL",
+    "lat": 34.7304,
+    "lng": -86.5861,
+    "intro": "Huntsville's growing tech corridors and I-565 traffic keep more vehicles — and tire hazards — on the road. Mobile tire repair in Huntsville comes to you across the Rocket City.",
+    "nearbyCities": [
+      "montgomery",
+      "birmingham",
+      "mobile",
+      "tuscaloosa"
+    ]
+  },
+  "montgomery": {
+    "slug": "montgomery",
+    "name": "Montgomery",
+    "state": "alabama",
+    "stateCode": "AL",
+    "lat": 32.3792,
+    "lng": -86.3077,
+    "intro": "Montgomery heat, I-65 / I-85 traffic, and capital-area streets create frequent tire emergencies. Mobile tire repair in Montgomery gets you back on the road on-site.",
+    "nearbyCities": [
+      "huntsville",
+      "birmingham",
+      "mobile",
+      "tuscaloosa"
+    ]
+  },
+  "birmingham": {
+    "slug": "birmingham",
+    "name": "Birmingham",
+    "state": "alabama",
+    "stateCode": "AL",
+    "lat": 33.5186,
+    "lng": -86.8104,
+    "intro": "Birmingham's I-20 / I-59 / I-65 interchange and humid summers punish tires citywide. Mobile tire repair in Birmingham reaches downtown and the surrounding metro.",
+    "nearbyCities": [
+      "huntsville",
+      "montgomery",
+      "mobile",
+      "tuscaloosa"
+    ]
+  },
+  "mobile": {
+    "slug": "mobile",
+    "name": "Mobile",
+    "state": "alabama",
+    "stateCode": "AL",
+    "lat": 30.6954,
+    "lng": -88.0399,
+    "intro": "Mobile's Gulf humidity, I-10 corridor, and port traffic make tire failures common. Mobile tire repair in Mobile brings on-site help across the city and nearby bay routes.",
+    "nearbyCities": [
+      "huntsville",
+      "montgomery",
+      "birmingham",
+      "tuscaloosa"
+    ]
+  },
+  "tuscaloosa": {
+    "slug": "tuscaloosa",
+    "name": "Tuscaloosa",
+    "state": "alabama",
+    "stateCode": "AL",
+    "lat": 33.2098,
+    "lng": -87.5692,
+    "intro": "Tuscaloosa's I-20 / I-59 traffic and campus-area streets keep tire demand high. Mobile tire repair in Tuscaloosa serves the city without a shop appointment.",
+    "nearbyCities": [
+      "huntsville",
+      "montgomery",
+      "birmingham",
+      "mobile"
+    ]
+  },
+  "new-orleans": {
+    "slug": "new-orleans",
+    "name": "New Orleans",
+    "state": "louisiana",
+    "stateCode": "LA",
+    "lat": 29.9511,
+    "lng": -90.0715,
+    "intro": "New Orleans heat, flooding debris, and I-10 congestion make flats a routine headache. Mobile tire repair in New Orleans comes to you across the city without a tow.",
+    "nearbyCities": [
+      "baton-rouge",
+      "shreveport",
+      "lafayette",
+      "lake-charles"
+    ]
+  },
+  "baton-rouge": {
+    "slug": "baton-rouge",
+    "name": "Baton Rouge",
+    "state": "louisiana",
+    "stateCode": "LA",
+    "lat": 30.4515,
+    "lng": -91.1871,
+    "intro": "Baton Rouge's I-10 / I-12 traffic and humid summers wear tires down fast. Mobile tire repair in Baton Rouge reaches downtown and the surrounding capital-area corridors.",
+    "nearbyCities": [
+      "new-orleans",
+      "shreveport",
+      "lafayette",
+      "lake-charles"
+    ]
+  },
+  "shreveport": {
+    "slug": "shreveport",
+    "name": "Shreveport",
+    "state": "louisiana",
+    "stateCode": "LA",
+    "lat": 32.5252,
+    "lng": -93.7502,
+    "intro": "Shreveport's I-20 corridor and northwest Louisiana heat create frequent tire emergencies. Mobile tire repair in Shreveport gets you moving again on-site.",
+    "nearbyCities": [
+      "new-orleans",
+      "baton-rouge",
+      "lafayette",
+      "lake-charles"
+    ]
+  },
+  "lafayette": {
+    "slug": "lafayette",
+    "name": "Lafayette",
+    "state": "louisiana",
+    "stateCode": "LA",
+    "lat": 30.2241,
+    "lng": -92.0198,
+    "intro": "Lafayette's I-10 traffic and Acadiana heat punish tires year-round. Mobile tire repair in Lafayette brings on-site service across the city and nearby routes.",
+    "nearbyCities": [
+      "new-orleans",
+      "baton-rouge",
+      "shreveport",
+      "lake-charles"
+    ]
+  },
+  "lake-charles": {
+    "slug": "lake-charles",
+    "name": "Lake Charles",
+    "state": "louisiana",
+    "stateCode": "LA",
+    "lat": 30.2266,
+    "lng": -93.2174,
+    "intro": "Lake Charles industrial traffic, I-10 access, and Gulf storms keep tire demand high. Mobile tire repair in Lake Charles serves southwest Louisiana drivers without a shop wait.",
+    "nearbyCities": [
+      "new-orleans",
+      "baton-rouge",
+      "shreveport",
+      "lafayette"
+    ]
+  },
+  "louisville": {
+    "slug": "louisville",
+    "name": "Louisville",
+    "state": "kentucky",
+    "stateCode": "KY",
+    "lat": 38.2527,
+    "lng": -85.7585,
+    "intro": "Louisville's I-64 / I-65 / I-71 interchange and humid summers create constant tire wear. Mobile tire repair in Louisville comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "lexington",
+      "bowling-green",
+      "owensboro",
+      "covington"
+    ]
+  },
+  "lexington": {
+    "slug": "lexington",
+    "name": "Lexington",
+    "state": "kentucky",
+    "stateCode": "KY",
+    "lat": 38.0406,
+    "lng": -84.5037,
+    "intro": "Lexington's New Circle Road traffic and Bluegrass summers punish tires year-round. Mobile tire repair in Lexington reaches downtown and the surrounding horse-country corridors.",
+    "nearbyCities": [
+      "louisville",
+      "bowling-green",
+      "owensboro",
+      "covington"
+    ]
+  },
+  "bowling-green": {
+    "slug": "bowling-green",
+    "name": "Bowling Green",
+    "state": "kentucky",
+    "stateCode": "KY",
+    "lat": 36.9685,
+    "lng": -86.4808,
+    "intro": "Bowling Green's I-65 corridor and growing metro traffic keep tire demand high. Mobile tire repair in Bowling Green gets you back on the road on-site.",
+    "nearbyCities": [
+      "louisville",
+      "lexington",
+      "owensboro",
+      "covington"
+    ]
+  },
+  "owensboro": {
+    "slug": "owensboro",
+    "name": "Owensboro",
+    "state": "kentucky",
+    "stateCode": "KY",
+    "lat": 37.7719,
+    "lng": -87.1112,
+    "intro": "Owensboro's river-city roads and western Kentucky weather create frequent roadside flats. Mobile tire repair in Owensboro brings on-site help across the city.",
+    "nearbyCities": [
+      "louisville",
+      "lexington",
+      "bowling-green",
+      "covington"
+    ]
+  },
+  "covington": {
+    "slug": "covington",
+    "name": "Covington",
+    "state": "kentucky",
+    "stateCode": "KY",
+    "lat": 39.0837,
+    "lng": -84.5086,
+    "intro": "Covington's I-71 / I-75 traffic and Northern Kentucky commute corridors wear tires down fast. Mobile tire repair in Covington serves the city and nearby river routes.",
+    "nearbyCities": [
+      "louisville",
+      "lexington",
+      "bowling-green",
+      "owensboro"
+    ]
+  },
+  "portland": {
+    "slug": "portland",
+    "name": "Portland",
+    "state": "oregon",
+    "stateCode": "OR",
+    "lat": 45.5152,
+    "lng": -122.6784,
+    "intro": "Portland's wet roads, I-5 / I-84 congestion, and potholes make tire damage a year-round issue. Mobile tire repair in Portland comes to you across the city without a tow.",
+    "nearbyCities": [
+      "salem",
+      "eugene",
+      "gresham",
+      "hillsboro"
+    ]
+  },
+  "salem": {
+    "slug": "salem",
+    "name": "Salem",
+    "state": "oregon",
+    "stateCode": "OR",
+    "lat": 44.9429,
+    "lng": -123.0351,
+    "intro": "Salem's I-5 corridor and Willamette Valley weather create frequent tire emergencies. Mobile tire repair in Salem reaches downtown and the surrounding capital-area routes.",
+    "nearbyCities": [
+      "portland",
+      "eugene",
+      "gresham",
+      "hillsboro"
+    ]
+  },
+  "eugene": {
+    "slug": "eugene",
+    "name": "Eugene",
+    "state": "oregon",
+    "stateCode": "OR",
+    "lat": 44.0521,
+    "lng": -123.0868,
+    "intro": "Eugene's I-5 access, campus traffic, and wet winters punish tires year-round. Mobile tire repair in Eugene gets you moving again on-site.",
+    "nearbyCities": [
+      "portland",
+      "salem",
+      "gresham",
+      "hillsboro"
+    ]
+  },
+  "gresham": {
+    "slug": "gresham",
+    "name": "Gresham",
+    "state": "oregon",
+    "stateCode": "OR",
+    "lat": 45.4982,
+    "lng": -122.4313,
+    "intro": "Gresham's east-metro commute and I-84 access keep tire demand high. Mobile tire repair in Gresham brings on-site service across the city and nearby Multnomah County routes.",
+    "nearbyCities": [
+      "portland",
+      "salem",
+      "eugene",
+      "hillsboro"
+    ]
+  },
+  "hillsboro": {
+    "slug": "hillsboro",
+    "name": "Hillsboro",
+    "state": "oregon",
+    "stateCode": "OR",
+    "lat": 45.5229,
+    "lng": -122.9898,
+    "intro": "Hillsboro's tech-campus traffic and US-26 corridor wear tires down fast. Mobile tire repair in Hillsboro serves Washington County drivers without a shop wait.",
+    "nearbyCities": [
+      "portland",
+      "salem",
+      "eugene",
+      "gresham"
+    ]
+  },
+  "oklahoma-city": {
+    "slug": "oklahoma-city",
+    "name": "Oklahoma City",
+    "state": "oklahoma",
+    "stateCode": "OK",
+    "lat": 35.4676,
+    "lng": -97.5164,
+    "intro": "Oklahoma City heat, I-35 / I-40 traffic, and severe storms create frequent tire emergencies. Mobile tire repair in Oklahoma City comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "tulsa",
+      "norman",
+      "broken-arrow",
+      "edmond"
+    ]
+  },
+  "tulsa": {
+    "slug": "tulsa",
+    "name": "Tulsa",
+    "state": "oklahoma",
+    "stateCode": "OK",
+    "lat": 36.154,
+    "lng": -95.9928,
+    "intro": "Tulsa's I-44 / I-244 corridors and summer heat punish tires citywide. Mobile tire repair in Tulsa reaches downtown and the surrounding metro.",
+    "nearbyCities": [
+      "oklahoma-city",
+      "norman",
+      "broken-arrow",
+      "edmond"
+    ]
+  },
+  "norman": {
+    "slug": "norman",
+    "name": "Norman",
+    "state": "oklahoma",
+    "stateCode": "OK",
+    "lat": 35.2226,
+    "lng": -97.4395,
+    "intro": "Norman's I-35 commute and campus traffic keep tire demand high. Mobile tire repair in Norman gets you back on the road on-site.",
+    "nearbyCities": [
+      "oklahoma-city",
+      "tulsa",
+      "broken-arrow",
+      "edmond"
+    ]
+  },
+  "broken-arrow": {
+    "slug": "broken-arrow",
+    "name": "Broken Arrow",
+    "state": "oklahoma",
+    "stateCode": "OK",
+    "lat": 36.0609,
+    "lng": -95.7975,
+    "intro": "Broken Arrow's Tulsa-metro commute and Creek Turnpike traffic wear tires down fast. Mobile tire repair in Broken Arrow brings on-site help across the city.",
+    "nearbyCities": [
+      "oklahoma-city",
+      "tulsa",
+      "norman",
+      "edmond"
+    ]
+  },
+  "edmond": {
+    "slug": "edmond",
+    "name": "Edmond",
+    "state": "oklahoma",
+    "stateCode": "OK",
+    "lat": 35.6528,
+    "lng": -97.4781,
+    "intro": "Edmond's north-OKC suburbs and I-35 access create frequent roadside flats. Mobile tire repair in Edmond serves the city without a shop appointment.",
+    "nearbyCities": [
+      "oklahoma-city",
+      "tulsa",
+      "norman",
+      "broken-arrow"
+    ]
+  },
+  "bridgeport": {
+    "slug": "bridgeport",
+    "name": "Bridgeport",
+    "state": "connecticut",
+    "stateCode": "CT",
+    "lat": 41.1865,
+    "lng": -73.1952,
+    "intro": "Bridgeport's I-95 congestion and winter potholes make tire damage a regular commute problem. Mobile tire repair in Bridgeport comes to you across the city without a tow.",
+    "nearbyCities": [
+      "stamford",
+      "new-haven",
+      "hartford",
+      "waterbury"
+    ]
+  },
+  "stamford": {
+    "slug": "stamford",
+    "name": "Stamford",
+    "state": "connecticut",
+    "stateCode": "CT",
+    "lat": 41.0534,
+    "lng": -73.5387,
+    "intro": "Stamford's Metro-North commute, I-95 traffic, and dense streets punish tires year-round. Mobile tire repair in Stamford reaches downtown and the surrounding Fairfield County routes.",
+    "nearbyCities": [
+      "bridgeport",
+      "new-haven",
+      "hartford",
+      "waterbury"
+    ]
+  },
+  "new-haven": {
+    "slug": "new-haven",
+    "name": "New Haven",
+    "state": "connecticut",
+    "stateCode": "CT",
+    "lat": 41.3083,
+    "lng": -72.9279,
+    "intro": "New Haven's I-91 / I-95 interchange and urban potholes create frequent tire emergencies. Mobile tire repair in New Haven gets you moving again on-site.",
+    "nearbyCities": [
+      "bridgeport",
+      "stamford",
+      "hartford",
+      "waterbury"
+    ]
+  },
+  "hartford": {
+    "slug": "hartford",
+    "name": "Hartford",
+    "state": "connecticut",
+    "stateCode": "CT",
+    "lat": 41.7658,
+    "lng": -72.6734,
+    "intro": "Hartford's I-84 / I-91 traffic and capital-area streets wear tires down fast. Mobile tire repair in Hartford brings on-site service across the city.",
+    "nearbyCities": [
+      "bridgeport",
+      "stamford",
+      "new-haven",
+      "waterbury"
+    ]
+  },
+  "waterbury": {
+    "slug": "waterbury",
+    "name": "Waterbury",
+    "state": "connecticut",
+    "stateCode": "CT",
+    "lat": 41.5582,
+    "lng": -73.0515,
+    "intro": "Waterbury winters and I-84 corridor traffic keep tire demand high. Mobile tire repair in Waterbury serves the Naugatuck Valley without a shop wait.",
+    "nearbyCities": [
+      "bridgeport",
+      "stamford",
+      "new-haven",
+      "hartford"
+    ]
+  },
+  "salt-lake-city": {
+    "slug": "salt-lake-city",
+    "name": "Salt Lake City",
+    "state": "utah",
+    "stateCode": "UT",
+    "lat": 40.7608,
+    "lng": -111.891,
+    "intro": "Salt Lake City's I-15 congestion, inversion-season roads, and canyon access wear tires down fast. Mobile tire repair in Salt Lake City comes to you across the valley without a tow.",
+    "nearbyCities": [
+      "west-valley-city",
+      "west-jordan",
+      "provo",
+      "orem"
+    ]
+  },
+  "west-valley-city": {
+    "slug": "west-valley-city",
+    "name": "West Valley City",
+    "state": "utah",
+    "stateCode": "UT",
+    "lat": 40.6916,
+    "lng": -112.0011,
+    "intro": "West Valley City's I-215 access and west-side commute traffic create frequent tire emergencies. Mobile tire repair in West Valley City reaches you on-site.",
+    "nearbyCities": [
+      "salt-lake-city",
+      "west-jordan",
+      "provo",
+      "orem"
+    ]
+  },
+  "west-jordan": {
+    "slug": "west-jordan",
+    "name": "West Jordan",
+    "state": "utah",
+    "stateCode": "UT",
+    "lat": 40.6097,
+    "lng": -111.9391,
+    "intro": "West Jordan's Bangerter Highway traffic and growing suburbs keep tire demand high. Mobile tire repair in West Jordan brings on-site help across the city.",
+    "nearbyCities": [
+      "salt-lake-city",
+      "west-valley-city",
+      "provo",
+      "orem"
+    ]
+  },
+  "provo": {
+    "slug": "provo",
+    "name": "Provo",
+    "state": "utah",
+    "stateCode": "UT",
+    "lat": 40.2338,
+    "lng": -111.6585,
+    "intro": "Provo's I-15 corridor and campus traffic punish tires year-round. Mobile tire repair in Provo gets you back on the road without a shop appointment.",
+    "nearbyCities": [
+      "salt-lake-city",
+      "west-valley-city",
+      "west-jordan",
+      "orem"
+    ]
+  },
+  "orem": {
+    "slug": "orem",
+    "name": "Orem",
+    "state": "utah",
+    "stateCode": "UT",
+    "lat": 40.2969,
+    "lng": -111.6946,
+    "intro": "Orem's University Parkway commute and Utah Valley growth create constant tire wear. Mobile tire repair in Orem serves the city and nearby corridors fast.",
+    "nearbyCities": [
+      "salt-lake-city",
+      "west-valley-city",
+      "west-jordan",
+      "provo"
+    ]
+  },
+  "des-moines": {
+    "slug": "des-moines",
+    "name": "Des Moines",
+    "state": "iowa",
+    "stateCode": "IA",
+    "lat": 41.5868,
+    "lng": -93.625,
+    "intro": "Des Moines winters, I-35 / I-80 traffic, and freeze-thaw potholes make flats a seasonal certainty. Mobile tire repair in Des Moines comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "cedar-rapids",
+      "davenport",
+      "sioux-city",
+      "iowa-city"
+    ]
+  },
+  "cedar-rapids": {
+    "slug": "cedar-rapids",
+    "name": "Cedar Rapids",
+    "state": "iowa",
+    "stateCode": "IA",
+    "lat": 41.9779,
+    "lng": -91.6656,
+    "intro": "Cedar Rapids I-380 traffic and eastern Iowa winters create frequent tire emergencies. Mobile tire repair in Cedar Rapids reaches downtown and the surrounding corridors.",
+    "nearbyCities": [
+      "des-moines",
+      "davenport",
+      "sioux-city",
+      "iowa-city"
+    ]
+  },
+  "davenport": {
+    "slug": "davenport",
+    "name": "Davenport",
+    "state": "iowa",
+    "stateCode": "IA",
+    "lat": 41.5236,
+    "lng": -90.5776,
+    "intro": "Davenport's I-80 / I-74 access and Quad Cities weather punish tires year-round. Mobile tire repair in Davenport gets you moving again on-site.",
+    "nearbyCities": [
+      "des-moines",
+      "cedar-rapids",
+      "sioux-city",
+      "iowa-city"
+    ]
+  },
+  "sioux-city": {
+    "slug": "sioux-city",
+    "name": "Sioux City",
+    "state": "iowa",
+    "stateCode": "IA",
+    "lat": 42.4999,
+    "lng": -96.4003,
+    "intro": "Sioux City's I-29 corridor and Missouri River winters keep tire demand high. Mobile tire repair in Sioux City brings on-site help across the city.",
+    "nearbyCities": [
+      "des-moines",
+      "cedar-rapids",
+      "davenport",
+      "iowa-city"
+    ]
+  },
+  "iowa-city": {
+    "slug": "iowa-city",
+    "name": "Iowa City",
+    "state": "iowa",
+    "stateCode": "IA",
+    "lat": 41.6611,
+    "lng": -91.5302,
+    "intro": "Iowa City's I-80 access and campus traffic create frequent roadside flats. Mobile tire repair in Iowa City serves downtown and the surrounding Johnson County routes.",
+    "nearbyCities": [
+      "des-moines",
+      "cedar-rapids",
+      "davenport",
+      "sioux-city"
+    ]
+  },
+  "las-vegas": {
+    "slug": "las-vegas",
+    "name": "Las Vegas",
+    "state": "nevada",
+    "stateCode": "NV",
+    "lat": 36.1699,
+    "lng": -115.1398,
+    "intro": "Las Vegas heat, I-15 congestion, and Strip traffic cook tires and raise blowout risk. Mobile tire repair in Las Vegas comes to you across the valley without a tow.",
+    "nearbyCities": [
+      "henderson",
+      "reno",
+      "north-las-vegas",
+      "sparks"
+    ]
+  },
+  "henderson": {
+    "slug": "henderson",
+    "name": "Henderson",
+    "state": "nevada",
+    "stateCode": "NV",
+    "lat": 36.0395,
+    "lng": -114.9817,
+    "intro": "Henderson's I-215 corridor and desert heat create frequent tire emergencies. Mobile tire repair in Henderson reaches the south valley on-site.",
+    "nearbyCities": [
+      "las-vegas",
+      "reno",
+      "north-las-vegas",
+      "sparks"
+    ]
+  },
+  "reno": {
+    "slug": "reno",
+    "name": "Reno",
+    "state": "nevada",
+    "stateCode": "NV",
+    "lat": 39.5296,
+    "lng": -119.8138,
+    "intro": "Reno's I-80 traffic, high-desert temperature swings, and mountain grades punish tires year-round. Mobile tire repair in Reno gets you back on the road fast.",
+    "nearbyCities": [
+      "las-vegas",
+      "henderson",
+      "north-las-vegas",
+      "sparks"
+    ]
+  },
+  "north-las-vegas": {
+    "slug": "north-las-vegas",
+    "name": "North Las Vegas",
+    "state": "nevada",
+    "stateCode": "NV",
+    "lat": 36.1989,
+    "lng": -115.1175,
+    "intro": "North Las Vegas I-15 access and desert heat keep tire demand high. Mobile tire repair in North Las Vegas brings on-site service across the city.",
+    "nearbyCities": [
+      "las-vegas",
+      "henderson",
+      "reno",
+      "sparks"
+    ]
+  },
+  "sparks": {
+    "slug": "sparks",
+    "name": "Sparks",
+    "state": "nevada",
+    "stateCode": "NV",
+    "lat": 39.5349,
+    "lng": -119.7527,
+    "intro": "Sparks sits on the I-80 corridor where heat and commute traffic wear tires down fast. Mobile tire repair in Sparks serves the Reno-Sparks metro without a shop wait.",
+    "nearbyCities": [
+      "las-vegas",
+      "henderson",
+      "reno",
+      "north-las-vegas"
+    ]
+  },
+  "little-rock": {
+    "slug": "little-rock",
+    "name": "Little Rock",
+    "state": "arkansas",
+    "stateCode": "AR",
+    "lat": 34.7465,
+    "lng": -92.2896,
+    "intro": "Little Rock heat, I-30 / I-40 traffic, and capital-area streets create frequent tire emergencies. Mobile tire repair in Little Rock comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "fayetteville",
+      "fort-smith",
+      "springdale",
+      "jonesboro"
+    ]
+  },
+  "fayetteville": {
+    "slug": "fayetteville",
+    "name": "Fayetteville",
+    "state": "arkansas",
+    "stateCode": "AR",
+    "lat": 36.0626,
+    "lng": -94.1574,
+    "intro": "Fayetteville's I-49 corridor and campus traffic keep tire demand high in Northwest Arkansas. Mobile tire repair in Fayetteville reaches downtown and nearby routes on-site.",
+    "nearbyCities": [
+      "little-rock",
+      "fort-smith",
+      "springdale",
+      "jonesboro"
+    ]
+  },
+  "fort-smith": {
+    "slug": "fort-smith",
+    "name": "Fort Smith",
+    "state": "arkansas",
+    "stateCode": "AR",
+    "lat": 35.3859,
+    "lng": -94.3985,
+    "intro": "Fort Smith's I-40 access and Arkansas River weather punish tires year-round. Mobile tire repair in Fort Smith gets you moving again without a shop visit.",
+    "nearbyCities": [
+      "little-rock",
+      "fayetteville",
+      "springdale",
+      "jonesboro"
+    ]
+  },
+  "springdale": {
+    "slug": "springdale",
+    "name": "Springdale",
+    "state": "arkansas",
+    "stateCode": "AR",
+    "lat": 36.1867,
+    "lng": -94.1288,
+    "intro": "Springdale's NWA commute and I-49 traffic wear tires down fast. Mobile tire repair in Springdale brings on-site help across the city.",
+    "nearbyCities": [
+      "little-rock",
+      "fayetteville",
+      "fort-smith",
+      "jonesboro"
+    ]
+  },
+  "jonesboro": {
+    "slug": "jonesboro",
+    "name": "Jonesboro",
+    "state": "arkansas",
+    "stateCode": "AR",
+    "lat": 35.8423,
+    "lng": -90.7043,
+    "intro": "Jonesboro's US-63 corridor and northeast Arkansas heat create frequent roadside flats. Mobile tire repair in Jonesboro serves the city and surrounding routes.",
+    "nearbyCities": [
+      "little-rock",
+      "fayetteville",
+      "fort-smith",
+      "springdale"
+    ]
+  },
+  "jackson": {
+    "slug": "jackson",
+    "name": "Jackson",
+    "state": "mississippi",
+    "stateCode": "MS",
+    "lat": 32.2988,
+    "lng": -90.1848,
+    "intro": "Jackson heat, I-20 / I-55 traffic, and city streets make tire failures a regular delay. Mobile tire repair in Jackson comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "gulfport",
+      "southaven",
+      "biloxi",
+      "hattiesburg"
+    ]
+  },
+  "gulfport": {
+    "slug": "gulfport",
+    "name": "Gulfport",
+    "state": "mississippi",
+    "stateCode": "MS",
+    "lat": 30.3674,
+    "lng": -89.0928,
+    "intro": "Gulfport's I-10 corridor, coastal heat, and storm debris create frequent tire emergencies. Mobile tire repair in Gulfport reaches the Coast on-site.",
+    "nearbyCities": [
+      "jackson",
+      "southaven",
+      "biloxi",
+      "hattiesburg"
+    ]
+  },
+  "southaven": {
+    "slug": "southaven",
+    "name": "Southaven",
+    "state": "mississippi",
+    "stateCode": "MS",
+    "lat": 34.989,
+    "lng": -90.0126,
+    "intro": "Southaven's Memphis-metro commute and I-55 traffic keep tire demand high. Mobile tire repair in Southaven brings on-site service across DeSoto County.",
+    "nearbyCities": [
+      "jackson",
+      "gulfport",
+      "biloxi",
+      "hattiesburg"
+    ]
+  },
+  "biloxi": {
+    "slug": "biloxi",
+    "name": "Biloxi",
+    "state": "mississippi",
+    "stateCode": "MS",
+    "lat": 30.396,
+    "lng": -88.8853,
+    "intro": "Biloxi's beach traffic, I-110 access, and Gulf humidity punish tires year-round. Mobile tire repair in Biloxi gets you back on the road without a shop wait.",
+    "nearbyCities": [
+      "jackson",
+      "gulfport",
+      "southaven",
+      "hattiesburg"
+    ]
+  },
+  "hattiesburg": {
+    "slug": "hattiesburg",
+    "name": "Hattiesburg",
+    "state": "mississippi",
+    "stateCode": "MS",
+    "lat": 31.3271,
+    "lng": -89.2903,
+    "intro": "Hattiesburg's I-59 / US-49 interchange and Pine Belt heat create frequent roadside flats. Mobile tire repair in Hattiesburg serves the city and nearby corridors.",
+    "nearbyCities": [
+      "jackson",
+      "gulfport",
+      "southaven",
+      "biloxi"
+    ]
+  },
+  "wichita": {
+    "slug": "wichita",
+    "name": "Wichita",
+    "state": "kansas",
+    "stateCode": "KS",
+    "lat": 37.6872,
+    "lng": -97.3301,
+    "intro": "Wichita heat, I-135 / Kellogg traffic, and prairie crosswinds create frequent tire emergencies. Mobile tire repair in Wichita comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "overland-park",
+      "kansas-city-ks",
+      "olathe",
+      "topeka"
+    ]
+  },
+  "overland-park": {
+    "slug": "overland-park",
+    "name": "Overland Park",
+    "state": "kansas",
+    "stateCode": "KS",
+    "lat": 38.9822,
+    "lng": -94.6708,
+    "intro": "Overland Park's I-435 commute and Johnson County growth keep tire demand high. Mobile tire repair in Overland Park reaches the south KC metro on-site.",
+    "nearbyCities": [
+      "wichita",
+      "kansas-city-ks",
+      "olathe",
+      "topeka"
+    ]
+  },
+  "kansas-city-ks": {
+    "slug": "kansas-city-ks",
+    "name": "Kansas City",
+    "state": "kansas",
+    "stateCode": "KS",
+    "lat": 39.1142,
+    "lng": -94.6275,
+    "intro": "Kansas City, Kansas sits on I-70 / I-635 where freight traffic and seasonal weather punish tires. Mobile tire repair in Kansas City brings on-site help across Wyandotte County.",
+    "nearbyCities": [
+      "wichita",
+      "overland-park",
+      "olathe",
+      "topeka"
+    ]
+  },
+  "olathe": {
+    "slug": "olathe",
+    "name": "Olathe",
+    "state": "kansas",
+    "stateCode": "KS",
+    "lat": 38.8814,
+    "lng": -94.8191,
+    "intro": "Olathe's I-35 corridor and suburban commute wear tires down fast. Mobile tire repair in Olathe gets you moving again without a shop appointment.",
+    "nearbyCities": [
+      "wichita",
+      "overland-park",
+      "kansas-city-ks",
+      "topeka"
+    ]
+  },
+  "topeka": {
+    "slug": "topeka",
+    "name": "Topeka",
+    "state": "kansas",
+    "stateCode": "KS",
+    "lat": 39.0473,
+    "lng": -95.6752,
+    "intro": "Topeka's I-70 traffic and capital-area streets create frequent roadside flats. Mobile tire repair in Topeka serves downtown and the surrounding corridors.",
+    "nearbyCities": [
+      "wichita",
+      "overland-park",
+      "kansas-city-ks",
+      "olathe"
+    ]
+  },
+  "albuquerque": {
+    "slug": "albuquerque",
+    "name": "Albuquerque",
+    "state": "new-mexico",
+    "stateCode": "NM",
+    "lat": 35.0844,
+    "lng": -106.6504,
+    "intro": "Albuquerque's I-25 / I-40 interchange, high-desert heat, and altitude wear tires down fast. Mobile tire repair in Albuquerque comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "las-cruces",
+      "rio-rancho",
+      "santa-fe",
+      "roswell"
+    ]
+  },
+  "las-cruces": {
+    "slug": "las-cruces",
+    "name": "Las Cruces",
+    "state": "new-mexico",
+    "stateCode": "NM",
+    "lat": 32.3199,
+    "lng": -106.7637,
+    "intro": "Las Cruces I-10 / I-25 traffic and desert heat create frequent tire emergencies. Mobile tire repair in Las Cruces reaches the Mesilla Valley on-site.",
+    "nearbyCities": [
+      "albuquerque",
+      "rio-rancho",
+      "santa-fe",
+      "roswell"
+    ]
+  },
+  "rio-rancho": {
+    "slug": "rio-rancho",
+    "name": "Rio Rancho",
+    "state": "new-mexico",
+    "stateCode": "NM",
+    "lat": 35.2328,
+    "lng": -106.663,
+    "intro": "Rio Rancho's Albuquerque-metro commute and high-desert roads keep tire demand high. Mobile tire repair in Rio Rancho brings on-site service across the city.",
+    "nearbyCities": [
+      "albuquerque",
+      "las-cruces",
+      "santa-fe",
+      "roswell"
+    ]
+  },
+  "santa-fe": {
+    "slug": "santa-fe",
+    "name": "Santa Fe",
+    "state": "new-mexico",
+    "stateCode": "NM",
+    "lat": 35.687,
+    "lng": -105.9378,
+    "intro": "Santa Fe's mountain grades, I-25 access, and temperature swings punish tires year-round. Mobile tire repair in Santa Fe gets you back on the road without a shop wait.",
+    "nearbyCities": [
+      "albuquerque",
+      "las-cruces",
+      "rio-rancho",
+      "roswell"
+    ]
+  },
+  "roswell": {
+    "slug": "roswell",
+    "name": "Roswell",
+    "state": "new-mexico",
+    "stateCode": "NM",
+    "lat": 33.3943,
+    "lng": -104.523,
+    "intro": "Roswell's US-285 corridor and southeast New Mexico heat create frequent roadside flats. Mobile tire repair in Roswell serves the city and surrounding highways.",
+    "nearbyCities": [
+      "albuquerque",
+      "las-cruces",
+      "rio-rancho",
+      "santa-fe"
+    ]
+  },
+  "omaha": {
+    "slug": "omaha",
+    "name": "Omaha",
+    "state": "nebraska",
+    "stateCode": "NE",
+    "lat": 41.2565,
+    "lng": -95.9345,
+    "intro": "Omaha winters, I-80 / I-29 traffic, and freeze-thaw potholes make tire damage a regular delay. Mobile tire repair in Omaha comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "lincoln",
+      "bellevue-ne",
+      "grand-island",
+      "kearney"
+    ]
+  },
+  "lincoln": {
+    "slug": "lincoln",
+    "name": "Lincoln",
+    "state": "nebraska",
+    "stateCode": "NE",
+    "lat": 40.8136,
+    "lng": -96.7026,
+    "intro": "Lincoln's I-80 access, campus traffic, and Nebraska winters create frequent tire emergencies. Mobile tire repair in Lincoln reaches downtown and the surrounding capital-area routes.",
+    "nearbyCities": [
+      "omaha",
+      "bellevue-ne",
+      "grand-island",
+      "kearney"
+    ]
+  },
+  "bellevue-ne": {
+    "slug": "bellevue-ne",
+    "name": "Bellevue",
+    "state": "nebraska",
+    "stateCode": "NE",
+    "lat": 41.1544,
+    "lng": -95.9146,
+    "intro": "Bellevue's Offutt traffic and Omaha-metro commute keep tire demand high. Mobile tire repair in Bellevue brings on-site help across Sarpy County.",
+    "nearbyCities": [
+      "omaha",
+      "lincoln",
+      "grand-island",
+      "kearney"
+    ]
+  },
+  "grand-island": {
+    "slug": "grand-island",
+    "name": "Grand Island",
+    "state": "nebraska",
+    "stateCode": "NE",
+    "lat": 40.9264,
+    "lng": -98.342,
+    "intro": "Grand Island's I-80 corridor and central Nebraska weather punish tires year-round. Mobile tire repair in Grand Island gets you moving again on-site.",
+    "nearbyCities": [
+      "omaha",
+      "lincoln",
+      "bellevue-ne",
+      "kearney"
+    ]
+  },
+  "kearney": {
+    "slug": "kearney",
+    "name": "Kearney",
+    "state": "nebraska",
+    "stateCode": "NE",
+    "lat": 40.6995,
+    "lng": -99.0817,
+    "intro": "Kearney's I-80 traffic and long prairie highways create frequent roadside flats. Mobile tire repair in Kearney serves the city and nearby corridors.",
+    "nearbyCities": [
+      "omaha",
+      "lincoln",
+      "bellevue-ne",
+      "grand-island"
+    ]
+  },
+  "boise": {
+    "slug": "boise",
+    "name": "Boise",
+    "state": "idaho",
+    "stateCode": "ID",
+    "lat": 43.615,
+    "lng": -116.2023,
+    "intro": "Boise's I-84 congestion, Treasure Valley growth, and freeze-thaw winters wear tires down fast. Mobile tire repair in Boise comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "meridian",
+      "nampa",
+      "idaho-falls",
+      "caldwell"
+    ]
+  },
+  "meridian": {
+    "slug": "meridian",
+    "name": "Meridian",
+    "state": "idaho",
+    "stateCode": "ID",
+    "lat": 43.6121,
+    "lng": -116.3915,
+    "intro": "Meridian's suburban commute and I-84 access keep tire demand high. Mobile tire repair in Meridian reaches Ada County drivers on-site.",
+    "nearbyCities": [
+      "boise",
+      "nampa",
+      "idaho-falls",
+      "caldwell"
+    ]
+  },
+  "nampa": {
+    "slug": "nampa",
+    "name": "Nampa",
+    "state": "idaho",
+    "stateCode": "ID",
+    "lat": 43.5407,
+    "lng": -116.5635,
+    "intro": "Nampa's I-84 corridor and Treasure Valley traffic create frequent tire emergencies. Mobile tire repair in Nampa brings on-site service across Canyon County.",
+    "nearbyCities": [
+      "boise",
+      "meridian",
+      "idaho-falls",
+      "caldwell"
+    ]
+  },
+  "idaho-falls": {
+    "slug": "idaho-falls",
+    "name": "Idaho Falls",
+    "state": "idaho",
+    "stateCode": "ID",
+    "lat": 43.4917,
+    "lng": -112.034,
+    "intro": "Idaho Falls I-15 traffic and eastern Idaho winters punish tires year-round. Mobile tire repair in Idaho Falls gets you back on the road without a shop wait.",
+    "nearbyCities": [
+      "boise",
+      "meridian",
+      "nampa",
+      "caldwell"
+    ]
+  },
+  "caldwell": {
+    "slug": "caldwell",
+    "name": "Caldwell",
+    "state": "idaho",
+    "stateCode": "ID",
+    "lat": 43.6629,
+    "lng": -116.6874,
+    "intro": "Caldwell's I-84 access and growing suburbs create frequent roadside flats. Mobile tire repair in Caldwell serves the city and nearby west-valley routes.",
+    "nearbyCities": [
+      "boise",
+      "meridian",
+      "nampa",
+      "idaho-falls"
+    ]
+  },
+  "charleston-wv": {
+    "slug": "charleston-wv",
+    "name": "Charleston",
+    "state": "west-virginia",
+    "stateCode": "WV",
+    "lat": 38.3498,
+    "lng": -81.6326,
+    "intro": "Charleston's mountain grades, I-64 / I-77 traffic, and winter ice make tire failures especially dangerous. Mobile tire repair in Charleston comes to you across the capital city without a tow.",
+    "nearbyCities": [
+      "huntington",
+      "morgantown",
+      "parkersburg",
+      "wheeling"
+    ]
+  },
+  "huntington": {
+    "slug": "huntington",
+    "name": "Huntington",
+    "state": "west-virginia",
+    "stateCode": "WV",
+    "lat": 38.4192,
+    "lng": -82.4452,
+    "intro": "Huntington's I-64 corridor and Ohio River winters create frequent tire emergencies. Mobile tire repair in Huntington reaches downtown and the surrounding Tri-State routes.",
+    "nearbyCities": [
+      "charleston-wv",
+      "morgantown",
+      "parkersburg",
+      "wheeling"
+    ]
+  },
+  "morgantown": {
+    "slug": "morgantown",
+    "name": "Morgantown",
+    "state": "west-virginia",
+    "stateCode": "WV",
+    "lat": 39.6295,
+    "lng": -79.9559,
+    "intro": "Morgantown's I-79 access, campus hills, and freeze-thaw potholes punish tires year-round. Mobile tire repair in Morgantown gets you moving again on-site.",
+    "nearbyCities": [
+      "charleston-wv",
+      "huntington",
+      "parkersburg",
+      "wheeling"
+    ]
+  },
+  "parkersburg": {
+    "slug": "parkersburg",
+    "name": "Parkersburg",
+    "state": "west-virginia",
+    "stateCode": "WV",
+    "lat": 39.2667,
+    "lng": -81.5615,
+    "intro": "Parkersburg's I-77 corridor and Mid-Ohio Valley weather keep tire demand high. Mobile tire repair in Parkersburg brings on-site help across the city.",
+    "nearbyCities": [
+      "charleston-wv",
+      "huntington",
+      "morgantown",
+      "wheeling"
+    ]
+  },
+  "wheeling": {
+    "slug": "wheeling",
+    "name": "Wheeling",
+    "state": "west-virginia",
+    "stateCode": "WV",
+    "lat": 40.064,
+    "lng": -80.7209,
+    "intro": "Wheeling's I-70 traffic, hills, and winter road damage create frequent roadside flats. Mobile tire repair in Wheeling serves the city and nearby Northern Panhandle routes.",
+    "nearbyCities": [
+      "charleston-wv",
+      "huntington",
+      "morgantown",
+      "parkersburg"
+    ]
+  },
+  "honolulu": {
+    "slug": "honolulu",
+    "name": "Honolulu",
+    "state": "hawaii",
+    "stateCode": "HI",
+    "lat": 21.3069,
+    "lng": -157.8583,
+    "intro": "Honolulu's H-1 congestion, heat, and coastal roads wear tires faster than many drivers expect. Mobile tire repair in Honolulu comes to you across Oahu without a tow.",
+    "nearbyCities": [
+      "hilo",
+      "kailua",
+      "kapolei",
+      "kahului"
+    ]
+  },
+  "hilo": {
+    "slug": "hilo",
+    "name": "Hilo",
+    "state": "hawaii",
+    "stateCode": "HI",
+    "lat": 19.7074,
+    "lng": -155.09,
+    "intro": "Hilo's wet roads, Saddle Road access, and island heat create frequent tire emergencies. Mobile tire repair in Hilo reaches the Big Island's east side on-site.",
+    "nearbyCities": [
+      "honolulu",
+      "kailua",
+      "kapolei",
+      "kahului"
+    ]
+  },
+  "kailua": {
+    "slug": "kailua",
+    "name": "Kailua",
+    "state": "hawaii",
+    "stateCode": "HI",
+    "lat": 21.4022,
+    "lng": -157.7394,
+    "intro": "Kailua's windward commute and Pali Highway traffic keep tire demand high. Mobile tire repair in Kailua brings on-site service across the town.",
+    "nearbyCities": [
+      "honolulu",
+      "hilo",
+      "kapolei",
+      "kahului"
+    ]
+  },
+  "kapolei": {
+    "slug": "kapolei",
+    "name": "Kapolei",
+    "state": "hawaii",
+    "stateCode": "HI",
+    "lat": 21.3356,
+    "lng": -158.0808,
+    "intro": "Kapolei's H-1 west-side commute and growing suburbs punish tires year-round. Mobile tire repair in Kapolei gets you back on the road without a shop wait.",
+    "nearbyCities": [
+      "honolulu",
+      "hilo",
+      "kailua",
+      "kahului"
+    ]
+  },
+  "kahului": {
+    "slug": "kahului",
+    "name": "Kahului",
+    "state": "hawaii",
+    "stateCode": "HI",
+    "lat": 20.8893,
+    "lng": -156.4729,
+    "intro": "Kahului's airport traffic, Haleakala grades, and Maui heat create frequent roadside flats. Mobile tire repair in Kahului serves central Maui corridors.",
+    "nearbyCities": [
+      "honolulu",
+      "hilo",
+      "kailua",
+      "kapolei"
+    ]
+  },
+  "manchester": {
+    "slug": "manchester",
+    "name": "Manchester",
+    "state": "new-hampshire",
+    "stateCode": "NH",
+    "lat": 42.9956,
+    "lng": -71.4548,
+    "intro": "Manchester winters, I-93 traffic, and freeze-thaw potholes make tire damage a regular delay. Mobile tire repair in Manchester comes to you across the city without a tow.",
+    "nearbyCities": [
+      "nashua",
+      "concord",
+      "derry",
+      "dover-nh"
+    ]
+  },
+  "nashua": {
+    "slug": "nashua",
+    "name": "Nashua",
+    "state": "new-hampshire",
+    "stateCode": "NH",
+    "lat": 42.7654,
+    "lng": -71.4676,
+    "intro": "Nashua's F.E. Everett Turnpike commute and winter road damage create frequent tire emergencies. Mobile tire repair in Nashua reaches the Gate City on-site.",
+    "nearbyCities": [
+      "manchester",
+      "concord",
+      "derry",
+      "dover-nh"
+    ]
+  },
+  "concord": {
+    "slug": "concord",
+    "name": "Concord",
+    "state": "new-hampshire",
+    "stateCode": "NH",
+    "lat": 43.2081,
+    "lng": -71.5376,
+    "intro": "Concord's I-93 corridor and capital-area winters punish tires year-round. Mobile tire repair in Concord gets you moving again without a shop appointment.",
+    "nearbyCities": [
+      "manchester",
+      "nashua",
+      "derry",
+      "dover-nh"
+    ]
+  },
+  "derry": {
+    "slug": "derry",
+    "name": "Derry",
+    "state": "new-hampshire",
+    "stateCode": "NH",
+    "lat": 42.8806,
+    "lng": -71.3273,
+    "intro": "Derry's I-93 access and southern New Hampshire commute keep tire demand high. Mobile tire repair in Derry brings on-site help across the town.",
+    "nearbyCities": [
+      "manchester",
+      "nashua",
+      "concord",
+      "dover-nh"
+    ]
+  },
+  "dover-nh": {
+    "slug": "dover-nh",
+    "name": "Dover",
+    "state": "new-hampshire",
+    "stateCode": "NH",
+    "lat": 43.1979,
+    "lng": -70.8737,
+    "intro": "Dover's Spaulding Turnpike traffic and Seacoast winters create frequent roadside flats. Mobile tire repair in Dover serves the city and nearby corridors.",
+    "nearbyCities": [
+      "manchester",
+      "nashua",
+      "concord",
+      "derry"
+    ]
+  },
+  "portland-me": {
+    "slug": "portland-me",
+    "name": "Portland",
+    "state": "maine",
+    "stateCode": "ME",
+    "lat": 43.6591,
+    "lng": -70.2568,
+    "intro": "Portland winters, I-295 traffic, and coastal freeze-thaw cycles make tire failures common. Mobile tire repair in Portland comes to you across the city without a tow.",
+    "nearbyCities": [
+      "lewiston",
+      "bangor",
+      "south-portland",
+      "auburn"
+    ]
+  },
+  "lewiston": {
+    "slug": "lewiston",
+    "name": "Lewiston",
+    "state": "maine",
+    "stateCode": "ME",
+    "lat": 44.1004,
+    "lng": -70.2148,
+    "intro": "Lewiston's I-95 access and Androscoggin winters create frequent tire emergencies. Mobile tire repair in Lewiston reaches the Twin Cities on-site.",
+    "nearbyCities": [
+      "portland-me",
+      "bangor",
+      "south-portland",
+      "auburn"
+    ]
+  },
+  "bangor": {
+    "slug": "bangor",
+    "name": "Bangor",
+    "state": "maine",
+    "stateCode": "ME",
+    "lat": 44.8016,
+    "lng": -68.7712,
+    "intro": "Bangor's I-95 corridor and Downeast winters punish tires year-round. Mobile tire repair in Bangor gets you back on the road without a shop wait.",
+    "nearbyCities": [
+      "portland-me",
+      "lewiston",
+      "south-portland",
+      "auburn"
+    ]
+  },
+  "south-portland": {
+    "slug": "south-portland",
+    "name": "South Portland",
+    "state": "maine",
+    "stateCode": "ME",
+    "lat": 43.6415,
+    "lng": -70.2409,
+    "intro": "South Portland's mall traffic, I-295 access, and coastal weather keep tire demand high. Mobile tire repair in South Portland brings on-site service across the city.",
+    "nearbyCities": [
+      "portland-me",
+      "lewiston",
+      "bangor",
+      "auburn"
+    ]
+  },
+  "auburn": {
+    "slug": "auburn",
+    "name": "Auburn",
+    "state": "maine",
+    "stateCode": "ME",
+    "lat": 44.0979,
+    "lng": -70.2312,
+    "intro": "Auburn's Turnpike access and western Maine winters create frequent roadside flats. Mobile tire repair in Auburn serves the city and nearby Lewiston-Auburn routes.",
+    "nearbyCities": [
+      "portland-me",
+      "lewiston",
+      "bangor",
+      "south-portland"
+    ]
+  },
+  "billings": {
+    "slug": "billings",
+    "name": "Billings",
+    "state": "montana",
+    "stateCode": "MT",
+    "lat": 45.7833,
+    "lng": -108.5007,
+    "intro": "Billings I-90 / I-94 traffic, winter ice, and long prairie stretches make tire failures especially isolating. Mobile tire repair in Billings comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "missoula",
+      "great-falls",
+      "bozeman",
+      "butte"
+    ]
+  },
+  "missoula": {
+    "slug": "missoula",
+    "name": "Missoula",
+    "state": "montana",
+    "stateCode": "MT",
+    "lat": 46.8721,
+    "lng": -113.994,
+    "intro": "Missoula's I-90 corridor, mountain grades, and freeze-thaw winters create frequent tire emergencies. Mobile tire repair in Missoula reaches downtown and the surrounding valleys.",
+    "nearbyCities": [
+      "billings",
+      "great-falls",
+      "bozeman",
+      "butte"
+    ]
+  },
+  "great-falls": {
+    "slug": "great-falls",
+    "name": "Great Falls",
+    "state": "montana",
+    "stateCode": "MT",
+    "lat": 47.5053,
+    "lng": -111.3008,
+    "intro": "Great Falls I-15 traffic and northern Montana winters punish tires year-round. Mobile tire repair in Great Falls gets you moving again on-site.",
+    "nearbyCities": [
+      "billings",
+      "missoula",
+      "bozeman",
+      "butte"
+    ]
+  },
+  "bozeman": {
+    "slug": "bozeman",
+    "name": "Bozeman",
+    "state": "montana",
+    "stateCode": "MT",
+    "lat": 45.677,
+    "lng": -111.0429,
+    "intro": "Bozeman's I-90 access, mountain weather, and rapid growth keep tire demand high. Mobile tire repair in Bozeman brings on-site help across the city.",
+    "nearbyCities": [
+      "billings",
+      "missoula",
+      "great-falls",
+      "butte"
+    ]
+  },
+  "butte": {
+    "slug": "butte",
+    "name": "Butte",
+    "state": "montana",
+    "stateCode": "MT",
+    "lat": 46.0038,
+    "lng": -112.5348,
+    "intro": "Butte's high-altitude winters, I-15 / I-90 interchange, and steep streets create frequent roadside flats. Mobile tire repair in Butte serves the city and nearby corridors.",
+    "nearbyCities": [
+      "billings",
+      "missoula",
+      "great-falls",
+      "bozeman"
+    ]
+  },
+  "providence": {
+    "slug": "providence",
+    "name": "Providence",
+    "state": "rhode-island",
+    "stateCode": "RI",
+    "lat": 41.824,
+    "lng": -71.4128,
+    "intro": "Providence's I-95 congestion, winter potholes, and tight city streets make tire damage a weekly reality. Mobile tire repair in Providence comes to you across the city without a tow.",
+    "nearbyCities": [
+      "warwick",
+      "cranston",
+      "pawtucket",
+      "east-providence"
+    ]
+  },
+  "warwick": {
+    "slug": "warwick",
+    "name": "Warwick",
+    "state": "rhode-island",
+    "stateCode": "RI",
+    "lat": 41.7001,
+    "lng": -71.4162,
+    "intro": "Warwick's I-95 / airport traffic and freeze-thaw road damage create frequent tire emergencies. Mobile tire repair in Warwick reaches the city on-site.",
+    "nearbyCities": [
+      "providence",
+      "cranston",
+      "pawtucket",
+      "east-providence"
+    ]
+  },
+  "cranston": {
+    "slug": "cranston",
+    "name": "Cranston",
+    "state": "rhode-island",
+    "stateCode": "RI",
+    "lat": 41.7798,
+    "lng": -71.4373,
+    "intro": "Cranston's Route 10 / I-95 access and winter potholes punish tires year-round. Mobile tire repair in Cranston gets you back on the road without a shop wait.",
+    "nearbyCities": [
+      "providence",
+      "warwick",
+      "pawtucket",
+      "east-providence"
+    ]
+  },
+  "pawtucket": {
+    "slug": "pawtucket",
+    "name": "Pawtucket",
+    "state": "rhode-island",
+    "stateCode": "RI",
+    "lat": 41.8787,
+    "lng": -71.3826,
+    "intro": "Pawtucket's I-95 corridor and dense urban streets keep tire demand high. Mobile tire repair in Pawtucket brings on-site service across the city.",
+    "nearbyCities": [
+      "providence",
+      "warwick",
+      "cranston",
+      "east-providence"
+    ]
+  },
+  "east-providence": {
+    "slug": "east-providence",
+    "name": "East Providence",
+    "state": "rhode-island",
+    "stateCode": "RI",
+    "lat": 41.8137,
+    "lng": -71.3701,
+    "intro": "East Providence's I-195 traffic and winter road damage create frequent roadside flats. Mobile tire repair in East Providence serves the city and nearby East Bay routes.",
+    "nearbyCities": [
+      "providence",
+      "warwick",
+      "cranston",
+      "pawtucket"
+    ]
+  },
+  "wilmington": {
+    "slug": "wilmington",
+    "name": "Wilmington",
+    "state": "delaware",
+    "stateCode": "DE",
+    "lat": 39.7391,
+    "lng": -75.5398,
+    "intro": "Wilmington's I-95 congestion, winter potholes, and dense city streets make flats a routine delay. Mobile tire repair in Wilmington comes to you across the city without a tow.",
+    "nearbyCities": [
+      "dover",
+      "newark-de",
+      "middletown",
+      "bear"
+    ]
+  },
+  "dover": {
+    "slug": "dover",
+    "name": "Dover",
+    "state": "delaware",
+    "stateCode": "DE",
+    "lat": 39.1582,
+    "lng": -75.5244,
+    "intro": "Dover's Route 1 / Route 13 traffic and capital-area winters create frequent tire emergencies. Mobile tire repair in Dover reaches downtown and the surrounding Kent County routes.",
+    "nearbyCities": [
+      "wilmington",
+      "newark-de",
+      "middletown",
+      "bear"
+    ]
+  },
+  "newark-de": {
+    "slug": "newark-de",
+    "name": "Newark",
+    "state": "delaware",
+    "stateCode": "DE",
+    "lat": 39.6837,
+    "lng": -75.7497,
+    "intro": "Newark's I-95 access, campus traffic, and freeze-thaw potholes punish tires year-round. Mobile tire repair in Newark gets you moving again on-site.",
+    "nearbyCities": [
+      "wilmington",
+      "dover",
+      "middletown",
+      "bear"
+    ]
+  },
+  "middletown": {
+    "slug": "middletown",
+    "name": "Middletown",
+    "state": "delaware",
+    "stateCode": "DE",
+    "lat": 39.4496,
+    "lng": -75.7163,
+    "intro": "Middletown's Route 1 corridor and growing suburban commute keep tire demand high. Mobile tire repair in Middletown brings on-site help across the town.",
+    "nearbyCities": [
+      "wilmington",
+      "dover",
+      "newark-de",
+      "bear"
+    ]
+  },
+  "bear": {
+    "slug": "bear",
+    "name": "Bear",
+    "state": "delaware",
+    "stateCode": "DE",
+    "lat": 39.6293,
+    "lng": -75.6583,
+    "intro": "Bear's I-95 / Route 40 traffic and New Castle County winters create frequent roadside flats. Mobile tire repair in Bear serves the community and nearby corridors.",
+    "nearbyCities": [
+      "wilmington",
+      "dover",
+      "newark-de",
+      "middletown"
+    ]
+  },
+  "sioux-falls": {
+    "slug": "sioux-falls",
+    "name": "Sioux Falls",
+    "state": "south-dakota",
+    "stateCode": "SD",
+    "lat": 43.546,
+    "lng": -96.7313,
+    "intro": "Sioux Falls winters, I-29 / I-90 traffic, and freeze-thaw potholes make tire damage a regular delay. Mobile tire repair in Sioux Falls comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "rapid-city",
+      "aberdeen",
+      "brookings",
+      "watertown"
+    ]
+  },
+  "rapid-city": {
+    "slug": "rapid-city",
+    "name": "Rapid City",
+    "state": "south-dakota",
+    "stateCode": "SD",
+    "lat": 44.0805,
+    "lng": -103.231,
+    "intro": "Rapid City's I-90 corridor, Black Hills grades, and winter ice create frequent tire emergencies. Mobile tire repair in Rapid City reaches the city on-site.",
+    "nearbyCities": [
+      "sioux-falls",
+      "aberdeen",
+      "brookings",
+      "watertown"
+    ]
+  },
+  "aberdeen": {
+    "slug": "aberdeen",
+    "name": "Aberdeen",
+    "state": "south-dakota",
+    "stateCode": "SD",
+    "lat": 45.4647,
+    "lng": -98.4865,
+    "intro": "Aberdeen's US-12 corridor and northeast South Dakota winters punish tires year-round. Mobile tire repair in Aberdeen gets you back on the road without a shop wait.",
+    "nearbyCities": [
+      "sioux-falls",
+      "rapid-city",
+      "brookings",
+      "watertown"
+    ]
+  },
+  "brookings": {
+    "slug": "brookings",
+    "name": "Brookings",
+    "state": "south-dakota",
+    "stateCode": "SD",
+    "lat": 44.3114,
+    "lng": -96.7984,
+    "intro": "Brookings' I-29 access and campus traffic keep tire demand high. Mobile tire repair in Brookings brings on-site service across the city.",
+    "nearbyCities": [
+      "sioux-falls",
+      "rapid-city",
+      "aberdeen",
+      "watertown"
+    ]
+  },
+  "watertown": {
+    "slug": "watertown",
+    "name": "Watertown",
+    "state": "south-dakota",
+    "stateCode": "SD",
+    "lat": 44.8994,
+    "lng": -97.1151,
+    "intro": "Watertown's I-29 corridor and prairie winters create frequent roadside flats. Mobile tire repair in Watertown serves the city and nearby highways.",
+    "nearbyCities": [
+      "sioux-falls",
+      "rapid-city",
+      "aberdeen",
+      "brookings"
+    ]
+  },
+  "fargo": {
+    "slug": "fargo",
+    "name": "Fargo",
+    "state": "north-dakota",
+    "stateCode": "ND",
+    "lat": 46.8772,
+    "lng": -96.7898,
+    "intro": "Fargo winters, I-94 / I-29 traffic, and freeze-thaw ruts make tire failures a seasonal certainty. Mobile tire repair in Fargo comes to you across the metro without a tow.",
+    "nearbyCities": [
+      "bismarck",
+      "grand-forks",
+      "minot",
+      "west-fargo"
+    ]
+  },
+  "bismarck": {
+    "slug": "bismarck",
+    "name": "Bismarck",
+    "state": "north-dakota",
+    "stateCode": "ND",
+    "lat": 46.8083,
+    "lng": -100.7837,
+    "intro": "Bismarck's I-94 corridor and capital-area winters create frequent tire emergencies. Mobile tire repair in Bismarck reaches downtown and the surrounding Missouri Valley routes.",
+    "nearbyCities": [
+      "fargo",
+      "grand-forks",
+      "minot",
+      "west-fargo"
+    ]
+  },
+  "grand-forks": {
+    "slug": "grand-forks",
+    "name": "Grand Forks",
+    "state": "north-dakota",
+    "stateCode": "ND",
+    "lat": 47.9253,
+    "lng": -97.0329,
+    "intro": "Grand Forks I-29 traffic and Red River winters punish tires year-round. Mobile tire repair in Grand Forks gets you moving again on-site.",
+    "nearbyCities": [
+      "fargo",
+      "bismarck",
+      "minot",
+      "west-fargo"
+    ]
+  },
+  "minot": {
+    "slug": "minot",
+    "name": "Minot",
+    "state": "north-dakota",
+    "stateCode": "ND",
+    "lat": 48.233,
+    "lng": -101.2923,
+    "intro": "Minot's US-2 / US-83 corridors and northern Dakota winters keep tire demand high. Mobile tire repair in Minot brings on-site help across the city.",
+    "nearbyCities": [
+      "fargo",
+      "bismarck",
+      "grand-forks",
+      "west-fargo"
+    ]
+  },
+  "west-fargo": {
+    "slug": "west-fargo",
+    "name": "West Fargo",
+    "state": "north-dakota",
+    "stateCode": "ND",
+    "lat": 46.8772,
+    "lng": -96.8998,
+    "intro": "West Fargo's I-94 access and Fargo-metro commute create frequent roadside flats. Mobile tire repair in West Fargo serves the city and nearby corridors.",
+    "nearbyCities": [
+      "fargo",
+      "bismarck",
+      "grand-forks",
+      "minot"
+    ]
+  },
+  "anchorage": {
+    "slug": "anchorage",
+    "name": "Anchorage",
+    "state": "alaska",
+    "stateCode": "AK",
+    "lat": 61.2181,
+    "lng": -149.9003,
+    "intro": "Anchorage ice, studded-tire season, and Seward Highway traffic make tire failures especially dangerous. Mobile tire repair in Anchorage comes to you across the city without a tow.",
+    "nearbyCities": [
+      "fairbanks",
+      "juneau",
+      "wasilla",
+      "sitka"
+    ]
+  },
+  "fairbanks": {
+    "slug": "fairbanks",
+    "name": "Fairbanks",
+    "state": "alaska",
+    "stateCode": "AK",
+    "lat": 64.8378,
+    "lng": -147.7164,
+    "intro": "Fairbanks extreme cold, ice ruts, and Parks Highway access create frequent tire emergencies. Mobile tire repair in Fairbanks reaches the Interior on-site.",
+    "nearbyCities": [
+      "anchorage",
+      "juneau",
+      "wasilla",
+      "sitka"
+    ]
+  },
+  "juneau": {
+    "slug": "juneau",
+    "name": "Juneau",
+    "state": "alaska",
+    "stateCode": "AK",
+    "lat": 58.3019,
+    "lng": -134.4197,
+    "intro": "Juneau's steep coastal roads, rain, and winter ice punish tires year-round. Mobile tire repair in Juneau gets you back on the road without a shop wait.",
+    "nearbyCities": [
+      "anchorage",
+      "fairbanks",
+      "wasilla",
+      "sitka"
+    ]
+  },
+  "wasilla": {
+    "slug": "wasilla",
+    "name": "Wasilla",
+    "state": "alaska",
+    "stateCode": "AK",
+    "lat": 61.5814,
+    "lng": -149.4394,
+    "intro": "Wasilla's Parks Highway commute and Mat-Su winters keep tire demand high. Mobile tire repair in Wasilla brings on-site service across the valley.",
+    "nearbyCities": [
+      "anchorage",
+      "fairbanks",
+      "juneau",
+      "sitka"
+    ]
+  },
+  "sitka": {
+    "slug": "sitka",
+    "name": "Sitka",
+    "state": "alaska",
+    "stateCode": "AK",
+    "lat": 57.0531,
+    "lng": -135.33,
+    "intro": "Sitka's wet coastal roads and island weather create frequent roadside flats. Mobile tire repair in Sitka serves the community when you need help on-site.",
+    "nearbyCities": [
+      "anchorage",
+      "fairbanks",
+      "juneau",
+      "wasilla"
+    ]
+  },
+  "burlington": {
+    "slug": "burlington",
+    "name": "Burlington",
+    "state": "vermont",
+    "stateCode": "VT",
+    "lat": 44.4759,
+    "lng": -73.2121,
+    "intro": "Burlington winters, I-89 access, and freeze-thaw potholes make tire damage a regular delay. Mobile tire repair in Burlington comes to you across the city without a tow.",
+    "nearbyCities": [
+      "south-burlington",
+      "rutland",
+      "essex-junction",
+      "barre"
+    ]
+  },
+  "south-burlington": {
+    "slug": "south-burlington",
+    "name": "South Burlington",
+    "state": "vermont",
+    "stateCode": "VT",
+    "lat": 44.4669,
+    "lng": -73.1709,
+    "intro": "South Burlington's I-89 / Dorset Street traffic and winter road damage create frequent tire emergencies. Mobile tire repair in South Burlington reaches the city on-site.",
+    "nearbyCities": [
+      "burlington",
+      "rutland",
+      "essex-junction",
+      "barre"
+    ]
+  },
+  "rutland": {
+    "slug": "rutland",
+    "name": "Rutland",
+    "state": "vermont",
+    "stateCode": "VT",
+    "lat": 43.6106,
+    "lng": -72.9726,
+    "intro": "Rutland's US-4 / US-7 corridors and mountain winters punish tires year-round. Mobile tire repair in Rutland gets you moving again without a shop appointment.",
+    "nearbyCities": [
+      "burlington",
+      "south-burlington",
+      "essex-junction",
+      "barre"
+    ]
+  },
+  "essex-junction": {
+    "slug": "essex-junction",
+    "name": "Essex Junction",
+    "state": "vermont",
+    "stateCode": "VT",
+    "lat": 44.4923,
+    "lng": -73.1112,
+    "intro": "Essex Junction's suburban commute and Chittenden County winters keep tire demand high. Mobile tire repair in Essex Junction brings on-site help across the village.",
+    "nearbyCities": [
+      "burlington",
+      "south-burlington",
+      "rutland",
+      "barre"
+    ]
+  },
+  "barre": {
+    "slug": "barre",
+    "name": "Barre",
+    "state": "vermont",
+    "stateCode": "VT",
+    "lat": 44.197,
+    "lng": -72.502,
+    "intro": "Barre's I-89 access and central Vermont winters create frequent roadside flats. Mobile tire repair in Barre serves the city and nearby granite-belt routes.",
+    "nearbyCities": [
+      "burlington",
+      "south-burlington",
+      "rutland",
+      "essex-junction"
+    ]
+  },
+  "cheyenne": {
+    "slug": "cheyenne",
+    "name": "Cheyenne",
+    "state": "wyoming",
+    "stateCode": "WY",
+    "lat": 41.14,
+    "lng": -104.8202,
+    "intro": "Cheyenne wind, I-80 / I-25 traffic, and winter ice make blowouts a real highway hazard. Mobile tire repair in Cheyenne comes to you across the capital city without a tow.",
+    "nearbyCities": [
+      "casper",
+      "gillette",
+      "laramie",
+      "rock-springs"
+    ]
+  },
+  "casper": {
+    "slug": "casper",
+    "name": "Casper",
+    "state": "wyoming",
+    "stateCode": "WY",
+    "lat": 42.8666,
+    "lng": -106.3131,
+    "intro": "Casper's I-25 corridor and high-plains winters create frequent tire emergencies. Mobile tire repair in Casper reaches downtown and the surrounding metro.",
+    "nearbyCities": [
+      "cheyenne",
+      "gillette",
+      "laramie",
+      "rock-springs"
+    ]
+  },
+  "gillette": {
+    "slug": "gillette",
+    "name": "Gillette",
+    "state": "wyoming",
+    "stateCode": "WY",
+    "lat": 44.2911,
+    "lng": -105.5022,
+    "intro": "Gillette's I-90 access and Powder River weather punish tires year-round. Mobile tire repair in Gillette gets you back on the road on-site.",
+    "nearbyCities": [
+      "cheyenne",
+      "casper",
+      "laramie",
+      "rock-springs"
+    ]
+  },
+  "laramie": {
+    "slug": "laramie",
+    "name": "Laramie",
+    "state": "wyoming",
+    "stateCode": "WY",
+    "lat": 41.3114,
+    "lng": -105.5911,
+    "intro": "Laramie's I-80 corridor, high altitude, and campus traffic keep tire demand high. Mobile tire repair in Laramie brings on-site service across the city.",
+    "nearbyCities": [
+      "cheyenne",
+      "casper",
+      "gillette",
+      "rock-springs"
+    ]
+  },
+  "rock-springs": {
+    "slug": "rock-springs",
+    "name": "Rock Springs",
+    "state": "wyoming",
+    "stateCode": "WY",
+    "lat": 41.5875,
+    "lng": -109.2029,
+    "intro": "Rock Springs I-80 traffic, wind, and southwest Wyoming winters create frequent roadside flats. Mobile tire repair in Rock Springs serves the city and nearby corridors.",
+    "nearbyCities": [
+      "cheyenne",
+      "casper",
+      "gillette",
+      "laramie"
+    ]
   }
 }

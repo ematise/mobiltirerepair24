@@ -1,7 +1,5 @@
 'use client';
 
-import { Star } from 'lucide-react';
-
 export interface RatingBadgeProps {
   rating: number;
   count: number;
@@ -14,7 +12,7 @@ function StarIcon({ fill }: { fill: 'full' | 'half' | 'empty' }) {
   if (fill === 'full') {
     return (
       <svg
-        className="w-4 h-4 text-amber-400"
+        className="w-[18px] h-[18px] text-star"
         viewBox="0 0 20 20"
         fill="currentColor"
         aria-hidden="true"
@@ -26,9 +24,11 @@ function StarIcon({ fill }: { fill: 'full' | 'half' | 'empty' }) {
   if (fill === 'empty') {
     return (
       <svg
-        className="w-4 h-4 text-slate-300"
+        className="w-[18px] h-[18px] text-star"
         viewBox="0 0 20 20"
-        fill="currentColor"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
         aria-hidden="true"
       >
         <path d={STAR_PATH} />
@@ -36,19 +36,18 @@ function StarIcon({ fill }: { fill: 'full' | 'half' | 'empty' }) {
     );
   }
   return (
-    <span
-      className="relative inline-block w-4 h-4"
-      aria-hidden="true"
-    >
+    <span className="relative inline-block w-[18px] h-[18px]" aria-hidden="true">
       <svg
-        className="w-4 h-4 text-slate-300 absolute inset-0"
+        className="w-[18px] h-[18px] text-star absolute inset-0"
         viewBox="0 0 20 20"
-        fill="currentColor"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
       >
         <path d={STAR_PATH} />
       </svg>
       <svg
-        className="w-4 h-4 text-amber-400 absolute inset-0"
+        className="w-[18px] h-[18px] text-star absolute inset-0"
         viewBox="0 0 20 20"
         fill="currentColor"
         style={{ clipPath: 'inset(0 50% 0 0)' }}
@@ -79,8 +78,11 @@ export default function RatingBadge({ rating, count }: RatingBadgeProps) {
   return (
     <div className="flex items-center gap-2">
       <Stars rating={rating} />
-      <span className="text-slate-600 text-sm">
-        {rating.toFixed(1)} ({count} {count === 1 ? 'review' : 'reviews'})
+      <span className="text-[15px] font-bold text-gray-950 [font-family:var(--font-body)]">
+        {rating.toFixed(1)}
+      </span>
+      <span className="text-[14px] text-gray-400">
+        ({count} {count === 1 ? 'review' : 'reviews'})
       </span>
     </div>
   );

@@ -1,18 +1,25 @@
 'use client';
 
 import { useState } from 'react';
+import Button from '@/components/ui/Button';
 
 type FetchResult = {
   success: boolean;
   dryRun: boolean;
   citiesProcessed: number;
+  citiesSkipped: number;
   businessesFound: number;
   created: number;
   updated: number;
   photosAdded: number;
   apiCalls: number;
   cacheHits: number;
-  cityResults: Array<{ city: string; stateCode: string; count: number }>;
+  cityResults: Array<{
+    city: string;
+    stateCode: string;
+    count: number;
+    skipped?: boolean;
+  }>;
 };
 
 export default function BusinessFetcher({ onComplete }: { onComplete?: () => void }) {
@@ -56,8 +63,9 @@ export default function BusinessFetcher({ onComplete }: { onComplete?: () => voi
         <h2 className="text-lg font-bold text-gray-900">Fetch from Google Places</h2>
         <p className="text-sm text-gray-600 mt-1">
           Pulls mobile tire repair businesses and saves them directly to the database.
-          Cities with no businesses are fetched first, and each new listing gets a
-          Google Places photo when available. Add cities in{' '}
+          Empty cities are fetched first, each city is capped at 3 listings, and cities
+          that already have 3+ are skipped to save Google API quota. Each new listing
+          gets a Google Places photo when available. Add cities in{' '}
           <a href="/admin/cities" className="text-blue-600 hover:underline">
             Cities
           </a>{' '}
@@ -85,9 +93,9 @@ export default function BusinessFetcher({ onComplete }: { onComplete?: () => voi
             onChange={(e) => setMaxPages(Number(e.target.value))}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
           >
-            <option value={1}>1 (up to 20 results)</option>
-            <option value={2}>2 (up to 40 results)</option>
-            <option value={3}>3 (up to 60 results)</option>
+            <option value={1}>1 (usually enough for 3 listings)</option>
+            <option value={2}>2 (if the first page has too few matches)</option>
+            <option value={3}>3 (sparse cities only)</option>
           </select>
         </div>
         <div className="flex items-end">
@@ -103,13 +111,9 @@ export default function BusinessFetcher({ onComplete }: { onComplete?: () => voi
         </div>
       </div>
 
-      <button
-        onClick={handleFetch}
-        disabled={loading}
-        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:opacity-50"
-      >
+      <Button type="button" onClick={handleFetch} disabled={loading} variant="primary">
         {loading ? 'Fetching…' : dryRun ? 'Preview fetch' : 'Fetch & save to database'}
-      </button>
+      </Button>
 
       {error && (
         <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded text-sm">{error}</div>
@@ -120,6 +124,9 @@ export default function BusinessFetcher({ onComplete }: { onComplete?: () => voi
           <p>
             <strong>{result.dryRun ? 'Preview' : 'Saved'}:</strong>{' '}
             {result.businessesFound} businesses across {result.citiesProcessed} cities
+            {result.citiesSkipped > 0 && (
+              <> · {result.citiesSkipped} skipped (already have 3+)</>
+            )}
             {!result.dryRun && (
               <>
                 {' '}
@@ -131,13 +138,15 @@ export default function BusinessFetcher({ onComplete }: { onComplete?: () => voi
           <p className="text-gray-600">
             API calls: {result.apiCalls} · cache hits: {result.cacheHits}
           </p>
-          {result.cityResults.length > 0 && (
+          {result.cityResults.some((row) => !row.skipped) && (
             <ul className="text-gray-600 list-disc list-inside">
-              {result.cityResults.map((row) => (
-                <li key={`${row.city}-${row.stateCode}`}>
-                  {row.city}, {row.stateCode}: {row.count}
-                </li>
-              ))}
+              {result.cityResults
+                .filter((row) => !row.skipped)
+                .map((row) => (
+                  <li key={`${row.city}-${row.stateCode}`}>
+                    {row.city}, {row.stateCode}: {row.count}
+                  </li>
+                ))}
             </ul>
           )}
         </div>

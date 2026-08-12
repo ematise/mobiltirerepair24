@@ -2,6 +2,7 @@
 
 import { useState, ChangeEvent, DragEvent } from 'react';
 import Image from 'next/image';
+import Button from '@/components/ui/Button';
 
 interface ImageUploaderProps {
   photos: string[];
@@ -205,14 +206,15 @@ export default function ImageUploader({ photos, onPhotosChange, businessSlug }: 
             disabled={addingUrl || uploading}
             className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
           />
-          <button
+          <Button
             type="button"
             onClick={handleAddUrl}
             disabled={addingUrl || uploading || !urlInput.trim()}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition text-sm font-medium"
+            variant="primary"
+            size="sm"
           >
             {addingUrl ? 'Adding...' : 'Add URL'}
-          </button>
+          </Button>
         </div>
         <p className="text-xs text-gray-600 mt-2">
           Must be a publicly accessible HTTPS URL. Images will be resized to max 1024px width.
@@ -234,10 +236,13 @@ export default function ImageUploader({ photos, onPhotosChange, businessSlug }: 
                     className="object-cover"
                   />
                 </div>
-                <button
+                <Button
                   type="button"
+                  variant="danger"
+                  size="sm"
                   onClick={() => handleRemovePhoto(index)}
-                  className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition"
+                  className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 !min-h-8 !px-2"
+                  aria-label={`Remove photo ${index + 1}`}
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -246,7 +251,7 @@ export default function ImageUploader({ photos, onPhotosChange, businessSlug }: 
                       clipRule="evenodd"
                     />
                   </svg>
-                </button>
+                </Button>
                 <p className="text-xs text-gray-600 mt-1 truncate">{photo.split('/').pop()}</p>
               </div>
             ))}

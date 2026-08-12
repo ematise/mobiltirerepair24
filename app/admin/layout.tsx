@@ -2,10 +2,17 @@
 
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import Button from '@/components/ui/Button';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
+  const pathname = usePathname();
+  const isLoginPage = pathname === '/admin/login' || pathname === '/admin/login/';
+
+  if (isLoginPage) {
+    return <>{children}</>;
+  }
 
   const handleLogout = async () => {
     try {
@@ -51,12 +58,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
                 ← Back to site
               </Link>
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 border border-red-200 rounded hover:bg-red-50 transition"
-              >
+              <Button type="button" variant="danger" size="sm" onClick={handleLogout}>
                 Logout
-              </button>
+              </Button>
             </div>
           </div>
         </div>

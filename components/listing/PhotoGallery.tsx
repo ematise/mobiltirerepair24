@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Button from '@/components/ui/Button';
 
 export interface PhotoGalleryProps {
   photos: string[];
@@ -20,7 +21,7 @@ export default function PhotoGallery({ photos, businessName }: PhotoGalleryProps
   return (
     <div className="space-y-4">
       {/* Main image */}
-      <div className="relative bg-slate-100 rounded-lg overflow-hidden aspect-video">
+      <div className="relative bg-gray-100 rounded-[14px] overflow-hidden aspect-video">
         <Image
           src={photos[currentIndex]}
           alt={`${businessName} service photo ${currentIndex + 1}`}
@@ -33,20 +34,24 @@ export default function PhotoGallery({ photos, businessName }: PhotoGalleryProps
         {/* Navigation buttons */}
         {photos.length > 1 && (
           <>
-            <button
+            <Button
+              type="button"
+              variant="icon"
               onClick={prev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-surface"
               aria-label="Previous photo"
             >
-              <ChevronLeft className="w-5 h-5 text-slate-900" />
-            </button>
-            <button
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
+            <Button
+              type="button"
+              variant="icon"
               onClick={next}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 rounded-full transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-surface"
               aria-label="Next photo"
             >
-              <ChevronRight className="w-5 h-5 text-slate-900" />
-            </button>
+              <ChevronRight className="w-5 h-5" />
+            </Button>
           </>
         )}
 

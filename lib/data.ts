@@ -421,7 +421,7 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
 
 export async function getAllStates(): Promise<State[]> {
   const db = await getDb();
-  const docs = await db.collection(COLLECTIONS.states).find({}).toArray();
+  const docs = await db.collection(COLLECTIONS.states).find({}).sort({ name: 1 }).toArray();
   return cleanAll<State>(docs as never);
 }
 

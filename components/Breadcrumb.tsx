@@ -2,7 +2,37 @@ import Link from 'next/link';
 
 type Crumb = { name: string; url: string };
 
-export default function Breadcrumb({ crumbs }: { crumbs: Crumb[] }) {
+export default function Breadcrumb({
+  crumbs,
+  variant = 'default',
+}: {
+  crumbs: Crumb[];
+  variant?: 'default' | 'muted';
+}) {
+  if (variant === 'muted') {
+    return (
+      <nav aria-label="Breadcrumb" className="text-[13px] text-gray-400 mb-3 [font-family:var(--font-body)]">
+        <ol className="flex flex-wrap items-center">
+          {crumbs.map((crumb, i) => (
+            <li key={crumb.url} className="flex items-center">
+              {i > 0 && (
+                <span className="mx-1.5 text-gray-300" aria-hidden="true">
+                  ›
+                </span>
+              )}
+              <Link
+                href={crumb.url}
+                className="hover:text-gray-600 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-cta rounded"
+              >
+                {crumb.name}
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    );
+  }
+
   return (
     <nav aria-label="Breadcrumb" className="text-sm text-slate-500 mb-6">
       <ol className="flex flex-wrap items-center gap-1">

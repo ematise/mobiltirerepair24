@@ -3,6 +3,8 @@
  * and upserts them directly into MongoDB.
  *
  * Cities are read from the database (manage them in /admin/cities).
+ * Empty cities are fetched first; each city is capped at 3 businesses.
+ * Cities that already have 3+ are skipped to save Google API quota.
  * API responses are cached in the OS temp dir to avoid re-billing on re-runs.
  *
  * Usage:
@@ -46,10 +48,14 @@ async function main() {
   });
 
   for (const row of result.cityResults) {
+    if (row.skipped) continue;
     console.log(`  ✓ ${row.city}, ${row.stateCode}: ${row.count} businesses`);
   }
 
   console.log(`\nCities processed: ${result.citiesProcessed}`);
+  if (result.citiesSkipped > 0) {
+    console.log(`Cities skipped (already have 3+): ${result.citiesSkipped}`);
+  }
   console.log(`Businesses found: ${result.businessesFound}`);
   if (!dryRun) {
     console.log(

@@ -7,6 +7,7 @@ import { reHostPhotosToS3 } from './s3';
 import {
   getAllCities,
   getBusinessCountsByCity,
+  getBusinessesByCity,
   getBusinessPhotos,
   upsertBusiness,
   ensureBusinessLocation,
@@ -57,6 +58,9 @@ const FIELD_MASK = [
   'nextPageToken',
 ].join(',');
 
+/** Target coverage per city. Extra Google results are discarded to save photo API calls. */
+const MAX_BUSINESSES_PER_CITY = 3;
+
 export type FetchBusinessesOptions = {
   citySlugs?: string[];
   maxPages?: number;
@@ -66,13 +70,19 @@ export type FetchBusinessesOptions = {
 
 export type FetchBusinessesResult = {
   citiesProcessed: number;
+  citiesSkipped: number;
   businessesFound: number;
   created: number;
   updated: number;
   photosAdded: number;
   apiCalls: number;
   cacheHits: number;
-  cityResults: Array<{ city: string; stateCode: string; count: number }>;
+  cityResults: Array<{
+    city: string;
+    stateCode: string;
+    count: number;
+    skipped?: boolean;
+  }>;
 };
 
 function getCacheDir(): string {
@@ -280,11 +290,31 @@ export async function fetchBusinessesFromPlaces(
   let updated = 0;
   let photosAdded = 0;
   let businessesFound = 0;
+  let citiesProcessed = 0;
+  let citiesSkipped = 0;
 
   for (const city of targets) {
+    const existingCount = businessCounts.get(`${city.slug}:${city.state}`) ?? 0;
+    if (existingCount >= MAX_BUSINESSES_PER_CITY) {
+      const listed = await getBusinessesByCity(city.slug, city.state);
+      const needsPhotoBackfill = listed.some((b) => !b.photos?.length);
+      if (!needsPhotoBackfill) {
+        citiesSkipped++;
+        cityResults.push({
+          city: city.name,
+          stateCode: city.stateCode,
+          count: 0,
+          skipped: true,
+        });
+        continue;
+      }
+    }
+
+    const needed = Math.max(0, MAX_BUSINESSES_PER_CITY - existingCount);
     const query = `mobile tire repair in ${city.name}, ${city.stateCode}`;
     let pageToken: string | undefined;
     let cityCount = 0;
+    citiesProcessed++;
 
     for (let page = 0; page < pages; page++) {
       // Cache key includes "photos-loc" so older Text Search caches (without photo
@@ -299,26 +329,41 @@ export async function fetchBusinessesFromPlaces(
 
       for (const place of data.places ?? []) {
         if (seen.has(place.id) || !isRelevant(place) || !place.displayName) continue;
-        seen.add(place.id);
 
         const business = toBusiness(place, city);
+        const existingPhotos = await getBusinessPhotos(business.slug);
+        const alreadyExists = existingPhotos !== undefined;
+
+        if (alreadyExists) {
+          seen.add(place.id);
+          if (!dryRun) {
+            const needsPhoto = existingPhotos.length === 0;
+            if (needsPhoto && (await attachListingPhoto(apiKey, place, business, stats))) {
+              photosAdded++;
+            }
+            await upsertBusiness(business);
+            updated++;
+          }
+          continue;
+        }
+
+        if (cityCount >= needed) continue;
+
+        seen.add(place.id);
         businessesFound++;
         cityCount++;
 
         if (!dryRun) {
           await ensureBusinessLocation(business);
-
-          const existingPhotos = await getBusinessPhotos(business.slug);
-          const needsPhoto = !existingPhotos || existingPhotos.length === 0;
-          if (needsPhoto && (await attachListingPhoto(apiKey, place, business, stats))) {
+          if (await attachListingPhoto(apiKey, place, business, stats)) {
             photosAdded++;
           }
-
-          const { created: isNew } = await upsertBusiness(business);
-          if (isNew) created++;
-          else updated++;
+          await upsertBusiness(business);
+          created++;
         }
       }
+
+      if (cityCount >= needed) break;
 
       pageToken = data.nextPageToken;
       if (!pageToken) break;
@@ -329,7 +374,8 @@ export async function fetchBusinessesFromPlaces(
   }
 
   return {
-    citiesProcessed: targets.length,
+    citiesProcessed,
+    citiesSkipped,
     businessesFound,
     created,
     updated,

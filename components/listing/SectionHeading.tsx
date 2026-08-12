@@ -1,10 +1,10 @@
 export interface SectionHeadingProps {
-  children: string;
+  children: React.ReactNode;
 }
 
 export default function SectionHeading({ children }: SectionHeadingProps) {
   return (
-    <h2 className="text-xl font-semibold text-slate-900 mb-4">
+    <h2 className="text-[22px] font-bold text-gray-950 mb-3 tracking-tight [font-family:var(--font-body)]">
       {children}
     </h2>
   );

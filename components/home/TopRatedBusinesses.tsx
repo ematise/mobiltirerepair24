@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone } from 'lucide-react';
 import type { Business } from '@/lib/data';
+import Button from '@/components/ui/Button';
 
 function formatCitySlug(slug: string) {
   return slug.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
@@ -55,14 +56,16 @@ export default function TopRatedBusinesses({ businesses }: { businesses: Busines
               <p className="text-slate-500 text-sm mt-1">
                 {formatCitySlug(biz.city)}, {biz.stateCode}
               </p>
-              <a
+              <Button
                 href={`tel:${biz.phone}`}
-                className="inline-flex items-center gap-1.5 mt-3 text-blue-700 font-semibold text-sm hover:text-blue-800 transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded min-h-11"
+                variant="primary"
+                size="sm"
+                className="mt-3"
                 aria-label={`Call ${biz.name} at ${biz.phoneDisplay}`}
               >
                 <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
                 {biz.phoneDisplay}
-              </a>
+              </Button>
             </div>
           </article>
         ))}

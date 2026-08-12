@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { City } from '@/lib/data';
 import CityForm from '@/components/admin/CityForm';
+import Button from '@/components/ui/Button';
 
 export default function CitiesPage() {
   const [cities, setCities] = useState<City[]>([]);
@@ -98,12 +99,9 @@ export default function CitiesPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-900">Cities</h1>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-        >
+        <Button type="button" variant={showForm ? 'secondary' : 'primary'} onClick={() => setShowForm(!showForm)}>
           {showForm ? 'Cancel' : 'Add City'}
-        </button>
+        </Button>
       </div>
 
       {error && <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded">{error}</div>}
@@ -175,18 +173,12 @@ export default function CitiesPage() {
                   </td>
                   <td className="px-6 py-4 text-gray-600 text-sm">{city.nearbyCities.length}</td>
                   <td className="px-6 py-4 space-x-2">
-                    <button
-                      onClick={() => setEditingSlug(city.slug)}
-                      className="px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition text-sm"
-                    >
+                    <Button type="button" variant="soft" size="sm" onClick={() => setEditingSlug(city.slug)}>
                       Edit
-                    </button>
-                    <button
-                      onClick={() => handleDeleteCity(city.slug)}
-                      className="px-3 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition text-sm"
-                    >
+                    </Button>
+                    <Button type="button" variant="danger" size="sm" onClick={() => handleDeleteCity(city.slug)}>
                       Delete
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               ))}

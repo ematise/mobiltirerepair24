@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { LocateFixed } from 'lucide-react';
+import Button from '@/components/ui/Button';
 
 export default function StickyCallToAction() {
   const [visible, setVisible] = useState(false);
@@ -30,20 +31,16 @@ export default function StickyCallToAction() {
 
   return (
     <div
-      className={`fixed bottom-0 inset-x-0 z-40 md:hidden bg-white border-t border-slate-200 pb-[env(safe-area-inset-bottom)] transition-transform duration-200 ${
+      className={`fixed bottom-0 inset-x-0 z-40 md:hidden bg-surface border-t border-border pb-[env(safe-area-inset-bottom)] transition-transform duration-200 ${
         visible ? 'translate-y-0' : 'translate-y-full'
       }`}
       aria-hidden={!visible}
     >
       <div className="px-4 py-3">
-        <button
-          type="button"
-          onClick={scrollToFinder}
-          className="flex items-center justify-center gap-2 w-full min-h-12 px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-        >
+        <Button type="button" variant="primary" block onClick={scrollToFinder}>
           <LocateFixed className="w-5 h-5" aria-hidden="true" />
           Find Tire Repair Near Me
-        </button>
+        </Button>
       </div>
     </div>
   );

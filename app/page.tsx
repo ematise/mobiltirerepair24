@@ -61,15 +61,13 @@ const SERVICE_ICONS: Record<string, ReactNode> = {
   'tire-installation': <Disc3 className="w-5 h-5" aria-hidden="true" />,
 };
 
-function formatCitySlug(slug: string) {
-  return slug.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
-}
-
 function StateCityLinks({
   state,
+  cityNames,
   compact = false,
 }: {
   state: Awaited<ReturnType<typeof getAllStates>>[number];
+  cityNames: Map<string, string>;
   compact?: boolean;
 }) {
   return (
@@ -83,7 +81,7 @@ function StateCityLinks({
             href={`/${state.slug}/${citySlug}/`}
             className="text-blue-700 hover:underline text-sm font-medium cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
           >
-            {formatCitySlug(citySlug)}
+            {cityNames.get(citySlug) ?? citySlug}
           </Link>
         </li>
       ))}
@@ -105,6 +103,7 @@ export default async function HomePage() {
     allCities.map((c) => isCityIndexable(c.slug, c.state)),
   );
   const cities = allCities.filter((_, i) => indexableCities[i]);
+  const cityNames = new Map(allCities.map((c) => [c.slug, c.name]));
 
   const popularCityLinks = popularCities.map((c) => ({
     name: `${c.name}, ${c.stateCode}`,
@@ -120,7 +119,7 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="bg-slate-900 text-white py-14 sm:py-20 px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-5xl font-bold mb-4 leading-tight">
+          <h1 className="text-3xl sm:text-5xl font-bold mb-4 leading-tight !text-white">
             Find the Best Mobile Tire Repair Near Me
           </h1>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl mx-auto">
@@ -136,7 +135,7 @@ export default async function HomePage() {
               <Link
                 key={city.href}
                 href={city.href}
-                className="inline-flex items-center bg-slate-800 border border-slate-700 rounded-full px-4 py-2 text-sm hover:bg-slate-700 transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="btn btn-secondary btn-sm"
               >
                 {city.name}
               </Link>
@@ -247,7 +246,7 @@ export default async function HomePage() {
       </section>
 
       {/* Browse by state — mobile accordion */}
-      <section className="max-w-6xl mx-auto px-4 py-12 pb-20 md:pb-12">
+      <section id="browse-states" className="max-w-6xl mx-auto px-4 py-12 pb-20 md:pb-12">
         <h2 className="text-2xl font-semibold text-slate-900 mb-8">Browse by State</h2>
 
         <div className="md:hidden flex flex-col gap-3">
@@ -260,7 +259,7 @@ export default async function HomePage() {
                 {state.name}
                 <ChevronDown className="w-4 h-4 text-slate-400 transition-transform duration-200 group-open:rotate-180 shrink-0" />
               </summary>
-              <StateCityLinks state={state} />
+              <StateCityLinks state={state} cityNames={cityNames} />
             </details>
           ))}
         </div>
@@ -277,7 +276,7 @@ export default async function HomePage() {
                 </Link>
               </h3>
               <p className="text-slate-500 text-sm mb-4 line-clamp-2">{state.intro}</p>
-              <StateCityLinks state={state} compact />
+              <StateCityLinks state={state} cityNames={cityNames} compact />
             </div>
           ))}
         </div>

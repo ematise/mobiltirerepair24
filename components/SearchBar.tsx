@@ -13,7 +13,7 @@ function useDebounce<T>(value: T, delay: number): T {
   return debounced;
 }
 
-export default function SearchBar() {
+export default function SearchBar({ autoFocus = false }: { autoFocus?: boolean }) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [open, setOpen] = useState(false);
@@ -25,7 +25,6 @@ export default function SearchBar() {
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // Fetch suggestions
   useEffect(() => {
     if (debouncedQuery.length < 2) {
       setResults([]);
@@ -45,7 +44,6 @@ export default function SearchBar() {
       .finally(() => setLoading(false));
   }, [debouncedQuery]);
 
-  // Close on outside click
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (!containerRef.current?.contains(e.target as Node)) {
@@ -85,7 +83,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div ref={containerRef} className="relative w-full md:max-w-sm focus-within:flex-1 md:focus-within:max-w-sm" style={{ transition: 'flex 150ms' }}>
+    <div ref={containerRef} className="relative w-full">
       <div className="relative">
         <input
           ref={inputRef}
@@ -100,31 +98,30 @@ export default function SearchBar() {
           aria-expanded={open}
           aria-controls="search-results"
           autoComplete="off"
-          className="w-full bg-slate-800 text-white placeholder-slate-400 text-sm rounded-lg px-4 py-2 pr-9 border border-slate-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors duration-150"
+          autoFocus={autoFocus}
+          className="search-input"
         />
 
-        {/* Icon */}
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-muted">
           {loading ? (
-            <svg className="w-4 h-4 text-slate-400 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z" />
             </svg>
           ) : (
-            <svg className="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
             </svg>
           )}
         </div>
       </div>
 
-      {/* Dropdown */}
       {open && results.length > 0 && (
         <ul
           id="search-results"
           role="listbox"
           aria-label="Search suggestions"
-          className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-lg overflow-hidden z-50"
+          className="absolute top-full left-0 right-0 mt-1 bg-surface border border-border rounded-btn shadow-lg overflow-hidden z-50"
         >
           {results.map((result, i) => (
             <li
@@ -134,11 +131,10 @@ export default function SearchBar() {
               onMouseDown={() => navigate(result)}
               onMouseEnter={() => setActive(i)}
               className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors duration-100 ${
-                i === active ? 'bg-blue-50' : 'hover:bg-slate-50'
+                i === active ? 'bg-cta-soft' : 'hover:bg-surface-hover'
               }`}
             >
-              {/* Icon */}
-              <span className="shrink-0 text-slate-400">
+              <span className="shrink-0 text-muted">
                 {result.type === 'state' ? (
                   <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M8.157 2.175a1.5 1.5 0 00-1.147 0l-4.084 1.69A1.5 1.5 0 002 5.251v10.877a.75.75 0 001.067.672l3.766-1.561 3.766 1.561a1.5 1.5 0 001.147 0l3.766-1.561 3.766 1.561A.75.75 0 0018 16.128V5.251a1.5 1.5 0 00-.926-1.386l-4.084-1.69a1.5 1.5 0 00-1.147 0L8.157 2.175zM7.25 6a.75.75 0 011.5 0v6a.75.75 0 01-1.5 0V6zm4.5 1.5a.75.75 0 011.5 0v6a.75.75 0 01-1.5 0v-6z" clipRule="evenodd" />
@@ -155,8 +151,8 @@ export default function SearchBar() {
               </span>
 
               <div className="min-w-0">
-                <p className="text-slate-900 text-sm font-medium truncate">{result.label}</p>
-                <p className="text-slate-500 text-xs truncate">{result.sublabel}</p>
+                <p className="text-heading text-sm font-medium truncate">{result.label}</p>
+                <p className="text-muted text-xs truncate">{result.sublabel}</p>
               </div>
             </li>
           ))}

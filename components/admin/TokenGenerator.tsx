@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Button from '@/components/ui/Button';
 
 export default function TokenGenerator() {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,16 +56,18 @@ export default function TokenGenerator() {
     <div className="bg-white rounded-lg shadow p-6">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-bold text-gray-900">Generate Admin Token Link</h2>
-        <button
+        <Button
+          type="button"
+          variant="icon"
           onClick={() => {
             setIsOpen(!isOpen);
             setTokenLink('');
             setError('');
           }}
-          className="text-2xl text-gray-400 hover:text-gray-600"
+          aria-label={isOpen ? 'Close' : 'Open'}
         >
           {isOpen ? '✕' : '+'}
-        </button>
+        </Button>
       </div>
 
       {isOpen && (
@@ -87,36 +90,30 @@ export default function TokenGenerator() {
                   Token Expiry: {getExpiryLabel()}
                 </label>
                 <div className="flex gap-2">
-                  <button
+                  <Button
+                    type="button"
                     onClick={() => setExpiryHours(24)}
-                    className={`px-3 py-1 rounded text-sm font-medium transition ${
-                      expiryHours === 24
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
+                    variant={expiryHours === 24 ? 'primary' : 'secondary'}
+                    size="sm"
                   >
                     1 day
-                  </button>
-                  <button
+                  </Button>
+                  <Button
+                    type="button"
                     onClick={() => setExpiryHours(168)}
-                    className={`px-3 py-1 rounded text-sm font-medium transition ${
-                      expiryHours === 168
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
+                    variant={expiryHours === 168 ? 'primary' : 'secondary'}
+                    size="sm"
                   >
                     7 days
-                  </button>
-                  <button
+                  </Button>
+                  <Button
+                    type="button"
                     onClick={() => setExpiryHours(720)}
-                    className={`px-3 py-1 rounded text-sm font-medium transition ${
-                      expiryHours === 720
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
+                    variant={expiryHours === 720 ? 'primary' : 'secondary'}
+                    size="sm"
                   >
                     30 days
-                  </button>
+                  </Button>
                   <input
                     type="number"
                     min="1"
@@ -129,13 +126,9 @@ export default function TokenGenerator() {
                 </div>
               </div>
 
-              <button
-                onClick={handleGenerate}
-                disabled={loading}
-                className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition font-medium"
-              >
+              <Button type="button" onClick={handleGenerate} disabled={loading} variant="primary" block>
                 {loading ? 'Generating...' : 'Generate Token Link'}
-              </button>
+              </Button>
             </div>
           ) : (
             <div className="space-y-3 bg-gray-50 p-4 rounded-lg">
@@ -149,16 +142,9 @@ export default function TokenGenerator() {
                   readOnly
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm font-mono text-gray-900"
                 />
-                <button
-                  onClick={handleCopy}
-                  className={`px-4 py-2 rounded-lg font-medium transition ${
-                    copied
-                      ? 'bg-green-600 text-white'
-                      : 'bg-gray-200 text-gray-900 hover:bg-gray-300'
-                  }`}
-                >
-                  {copied ? '✓ Copied' : 'Copy'}
-                </button>
+                <Button type="button" onClick={handleCopy} variant={copied ? 'primary' : 'secondary'}>
+                  {copied ? 'Copied' : 'Copy'}
+                </Button>
               </div>
               <div className="pt-2 border-t text-sm text-gray-600">
                 <p>
@@ -168,15 +154,17 @@ export default function TokenGenerator() {
                   ⚠ Anyone with this link can access the admin panel. Keep it secure!
                 </p>
               </div>
-              <button
+              <Button
+                type="button"
+                variant="ghost"
+                block
                 onClick={() => {
                   setTokenLink('');
                   setExpiryHours(168);
                 }}
-                className="w-full px-3 py-2 text-sm text-blue-600 hover:text-blue-700 font-medium"
               >
                 Generate Another Link
-              </button>
+              </Button>
             </div>
           )}
         </div>

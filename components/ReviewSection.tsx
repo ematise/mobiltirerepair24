@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import type { Review } from '@/app/api/reviews/route';
+import Button from '@/components/ui/Button';
 
 const ANON_ADJECTIVES = ['Happy', 'Quick', 'Friendly', 'Helpful', 'Honest', 'Local', 'Loyal', 'Trusted'];
 const ANON_NOUNS = ['Driver', 'Customer', 'Motorist', 'Traveler', 'Commuter', 'Rider'];
@@ -71,17 +72,30 @@ function ReviewCard({ review }: { review: Review }) {
   });
 
   return (
-    <div className="border border-slate-200 rounded-lg p-4">
-      <div className="flex items-start justify-between gap-2 mb-2">
-        <div>
-          <p className="font-medium text-slate-900 text-sm">{review.displayName}</p>
-          <p className="text-xs text-slate-400">{date}</p>
+    <div className="flex items-start gap-3 rounded-[14px] border border-gray-200 bg-white px-3.5 py-3.5">
+      <span
+        className="flex items-center justify-center w-11 h-11 rounded-full bg-cta-soft text-cta text-[13px] font-bold shrink-0"
+        aria-hidden="true"
+      >
+        {review.displayName
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean)
+          .slice(0, 2)
+          .map((p, _i, arr) => (arr.length === 1 ? p.slice(0, 2) : p[0]))
+          .join('')
+          .toUpperCase() || '?'}
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center justify-between gap-2 mb-1">
+          <p className="font-medium text-gray-900 text-sm [font-family:var(--font-body)]">{review.displayName}</p>
+          <p className="text-xs text-gray-400 shrink-0">{date}</p>
         </div>
-        <div className="flex items-center gap-0.5 shrink-0" aria-label={`${review.rating} out of 5 stars`}>
+        <div className="flex items-center gap-0.5 mb-1.5" aria-label={`${review.rating} out of 5 stars`}>
           {[1, 2, 3, 4, 5].map((s) => (
             <svg
               key={s}
-              className={`w-3.5 h-3.5 ${s <= review.rating ? 'text-amber-400' : 'text-slate-300'}`}
+              className={`w-3.5 h-3.5 ${s <= review.rating ? 'text-star' : 'text-gray-300'}`}
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
@@ -90,8 +104,8 @@ function ReviewCard({ review }: { review: Review }) {
             </svg>
           ))}
         </div>
+        <p className="text-gray-600 text-sm leading-relaxed">{review.comment}</p>
       </div>
-      <p className="text-slate-600 text-sm leading-relaxed">{review.comment}</p>
     </div>
   );
 }
@@ -210,8 +224,10 @@ export default function ReviewSection({ businessSlug }: { businessSlug: string }
   }
 
   return (
-    <section className="mt-12 border-t border-slate-200 pt-8">
-      <h2 className="text-xl font-semibold text-slate-900 mb-6">Reviews</h2>
+    <section className="mb-8">
+      <h2 className="text-[22px] font-bold text-gray-950 mb-4 tracking-tight [font-family:var(--font-body)]">
+        Leave a review
+      </h2>
 
       {/* Submit form */}
       {submitted ? (
@@ -223,7 +239,7 @@ export default function ReviewSection({ businessSlug }: { businessSlug: string }
           You've already reviewed this business. Thank you for your feedback!
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-8 space-y-4">
+        <form onSubmit={handleSubmit} className="bg-white border border-gray-200 rounded-[14px] p-5 mb-8 space-y-4">
           <p className="text-sm font-medium text-slate-700">Leave a review</p>
 
           <div>
@@ -269,13 +285,9 @@ export default function ReviewSection({ businessSlug }: { businessSlug: string }
             <p className="text-red-600 text-xs">{error}</p>
           )}
 
-          <button
-            type="submit"
-            disabled={submitting}
-            className="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 disabled:opacity-60 text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer"
-          >
+          <Button type="submit" disabled={submitting} variant="primary">
             {submitting ? 'Submitting…' : 'Submit Review'}
-          </button>
+          </Button>
         </form>
       )}
 

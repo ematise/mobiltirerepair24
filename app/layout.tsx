@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { EB_Garamond, Lato } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
-import { getAllStates } from '@/lib/data';
-import SearchBar from '@/components/SearchBar';
+import { getAllCities, getAllStates } from '@/lib/data';
+import SiteHeader from '@/components/SiteHeader';
 
 const garamond = EB_Garamond({
   subsets: ['latin'],
@@ -37,52 +37,29 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const states = await getAllStates();
+  const [states, cities] = await Promise.all([getAllStates(), getAllCities()]);
+  const cityNames = new Map(cities.map((c) => [c.slug, c.name]));
 
   return (
     <html lang="en" className={`${garamond.variable} ${lato.variable}`} suppressHydrationWarning>
       <head />
       <body className="flex flex-col min-h-screen" suppressHydrationWarning>
-        {/* Header */}
-        <header className="bg-slate-900 text-white shadow-sm">
-          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4 group/header">
-            <Link
-              href="/"
-              className="font-semibold text-lg tracking-tight hover:text-blue-300 transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded shrink-0 group-focus-within/header:hidden md:group-focus-within/header:block"
-              aria-label="MobileTireRepair24 — Home"
-            >
-              MobileTireRepair<span className="text-blue-400">24</span>
-            </Link>
-
-            <SearchBar />
-
-            <nav className="hidden md:flex" aria-label="Main navigation">
-              <ul className="flex items-center gap-4 text-sm" role="list">
-                {states.map((state) => (
-                  <li key={state.slug}>
-                    <Link
-                      href={`/${state.slug}/`}
-                      className="text-slate-300 hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
-                    >
-                      {state.code}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-        </header>
+        <SiteHeader />
 
         {/* Main */}
         <main className="flex-1">{children}</main>
 
         {/* Footer */}
-        <footer className="bg-slate-900 text-slate-400 text-sm mt-16">
+        <footer className="bg-footer text-footer-muted text-sm mt-16">
           <div className="max-w-6xl mx-auto px-4 py-10">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8 mb-8">
               {states.map((state) => (
                 <div key={state.slug}>
-                  <h3 className="text-white font-semibold mb-3">{state.name}</h3>
+                  <h3 className="!text-white font-semibold mb-3">
+                    <Link href={`/${state.slug}/`} className="hover:text-white">
+                      {state.name}
+                    </Link>
+                  </h3>
                   <ul className="flex flex-col gap-1.5" role="list">
                     {state.cities.map((citySlug) => (
                       <li key={citySlug}>
@@ -90,10 +67,7 @@ export default async function RootLayout({
                           href={`/${state.slug}/${citySlug}/`}
                           className="hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
                         >
-                          {citySlug
-                            .split('-')
-                            .map((w) => w[0].toUpperCase() + w.slice(1))
-                            .join(' ')}
+                          {cityNames.get(citySlug) ?? citySlug}
                         </Link>
                       </li>
                     ))}

@@ -2,6 +2,7 @@
 
 import { FormEvent, useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Button from '@/components/ui/Button';
 
 export const dynamic = 'force-dynamic';
 
@@ -123,13 +124,9 @@ function LoginContent() {
                 />
               </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition"
-              >
+              <Button type="submit" disabled={loading} variant="primary" block>
                 {loading ? 'Logging in...' : 'Login'}
-              </button>
+              </Button>
             </form>
           )}
         </div>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getAllStates, getAllCities, getAllBusinesses } from '@/lib/data';
 import TokenGenerator from '@/components/admin/TokenGenerator';
 import SeedGeographyButton from '@/components/admin/SeedGeographyButton';
+import Button from '@/components/ui/Button';
 
 export default async function AdminDashboard() {
   const [states, cities, businesses] = await Promise.all([
@@ -41,24 +42,15 @@ export default async function AdminDashboard() {
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-lg font-bold text-gray-900 mb-4">Quick Actions</h2>
         <div className="flex gap-4">
-          <Link
-            href="/admin/states?action=new"
-            className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-          >
+          <Button href="/admin/states?action=new" variant="primary" size="sm">
             Add State
-          </Link>
-          <Link
-            href="/admin/cities?action=new"
-            className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-          >
+          </Button>
+          <Button href="/admin/cities?action=new" variant="primary" size="sm">
             Add City
-          </Link>
-          <Link
-            href="/admin/businesses?action=new"
-            className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-          >
+          </Button>
+          <Button href="/admin/businesses?action=new" variant="primary" size="sm">
             Add Business
-          </Link>
+          </Button>
         </div>
       </div>
     </div>

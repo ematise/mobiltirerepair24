@@ -4,55 +4,649 @@
     "name": "Texas",
     "code": "TX",
     "intro": "Texas is one of the most vehicle-dependent states in the country. With sprawling metro areas, long highways, and extreme summer heat that can quickly degrade tires, having access to a reliable mobile tire repair service is essential for Texas drivers.",
-    "cities": ["dallas", "houston", "austin", "san-antonio", "fort-worth"]
+    "cities": [
+      "dallas",
+      "houston",
+      "austin",
+      "san-antonio",
+      "fort-worth"
+    ]
   },
   "florida": {
     "slug": "florida",
     "name": "Florida",
     "code": "FL",
     "intro": "Florida's year-round heat, frequent tropical storms, and high tourist traffic make tire blowouts and flat tires a common roadside emergency. Mobile tire repair services across Florida ensure you're never stranded far from help.",
-    "cities": ["miami", "orlando", "tampa", "jacksonville", "fort-lauderdale"]
+    "cities": [
+      "miami",
+      "orlando",
+      "tampa",
+      "jacksonville",
+      "fort-lauderdale"
+    ]
   },
   "california": {
     "slug": "california",
     "name": "California",
     "code": "CA",
     "intro": "From the congested freeways of Los Angeles to the long stretches of Highway 1, California drivers face unique tire challenges. Mobile tire repair services across the state offer fast, on-site solutions without the hassle of a tow.",
-    "cities": ["los-angeles", "san-diego", "san-jose", "sacramento", "fresno"]
+    "cities": [
+      "los-angeles",
+      "san-diego",
+      "san-jose",
+      "sacramento",
+      "fresno"
+    ]
   },
   "arizona": {
     "slug": "arizona",
     "name": "Arizona",
     "code": "AZ",
     "intro": "Arizona's extreme desert heat, monsoon storms, and long stretches of interstate make tire failures especially dangerous. Mobile tire repair across Arizona brings fast roadside help to Phoenix, Tucson, and the growing East Valley metros.",
-    "cities": ["phoenix", "tucson", "mesa", "scottsdale", "chandler"]
+    "cities": [
+      "phoenix",
+      "tucson",
+      "mesa",
+      "scottsdale",
+      "chandler"
+    ]
   },
   "georgia": {
     "slug": "georgia",
     "name": "Georgia",
     "code": "GA",
     "intro": "Georgia drivers cover everything from Atlanta's congested interstates to coastal and rural highways. Hot summers and busy freight corridors increase tire wear — mobile tire repair services across Georgia get you moving again without a tow.",
-    "cities": ["atlanta", "savannah", "augusta", "columbus", "macon"]
+    "cities": [
+      "atlanta",
+      "savannah",
+      "augusta",
+      "columbus",
+      "macon"
+    ]
   },
   "new-york": {
     "slug": "new-york",
     "name": "New York",
     "code": "NY",
     "intro": "From dense city streets to long Upstate corridors, New York drivers face potholes, winter road damage, and heavy traffic that punish tires. Mobile tire repair across New York means help comes to you — in the five boroughs or far beyond.",
-    "cities": ["new-york-city", "buffalo", "rochester", "albany", "syracuse"]
+    "cities": [
+      "new-york-city",
+      "buffalo",
+      "rochester",
+      "albany",
+      "syracuse"
+    ]
   },
   "illinois": {
     "slug": "illinois",
     "name": "Illinois",
     "code": "IL",
     "intro": "Illinois winters, freeze-thaw potholes, and Chicago-area congestion create constant tire emergencies. Mobile tire repair across Illinois reaches drivers from downtown Chicago to Springfield and the suburbs without waiting on a tow truck.",
-    "cities": ["chicago", "springfield", "peoria", "rockford", "naperville"]
+    "cities": [
+      "chicago",
+      "springfield",
+      "peoria",
+      "rockford",
+      "naperville"
+    ]
   },
   "north-carolina": {
     "slug": "north-carolina",
     "name": "North Carolina",
     "code": "NC",
     "intro": "North Carolina's fast-growing metros and long I-40 / I-85 corridors keep drivers on the road year-round. Mobile tire repair across the state offers on-site flat fixes and replacements from Charlotte to the Triangle and Triad.",
-    "cities": ["charlotte", "raleigh", "greensboro", "durham", "winston-salem"]
+    "cities": [
+      "charlotte",
+      "raleigh",
+      "greensboro",
+      "durham",
+      "winston-salem"
+    ]
+  },
+  "pennsylvania": {
+    "slug": "pennsylvania",
+    "name": "Pennsylvania",
+    "code": "PA",
+    "intro": "Pennsylvania's freeze-thaw winters, mountain passes, and dense urban traffic from Philadelphia to Pittsburgh create constant tire wear and roadside emergencies. Mobile tire repair across Pennsylvania brings on-site help without the tow.",
+    "cities": [
+      "philadelphia",
+      "pittsburgh",
+      "allentown",
+      "reading",
+      "erie"
+    ]
+  },
+  "ohio": {
+    "slug": "ohio",
+    "name": "Ohio",
+    "code": "OH",
+    "intro": "Ohio drivers face harsh winters, pothole season, and heavy freight traffic on I-71, I-75, and the Ohio Turnpike. Mobile tire repair across Ohio gets you back on the road from Columbus to Cleveland and Cincinnati.",
+    "cities": [
+      "columbus-oh",
+      "cleveland",
+      "cincinnati",
+      "toledo",
+      "akron"
+    ]
+  },
+  "michigan": {
+    "slug": "michigan",
+    "name": "Michigan",
+    "code": "MI",
+    "intro": "Michigan winters, road salt, and long commutes across the Detroit metro and Great Lakes corridors punish tires harder than most states. Mobile tire repair across Michigan delivers fast roadside service when flats strike.",
+    "cities": [
+      "detroit",
+      "grand-rapids",
+      "warren",
+      "lansing",
+      "ann-arbor"
+    ]
+  },
+  "new-jersey": {
+    "slug": "new-jersey",
+    "name": "New Jersey",
+    "code": "NJ",
+    "intro": "New Jersey's dense turnpike traffic, winter potholes, and tight urban streets make tire emergencies a daily reality for commuters. Mobile tire repair across New Jersey comes to you from Newark to the Shore and everywhere in between.",
+    "cities": [
+      "newark",
+      "jersey-city",
+      "paterson",
+      "elizabeth",
+      "edison"
+    ]
+  },
+  "virginia": {
+    "slug": "virginia",
+    "name": "Virginia",
+    "code": "VA",
+    "intro": "Virginia spans busy Hampton Roads ports, Northern Virginia commute corridors, and long I-95 / I-64 stretches where tire failures are common. Mobile tire repair across Virginia brings the shop to your location fast.",
+    "cities": [
+      "virginia-beach",
+      "chesapeake",
+      "norfolk",
+      "richmond",
+      "newport-news"
+    ]
+  },
+  "washington": {
+    "slug": "washington",
+    "name": "Washington",
+    "code": "WA",
+    "intro": "Washington's wet winters, mountain passes, and congested Puget Sound freeways create year-round tire hazards. Mobile tire repair across Washington brings on-site help from Seattle to Spokane without a tow.",
+    "cities": [
+      "seattle",
+      "spokane",
+      "tacoma",
+      "vancouver",
+      "bellevue"
+    ]
+  },
+  "massachusetts": {
+    "slug": "massachusetts",
+    "name": "Massachusetts",
+    "code": "MA",
+    "intro": "Massachusetts drivers deal with freeze-thaw potholes, dense urban streets, and heavy I-90 / I-93 traffic. Mobile tire repair across Massachusetts gets you moving again from Boston to Worcester and the Pioneer Valley.",
+    "cities": [
+      "boston",
+      "worcester",
+      "springfield-ma",
+      "cambridge",
+      "lowell"
+    ]
+  },
+  "tennessee": {
+    "slug": "tennessee",
+    "name": "Tennessee",
+    "code": "TN",
+    "intro": "Tennessee's humid summers, I-40 freight corridor, and growing metros put constant stress on tires. Mobile tire repair across Tennessee offers fast roadside service from Memphis to Nashville and the eastern mountains.",
+    "cities": [
+      "nashville",
+      "memphis",
+      "knoxville",
+      "chattanooga",
+      "clarksville"
+    ]
+  },
+  "indiana": {
+    "slug": "indiana",
+    "name": "Indiana",
+    "code": "IN",
+    "intro": "Indiana winters, Indy-area congestion, and long I-65 / I-70 stretches make tire failures a regular roadside emergency. Mobile tire repair across Indiana comes to you from Indianapolis to Fort Wayne and beyond.",
+    "cities": [
+      "indianapolis",
+      "fort-wayne",
+      "evansville",
+      "south-bend",
+      "carmel"
+    ]
+  },
+  "missouri": {
+    "slug": "missouri",
+    "name": "Missouri",
+    "code": "MO",
+    "intro": "Missouri drivers face summer heat, winter ice, and busy I-70 / I-44 corridors that punish tires. Mobile tire repair across Missouri reaches Kansas City, St. Louis, and the rest of the state without waiting on a tow.",
+    "cities": [
+      "kansas-city",
+      "st-louis",
+      "springfield-mo",
+      "columbia-mo",
+      "independence"
+    ]
+  },
+  "maryland": {
+    "slug": "maryland",
+    "name": "Maryland",
+    "code": "MD",
+    "intro": "Maryland's Beltway congestion, harbor traffic, and freeze-thaw potholes create constant tire emergencies. Mobile tire repair across Maryland brings on-site help from Baltimore to the DC suburbs and Frederick.",
+    "cities": [
+      "baltimore",
+      "columbia-md",
+      "germantown",
+      "silver-spring",
+      "frederick"
+    ]
+  },
+  "wisconsin": {
+    "slug": "wisconsin",
+    "name": "Wisconsin",
+    "code": "WI",
+    "intro": "Wisconsin winters, road salt, and lake-effect weather take a hard toll on tires. Mobile tire repair across Wisconsin gets drivers back on the road from Milwaukee to Madison and Green Bay.",
+    "cities": [
+      "milwaukee",
+      "madison",
+      "green-bay",
+      "kenosha",
+      "racine"
+    ]
+  },
+  "colorado": {
+    "slug": "colorado",
+    "name": "Colorado",
+    "code": "CO",
+    "intro": "Colorado's altitude, mountain grades, and Front Range freeze-thaw cycles wear tires faster than most states. Mobile tire repair across Colorado serves Denver, Colorado Springs, and the growing metro corridor.",
+    "cities": [
+      "denver",
+      "colorado-springs",
+      "aurora",
+      "fort-collins",
+      "lakewood"
+    ]
+  },
+  "minnesota": {
+    "slug": "minnesota",
+    "name": "Minnesota",
+    "code": "MN",
+    "intro": "Minnesota winters, ice ruts, and Twin Cities congestion make roadside tire help essential. Mobile tire repair across Minnesota reaches Minneapolis, St. Paul, and Greater Minnesota without a shop wait.",
+    "cities": [
+      "minneapolis",
+      "st-paul",
+      "rochester-mn",
+      "bloomington",
+      "duluth"
+    ]
+  },
+  "south-carolina": {
+    "slug": "south-carolina",
+    "name": "South Carolina",
+    "code": "SC",
+    "intro": "South Carolina's heat, coastal storms, and I-26 / I-95 traffic create frequent flats and blowouts. Mobile tire repair across South Carolina brings fast on-site service from Charleston to Columbia and the Upstate.",
+    "cities": [
+      "charleston",
+      "columbia-sc",
+      "north-charleston",
+      "mount-pleasant",
+      "rock-hill"
+    ]
+  },
+  "alabama": {
+    "slug": "alabama",
+    "name": "Alabama",
+    "code": "AL",
+    "intro": "Alabama heat, Gulf humidity, and busy I-65 / I-20 corridors increase tire wear statewide. Mobile tire repair across Alabama gets you moving again from Huntsville to Mobile without a tow truck.",
+    "cities": [
+      "huntsville",
+      "montgomery",
+      "birmingham",
+      "mobile",
+      "tuscaloosa"
+    ]
+  },
+  "louisiana": {
+    "slug": "louisiana",
+    "name": "Louisiana",
+    "code": "LA",
+    "intro": "Louisiana's heat, flooding debris, and long I-10 stretches make tire failures especially disruptive. Mobile tire repair across Louisiana comes to you from New Orleans to Baton Rouge and Shreveport.",
+    "cities": [
+      "new-orleans",
+      "baton-rouge",
+      "shreveport",
+      "lafayette",
+      "lake-charles"
+    ]
+  },
+  "kentucky": {
+    "slug": "kentucky",
+    "name": "Kentucky",
+    "code": "KY",
+    "intro": "Kentucky drivers cover mountain parkways, I-64 / I-75 freight routes, and humid summers that wear tires down. Mobile tire repair across Kentucky offers on-site help from Louisville to Lexington and beyond.",
+    "cities": [
+      "louisville",
+      "lexington",
+      "bowling-green",
+      "owensboro",
+      "covington"
+    ]
+  },
+  "oregon": {
+    "slug": "oregon",
+    "name": "Oregon",
+    "code": "OR",
+    "intro": "Oregon's wet roads, mountain passes, and I-5 corridor traffic create year-round tire hazards. Mobile tire repair across Oregon reaches Portland, Salem, and the Willamette Valley without a tow.",
+    "cities": [
+      "portland",
+      "salem",
+      "eugene",
+      "gresham",
+      "hillsboro"
+    ]
+  },
+  "oklahoma": {
+    "slug": "oklahoma",
+    "name": "Oklahoma",
+    "code": "OK",
+    "intro": "Oklahoma heat, severe storms, and long interstate stretches make roadside tire trouble common. Mobile tire repair across Oklahoma brings fast help from Oklahoma City to Tulsa and the surrounding metros.",
+    "cities": [
+      "oklahoma-city",
+      "tulsa",
+      "norman",
+      "broken-arrow",
+      "edmond"
+    ]
+  },
+  "connecticut": {
+    "slug": "connecticut",
+    "name": "Connecticut",
+    "code": "CT",
+    "intro": "Connecticut's dense I-95 corridor, winter potholes, and tight city streets punish tires year-round. Mobile tire repair across Connecticut comes to you from Bridgeport to Hartford and New Haven.",
+    "cities": [
+      "bridgeport",
+      "stamford",
+      "new-haven",
+      "hartford",
+      "waterbury"
+    ]
+  },
+  "utah": {
+    "slug": "utah",
+    "name": "Utah",
+    "code": "UT",
+    "intro": "Utah canyon roads, Wasatch Front congestion, and extreme temperature swings put extra stress on tires. Mobile tire repair across Utah serves Salt Lake City, Provo, and the growing suburbs on-site.",
+    "cities": [
+      "salt-lake-city",
+      "west-valley-city",
+      "west-jordan",
+      "provo",
+      "orem"
+    ]
+  },
+  "iowa": {
+    "slug": "iowa",
+    "name": "Iowa",
+    "code": "IA",
+    "intro": "Iowa winters, rural highways, and I-80 freight traffic create frequent tire emergencies. Mobile tire repair across Iowa gets drivers back on the road from Des Moines to Cedar Rapids and the river cities.",
+    "cities": [
+      "des-moines",
+      "cedar-rapids",
+      "davenport",
+      "sioux-city",
+      "iowa-city"
+    ]
+  },
+  "nevada": {
+    "slug": "nevada",
+    "name": "Nevada",
+    "code": "NV",
+    "intro": "Nevada's desert heat, long I-15 / I-80 stretches, and Las Vegas traffic make blowouts especially dangerous. Mobile tire repair across Nevada brings roadside help from Las Vegas to Reno without a shop visit.",
+    "cities": [
+      "las-vegas",
+      "henderson",
+      "reno",
+      "north-las-vegas",
+      "sparks"
+    ]
+  },
+  "arkansas": {
+    "slug": "arkansas",
+    "name": "Arkansas",
+    "code": "AR",
+    "intro": "Arkansas heat, Ozark grades, and I-40 / I-30 corridors keep tire demand high statewide. Mobile tire repair across Arkansas reaches Little Rock, Northwest Arkansas, and the rest of the state fast.",
+    "cities": [
+      "little-rock",
+      "fayetteville",
+      "fort-smith",
+      "springdale",
+      "jonesboro"
+    ]
+  },
+  "mississippi": {
+    "slug": "mississippi",
+    "name": "Mississippi",
+    "code": "MS",
+    "intro": "Mississippi's heat, Gulf storms, and I-55 / I-10 traffic create frequent roadside tire failures. Mobile tire repair across Mississippi offers on-site service from Jackson to the Coast.",
+    "cities": [
+      "jackson",
+      "gulfport",
+      "southaven",
+      "biloxi",
+      "hattiesburg"
+    ]
+  },
+  "kansas": {
+    "slug": "kansas",
+    "name": "Kansas",
+    "code": "KS",
+    "intro": "Kansas crosswinds, summer heat, and long I-70 / I-35 stretches make tire trouble a real hazard. Mobile tire repair across Kansas comes to you from Wichita to Kansas City and Topeka.",
+    "cities": [
+      "wichita",
+      "overland-park",
+      "kansas-city-ks",
+      "olathe",
+      "topeka"
+    ]
+  },
+  "new-mexico": {
+    "slug": "new-mexico",
+    "name": "New Mexico",
+    "code": "NM",
+    "intro": "New Mexico's high desert heat, mountain grades, and I-25 / I-40 corridors punish tires year-round. Mobile tire repair across New Mexico brings help from Albuquerque to Las Cruces and Santa Fe.",
+    "cities": [
+      "albuquerque",
+      "las-cruces",
+      "rio-rancho",
+      "santa-fe",
+      "roswell"
+    ]
+  },
+  "nebraska": {
+    "slug": "nebraska",
+    "name": "Nebraska",
+    "code": "NE",
+    "intro": "Nebraska winters, I-80 freight traffic, and long rural highways make roadside tire help essential. Mobile tire repair across Nebraska serves Omaha, Lincoln, and the rest of the state on-site.",
+    "cities": [
+      "omaha",
+      "lincoln",
+      "bellevue-ne",
+      "grand-island",
+      "kearney"
+    ]
+  },
+  "idaho": {
+    "slug": "idaho",
+    "name": "Idaho",
+    "code": "ID",
+    "intro": "Idaho's mountain passes, Treasure Valley growth, and freeze-thaw winters create constant tire wear. Mobile tire repair across Idaho reaches Boise, Meridian, and eastern Idaho without a tow.",
+    "cities": [
+      "boise",
+      "meridian",
+      "nampa",
+      "idaho-falls",
+      "caldwell"
+    ]
+  },
+  "west-virginia": {
+    "slug": "west-virginia",
+    "name": "West Virginia",
+    "code": "WV",
+    "intro": "West Virginia mountain roads, winter ice, and I-64 / I-79 corridors make tire failures especially dangerous. Mobile tire repair across West Virginia brings on-site help from Charleston to Huntington and beyond.",
+    "cities": [
+      "charleston-wv",
+      "huntington",
+      "morgantown",
+      "parkersburg",
+      "wheeling"
+    ]
+  },
+  "hawaii": {
+    "slug": "hawaii",
+    "name": "Hawaii",
+    "code": "HI",
+    "intro": "Hawaii's heat, coastal roads, and island highway traffic wear tires faster than many drivers expect. Mobile tire repair across Hawaii offers on-site service from Honolulu to Hilo and Maui.",
+    "cities": [
+      "honolulu",
+      "hilo",
+      "kailua",
+      "kapolei",
+      "kahului"
+    ]
+  },
+  "new-hampshire": {
+    "slug": "new-hampshire",
+    "name": "New Hampshire",
+    "code": "NH",
+    "intro": "New Hampshire winters, I-93 commute traffic, and freeze-thaw potholes create frequent tire emergencies. Mobile tire repair across New Hampshire comes to you from Manchester to Nashua and Concord.",
+    "cities": [
+      "manchester",
+      "nashua",
+      "concord",
+      "derry",
+      "dover-nh"
+    ]
+  },
+  "maine": {
+    "slug": "maine",
+    "name": "Maine",
+    "code": "ME",
+    "intro": "Maine's harsh winters, coastal roads, and I-95 corridor make roadside tire help a necessity. Mobile tire repair across Maine reaches Portland, Lewiston, and Bangor without waiting on a shop.",
+    "cities": [
+      "portland-me",
+      "lewiston",
+      "bangor",
+      "south-portland",
+      "auburn"
+    ]
+  },
+  "montana": {
+    "slug": "montana",
+    "name": "Montana",
+    "code": "MT",
+    "intro": "Montana mountain grades, winter ice, and long I-90 / I-15 stretches make tire failures especially isolating. Mobile tire repair across Montana brings on-site help from Billings to Missoula and Bozeman.",
+    "cities": [
+      "billings",
+      "missoula",
+      "great-falls",
+      "bozeman",
+      "butte"
+    ]
+  },
+  "rhode-island": {
+    "slug": "rhode-island",
+    "name": "Rhode Island",
+    "code": "RI",
+    "intro": "Rhode Island's dense I-95 traffic, winter potholes, and tight city streets punish tires year-round. Mobile tire repair across Rhode Island gets you moving again from Providence to Warwick and Cranston.",
+    "cities": [
+      "providence",
+      "warwick",
+      "cranston",
+      "pawtucket",
+      "east-providence"
+    ]
+  },
+  "delaware": {
+    "slug": "delaware",
+    "name": "Delaware",
+    "code": "DE",
+    "intro": "Delaware drivers face I-95 congestion, winter road damage, and coastal traffic that wear tires down fast. Mobile tire repair across Delaware comes to you from Wilmington to Dover and Newark.",
+    "cities": [
+      "wilmington",
+      "dover",
+      "newark-de",
+      "middletown",
+      "bear"
+    ]
+  },
+  "south-dakota": {
+    "slug": "south-dakota",
+    "name": "South Dakota",
+    "code": "SD",
+    "intro": "South Dakota's winters, I-90 corridor, and long rural highways make roadside tire trouble a serious delay. Mobile tire repair across South Dakota serves Sioux Falls, Rapid City, and the rest of the state.",
+    "cities": [
+      "sioux-falls",
+      "rapid-city",
+      "aberdeen",
+      "brookings",
+      "watertown"
+    ]
+  },
+  "north-dakota": {
+    "slug": "north-dakota",
+    "name": "North Dakota",
+    "code": "ND",
+    "intro": "North Dakota winters, I-94 traffic, and long prairie highways create frequent tire emergencies. Mobile tire repair across North Dakota brings on-site help from Fargo to Bismarck and Grand Forks.",
+    "cities": [
+      "fargo",
+      "bismarck",
+      "grand-forks",
+      "minot",
+      "west-fargo"
+    ]
+  },
+  "alaska": {
+    "slug": "alaska",
+    "name": "Alaska",
+    "code": "AK",
+    "intro": "Alaska's ice, studded-tire season, and long highway stretches make tire failures especially dangerous. Mobile tire repair across Alaska reaches Anchorage, Fairbanks, and Juneau when you need help on-site.",
+    "cities": [
+      "anchorage",
+      "fairbanks",
+      "juneau",
+      "wasilla",
+      "sitka"
+    ]
+  },
+  "vermont": {
+    "slug": "vermont",
+    "name": "Vermont",
+    "code": "VT",
+    "intro": "Vermont winters, mountain roads, and freeze-thaw potholes take a hard toll on tires. Mobile tire repair across Vermont comes to you from Burlington to Rutland without a trip to the shop.",
+    "cities": [
+      "burlington",
+      "south-burlington",
+      "rutland",
+      "essex-junction",
+      "barre"
+    ]
+  },
+  "wyoming": {
+    "slug": "wyoming",
+    "name": "Wyoming",
+    "code": "WY",
+    "intro": "Wyoming's wind, mountain grades, and I-80 / I-25 stretches make blowouts a real highway hazard. Mobile tire repair across Wyoming brings roadside help from Cheyenne to Casper and beyond.",
+    "cities": [
+      "cheyenne",
+      "casper",
+      "gillette",
+      "laramie",
+      "rock-springs"
+    ]
   }
 }

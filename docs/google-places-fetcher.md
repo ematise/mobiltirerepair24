@@ -6,7 +6,7 @@ The Google Places fetcher searches Google’s **Places API (New)** for mobile ti
 
 ## What it does (in one sentence)
 
-For each city in your database, it runs a Google search like *“mobile tire repair in Dallas, TX”*, filters the results, converts them into business records, and **creates or updates** them in MongoDB. Cities with fewer existing businesses are processed first so empty coverage fills before cities that already have listings. When a listing has no photos yet, the fetcher downloads one Google Places photo and re-hosts it on S3 for the listing card/gallery.
+For each city in your database, it runs a Google search like *“mobile tire repair in Dallas, TX”*, filters the results, converts them into business records, and **creates or updates** them in MongoDB. Cities with fewer existing businesses are processed first so empty coverage fills before cities that already have listings. Each city is capped at **3 businesses**; cities that already have 3+ are skipped (no Google request). When a listing has no photos yet, the fetcher downloads one Google Places photo and re-hosts it on S3 for the listing card/gallery.
 
 ---
 
@@ -46,7 +46,7 @@ Go to **`/admin/businesses`**. At the top you’ll see the **“Fetch from Googl
 | Field | What it does |
 |---|---|
 | **City slugs (optional)** | Comma-separated slugs, e.g. `dallas, houston`. Leave empty to fetch **all** cities in the database. |
-| **Pages per city** | How many result pages to request per city (1 = up to ~20, 2 = ~40, 3 = ~60). |
+| **Pages per city** | Extra result pages if the first page has too few relevant matches (1 is usually enough to fill 3 listings). |
 | **Dry run** | When checked, fetches and shows stats but **does not write** to MongoDB. |
 
 ### Buttons
@@ -58,11 +58,12 @@ Go to **`/admin/businesses`**. At the top you’ll see the **“Fetch from Googl
 
 You’ll see:
 
-- Total businesses found
+- Total businesses found (new listings, up to 3 per city)
 - Created vs updated counts
 - Photos added
 - API calls vs cache hits
-- Per-city breakdown (e.g. `Dallas, TX: 12`)
+- Cities skipped because they already have 3+ listings
+- Per-city breakdown for cities that were searched
 
 The business list refreshes automatically after a non–dry-run fetch.
 
@@ -135,15 +136,17 @@ The CLI loads env from `.env.local` and `.env` automatically.
   "success": true,
   "dryRun": false,
   "citiesProcessed": 2,
-  "businessesFound": 24,
-  "created": 18,
-  "updated": 6,
-  "photosAdded": 15,
-  "apiCalls": 17,
+  "citiesSkipped": 1,
+  "businessesFound": 5,
+  "created": 4,
+  "updated": 1,
+  "photosAdded": 4,
+  "apiCalls": 6,
   "cacheHits": 0,
   "cityResults": [
-    { "city": "Dallas", "stateCode": "TX", "count": 12 },
-    { "city": "Houston", "stateCode": "TX", "count": 12 }
+    { "city": "Dallas", "stateCode": "TX", "count": 3 },
+    { "city": "Houston", "stateCode": "TX", "count": 2 },
+    { "city": "Austin", "stateCode": "TX", "count": 0, "skipped": true }
   ]
 }
 ```
@@ -161,7 +164,9 @@ flowchart TD
     D --> S[Sort by existing business count ascending]
     E --> S
     S --> F[For each city — empty cities first...]
-    F --> G["Google Text Search: mobile tire repair in {city}, {stateCode}"]
+    F --> SKIP{Already has 3+ businesses?}
+    SKIP -->|Yes| Q[Next city / next place]
+    SKIP -->|No| G["Google Text Search: mobile tire repair in {city}, {stateCode}"]
     G --> H{Cache hit?}
     H -->|Yes| I[Use cached JSON]
     H -->|No| J[Call Places API]
@@ -169,14 +174,16 @@ flowchart TD
     I --> L[Filter & dedupe results]
     K --> L
     L --> M[Convert to Business record]
-    M --> N{Dry run?}
+    M --> CAP{City already at 3 listings?}
+    CAP -->|Yes| Q
+    CAP -->|No| N{Dry run?}
     N -->|No| O[ensureBusinessLocation]
     O --> PH{Listing missing photos?}
     PH -->|Yes| PI[Fetch Place Photo + re-host to S3]
     PH -->|No| U[upsertBusiness]
     PI --> U
     N -->|Yes| P[Count only]
-    U --> Q[Next place / next page / next city]
+    U --> Q
     P --> Q
     Q --> R[Return summary stats]
 ```
@@ -205,11 +212,13 @@ A place is **kept** only if all of these are true:
 
 Places are deduplicated by Google Place ID across all cities in one run. The same business won’t be inserted twice.
 
-### Pagination
+### Pagination and per-city cap
 
-- Up to **3 pages** per city (hard cap)
+- **3 businesses per city** — new listings stop once the city reaches 3 (including ones already in the database)
+- Cities that already have **3+** businesses are **skipped** (no Text Search, no photos)
+- Up to **3 pages** per city (hard cap), but paging stops as soon as the city is filled
 - **2 second delay** between pages (Google requirement for `nextPageToken`)
-- Each page returns up to ~20 results
+- Each page returns up to ~20 results; only enough relevant matches are kept to fill the cap
 
 ---
 
@@ -290,13 +299,14 @@ To clear cache: delete the folder `{tmpdir}/mobiltirerepair24-places-cache/` (on
 
 ## API cost estimate
 
-Each **uncached** city page = **1 Text Search request**. Each listing that needs a photo adds **1 Place Photo** request.
+Each **uncached** under-filled city = **1 Text Search request** (cities already at 3+ cost nothing). Each **new** listing that needs a photo adds **1 Place Photo** request.
 
 | Scenario | Approx. API calls |
 |---|---|
-| 10 cities, 1 page each (search only) | 10 |
-| 10 cities, 1 page each + 12 new photos | 10 + 12 |
-| 10 cities, 3 pages each | 30 (+ photos as needed) |
+| 10 empty cities, 1 page each (search only) | 10 |
+| 10 empty cities + 3 new photos each | 10 + 30 |
+| 10 cities already at 3+ businesses | 0 |
+| 10 cities, 3 pages each (only if page 1 can’t fill 3) | up to 30 (+ photos as needed) |
 | Re-run with cache, all listings already have photos | 0 Text Search (cache) + 0 photos |
 
 Check current pricing: [Google Maps Platform — Places API](https://developers.google.com/maps/billing-and-pricing/pricing#places-pricing).

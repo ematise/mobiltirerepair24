@@ -1,4 +1,3 @@
-import BadgeGroup from './BadgeGroup';
 import SectionHeading from './SectionHeading';
 import SectionContainer from './SectionContainer';
 
@@ -11,8 +10,17 @@ export default function VehicleTypesSection({ vehicleTypes }: VehicleTypesSectio
 
   return (
     <SectionContainer>
-      <SectionHeading>Vehicle Types Served</SectionHeading>
-      <BadgeGroup items={vehicleTypes} variant="pill" />
+      <SectionHeading>Vehicle types served</SectionHeading>
+      <div className="flex flex-wrap gap-2">
+        {vehicleTypes.map((item) => (
+          <span
+            key={item}
+            className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-[13px] font-medium text-gray-800 [font-family:var(--font-body)]"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
     </SectionContainer>
   );
 }

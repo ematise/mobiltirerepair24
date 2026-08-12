@@ -1,5 +1,4 @@
 import { CheckCircle } from 'lucide-react';
-import BadgeGroup from './BadgeGroup';
 import SectionHeading from './SectionHeading';
 import SectionContainer from './SectionContainer';
 
@@ -12,11 +11,18 @@ export default function CertificationBadges({ certifications }: CertificationBad
 
   return (
     <SectionContainer>
-      <div className="flex items-center gap-2 mb-4">
-        <CheckCircle className="w-5 h-5 text-green-600" aria-hidden="true" />
-        <h2 className="text-xl font-semibold text-slate-900">Certifications & Trust Signals</h2>
+      <SectionHeading>Certifications</SectionHeading>
+      <div className="flex flex-wrap gap-2">
+        {certifications.map((item) => (
+          <span
+            key={item}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-[13px] font-medium text-gray-800 [font-family:var(--font-body)]"
+          >
+            <CheckCircle className="w-3.5 h-3.5 text-green-600" aria-hidden="true" />
+            {item}
+          </span>
+        ))}
       </div>
-      <BadgeGroup items={certifications} variant="badge" />
     </SectionContainer>
   );
 }
