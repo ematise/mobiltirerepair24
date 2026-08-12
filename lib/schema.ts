@@ -1,27 +1,63 @@
 import type { Business, City, Service, State } from './data';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mobiletirerepair24.com';
+const SITE_NAME = 'MobileTireRepair24';
 
-export function buildLocalBusinessSchema(biz: Business) {
+const DAY_NAMES: Record<string, string> = {
+  monday: 'Monday',
+  tuesday: 'Tuesday',
+  wednesday: 'Wednesday',
+  thursday: 'Thursday',
+  friday: 'Friday',
+  saturday: 'Saturday',
+  sunday: 'Sunday',
+};
+
+export function buildLocalBusinessSchema(biz: Business, city: City) {
+  const profileUrl = `${SITE_URL}/business/${biz.slug}/`;
+
+  const openingHours = biz.hours
+    ? Object.entries(biz.hours)
+        .filter(([, v]) => !v.closed && v.open && v.close)
+        .map(([day, v]) => ({
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: DAY_NAMES[day.toLowerCase()] ?? day,
+          opens: v.open,
+          closes: v.close,
+        }))
+    : undefined;
+
+  const prices = (biz.pricing ?? []).flatMap((p) => [p.minPrice, p.maxPrice]);
+  const priceRange =
+    prices.length > 0 ? `$${Math.min(...prices)} - $${Math.max(...prices)}` : undefined;
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'AutoRepair',
+    '@id': `${profileUrl}#business`,
     name: biz.name,
+    url: biz.website ?? profileUrl,
     telephone: biz.phone,
+    description: biz.description,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: biz.city
-        .split('-')
-        .map((w) => w[0].toUpperCase() + w.slice(1))
-        .join(' '),
+      streetAddress: biz.address,
+      addressLocality: city.name,
       addressRegion: biz.stateCode,
+      ...(biz.zipCode && { postalCode: biz.zipCode }),
       addressCountry: 'US',
     },
-    areaServed: biz.areasServed.map((area) => ({
-      '@type': 'City',
-      name: area,
-    })),
-    description: biz.description,
+    ...(city.lat !== 0 &&
+      city.lng !== 0 && {
+        geo: { '@type': 'GeoCoordinates', latitude: city.lat, longitude: city.lng },
+      }),
+    ...(biz.photos && biz.photos.length > 0 && { image: biz.photos }),
+    ...(openingHours && openingHours.length > 0 && {
+      openingHoursSpecification: openingHours,
+    }),
+    ...(priceRange && { priceRange }),
+    ...(biz.website && { sameAs: [biz.website] }),
+    areaServed: biz.areasServed.map((area) => ({ '@type': 'City', name: area })),
     ...(biz.rating && {
       aggregateRating: {
         '@type': 'AggregateRating',
@@ -30,7 +66,6 @@ export function buildLocalBusinessSchema(biz: Business) {
         bestRating: '5',
       },
     }),
-    url: `${SITE_URL}/business/${biz.slug}/`,
   };
 }
 
@@ -73,6 +108,26 @@ export function buildFAQSchema(faqs: { q: string; a: string }[]) {
         text: faq.a,
       },
     })),
+  };
+}
+
+export function buildWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE_URL}/#website`,
+    name: SITE_NAME,
+    url: `${SITE_URL}/`,
+  };
+}
+
+export function buildOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE_URL}/#organization`,
+    name: SITE_NAME,
+    url: `${SITE_URL}/`,
   };
 }
 

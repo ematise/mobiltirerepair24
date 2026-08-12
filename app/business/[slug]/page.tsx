@@ -78,7 +78,7 @@ export default async function BusinessPage({ params }: Props) {
 
   return (
     <>
-      <SchemaOrg data={buildLocalBusinessSchema(biz)} />
+      <SchemaOrg data={buildLocalBusinessSchema(biz, city)} />
       <SchemaOrg data={buildBreadcrumbSchema(crumbs)} />
 
       <div className="max-w-3xl mx-auto px-4 py-10">

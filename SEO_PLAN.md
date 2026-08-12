@@ -438,7 +438,7 @@ for (const city of cities) {
 
 ### Task 3.1 — Rich `LocalBusiness` (→ `AutoRepair`) schema
 
-- [ ] Done
+- [x] Done
 
 **Files:** `lib/schema.ts`, `app/business/[slug]/page.tsx`
 
@@ -518,7 +518,7 @@ Then in `app/business/[slug]/page.tsx`, update the call site to `buildLocalBusin
 
 ### Task 3.2 — `WebSite` + `Organization` schema on the homepage
 
-- [ ] Done
+- [x] Done
 
 **Files:** `lib/schema.ts`, `app/page.tsx`
 
