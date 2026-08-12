@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getAllStates, getAllCities, getAllBusinesses } from '@/lib/data';
 import TokenGenerator from '@/components/admin/TokenGenerator';
+import SeedGeographyButton from '@/components/admin/SeedGeographyButton';
 
 export default async function AdminDashboard() {
   const [states, cities, businesses] = await Promise.all([
@@ -21,6 +22,8 @@ export default async function AdminDashboard() {
 
       {/* Token Generator */}
       <TokenGenerator />
+
+      <SeedGeographyButton />
 
       {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-6">

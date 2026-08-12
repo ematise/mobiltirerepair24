@@ -9,6 +9,7 @@
  *
  * Upsert states/cities from JSON without wiping businesses:
  *   npx tsx scripts/seed.ts --upsert-geography
+ *   (or use the Admin Dashboard "Run geography seed" button)
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -16,6 +17,7 @@ import dotenv from 'dotenv';
 import { MongoClient, type Db } from 'mongodb';
 import { ensureDbIndexes, COLLECTIONS } from '../lib/db';
 import { DEFAULT_SERVICES } from '../lib/default-services';
+import { upsertGeographyFromJson } from '../lib/seed-geography';
 
 dotenv.config({ path: ['.env.local', '.env'] });
 
@@ -57,29 +59,6 @@ async function importFromJson(db: Db) {
   }
 }
 
-async function upsertGeography(db: Db) {
-  for (const file of ['states.json', 'cities.json'] as const) {
-    const filePath = path.join(DATA_DIR, file);
-    if (!fs.existsSync(filePath)) {
-      console.log(`  — ${file} not found, skipping`);
-      continue;
-    }
-
-    const raw = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    const docs = (Array.isArray(raw) ? raw : Object.values(raw)) as Array<{ slug: string }>;
-    const colName = COLLECTIONS[file.replace('.json', '') as 'states' | 'cities'];
-    const col = db.collection(colName);
-
-    let upserted = 0;
-    for (const doc of docs) {
-      if (!doc?.slug) continue;
-      await col.updateOne({ slug: doc.slug }, { $set: doc }, { upsert: true });
-      upserted += 1;
-    }
-    console.log(`✓ Upserted ${upserted} ${colName} from ${file}`);
-  }
-}
-
 async function seed() {
   if (!uri) throw new Error('MONGODB_URI not set — add it to .env.local');
 
@@ -104,7 +83,8 @@ async function seed() {
 
     if (upsertGeo) {
       console.log('\nUpserting states and cities from JSON (businesses untouched)...');
-      await upsertGeography(db);
+      const result = await upsertGeographyFromJson();
+      console.log(`✓ Upserted ${result.states} states and ${result.cities} cities`);
     }
 
     console.log('\n✅ Seed complete.');

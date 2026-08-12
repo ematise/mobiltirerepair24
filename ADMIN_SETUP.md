@@ -406,7 +406,7 @@ export function middleware(request: NextRequest) {
 - Slugs should be URL-safe (lowercase, hyphens)
 - Photos array is unlimited in size (but keep under 100 for performance)
 - Complex fields (hours, pricing) require tab-based form UI
-- To sync `data/states.json` + `data/cities.json` into MongoDB without wiping businesses: `npm run seed:geography`
+- To sync `data/states.json` + `data/cities.json` into MongoDB without wiping businesses: use **Admin → Seed Geography → Run geography seed**, or `npm run seed:geography`
 ---
 
 ## 🚀 Next Steps
