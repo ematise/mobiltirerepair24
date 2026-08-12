@@ -153,6 +153,19 @@ export async function getBusinessesByCity(
   return businesses;
 }
 
+export async function getBusinessesByCityAndService(
+  citySlug: string,
+  stateSlug: string,
+  serviceSlug: string
+): Promise<Business[]> {
+  const db = await getDb();
+  const docs = await db
+    .collection(COLLECTIONS.businesses)
+    .find({ city: citySlug, state: stateSlug, services: serviceSlug })
+    .toArray();
+  return cleanAllBusinesses(docs as never);
+}
+
 /** Returns photo URLs for a business, or `undefined` if the business does not exist. */
 export async function getBusinessPhotos(slug: string): Promise<string[] | undefined> {
   const db = await getDb();
@@ -419,6 +432,10 @@ export async function deleteState(slug: string): Promise<boolean> {
 
 // ── Indexation gates ─────────────────────────────────────────────────────────
 
+/** Minimum businesses required for a city or service-city page to be indexable.
+ *  Raise to 3 once listing density improves (see SEO_PLAN.md). */
+export const MIN_BUSINESSES_TO_INDEX = 1;
+
 export async function isCityIndexable(
   citySlug: string,
   stateSlug: string
@@ -427,7 +444,19 @@ export async function isCityIndexable(
   const count = await db
     .collection(COLLECTIONS.businesses)
     .countDocuments({ city: citySlug, state: stateSlug });
-  return count >= 1;
+  return count >= MIN_BUSINESSES_TO_INDEX;
+}
+
+export async function isServiceCityIndexable(
+  serviceSlug: string,
+  citySlug: string,
+  stateSlug: string
+): Promise<boolean> {
+  const db = await getDb();
+  const count = await db
+    .collection(COLLECTIONS.businesses)
+    .countDocuments({ city: citySlug, state: stateSlug, services: serviceSlug });
+  return count >= MIN_BUSINESSES_TO_INDEX;
 }
 
 // ── Template interpolation ───────────────────────────────────────────────────

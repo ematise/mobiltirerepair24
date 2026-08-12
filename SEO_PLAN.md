@@ -157,7 +157,7 @@ Everything needed already exists except the route itself: `lib/seo.ts` has `serv
 
 ### Task 2.1 — Data-layer support
 
-- [ ] Done
+- [x] Done
 
 **File:** `lib/data.ts`
 
@@ -202,7 +202,7 @@ export async function isServiceCityIndexable(
 
 ### Task 2.2 — The route: `app/[state]/[city]/[service]/page.tsx`
 
-- [ ] Done
+- [x] Done
 
 **File (new):** `app/[state]/[city]/[service]/page.tsx`
 
