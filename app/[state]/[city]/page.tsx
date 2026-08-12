@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import {
   getAllCities,
+  getAllServices,
   getStateBySlug,
   getCityBySlug,
   getBusinessesByCity,
@@ -17,6 +18,7 @@ import { getNearbyCities } from '@/lib/nearby';
 import Breadcrumb from '@/components/Breadcrumb';
 import BusinessList from '@/components/BusinessList';
 import CityLinks from '@/components/CityLinks';
+import ServiceLinks from '@/components/ServiceLinks';
 import SchemaOrg from '@/components/SchemaOrg';
 
 type Props = { params: Promise<{ state: string; city: string }> };
@@ -45,10 +47,14 @@ export default async function CityPage({ params }: Props) {
   ]);
   if (!state || !city) notFound();
 
-  const [businesses, nearby] = await Promise.all([
+  const [businesses, nearby, services] = await Promise.all([
     getBusinessesByCity(citySlug, stateSlug),
     getNearbyCities(citySlug),
+    getAllServices(),
   ]);
+  const offeredServices = services.filter((svc) =>
+    businesses.some((b) => b.services.includes(svc.slug))
+  );
 
   const crumbs = cityBreadcrumbs(city, state);
 
@@ -74,6 +80,15 @@ export default async function CityPage({ params }: Props) {
             businesses={businesses}
             heading={`Top Mobile Tire Repair Services in ${city.name}`}
           />
+
+          {offeredServices.length > 0 && (
+            <ServiceLinks
+              services={offeredServices}
+              citySlug={citySlug}
+              stateSlug={stateSlug}
+              heading={`Services Available in ${city.name}`}
+            />
+          )}
 
           {nearby.length > 0 && (
             <CityLinks

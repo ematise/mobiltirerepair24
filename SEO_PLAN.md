@@ -348,7 +348,7 @@ Notes for the executor:
 
 ### Task 2.3 — Link service pages from city pages
 
-- [ ] Done
+- [x] Done
 
 **File:** `app/[state]/[city]/page.tsx`
 
