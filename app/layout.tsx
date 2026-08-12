@@ -1,8 +1,24 @@
 import type { Metadata } from 'next';
+import { EB_Garamond, Lato } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
 import { getAllStates } from '@/lib/data';
 import SearchBar from '@/components/SearchBar';
+
+const garamond = EB_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-heading',
+  display: 'swap',
+});
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ['300', '400', '700'],
+  variable: '--font-body',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +40,7 @@ export default async function RootLayout({
   const states = await getAllStates();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${garamond.variable} ${lato.variable}`} suppressHydrationWarning>
       <head />
       <body className="flex flex-col min-h-screen" suppressHydrationWarning>
         {/* Header */}

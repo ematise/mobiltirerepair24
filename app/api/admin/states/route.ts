@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { createState, updateState, deleteState, getAllStates } from '@/lib/data';
 import { State } from '@/lib/data';
 
@@ -22,6 +23,7 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await createState(state);
+    revalidatePath('/', 'layout');
     return NextResponse.json(result, { status: 201 });
   } catch (error) {
     console.error('Error creating state:', error);
@@ -43,6 +45,7 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'State not found' }, { status: 404 });
     }
 
+    revalidatePath('/', 'layout');
     return NextResponse.json(result);
   } catch (error) {
     console.error('Error updating state:', error);
@@ -64,6 +67,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'State not found' }, { status: 404 });
     }
 
+    revalidatePath('/', 'layout');
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting state:', error);

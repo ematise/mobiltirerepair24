@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export interface PhotoGalleryProps {
@@ -20,10 +21,13 @@ export default function PhotoGallery({ photos, businessName }: PhotoGalleryProps
     <div className="space-y-4">
       {/* Main image */}
       <div className="relative bg-slate-100 rounded-lg overflow-hidden aspect-video">
-        <img
+        <Image
           src={photos[currentIndex]}
           alt={`${businessName} service photo ${currentIndex + 1}`}
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 768px"
+          priority={currentIndex === 0}
         />
 
         {/* Navigation buttons */}
@@ -61,15 +65,17 @@ export default function PhotoGallery({ photos, businessName }: PhotoGalleryProps
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+              className={`relative flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                 idx === currentIndex ? 'border-blue-500' : 'border-slate-200 hover:border-slate-300'
               }`}
               aria-label={`View photo ${idx + 1}`}
             >
-              <img
+              <Image
                 src={photo}
                 alt={`Thumbnail ${idx + 1}`}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="64px"
               />
             </button>
           ))}

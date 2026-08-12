@@ -7,7 +7,7 @@ const JWT_SECRET = new TextEncoder().encode(
 
 const PUBLIC_PATHS = ['/admin/login', '/api/admin/auth/login', '/api/admin/auth/token-login'];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (PUBLIC_PATHS.includes(pathname)) {

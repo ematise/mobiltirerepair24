@@ -1,6 +1,6 @@
 # SEO_PLAN.md — Technical SEO Execution Plan for MobileTireRepair24
 
-> **Status:** NOT YET EXECUTED. This document is the single source of truth for SEO work.
+> **Status:** EXECUTED. This document is the single source of truth for SEO work.
 > It supersedes the SEO-related sections of `PLAN.md` (which describes the original build and is partially outdated).
 
 ---
@@ -54,7 +54,7 @@
 
 ### Task 1.1 — Enforce trailing slashes at the framework level
 
-- [ ] Done
+- [x] Done
 
 **File:** `next.config.ts`
 
@@ -79,7 +79,7 @@ const nextConfig: NextConfig = {
 
 ### Task 1.2 — Block admin and API from crawlers
 
-- [ ] Done
+- [x] Done
 
 **File:** `app/robots.ts`
 
@@ -101,7 +101,7 @@ Keep the existing `sitemap` field.
 
 ### Task 1.3 — Homepage metadata with canonical
 
-- [ ] Done
+- [x] Done
 
 **Files:** `lib/seo.ts`, `app/page.tsx`
 
@@ -135,7 +135,7 @@ export const metadata = homeMetadata();
 
 ### Task 1.4 — Twitter cards on every page
 
-- [ ] Done
+- [x] Done
 
 **File:** `lib/seo.ts`
 
@@ -157,7 +157,7 @@ Everything needed already exists except the route itself: `lib/seo.ts` has `serv
 
 ### Task 2.1 — Data-layer support
 
-- [ ] Done
+- [x] Done
 
 **File:** `lib/data.ts`
 
@@ -202,7 +202,7 @@ export async function isServiceCityIndexable(
 
 ### Task 2.2 — The route: `app/[state]/[city]/[service]/page.tsx`
 
-- [ ] Done
+- [x] Done
 
 **File (new):** `app/[state]/[city]/[service]/page.tsx`
 
@@ -348,7 +348,7 @@ Notes for the executor:
 
 ### Task 2.3 — Link service pages from city pages
 
-- [ ] Done
+- [x] Done
 
 **File:** `app/[state]/[city]/page.tsx`
 
@@ -379,7 +379,7 @@ const offeredServices = services.filter((svc) =>
 
 ### Task 2.4 — Link service pages from business pages
 
-- [ ] Done
+- [x] Done
 
 **File:** `app/business/[slug]/page.tsx`
 
@@ -407,7 +407,7 @@ const offeredServices = allServices.filter((s) => biz.services.includes(s.slug))
 
 ### Task 2.5 — Add service-city URLs to the sitemap
 
-- [ ] Done
+- [x] Done
 
 **File:** `app/sitemap.ts`
 
@@ -438,7 +438,7 @@ for (const city of cities) {
 
 ### Task 3.1 — Rich `LocalBusiness` (→ `AutoRepair`) schema
 
-- [ ] Done
+- [x] Done
 
 **Files:** `lib/schema.ts`, `app/business/[slug]/page.tsx`
 
@@ -518,7 +518,7 @@ Then in `app/business/[slug]/page.tsx`, update the call site to `buildLocalBusin
 
 ### Task 3.2 — `WebSite` + `Organization` schema on the homepage
 
-- [ ] Done
+- [x] Done
 
 **Files:** `lib/schema.ts`, `app/page.tsx`
 
@@ -565,7 +565,7 @@ Next.js file convention: an `opengraph-image.tsx` in a route segment auto-inject
 
 ### Task 4.1 — Site-default OG image
 
-- [ ] Done
+- [x] Done
 
 **File (new):** `app/opengraph-image.tsx`
 
@@ -607,7 +607,7 @@ export default async function Image() {
 
 ### Task 4.2 — Dynamic OG images for city and business pages
 
-- [ ] Done
+- [x] Done
 
 **Files (new):** `app/[state]/[city]/opengraph-image.tsx`, `app/business/[slug]/opengraph-image.tsx`
 
@@ -675,7 +675,7 @@ Optionally add `app/[state]/opengraph-image.tsx` following the same pattern with
 
 ### Task 5.1 — Time-based revalidation on all public pages
 
-- [ ] Done
+- [x] Done
 
 **Files:** `app/page.tsx`, `app/[state]/page.tsx`, `app/[state]/[city]/page.tsx`, `app/[state]/[city]/[service]/page.tsx`, `app/business/[slug]/page.tsx`, `app/sitemap.ts`
 
@@ -691,7 +691,7 @@ This keeps pages statically served but re-renders them in the background at most
 
 ### Task 5.2 (optional, only if Task 5.1 verified) — Instant revalidation on admin writes
 
-- [ ] Done
+- [x] Done
 
 **Files:** the admin CRUD route handlers under `app/api/admin/businesses/`, `app/api/admin/cities/`, `app/api/admin/states/` (locate the POST/PUT/PATCH/DELETE handlers with `rg "deleteBusiness|upsertBusiness|updateBusiness|createBusiness" app/api/admin`)
 
@@ -713,7 +713,7 @@ revalidatePath('/', 'layout');
 
 ### Task 6.1 — Self-hosted fonts via `next/font`
 
-- [ ] Done
+- [x] Done
 
 **Files:** `app/layout.tsx`, `app/globals.css`
 
@@ -753,7 +753,7 @@ and change the `<html>` tag to:
 
 ### Task 6.2 — `next/image` for public listing photos
 
-- [ ] Done
+- [x] Done
 
 **Files:** `components/listing/PhotoGallery.tsx`, `components/BusinessCard.tsx`
 
@@ -790,7 +790,7 @@ Import `Image from 'next/image'` in both files.
 
 ### Task 7.1 — Web app manifest
 
-- [ ] Done
+- [x] Done
 
 **File (new):** `app/manifest.ts`
 
@@ -816,7 +816,7 @@ export default function manifest(): MetadataRoute.Manifest {
 
 ### Task 7.2 — Custom 404 with recovery links
 
-- [ ] Done
+- [x] Done
 
 **File (new):** `app/not-found.tsx`
 
@@ -826,7 +826,7 @@ Server component. Render an H1 ("Page Not Found"), one sentence of copy, a link 
 
 ### Task 7.3 — Rename deprecated `middleware.ts` to `proxy.ts`
 
-- [ ] Done
+- [x] Done
 
 **Files:** `middleware.ts` → `proxy.ts`
 

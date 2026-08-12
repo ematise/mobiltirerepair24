@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   getAllBusinesses,
+  getAllServices,
   getBusinessBySlug,
   getBusinessesByCity,
   getCityBySlug,
@@ -23,6 +24,7 @@ import StatusBadge from '@/components/listing/StatusBadge';
 import HeroMetrics from '@/components/listing/HeroMetrics';
 import PhotoGallery from '@/components/listing/PhotoGallery';
 import ServiceSection from '@/components/listing/ServiceSection';
+import ServiceLinks from '@/components/ServiceLinks';
 import ContactSection from '@/components/listing/ContactSection';
 import HoursSection from '@/components/listing/HoursSection';
 import PricingSection from '@/components/listing/PricingSection';
@@ -33,6 +35,8 @@ import ReviewHighlights from '@/components/listing/ReviewHighlights';
 import CTAButtonGroup from '@/components/listing/CTAButtonGroup';
 import SectionContainer from '@/components/listing/SectionContainer';
 import SectionHeading from '@/components/listing/SectionHeading';
+
+export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -58,12 +62,15 @@ export default async function BusinessPage({ params }: Props) {
   const biz = await getBusinessBySlug(slug);
   if (!biz) notFound();
 
-  const [city, state, allCityBusinesses] = await Promise.all([
+  const [city, state, allCityBusinesses, allServices] = await Promise.all([
     getCityBySlug(biz.city),
     getStateBySlug(biz.state),
     getBusinessesByCity(biz.city, biz.state),
+    getAllServices(),
   ]);
   if (!city || !state) notFound();
+
+  const offeredServices = allServices.filter((s) => biz.services.includes(s.slug));
 
   const relatedBusinesses = allCityBusinesses
     .filter((b) => b.slug !== biz.slug)
@@ -73,7 +80,7 @@ export default async function BusinessPage({ params }: Props) {
 
   return (
     <>
-      <SchemaOrg data={buildLocalBusinessSchema(biz)} />
+      <SchemaOrg data={buildLocalBusinessSchema(biz, city)} />
       <SchemaOrg data={buildBreadcrumbSchema(crumbs)} />
 
       <div className="max-w-3xl mx-auto px-4 py-10">
@@ -130,6 +137,15 @@ export default async function BusinessPage({ params }: Props) {
 
         {/* Services */}
         <ServiceSection services={biz.services} />
+
+        {offeredServices.length > 0 && (
+          <ServiceLinks
+            services={offeredServices}
+            citySlug={biz.city}
+            stateSlug={biz.state}
+            heading={`Find These Services in ${city.name}`}
+          />
+        )}
 
         {/* Vehicle Types */}
         <VehicleTypesSection vehicleTypes={biz.vehicleTypes || []} />
