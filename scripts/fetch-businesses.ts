@@ -52,7 +52,9 @@ async function main() {
   console.log(`\nCities processed: ${result.citiesProcessed}`);
   console.log(`Businesses found: ${result.businessesFound}`);
   if (!dryRun) {
-    console.log(`Created: ${result.created} · Updated: ${result.updated}`);
+    console.log(
+      `Created: ${result.created} · Updated: ${result.updated} · Photos added: ${result.photosAdded}`,
+    );
   }
   console.log(`API calls: ${result.apiCalls} · cache hits: ${result.cacheHits}`);
 }

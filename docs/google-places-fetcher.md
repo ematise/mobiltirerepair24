@@ -6,7 +6,7 @@ The Google Places fetcher searches Google’s **Places API (New)** for mobile ti
 
 ## What it does (in one sentence)
 
-For each city in your database, it runs a Google search like *“mobile tire repair in Dallas, TX”*, filters the results, converts them into business records, and **creates or updates** them in MongoDB. Cities with fewer existing businesses are processed first so empty coverage fills before cities that already have listings.
+For each city in your database, it runs a Google search like *“mobile tire repair in Dallas, TX”*, filters the results, converts them into business records, and **creates or updates** them in MongoDB. Cities with fewer existing businesses are processed first so empty coverage fills before cities that already have listings. When a listing has no photos yet, the fetcher downloads one Google Places photo and re-hosts it on S3 for the listing card/gallery.
 
 ---
 
@@ -18,9 +18,10 @@ Before running a fetch, you need:
 |---|---|
 | **Google Maps API key** | Set `GOOGLE_MAPS_API_KEY` in `.env.local` |
 | **Places API (New) enabled** | In [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → enable **Places API (New)** (not the legacy Places API) |
-| **Billing enabled** | Google charges per Text Search request |
+| **Billing enabled** | Google charges per Text Search and Place Photo request |
 | **MongoDB** | `MONGODB_URI` must be set and reachable |
 | **Cities in the database** | The fetcher reads cities from MongoDB — add them first at `/admin/cities` |
+| **AWS S3 (for photos)** | `AWS_S3_BUCKET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` (and optional `AWS_REGION`). Without S3, businesses still import but photos are skipped. |
 
 If no cities exist, the fetch fails with: *“No cities in database — add cities in admin first”*.
 
@@ -59,6 +60,7 @@ You’ll see:
 
 - Total businesses found
 - Created vs updated counts
+- Photos added
 - API calls vs cache hits
 - Per-city breakdown (e.g. `Dallas, TX: 12`)
 
@@ -136,7 +138,8 @@ The CLI loads env from `.env.local` and `.env` automatically.
   "businessesFound": 24,
   "created": 18,
   "updated": 6,
-  "apiCalls": 2,
+  "photosAdded": 15,
+  "apiCalls": 17,
   "cacheHits": 0,
   "cityResults": [
     { "city": "Dallas", "stateCode": "TX", "count": 12 },
@@ -167,9 +170,13 @@ flowchart TD
     K --> L
     L --> M[Convert to Business record]
     M --> N{Dry run?}
-    N -->|No| O[ensureBusinessLocation + upsertBusiness]
+    N -->|No| O[ensureBusinessLocation]
+    O --> PH{Listing missing photos?}
+    PH -->|Yes| PI[Fetch Place Photo + re-host to S3]
+    PH -->|No| U[upsertBusiness]
+    PI --> U
     N -->|Yes| P[Count only]
-    O --> Q[Next place / next page / next city]
+    U --> Q[Next place / next page / next city]
     P --> Q
     Q --> R[Return summary stats]
 ```
@@ -221,6 +228,7 @@ Places are deduplicated by Google Place ID across all cities in one run. The sam
 | `rating`, `reviewCount` | Google |
 | `website` | Google (if available) |
 | `hours` | Google opening hours (if available). **24/7** places are encoded by Google as a single period with `open` at Sunday 00:00 and **no** `close` field — we map that to every day `00:00–23:59`. |
+| `photos` | First Google Places photo, re-hosted to S3 (only when the listing has no photos yet). Skipped if S3 is not configured or the place has no photos. |
 
 ### Hours repair
 
@@ -235,12 +243,23 @@ Add `--dry-run` to preview counts without writing.
 
 The site also **self-heals** on read: listing pages normalize and persist corrected hours. Admins can click **Repair 24/7 hours** on `/admin/businesses`, or `POST /api/admin/businesses/fix-hours`.
 
+### Listing photos
+
+For each kept place that has a Places photo:
+
+1. Resolve the photo resource via Place Photos (New) (`…/media?maxWidthPx=1024&skipHttpRedirect=true`)
+2. Download the image and re-host it to S3 (`business-photos/{slug}-mobile-tire-repair-1.jpg`)
+3. Set `photos: [s3Url]` on the business
+
+Existing photos are **not** overwritten. Re-runs only backfill listings that still have an empty `photos` array.
+
 ### Upsert behavior
 
 - Match key: **`slug`**
-- **Same slug exists** → record is **updated** (`$set` overwrites fields)
+- **Same slug exists** → record is **updated** (`$set` overwrites fields present on the fetch payload)
 - **New slug** → record is **inserted**
 - Runs are **non-destructive**: businesses not returned by Google are **not deleted**
+- Existing `photos` are preserved when the listing already has images
 
 ### Location records
 
@@ -259,11 +278,11 @@ So fetched businesses can create location records even if you didn’t add the c
 API responses are cached on disk to avoid repeat billing:
 
 - **Location:** OS temp directory → `{tmpdir}/mobiltirerepair24-places-cache/`
-- **Filename:** `{city-slug}-{state-code}-p{page}.json` (e.g. `dallas-tx-p1.json`)
+- **Filename:** `{city-slug}-{state-code}-p{page}-photos.json` (e.g. `dallas-tx-p1-photos.json`)
 - **Default:** cache is **on** (UI and CLI)
 - **Bypass:** CLI `--no-cache`, or API `"useCache": false`
 
-Cache hits show in stats as `cacheHits`. Re-running the same cities/pages within the same environment reuses cached responses at no extra API cost.
+Cache hits show in stats as `cacheHits`. Re-running the same cities/pages within the same environment reuses cached Text Search responses. Place Photo media downloads are **not** cached (they only run when a listing still needs a photo).
 
 To clear cache: delete the folder `{tmpdir}/mobiltirerepair24-places-cache/` (on Windows, often something like `C:\Users\{you}\AppData\Local\Temp\mobiltirerepair24-places-cache`).
 
@@ -271,13 +290,14 @@ To clear cache: delete the folder `{tmpdir}/mobiltirerepair24-places-cache/` (on
 
 ## API cost estimate
 
-Each **uncached** city page = **1 Text Search request**.
+Each **uncached** city page = **1 Text Search request**. Each listing that needs a photo adds **1 Place Photo** request.
 
 | Scenario | Approx. API calls |
 |---|---|
-| 10 cities, 1 page each | 10 |
-| 10 cities, 3 pages each | 30 |
-| Re-run with cache | 0 (all cache hits) |
+| 10 cities, 1 page each (search only) | 10 |
+| 10 cities, 1 page each + 12 new photos | 10 + 12 |
+| 10 cities, 3 pages each | 30 (+ photos as needed) |
+| Re-run with cache, all listings already have photos | 0 Text Search (cache) + 0 photos |
 
 Check current pricing: [Google Maps Platform — Places API](https://developers.google.com/maps/billing-and-pricing/pricing#places-pricing).
 
@@ -330,8 +350,9 @@ Use that only if you have a pre-built JSON array of businesses (manual export, o
 
 | File | Role |
 |---|---|
-| `lib/places-fetch.ts` | Core fetch logic, empty-city-first ordering, filtering, caching, upsert |
-| `lib/data.ts` (`getBusinessCountsByCity`) | Per-city business counts used to prioritize empty cities |
+| `lib/places-fetch.ts` | Core fetch logic, empty-city-first ordering, photo attach, filtering, caching, upsert |
+| `lib/data.ts` | City counts (`getBusinessCountsByCity`) and photo lookup (`getBusinessPhotos`) |
+| `lib/s3.ts` (`reHostPhotosToS3`) | Download + resize + upload listing images to S3 |
 | `scripts/fetch-businesses.ts` | CLI entry point |
 | `app/api/admin/businesses/fetch/route.ts` | Admin API endpoint |
 | `components/admin/BusinessFetcher.tsx` | Admin UI panel |
