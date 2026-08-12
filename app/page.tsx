@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { getAllStates, getAllCities, isCityIndexable } from '@/lib/data';
 import { homeMetadata } from '@/lib/seo';
+import { buildWebSiteSchema, buildOrganizationSchema } from '@/lib/schema';
+import SchemaOrg from '@/components/SchemaOrg';
 
 export const metadata = homeMetadata();
 
@@ -13,6 +15,9 @@ export default async function HomePage() {
 
   return (
     <>
+      <SchemaOrg data={buildWebSiteSchema()} />
+      <SchemaOrg data={buildOrganizationSchema()} />
+
       {/* Hero */}
       <section className="bg-slate-900 text-white py-16 px-4">
         <div className="max-w-3xl mx-auto text-center">
