@@ -15,10 +15,15 @@
  *   npx tsx scripts/fetch-businesses.ts --no-cache
  */
 import dotenv from 'dotenv';
-import { fetchBusinessesFromPlaces } from '../lib/places-fetch';
+import { fetchBusinessesFromPlaces, checkFetchServices } from '../lib/places-fetch';
 import { ensureDbIndexes } from '../lib/db';
+import { withTimeout } from '../lib/fetch-with-timeout';
 
 dotenv.config({ path: ['.env.local', '.env'] });
+
+function statusLine(ok: boolean, message: string): string {
+  return `  ${ok ? '✓' : '✗'} ${message}`;
+}
 
 async function main() {
   const args = process.argv.slice(2);
@@ -32,12 +37,32 @@ async function main() {
   const useCache = !args.includes('--no-cache');
   const dryRun = args.includes('--dry-run');
 
-  await ensureDbIndexes();
+  console.log('Checking services...\n');
+  const services = await checkFetchServices();
+  console.log(statusLine(services.mongodb.ok, services.mongodb.message));
+  console.log(statusLine(services.googlePlaces.ok, services.googlePlaces.message));
+  console.log(statusLine(services.s3.ok, services.s3.message));
+
+  if (!services.mongodb.ok) {
+    console.error('\nMongoDB is required. Fix MONGODB_URI or network access, then retry.');
+    process.exit(1);
+  }
+
+  if (!services.googlePlaces.ok) {
+    console.error('\nGoogle Places API is required. Fix GOOGLE_MAPS_API_KEY, then retry.');
+    process.exit(1);
+  }
+
+  if (!services.s3.ok) {
+    console.warn('\n⚠ S3 is unavailable — fetch will continue but skip business photos.');
+  }
+
+  await withTimeout(ensureDbIndexes(), 15_000, 'Ensuring database indexes');
 
   console.log(
     dryRun
-      ? 'Dry run — fetching without writing to database...\n'
-      : 'Fetching businesses and upserting into MongoDB...\n',
+      ? '\nDry run — fetching without writing to database...\n'
+      : '\nFetching businesses and upserting into MongoDB...\n',
   );
 
   const result = await fetchBusinessesFromPlaces({
@@ -45,12 +70,8 @@ async function main() {
     maxPages,
     useCache,
     dryRun,
+    photosEnabled: services.s3.ok,
   });
-
-  for (const row of result.cityResults) {
-    if (row.skipped) continue;
-    console.log(`  ✓ ${row.city}, ${row.stateCode}: ${row.count} businesses`);
-  }
 
   console.log(`\nCities processed: ${result.citiesProcessed}`);
   if (result.citiesSkipped > 0) {

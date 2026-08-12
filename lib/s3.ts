@@ -1,11 +1,52 @@
-import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, DeleteObjectCommand, HeadBucketCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import sharp from 'sharp';
+import { fetchWithTimeout, withTimeout } from './fetch-with-timeout';
 
 let s3Client: S3Client | undefined;
 
 function getBucketName(): string {
   return process.env.AWS_S3_BUCKET || '';
+}
+
+export function isS3Configured(): boolean {
+  return Boolean(
+    getBucketName() &&
+      process.env.AWS_ACCESS_KEY_ID &&
+      process.env.AWS_SECRET_ACCESS_KEY,
+  );
+}
+
+export type S3CheckResult = {
+  ok: boolean;
+  configured: boolean;
+  message: string;
+};
+
+/** Verify S3 credentials and bucket access (used by fetch script preflight). */
+export async function checkS3Available(): Promise<S3CheckResult> {
+  if (!isS3Configured()) {
+    return {
+      ok: false,
+      configured: false,
+      message: 'AWS S3 is not configured — business photos will be skipped',
+    };
+  }
+
+  try {
+    await withTimeout(
+      getS3Client().send(new HeadBucketCommand({ Bucket: getBucketName() })),
+      10_000,
+      'S3 bucket check',
+    );
+    return { ok: true, configured: true, message: `S3 bucket "${getBucketName()}" is reachable` };
+  } catch (err) {
+    return {
+      ok: false,
+      configured: true,
+      message: `S3 unavailable (${getBucketName()}): ${(err as Error).message}`,
+    };
+  }
 }
 
 function getS3Client(): S3Client {
@@ -114,7 +155,7 @@ export async function reHostPhotosToS3(
     }
 
     try {
-      const res = await fetch(url);
+      const res = await fetchWithTimeout(url, undefined, 30_000);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const contentType = (res.headers.get('content-type') || 'image/jpeg').split(';')[0].trim();
@@ -135,12 +176,16 @@ export async function reHostPhotosToS3(
 
       const key = `business-photos/${slug}-mobile-tire-repair-${startIndex + i}.${ext}`;
 
-      await getS3Client().send(new PutObjectCommand({
-        Bucket: bucket,
-        Key: key,
-        Body: new Uint8Array(resized),
-        ContentType: contentType,
-      }));
+      await withTimeout(
+        getS3Client().send(new PutObjectCommand({
+          Bucket: bucket,
+          Key: key,
+          Body: new Uint8Array(resized),
+          ContentType: contentType,
+        })),
+        30_000,
+        'S3 upload',
+      );
 
       result.push(`https://${bucket}.s3.amazonaws.com/${key}`);
     } catch (err) {

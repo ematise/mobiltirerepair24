@@ -18,22 +18,37 @@ declare global {
 
 let client: MongoClient | null = null;
 
+const MONGO_OPTIONS = {
+  serverSelectionTimeoutMS: 10_000,
+  connectTimeoutMS: 10_000,
+} as const;
+
+function createMongoClient(uri: string): MongoClient {
+  return new MongoClient(uri, MONGO_OPTIONS);
+}
+
 export async function getDb(): Promise<Db> {
   const uri = getMongoUri();
 
   if (!client) {
     if (process.env.NODE_ENV === 'development') {
       if (!global._mongoClient) {
-        global._mongoClient = new MongoClient(uri);
+        global._mongoClient = createMongoClient(uri);
       }
       client = global._mongoClient;
     } else {
-      client = new MongoClient(uri);
+      client = createMongoClient(uri);
     }
   }
 
   await client.connect();
   return client.db(DB_NAME);
+}
+
+/** Verify MongoDB is reachable (used by fetch script preflight). */
+export async function pingDb(): Promise<void> {
+  const db = await getDb();
+  await db.command({ ping: 1 });
 }
 
 export const COLLECTIONS = {

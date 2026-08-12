@@ -295,7 +295,7 @@ export default function ReviewSection({ businessSlug }: { businessSlug: string }
       {loadingReviews ? (
         <p className="text-slate-400 text-sm">Loading reviews…</p>
       ) : reviews.filter((r) => r.comment?.trim()).length === 0 ? (
-        <p className="text-slate-400 text-sm">No reviews yet. Be the first!</p>
+        <p className="text-slate-400 text-sm hidden">No reviews yet. Be the first!</p>
       ) : (
         <div className="space-y-4">
           {reviews.filter((r) => r.comment?.trim()).map((r) => (

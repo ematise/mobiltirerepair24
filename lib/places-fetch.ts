@@ -3,7 +3,9 @@ import path from 'node:path';
 import os from 'node:os';
 import { slugify } from './slugify';
 import { mapGoogleOpeningHours, type GoogleOpeningHours } from './hours';
-import { reHostPhotosToS3 } from './s3';
+import { reHostPhotosToS3, isS3Configured, checkS3Available } from './s3';
+import { fetchWithTimeout, withTimeout } from './fetch-with-timeout';
+import { pingDb } from './db';
 import {
   getAllCities,
   getBusinessCountsByCity,
@@ -61,11 +63,83 @@ const FIELD_MASK = [
 /** Target coverage per city. Extra Google results are discarded to save photo API calls. */
 const MAX_BUSINESSES_PER_CITY = 3;
 
+const PLACES_SEARCH_TIMEOUT_MS = 30_000;
+const PLACES_PHOTO_TIMEOUT_MS = 20_000;
+
+export type ServiceCheckResult = {
+  ok: boolean;
+  message: string;
+};
+
+export type FetchServiceChecks = {
+  mongodb: ServiceCheckResult;
+  googlePlaces: ServiceCheckResult;
+  s3: ServiceCheckResult & { configured: boolean };
+};
+
+/** Preflight checks for MongoDB, Google Places, and S3 before a long fetch run. */
+export async function checkFetchServices(): Promise<FetchServiceChecks> {
+  const mongodb = await (async (): Promise<ServiceCheckResult> => {
+    if (!process.env.MONGODB_URI) {
+      return { ok: false, message: 'MONGODB_URI is not set' };
+    }
+    try {
+      await withTimeout(pingDb(), 10_000, 'MongoDB connection');
+      return { ok: true, message: 'MongoDB is reachable' };
+    } catch (err) {
+      return { ok: false, message: (err as Error).message };
+    }
+  })();
+
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  const googlePlaces = await (async (): Promise<ServiceCheckResult> => {
+    if (!apiKey) {
+      return { ok: false, message: 'GOOGLE_MAPS_API_KEY is not set' };
+    }
+    try {
+      const res = await fetchWithTimeout(
+        'https://places.googleapis.com/v1/places:searchText',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Goog-Api-Key': apiKey,
+            'X-Goog-FieldMask': 'places.id',
+          },
+          body: JSON.stringify({ textQuery: 'mobile tire repair', pageSize: 1 }),
+        },
+        PLACES_SEARCH_TIMEOUT_MS,
+      );
+      if (res.status === 401 || res.status === 403) {
+        const body = await res.text();
+        return { ok: false, message: `Google Places API auth failed (${res.status}): ${body}` };
+      }
+      if (!res.ok && res.status >= 500) {
+        return { ok: false, message: `Google Places API error (${res.status})` };
+      }
+      return { ok: true, message: 'Google Places API is reachable' };
+    } catch (err) {
+      return { ok: false, message: (err as Error).message };
+    }
+  })();
+
+  const s3Status = await checkS3Available();
+  const s3: FetchServiceChecks['s3'] = {
+    ok: s3Status.ok,
+    configured: s3Status.configured,
+    message: s3Status.message,
+  };
+
+  return { mongodb, googlePlaces, s3 };
+}
+
 export type FetchBusinessesOptions = {
   citySlugs?: string[];
   maxPages?: number;
   useCache?: boolean;
   dryRun?: boolean;
+  /** When false, skip photo downloads/uploads (e.g. S3 unavailable). */
+  photosEnabled?: boolean;
 };
 
 export type FetchBusinessesResult = {
@@ -87,14 +161,6 @@ export type FetchBusinessesResult = {
 
 function getCacheDir(): string {
   return path.join(os.tmpdir(), 'mobiltirerepair24-places-cache');
-}
-
-function isS3Configured(): boolean {
-  return Boolean(
-    process.env.AWS_S3_BUCKET &&
-      process.env.AWS_ACCESS_KEY_ID &&
-      process.env.AWS_SECRET_ACCESS_KEY,
-  );
 }
 
 function inferServices(name: string): string[] {
@@ -160,18 +226,22 @@ async function searchTextPage(
     return JSON.parse(fs.readFileSync(cacheFile, 'utf8'));
   }
 
-  const res = await fetch('https://places.googleapis.com/v1/places:searchText', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Goog-Api-Key': apiKey,
-      'X-Goog-FieldMask': FIELD_MASK,
+  const res = await fetchWithTimeout(
+    'https://places.googleapis.com/v1/places:searchText',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Goog-Api-Key': apiKey,
+        'X-Goog-FieldMask': FIELD_MASK,
+      },
+      body: JSON.stringify({
+        textQuery: query,
+        ...(pageToken ? { pageToken } : {}),
+      }),
     },
-    body: JSON.stringify({
-      textQuery: query,
-      ...(pageToken ? { pageToken } : {}),
-    }),
-  });
+    PLACES_SEARCH_TIMEOUT_MS,
+  );
   stats.apiCalls++;
 
   if (!res.ok) {
@@ -196,7 +266,11 @@ async function fetchPlacePhotoUri(
     skipHttpRedirect: 'true',
     key: apiKey,
   });
-  const res = await fetch(`https://places.googleapis.com/v1/${photoName}/media?${params}`);
+  const res = await fetchWithTimeout(
+    `https://places.googleapis.com/v1/${photoName}/media?${params}`,
+    undefined,
+    PLACES_PHOTO_TIMEOUT_MS,
+  );
   stats.apiCalls++;
 
   if (!res.ok) {
@@ -217,9 +291,10 @@ async function attachListingPhoto(
   place: PlaceResult,
   business: Business,
   stats: { apiCalls: number },
+  s3Available: boolean,
 ): Promise<boolean> {
   const photoName = place.photos?.[0]?.name;
-  if (!photoName || !isS3Configured()) return false;
+  if (!photoName || !s3Available) return false;
 
   const photoUri = await fetchPlacePhotoUri(apiKey, photoName, stats);
   if (!photoUri) return false;
@@ -251,10 +326,12 @@ export async function fetchBusinessesFromPlaces(
     maxPages = 1,
     useCache = true,
     dryRun = false,
+    photosEnabled = isS3Configured(),
   } = options;
 
   const pages = Math.min(Math.max(maxPages, 1), 3);
-  const allCities = await getAllCities();
+  console.log(`Loading ${citySlugs?.length ? 'selected' : 'all'} cities from MongoDB...`);
+  const allCities = await withTimeout(getAllCities(), 15_000, 'Loading cities');
   const targets = citySlugs?.length
     ? allCities.filter((c) => citySlugs.includes(c.slug))
     : allCities;
@@ -268,7 +345,7 @@ export async function fetchBusinessesFromPlaces(
   }
 
   // Prefer cities with no (or fewer) businesses so sparse coverage fills first.
-  const businessCounts = await getBusinessCountsByCity();
+  const businessCounts = await withTimeout(getBusinessCountsByCity(), 15_000, 'Loading business counts');
   targets.sort((a, b) => {
     const countA = businessCounts.get(`${a.slug}:${a.state}`) ?? 0;
     const countB = businessCounts.get(`${b.slug}:${b.state}`) ?? 0;
@@ -279,9 +356,11 @@ export async function fetchBusinessesFromPlaces(
     return a.stateCode.localeCompare(b.stateCode);
   });
 
-  if (!dryRun && !isS3Configured()) {
-    console.warn('AWS S3 is not configured — Places fetch will skip business photos');
+  if (!dryRun && !photosEnabled) {
+    console.warn('Photos disabled — business listings will be saved without images');
   }
+
+  console.log(`Scanning ${targets.length} cities...\n`);
 
   const stats = { apiCalls: 0, cacheHits: 0 };
   const seen = new Set<string>();
@@ -292,12 +371,18 @@ export async function fetchBusinessesFromPlaces(
   let businessesFound = 0;
   let citiesProcessed = 0;
   let citiesSkipped = 0;
+  let citiesFailed = 0;
 
   for (const city of targets) {
     const existingCount = businessCounts.get(`${city.slug}:${city.state}`) ?? 0;
+    let needsPhotoBackfill = false;
     if (existingCount >= MAX_BUSINESSES_PER_CITY) {
-      const listed = await getBusinessesByCity(city.slug, city.state);
-      const needsPhotoBackfill = listed.some((b) => !b.photos?.length);
+      const listed = await withTimeout(
+        getBusinessesByCity(city.slug, city.state),
+        10_000,
+        `Loading businesses for ${city.name}`,
+      );
+      needsPhotoBackfill = listed.some((b) => !b.photos?.length);
       if (!needsPhotoBackfill) {
         citiesSkipped++;
         cityResults.push({
@@ -314,8 +399,18 @@ export async function fetchBusinessesFromPlaces(
     const query = `mobile tire repair in ${city.name}, ${city.stateCode}`;
     let pageToken: string | undefined;
     let cityCount = 0;
+    let cityUpdated = 0;
+    let cityPhotos = 0;
     citiesProcessed++;
 
+    const taskLabel = needsPhotoBackfill
+      ? 'photo backfill'
+      : needed > 0
+        ? `need ${needed} more`
+        : 'fetch';
+    process.stdout.write(`→ ${city.name}, ${city.stateCode} (${taskLabel})... `);
+
+    let cityFailed = false;
     for (let page = 0; page < pages; page++) {
       // Cache key includes "photos-loc" so older Text Search caches (without photo
       // resource names or location) are not reused after this feature was added.
@@ -324,25 +419,35 @@ export async function fetchBusinessesFromPlaces(
       try {
         data = await searchTextPage(apiKey, query, cacheKey, useCache, stats, pageToken);
       } catch (err) {
-        throw new Error(`${city.name}, ${city.stateCode}: ${(err as Error).message}`);
+        console.log(`failed`);
+        console.warn(`  ⚠ Places search failed: ${(err as Error).message}`);
+        cityFailed = true;
+        citiesFailed++;
+        break;
       }
 
       for (const place of data.places ?? []) {
         if (seen.has(place.id) || !isRelevant(place) || !place.displayName) continue;
 
         const business = toBusiness(place, city);
-        const existingPhotos = await getBusinessPhotos(business.slug);
+        const existingPhotos = await withTimeout(
+          getBusinessPhotos(business.slug),
+          10_000,
+          `Loading photos for ${business.slug}`,
+        );
         const alreadyExists = existingPhotos !== undefined;
 
         if (alreadyExists) {
           seen.add(place.id);
           if (!dryRun) {
             const needsPhoto = existingPhotos.length === 0;
-            if (needsPhoto && (await attachListingPhoto(apiKey, place, business, stats))) {
+            if (needsPhoto && (await attachListingPhoto(apiKey, place, business, stats, photosEnabled))) {
               photosAdded++;
+              cityPhotos++;
             }
             await upsertBusiness(business);
             updated++;
+            cityUpdated++;
           }
           continue;
         }
@@ -355,8 +460,9 @@ export async function fetchBusinessesFromPlaces(
 
         if (!dryRun) {
           await ensureBusinessLocation(business);
-          if (await attachListingPhoto(apiKey, place, business, stats)) {
+          if (await attachListingPhoto(apiKey, place, business, stats, photosEnabled)) {
             photosAdded++;
+            cityPhotos++;
           }
           await upsertBusiness(business);
           created++;
@@ -370,7 +476,21 @@ export async function fetchBusinessesFromPlaces(
       await new Promise((r) => setTimeout(r, 2000));
     }
 
+    if (cityFailed) {
+      cityResults.push({ city: city.name, stateCode: city.stateCode, count: 0 });
+      continue;
+    }
+
+    const parts = [`${cityCount} new`];
+    if (cityUpdated > 0) parts.push(`${cityUpdated} updated`);
+    if (cityPhotos > 0) parts.push(`${cityPhotos} photos`);
+    console.log(`done (${parts.join(', ')})`);
+
     cityResults.push({ city: city.name, stateCode: city.stateCode, count: cityCount });
+  }
+
+  if (citiesFailed > 0) {
+    console.warn(`\n⚠ ${citiesFailed} cit${citiesFailed === 1 ? 'y' : 'ies'} failed due to Places API errors`);
   }
 
   return {
