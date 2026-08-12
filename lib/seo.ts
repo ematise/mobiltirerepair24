@@ -5,6 +5,20 @@ import { fillTemplate } from './data';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mobiletirerepair24.com';
 const SITE_NAME = 'MobileTireRepair24';
 
+export function homeMetadata(): Metadata {
+  const title = 'MobileTireRepair24 — Find Mobile Tire Repair Near You';
+  const description =
+    'Find top-rated 24/7 mobile tire repair near you. Compare local technicians who come to your home, office, or roadside — anywhere in the US.';
+  const url = `${SITE_URL}/`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title, description, url, siteName: SITE_NAME, type: 'website' },
+  };
+}
+
 export function cityMetadata(city: City, state: State): Metadata {
   const title = `Mobile Tire Repair in ${city.name}, ${state.code} | ${SITE_NAME}`;
   const description = `Find top-rated mobile tire repair services in ${city.name}, ${state.code}. Fast on-site service — technicians come to you wherever you are.`;

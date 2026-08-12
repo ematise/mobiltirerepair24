@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import { getAllStates, getAllCities, isCityIndexable } from '@/lib/data';
+import { homeMetadata } from '@/lib/seo';
+
+export const metadata = homeMetadata();
 
 export default async function HomePage() {
   const [states, allCities] = await Promise.all([getAllStates(), getAllCities()]);

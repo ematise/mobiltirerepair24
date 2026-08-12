@@ -101,7 +101,7 @@ Keep the existing `sitemap` field.
 
 ### Task 1.3 — Homepage metadata with canonical
 
-- [ ] Done
+- [x] Done
 
 **Files:** `lib/seo.ts`, `app/page.tsx`
 
