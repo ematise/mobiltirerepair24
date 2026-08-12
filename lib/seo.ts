@@ -6,9 +6,9 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mobiletirerepair24
 const SITE_NAME = 'MobileTireRepair24';
 
 export function homeMetadata(): Metadata {
-  const title = 'MobileTireRepair24 — Find Mobile Tire Repair Near You';
+  const title = 'Mobile Tire Repair Near Me — Find Open Techs Fast | MobileTireRepair24';
   const description =
-    'Find top-rated 24/7 mobile tire repair near you. Compare local technicians who come to your home, office, or roadside — anywhere in the US.';
+    'Find mobile tire repair near you — compare open now techs sorted by distance. Call a local technician who comes to your location anywhere in the US.';
   const url = `${SITE_URL}/`;
 
   return {
