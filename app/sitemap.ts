@@ -2,10 +2,12 @@ import type { MetadataRoute } from 'next';
 import {
   getAllStates,
   getAllCities,
-  getAllBusinesses,
+  getAllBusinessSlugs,
   getAllServices,
-  isCityIndexable,
-  isServiceCityIndexable,
+  getIndexableCityKeys,
+  getIndexableServiceCityKeys,
+  cityIndexKey,
+  serviceCityIndexKey,
 } from '@/lib/data';
 
 const SITE_URL =
@@ -14,23 +16,26 @@ const SITE_URL =
 export const revalidate = 3600; // re-render at most hourly; admin edits go live without redeploys
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [states, cities, businesses, services] = await Promise.all([
-    getAllStates(),
-    getAllCities(),
-    getAllBusinesses(),
-    getAllServices(),
-  ]);
+  const [states, cities, businessSlugs, services, indexableCities, indexableServiceCities] =
+    await Promise.all([
+      getAllStates(),
+      getAllCities(),
+      getAllBusinessSlugs(),
+      getAllServices(),
+      getIndexableCityKeys(),
+      getIndexableServiceCityKeys(),
+    ]);
 
-  const urls: MetadataRoute.Sitemap = [];
-
-  urls.push({ url: `${SITE_URL}/`, changeFrequency: 'daily', priority: 1.0 });
+  const urls: MetadataRoute.Sitemap = [
+    { url: `${SITE_URL}/`, changeFrequency: 'daily', priority: 1.0 },
+  ];
 
   for (const state of states) {
     urls.push({ url: `${SITE_URL}/${state.slug}/`, changeFrequency: 'weekly', priority: 0.8 });
   }
 
   for (const city of cities) {
-    if (!(await isCityIndexable(city.slug, city.state))) continue;
+    if (!indexableCities.has(cityIndexKey(city.slug, city.state))) continue;
     urls.push({
       url: `${SITE_URL}/${city.state}/${city.slug}/`,
       changeFrequency: 'weekly',
@@ -40,7 +45,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (const city of cities) {
     for (const service of services) {
-      if (!(await isServiceCityIndexable(service.slug, city.slug, city.state))) continue;
+      if (
+        !indexableServiceCities.has(
+          serviceCityIndexKey(service.slug, city.slug, city.state)
+        )
+      ) {
+        continue;
+      }
       urls.push({
         url: `${SITE_URL}/${city.state}/${city.slug}/${service.slug}/`,
         changeFrequency: 'weekly',
@@ -49,9 +60,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  for (const biz of businesses) {
+  for (const slug of businessSlugs) {
     urls.push({
-      url: `${SITE_URL}/business/${biz.slug}/`,
+      url: `${SITE_URL}/business/${slug}/`,
       changeFrequency: 'monthly',
       priority: 0.7,
     });

@@ -207,6 +207,18 @@ export async function getBusinessPhotos(slug: string): Promise<string[] | undefi
   return Array.isArray(doc.photos) ? (doc.photos as string[]) : [];
 }
 
+export function cityIndexKey(citySlug: string, stateSlug: string): string {
+  return `${citySlug}:${stateSlug}`;
+}
+
+export function serviceCityIndexKey(
+  serviceSlug: string,
+  citySlug: string,
+  stateSlug: string
+): string {
+  return `${serviceSlug}:${citySlug}:${stateSlug}`;
+}
+
 /** Map of `${citySlug}:${stateSlug}` → business count for fetch prioritization. */
 export async function getBusinessCountsByCity(): Promise<Map<string, number>> {
   const db = await getDb();
@@ -220,9 +232,19 @@ export async function getBusinessCountsByCity(): Promise<Map<string, number>> {
   const map = new Map<string, number>();
   for (const row of rows) {
     if (!row._id?.city || !row._id?.state) continue;
-    map.set(`${row._id.city}:${row._id.state}`, row.count);
+    map.set(cityIndexKey(row._id.city, row._id.state), row.count);
   }
   return map;
+}
+
+/** Slugs only — avoids loading full docs and side-effect repairs during sitemap builds. */
+export async function getAllBusinessSlugs(): Promise<string[]> {
+  const db = await getDb();
+  const docs = await db
+    .collection(COLLECTIONS.businesses)
+    .find({}, { projection: { slug: 1, _id: 0 } })
+    .toArray();
+  return docs.map((doc) => doc.slug as string);
 }
 
 export async function createBusiness(business: Business): Promise<Business> {
@@ -488,6 +510,41 @@ export async function isServiceCityIndexable(
     .collection(COLLECTIONS.businesses)
     .countDocuments({ city: citySlug, state: stateSlug, services: serviceSlug });
   return count >= MIN_BUSINESSES_TO_INDEX;
+}
+
+/** Bulk indexability sets for sitemap and other batch URL builders. */
+export async function getIndexableCityKeys(): Promise<Set<string>> {
+  const counts = await getBusinessCountsByCity();
+  const keys = new Set<string>();
+  for (const [key, count] of counts) {
+    if (count >= MIN_BUSINESSES_TO_INDEX) keys.add(key);
+  }
+  return keys;
+}
+
+export async function getIndexableServiceCityKeys(): Promise<Set<string>> {
+  const db = await getDb();
+  const rows = await db
+    .collection(COLLECTIONS.businesses)
+    .aggregate<{ _id: { service: string; city: string; state: string }; count: number }>([
+      { $unwind: '$services' },
+      {
+        $group: {
+          _id: { service: '$services', city: '$city', state: '$state' },
+          count: { $sum: 1 },
+        },
+      },
+      { $match: { count: { $gte: MIN_BUSINESSES_TO_INDEX } } },
+    ])
+    .toArray();
+
+  const keys = new Set<string>();
+  for (const row of rows) {
+    const { service, city, state } = row._id ?? {};
+    if (!service || !city || !state) continue;
+    keys.add(serviceCityIndexKey(service, city, state));
+  }
+  return keys;
 }
 
 // ── Template interpolation ───────────────────────────────────────────────────
