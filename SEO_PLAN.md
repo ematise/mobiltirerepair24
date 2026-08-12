@@ -713,7 +713,7 @@ revalidatePath('/', 'layout');
 
 ### Task 6.1 — Self-hosted fonts via `next/font`
 
-- [ ] Done
+- [x] Done
 
 **Files:** `app/layout.tsx`, `app/globals.css`
 
@@ -753,7 +753,7 @@ and change the `<html>` tag to:
 
 ### Task 6.2 — `next/image` for public listing photos
 
-- [ ] Done
+- [x] Done
 
 **Files:** `components/listing/PhotoGallery.tsx`, `components/BusinessCard.tsx`
 
