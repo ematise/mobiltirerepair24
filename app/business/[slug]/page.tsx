@@ -18,10 +18,11 @@ import {
 } from '@/lib/schema';
 import { getOpenStatus } from '@/lib/open-now';
 import { timezoneForStateCode } from '@/lib/timezones';
+import { enrichProviders } from '@/lib/provider-list';
 import Breadcrumb from '@/components/Breadcrumb';
 import SchemaOrg from '@/components/SchemaOrg';
 import ReviewSection from '@/components/ReviewSection';
-import BusinessCard from '@/components/BusinessCard';
+import RelatedProviders from '@/components/listing/RelatedProviders';
 import RatingBadge from '@/components/listing/RatingBadge';
 import PhotoGallery from '@/components/listing/PhotoGallery';
 import ServiceSection from '@/components/listing/ServiceSection';
@@ -78,6 +79,7 @@ export default async function BusinessPage({ params }: Props) {
   const relatedBusinesses = allCityBusinesses
     .filter((b) => b.slug !== biz.slug)
     .slice(0, 3);
+  const relatedProviders = enrichProviders(relatedBusinesses, city, state.code);
 
   const crumbs = businessBreadcrumbs(biz, city, state);
   const openStatus = getOpenStatus(biz.hours, timezoneForStateCode(biz.stateCode));
@@ -179,13 +181,7 @@ export default async function BusinessPage({ params }: Props) {
 
           <SectionContainer>
             <SectionHeading>More in {city.name}</SectionHeading>
-            {relatedBusinesses.length > 0 && (
-              <div className="grid grid-cols-1 gap-3 mb-4">
-                {relatedBusinesses.map((b) => (
-                  <BusinessCard key={b.slug} biz={b} />
-                ))}
-              </div>
-            )}
+            <RelatedProviders providers={relatedProviders} services={allServices} />
             <Link
               href={`/${state.slug}/${city.slug}/`}
               className="text-cta hover:underline text-sm font-medium cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cta rounded"

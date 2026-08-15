@@ -127,7 +127,7 @@ export default async function HomePage() {
             closest to your location.
           </p>
 
-          <NearMeFinder popularCities={popularCityLinks} />
+          <NearMeFinder popularCities={popularCityLinks} services={services} />
 
           <p className="mt-8 text-slate-400 text-sm">or browse a city</p>
           <div className="flex flex-wrap justify-center gap-2 mt-3">
@@ -215,7 +215,7 @@ export default async function HomePage() {
 
       {/* Top rated */}
       <section className="max-w-6xl mx-auto px-4 py-12">
-        <TopRatedBusinesses businesses={topRated} />
+        <TopRatedBusinesses businesses={topRated} services={services} />
       </section>
 
       {/* Services */}

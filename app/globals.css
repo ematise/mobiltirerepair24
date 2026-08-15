@@ -216,15 +216,93 @@ button:focus-visible {
   font-weight: 500;
 }
 
-/* ── Header ──────────────────────────────────────────────────────────────── */
+/* ── Site chrome (location banner + header) ─────────────────────────────── */
 
-.site-header {
+.site-chrome {
   position: sticky;
   top: 0;
   z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+
+.location-prompt-banner {
+  position: relative;
+  flex-shrink: 0;
+  background: var(--color-cta-soft);
+  border-top: 1px solid color-mix(in srgb, var(--color-cta) 20%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-cta) 20%, transparent);
+}
+
+.site-header {
+  flex-shrink: 0;
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
 }
+
+.location-prompt-banner-content {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.875rem 2.75rem 0.875rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.location-prompt-banner-icon {
+  color: var(--color-cta);
+  margin-top: 0.125rem;
+}
+
+.location-prompt-banner-title {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-cta);
+  line-height: 1.3;
+}
+
+.location-prompt-banner-body {
+  margin-top: 0.125rem;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.8125rem;
+  color: var(--color-text);
+  line-height: 1.45;
+}
+
+.location-prompt-banner-privacy {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.6875rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.location-prompt-banner-dismiss {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--color-cta);
+  cursor: pointer;
+}
+
+.location-prompt-banner-dismiss:hover {
+  background: color-mix(in srgb, var(--color-cta) 12%, transparent);
+}
+
+.location-prompt-banner-dismiss:focus-visible {
+  box-shadow: var(--shadow-focus);
+  outline: none;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
 
 .site-header-inner {
   max-width: 72rem;
@@ -267,6 +345,9 @@ button:focus-visible {
 .site-header-nav {
   margin-left: auto;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .site-header-nav a {
@@ -275,6 +356,30 @@ button:focus-visible {
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
+}
+
+.site-header-location-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid color-mix(in srgb, var(--color-cta) 25%, transparent);
+  border-radius: 9999px;
+  background: var(--color-cta-soft);
+  color: var(--color-cta);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.site-header-location-pill:hover {
+  background: color-mix(in srgb, var(--color-cta) 15%, var(--color-cta-soft));
+}
+
+.site-header-location-pill:focus-visible {
+  box-shadow: var(--shadow-focus);
+  outline: none;
 }
 
 .site-header-nav a:hover {

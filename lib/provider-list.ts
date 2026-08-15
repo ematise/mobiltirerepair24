@@ -12,6 +12,8 @@ export type ProviderListing = {
   rating: number;
   reviewCount: number;
   services: string[];
+  lat?: number;
+  lng?: number;
   distanceMiles: number | null;
   openNow: boolean | null;
   openLabel: string | null;
@@ -52,34 +54,77 @@ function openSortRank(openNow: boolean | null): number {
   return 2;
 }
 
+export function businessToProviderListing(
+  biz: Business,
+  options?: {
+    stateCode?: string;
+    distanceMiles?: number | null;
+    referenceLat?: number;
+    referenceLng?: number;
+  },
+): ProviderListing {
+  const stateCode = options?.stateCode ?? biz.stateCode;
+  const openStatus = getOpenStatus(biz.hours, timezoneForStateCode(stateCode));
+  const cardOpen = getCardOpenLabel(openStatus);
+
+  let distanceMiles = options?.distanceMiles ?? null;
+  if (
+    distanceMiles === null &&
+    options?.referenceLat !== undefined &&
+    options?.referenceLng !== undefined &&
+    isValidLatLng(biz.lat ?? 0, biz.lng ?? 0) &&
+    isValidLatLng(options.referenceLat, options.referenceLng)
+  ) {
+    distanceMiles =
+      Math.round(
+        haversineMiles(options.referenceLat, options.referenceLng, biz.lat!, biz.lng!) * 10,
+      ) / 10;
+  }
+
+  return {
+    slug: biz.slug,
+    name: biz.name,
+    phone: biz.phone,
+    phoneDisplay: biz.phoneDisplay,
+    description: biz.description,
+    rating: biz.rating,
+    reviewCount: biz.reviewCount,
+    services: biz.services,
+    lat: biz.lat,
+    lng: biz.lng,
+    distanceMiles,
+    openNow: cardOpen?.openNow ?? null,
+    openLabel: cardOpen?.label ?? null,
+  };
+}
+
+export function applyUserDistance(
+  providers: ProviderListing[],
+  userLat: number,
+  userLng: number,
+): ProviderListing[] {
+  return providers.map((p) => {
+    if (!isValidLatLng(p.lat ?? 0, p.lng ?? 0) || !isValidLatLng(userLat, userLng)) {
+      return { ...p, distanceMiles: null };
+    }
+    const distanceMiles =
+      Math.round(haversineMiles(userLat, userLng, p.lat!, p.lng!) * 10) / 10;
+    return { ...p, distanceMiles };
+  });
+}
+
 export function enrichProviders(
   businesses: Business[],
-  city: City,
+  _city: City,
   stateCode: string,
 ): ProviderListing[] {
-  return businesses.map((biz) => {
-    const openStatus = getOpenStatus(biz.hours, timezoneForStateCode(stateCode));
-    const cardOpen = getCardOpenLabel(openStatus);
+  return businesses.map((biz) =>
+    businessToProviderListing(biz, { stateCode }),
+  );
+}
 
-    let distanceMiles: number | null = null;
-    if (isValidLatLng(biz.lat ?? 0, biz.lng ?? 0) && isValidLatLng(city.lat, city.lng)) {
-      distanceMiles = Math.round(haversineMiles(city.lat, city.lng, biz.lat!, biz.lng!) * 10) / 10;
-    }
-
-    return {
-      slug: biz.slug,
-      name: biz.name,
-      phone: biz.phone,
-      phoneDisplay: biz.phoneDisplay,
-      description: biz.description,
-      rating: biz.rating,
-      reviewCount: biz.reviewCount,
-      services: biz.services,
-      distanceMiles,
-      openNow: cardOpen?.openNow ?? null,
-      openLabel: cardOpen?.label ?? null,
-    };
-  });
+export function businessesToProviderListings(businesses: Business[]): ProviderListing[] {
+  return businesses.map((biz) => businessToProviderListing(biz));
 }
 
 export function sortProviders(providers: ProviderListing[], mode: SortMode): ProviderListing[] {

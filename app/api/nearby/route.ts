@@ -1,25 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllBusinesses, getAllCities } from '@/lib/data';
 import { haversineMiles, isValidLatLng } from '@/lib/geo';
-import { getOpenStatus } from '@/lib/open-now';
-import { timezoneForStateCode } from '@/lib/timezones';
-
+import { businessToProviderListing } from '@/lib/provider-list';
+import type { ProviderListing } from '@/lib/provider-list';
 export const runtime = 'nodejs';
 
-export type NearbyBusiness = {
-  slug: string;
-  name: string;
-  phone: string;
-  phoneDisplay: string;
-  rating: number;
-  reviewCount: number;
-  cityName: string;
-  stateCode: string;
-  distanceMiles: number;
-  openNow: boolean | null;
-  openLabel: string | null;
-  photo: string | null;
-};
+export type NearbyBusiness = ProviderListing;
 
 export type NearbyResponse = {
   results: NearbyBusiness[];
@@ -32,15 +18,7 @@ function openSortRank(openNow: boolean | null): number {
   return 2;
 }
 
-function formatCityName(slug: string): string {
-  return slug
-    .split('-')
-    .map((w) => w[0].toUpperCase() + w.slice(1))
-    .join(' ');
-}
-
-export async function GET(req: NextRequest) {
-  const lat = Number(req.nextUrl.searchParams.get('lat'));
+export async function GET(req: NextRequest) {  const lat = Number(req.nextUrl.searchParams.get('lat'));
   const lng = Number(req.nextUrl.searchParams.get('lng'));
   const limitParam = Number(req.nextUrl.searchParams.get('limit') ?? 5);
   const limit = Math.min(Math.max(Number.isFinite(limitParam) ? limitParam : 5, 1), 10);
@@ -82,28 +60,17 @@ export async function GET(req: NextRequest) {
         }
         if (distanceMiles === null) return null;
 
-        const openStatus = getOpenStatus(biz.hours, timezoneForStateCode(biz.stateCode));
-
-        return {
-          slug: biz.slug,
-          name: biz.name,
-          phone: biz.phone,
-          phoneDisplay: biz.phoneDisplay,
-          rating: biz.rating,
-          reviewCount: biz.reviewCount,
-          cityName: city.name || formatCityName(biz.city),
+        return businessToProviderListing(biz, {
           stateCode: biz.stateCode,
           distanceMiles: Math.round(distanceMiles * 10) / 10,
-          openNow: openStatus?.openNow ?? null,
-          openLabel: openStatus?.label ?? null,
-          photo: biz.photos?.[0] ?? null,
-        } satisfies NearbyBusiness;
-      })
+        }) satisfies NearbyBusiness;      })
       .filter((b): b is NearbyBusiness => b !== null)
       .sort((a, b) => {
         const openDiff = openSortRank(a.openNow) - openSortRank(b.openNow);
         if (openDiff !== 0) return openDiff;
-        if (a.distanceMiles !== b.distanceMiles) return a.distanceMiles - b.distanceMiles;
+        const aDist = a.distanceMiles ?? Number.POSITIVE_INFINITY;
+        const bDist = b.distanceMiles ?? Number.POSITIVE_INFINITY;
+        if (aDist !== bDist) return aDist - bDist;
         return b.rating - a.rating;
       })
       .slice(0, limit);

@@ -1,75 +1,41 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Phone } from 'lucide-react';
-import type { Business } from '@/lib/data';
-import Button from '@/components/ui/Button';
+'use client';
 
-function formatCitySlug(slug: string) {
-  return slug.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
-}
+import type { Business, Service } from '@/lib/data';
+import { businessesToProviderListings } from '@/lib/provider-list';
+import ProviderCard from '@/components/listing/ProviderCard';
+import { useProvidersForUser } from '@/components/listing/useProvidersForUser';
 
-export default function TopRatedBusinesses({ businesses }: { businesses: Business[] }) {
+export default function TopRatedBusinesses({
+  businesses,
+  services,
+}: {
+  businesses: Business[];
+  services: Service[];
+}) {
+  const baseProviders = businessesToProviderListings(businesses);
+  const { providers, hasUserLocation } = useProvidersForUser(baseProviders);
+
   if (businesses.length === 0) return null;
 
   return (
     <section aria-labelledby="top-rated-heading">
-      <h2 id="top-rated-heading" className="text-2xl font-semibold text-slate-900 mb-6">
+      <h2
+        id="top-rated-heading"
+        className="text-base font-semibold text-heading mb-3 [font-family:var(--font-body)]"
+      >
         Top-rated mobile tire techs
       </h2>
-      <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 -mx-4 px-4 scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible md:mx-0 md:px-0 md:gap-6">
-        {businesses.map((biz) => (
-          <article
-            key={biz.slug}
-            className="snap-start shrink-0 w-72 md:w-auto border border-slate-200 rounded-lg bg-white overflow-hidden hover:border-blue-300 hover:shadow-md transition-all duration-200"
-          >
-            {biz.photos?.[0] ? (
-              <div className="relative h-36 w-full">
-                <Image
-                  src={biz.photos[0]}
-                  alt={`${biz.name} photo`}
-                  fill
-                  className="object-cover"
-                  sizes="288px"
-                />
-              </div>
-            ) : (
-              <div className="h-36 w-full bg-slate-100" aria-hidden="true" />
-            )}
-            <div className="p-4">
-              <h3 className="font-semibold text-slate-900 leading-tight">
-                <Link
-                  href={`/business/${biz.slug}/`}
-                  className="hover:text-blue-700 transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
-                >
-                  {biz.name}
-                </Link>
-              </h3>
-              {biz.rating > 0 && (
-                <div className="flex items-center gap-1 mt-1.5 text-sm">
-                  <span className="text-amber-400" aria-hidden="true">
-                    ★
-                  </span>
-                  <span className="font-semibold text-slate-800">{biz.rating.toFixed(1)}</span>
-                  <span className="text-slate-400">({biz.reviewCount})</span>
-                </div>
-              )}
-              <p className="text-slate-500 text-sm mt-1">
-                {formatCitySlug(biz.city)}, {biz.stateCode}
-              </p>
-              <Button
-                href={`tel:${biz.phone}`}
-                variant="primary"
-                size="sm"
-                className="mt-3"
-                aria-label={`Call ${biz.name} at ${biz.phoneDisplay}`}
-              >
-                <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
-                {biz.phoneDisplay}
-              </Button>
-            </div>
-          </article>
+      <ul className="flex flex-col gap-3 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4" role="list">
+        {providers.map((provider) => (
+          <li key={provider.slug}>
+            <ProviderCard
+              provider={provider}
+              services={services}
+              distanceFromUser={hasUserLocation}
+            />
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }

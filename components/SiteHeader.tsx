@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { ArrowLeft, Search, X } from 'lucide-react';
+import { ArrowLeft, MapPin, Search, X } from 'lucide-react';
 import SearchBar from '@/components/SearchBar';
 import Button from '@/components/ui/Button';
+import { useUserLocation } from '@/components/location/UserLocationProvider';
 
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -16,6 +17,7 @@ export default function SiteHeader() {
   const isHome = pathname === '/';
   const isAdmin = pathname.startsWith('/admin');
   const showBack = !isHome && !isAdmin;
+  const { hasUserLocation, clearLocation, requestLocation } = useUserLocation();
 
   function handleBack() {
     const fromSameOrigin =
@@ -73,6 +75,20 @@ export default function SiteHeader() {
         </div>
 
         <nav className="site-header-nav" aria-label="Main navigation">
+          {hasUserLocation && !isAdmin && (
+            <button
+              type="button"
+              onClick={() => {
+                clearLocation();
+                requestLocation();
+              }}
+              className="site-header-location-pill"
+              aria-label="Using your location. Tap to update location."
+            >
+              <MapPin className="h-3.5 w-3.5 shrink-0" strokeWidth={2} aria-hidden="true" />
+              Near you
+            </button>
+          )}
           <Link href="/#browse-states">Browse states</Link>
         </nav>
 

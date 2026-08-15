@@ -9,9 +9,11 @@ import OpenStatusBadge from '@/components/listing/OpenStatusBadge';
 export default function ProviderCard({
   provider,
   services,
+  distanceFromUser = false,
 }: {
   provider: ProviderListing;
   services: Service[];
+  distanceFromUser?: boolean;
 }) {
   return (
     <article className="rounded-[var(--radius-card)] border border-border bg-surface p-4">
@@ -48,7 +50,7 @@ export default function ProviderCard({
               {provider.distanceMiles !== null && (
                 <span className="inline-flex items-center gap-1 text-muted">
                   <MapPin className="h-3.5 w-3.5 shrink-0" strokeWidth={2} aria-hidden="true" />
-                  {provider.distanceMiles} mi
+                  {provider.distanceMiles} mi{distanceFromUser ? ' from you' : ''}
                 </span>
               )}
             </div>

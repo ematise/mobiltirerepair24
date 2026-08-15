@@ -3,7 +3,7 @@ import { EB_Garamond, Lato } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
 import { getAllCities, getAllStates } from '@/lib/data';
-import SiteHeader from '@/components/SiteHeader';
+import AppShell from '@/components/location/AppShell';
 
 const garamond = EB_Garamond({
   subsets: ['latin'],
@@ -49,13 +49,12 @@ export default async function RootLayout({
     <html lang="en" className={`${garamond.variable} ${lato.variable}`} suppressHydrationWarning>
       <head />
       <body className="flex flex-col min-h-screen" suppressHydrationWarning>
-        <SiteHeader />
+        <AppShell>
+          {/* Main */}
+          <main className="flex-1">{children}</main>
 
-        {/* Main */}
-        <main className="flex-1">{children}</main>
-
-        {/* Footer */}
-        <footer className="bg-footer text-footer-muted text-sm mt-16">
+          {/* Footer */}
+          <footer className="bg-footer text-footer-muted text-sm mt-16">
           <div className="max-w-6xl mx-auto px-4 py-10">
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8 mb-8">
               {states.map((state) => (
@@ -92,6 +91,7 @@ export default async function RootLayout({
             </div>
           </div>
         </footer>
+        </AppShell>
       </body>
     </html>
   );
