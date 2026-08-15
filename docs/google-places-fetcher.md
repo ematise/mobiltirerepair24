@@ -234,7 +234,8 @@ Places are deduplicated by Google Place ID across all cities in one run. The sam
 | `services` | Inferred from name (always includes `mobile-tire-repair`, `flat-tire-repair`; may add `tire-installation`) |
 | `areasServed` | `[city.name]` |
 | `description` | Auto-generated template text |
-| `rating`, `reviewCount` | Google |
+| `rating`, `reviewCount` | Google, blended with any manually-submitted reviews (see below) |
+| `baseRating`, `baseReviewCount` | Google's raw rating/count, kept as the baseline for blending |
 | `website` | Google (if available) |
 | `hours` | Google opening hours (if available). **24/7** places are encoded by Google as a single period with `open` at Sunday 00:00 and **no** `close` field — we map that to every day `00:00–23:59`. |
 | `photos` | First Google Places photo, re-hosted to S3 (only when the listing has no photos yet). Skipped if S3 is not configured or the place has no photos. |
@@ -269,6 +270,29 @@ Existing photos are **not** overwritten. Re-runs only backfill listings that sti
 - **New slug** → record is **inserted**
 - Runs are **non-destructive**: businesses not returned by Google are **not deleted**
 - Existing `photos` are preserved when the listing already has images
+
+### Blending with manually-submitted reviews
+
+Visitors can leave a review directly on a listing page (see `app/api/reviews/route.ts`). Those manual
+reviews live in their own `reviews` MongoDB collection and are **never** overwritten by a re-fetch.
+
+Each business stores its Google-sourced numbers separately as `baseRating`/`baseReviewCount`. The
+publicly displayed `rating`/`reviewCount` are always **recomputed** as a weighted average of that
+baseline plus the live total of manually-submitted reviews:
+
+```
+combined rating = (baseRating × baseReviewCount + Σ manual review ratings)
+                  ÷ (baseReviewCount + count of manual reviews)
+```
+
+This recomputation happens both when a new manual review is submitted and when this fetcher updates
+an existing business, so:
+
+- Re-running the fetcher refreshes `baseRating`/`baseReviewCount` to Google's latest numbers **without**
+  erasing manually-submitted reviews — they're re-blended into the new baseline.
+- Submitting a new manual review never double-counts reviews that were already blended in by an
+  earlier submission, because the blend is always computed from the immutable baseline plus a fresh
+  aggregate of all manual reviews, not by adding onto the previously-combined `rating`/`reviewCount`.
 
 ### Location records
 

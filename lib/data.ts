@@ -16,6 +16,12 @@ export type Business = {
   description: string;
   rating: number;
   reviewCount: number;
+  // Baseline rating/count from the external source (Google Places import, or the
+  // value an admin last entered by hand). Kept separate from `rating`/`reviewCount`
+  // so manually-submitted reviews can be blended in without being double-counted
+  // on every subsequent submission, and without being erased by re-imports.
+  baseRating?: number;
+  baseReviewCount?: number;
   // Extended fields for comprehensive listing
   photos?: string[];
   hours?: {
@@ -282,6 +288,74 @@ export async function deleteBusiness(slug: string): Promise<boolean> {
   const db = await getDb();
   const result = await db.collection(COLLECTIONS.businesses).deleteOne({ slug });
   return result.deletedCount > 0;
+}
+
+// ── Rating blending (Google baseline + manually-submitted reviews) ──────────
+
+export type ReviewAggregate = { sum: number; count: number };
+
+/** Sum/count of all manually-submitted reviews for a business (the `reviews` collection). */
+export async function getManualReviewAggregate(slug: string): Promise<ReviewAggregate> {
+  const db = await getDb();
+  const agg = await db
+    .collection(COLLECTIONS.reviews)
+    .aggregate<{ _id: null; sum: number; count: number }>([
+      { $match: { businessSlug: slug } },
+      { $group: { _id: null, sum: { $sum: '$rating' }, count: { $sum: 1 } } },
+    ])
+    .toArray();
+  return agg[0] ? { sum: agg[0].sum, count: agg[0].count } : { sum: 0, count: 0 };
+}
+
+/**
+ * Combine an external/base rating (e.g. imported from Google, or entered by an
+ * admin) with the live total of manually-submitted reviews. Always recomputed
+ * from the immutable baseline + the *current* review aggregate, so calling
+ * this repeatedly never double-counts previously-blended reviews.
+ */
+export function combineRatingWithReviews(
+  baseRating: number,
+  baseReviewCount: number,
+  manualReviews: ReviewAggregate
+): { rating: number; reviewCount: number } {
+  const totalCount = baseReviewCount + manualReviews.count;
+  if (totalCount === 0) return { rating: 0, reviewCount: 0 };
+  const totalSum = baseRating * baseReviewCount + manualReviews.sum;
+  return { rating: Math.round((totalSum / totalCount) * 10) / 10, reviewCount: totalCount };
+}
+
+/**
+ * Recompute a business's displayed `rating`/`reviewCount` from its baseline
+ * plus all manually-submitted reviews, and persist the result (along with the
+ * baseline itself, so future calls stay stable even if `rating`/`reviewCount`
+ * on the document are legacy/combined values).
+ *
+ * Pass `baseRating`/`baseReviewCount` explicitly when refreshing after a fresh
+ * import (e.g. from Google) so the new external numbers become the baseline.
+ * Otherwise the business's stored baseline is used, falling back to its
+ * current `rating`/`reviewCount` the first time (freezing that as the baseline
+ * going forward).
+ */
+export async function refreshBusinessRating(
+  slug: string,
+  overrides?: { baseRating?: number; baseReviewCount?: number }
+): Promise<Business | null> {
+  const business = await getBusinessBySlug(slug);
+  if (!business) return null;
+
+  const baseRating = overrides?.baseRating ?? business.baseRating ?? business.rating ?? 0;
+  const baseReviewCount =
+    overrides?.baseReviewCount ?? business.baseReviewCount ?? business.reviewCount ?? 0;
+
+  const manualReviews = await getManualReviewAggregate(slug);
+  const combined = combineRatingWithReviews(baseRating, baseReviewCount, manualReviews);
+
+  return updateBusiness(slug, {
+    baseRating,
+    baseReviewCount,
+    rating: combined.rating,
+    reviewCount: combined.reviewCount,
+  });
 }
 
 export async function ensureBusinessLocation(business: Business): Promise<void> {

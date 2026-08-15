@@ -11,6 +11,8 @@ import {
   getBusinessCountsByCity,
   getBusinessesByCity,
   getBusinessPhotos,
+  getManualReviewAggregate,
+  combineRatingWithReviews,
   upsertBusiness,
   ensureBusinessLocation,
   type Business,
@@ -210,6 +212,8 @@ function toBusiness(place: PlaceResult, city: City): Business {
     description: `${name} provides mobile tire services in and around ${city.name}, ${city.stateCode}. Call for availability, pricing, and service area details.`,
     rating: place.rating ?? 0,
     reviewCount: place.userRatingCount ?? 0,
+    baseRating: place.rating ?? 0,
+    baseReviewCount: place.userRatingCount ?? 0,
     ...(place.websiteUri ? { website: place.websiteUri } : {}),
     ...(hours ? { hours } : {}),
     ...(place.location
@@ -490,6 +494,17 @@ export async function fetchBusinessesFromPlaces(
               photosAdded++;
               cityPhotos++;
             }
+            // Refresh the Google baseline, but re-blend it with any manually
+            // submitted reviews rather than overwriting `rating`/`reviewCount`
+            // outright — otherwise a re-fetch would silently erase them.
+            const manualReviews = await getManualReviewAggregate(business.slug);
+            const combined = combineRatingWithReviews(
+              business.baseRating ?? 0,
+              business.baseReviewCount ?? 0,
+              manualReviews,
+            );
+            business.rating = combined.rating;
+            business.reviewCount = combined.reviewCount;
             await upsertBusiness(business);
             updated++;
             cityUpdated++;
