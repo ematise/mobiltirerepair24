@@ -9,6 +9,7 @@ type FetchResult = {
   citiesProcessed: number;
   citiesSkipped: number;
   businessesFound: number;
+  rejected: number;
   created: number;
   updated: number;
   photosAdded: number;
@@ -18,6 +19,7 @@ type FetchResult = {
     city: string;
     stateCode: string;
     count: number;
+    rejected?: number;
     skipped?: boolean;
   }>;
 };
@@ -124,6 +126,7 @@ export default function BusinessFetcher({ onComplete }: { onComplete?: () => voi
           <p>
             <strong>{result.dryRun ? 'Preview' : 'Saved'}:</strong>{' '}
             {result.businessesFound} businesses across {result.citiesProcessed} cities
+            {result.rejected > 0 && <> · {result.rejected} rejected (outside US / too far)</>}
             {result.citiesSkipped > 0 && (
               <> · {result.citiesSkipped} skipped (already have 3+)</>
             )}
@@ -145,6 +148,7 @@ export default function BusinessFetcher({ onComplete }: { onComplete?: () => voi
                 .map((row) => (
                   <li key={`${row.city}-${row.stateCode}`}>
                     {row.city}, {row.stateCode}: {row.count}
+                    {row.rejected ? ` (${row.rejected} rejected)` : ''}
                   </li>
                 ))}
             </ul>

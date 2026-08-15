@@ -62,6 +62,15 @@ button:focus-visible {
   }
 }
 
+/* Prevent iOS Safari from zooming when focusing inputs with font-size < 16px */
+@media (max-width: 767px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="file"]):not([type="image"]),
+  textarea,
+  select {
+    font-size: 1rem !important;
+  }
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -228,17 +237,21 @@ button:focus-visible {
 }
 
 .site-logo {
-  font-family: var(--font-body), system-ui, sans-serif;
-  font-weight: 500;
-  font-size: 0.9375rem;
-  color: var(--color-heading);
-  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
   text-decoration: none;
   flex-shrink: 0;
 }
 
-.site-logo:hover {
-  color: var(--color-cta);
+.site-logo-img {
+  display: block;
+  margin-top: 0.3rem;
+  height: 1.2rem;
+  width: auto;
+}
+
+.site-logo:hover .site-logo-img {
+  opacity: 0.85;
 }
 
 .site-logo:focus-visible {
@@ -315,6 +328,25 @@ button:focus-visible {
   .site-header-search-toggle,
   .site-header-back {
     display: none;
+  }
+
+  .site-header-inner {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 24rem) 1fr;
+  }
+
+  .site-logo {
+    justify-self: start;
+  }
+
+  .site-header-search {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .site-header-nav {
+    margin-left: 0;
+    justify-self: end;
   }
 }
 

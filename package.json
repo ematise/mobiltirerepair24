@@ -8,6 +8,7 @@
     "start": "next start",
     "fetch:businesses": "tsx scripts/fetch-businesses.ts",
     "fix:hours": "tsx scripts/fix-hours.ts",
+    "audit:locations": "tsx scripts/audit-locations.ts",
     "seed": "tsx scripts/seed.ts",
     "seed:import": "tsx scripts/seed.ts --import-json",
     "seed:geography": "tsx scripts/seed.ts --upsert-geography",

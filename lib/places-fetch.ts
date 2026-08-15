@@ -16,6 +16,12 @@ import {
   type Business,
   type City,
 } from './data';
+import {
+  cityBoundingBox,
+  US_WIDE_RECTANGLE,
+  validateUsPlace,
+  type LocationRectangle,
+} from './us-location';
 
 // ── Places API (New) response types ───────────────────────────────────────────
 
@@ -146,6 +152,7 @@ export type FetchBusinessesResult = {
   citiesProcessed: number;
   citiesSkipped: number;
   businessesFound: number;
+  rejected: number;
   created: number;
   updated: number;
   photosAdded: number;
@@ -155,6 +162,7 @@ export type FetchBusinessesResult = {
     city: string;
     stateCode: string;
     count: number;
+    rejected?: number;
     skipped?: boolean;
   }>;
 };
@@ -216,6 +224,7 @@ async function searchTextPage(
   cacheKey: string,
   useCache: boolean,
   stats: { apiCalls: number; cacheHits: number },
+  locationRestriction: LocationRectangle,
   pageToken?: string,
 ): Promise<SearchResponse> {
   const cacheDir = getCacheDir();
@@ -237,6 +246,8 @@ async function searchTextPage(
       },
       body: JSON.stringify({
         textQuery: query,
+        regionCode: 'US',
+        locationRestriction: { rectangle: locationRestriction },
         ...(pageToken ? { pageToken } : {}),
       }),
     },
@@ -369,6 +380,7 @@ export async function fetchBusinessesFromPlaces(
   let updated = 0;
   let photosAdded = 0;
   let businessesFound = 0;
+  let rejected = 0;
   let citiesProcessed = 0;
   let citiesSkipped = 0;
   let citiesFailed = 0;
@@ -397,10 +409,18 @@ export async function fetchBusinessesFromPlaces(
 
     const needed = Math.max(0, MAX_BUSINESSES_PER_CITY - existingCount);
     const query = `mobile tire repair in ${city.name}, ${city.stateCode}`;
+    const cityBounds = cityBoundingBox(city);
+    const locationRestriction = cityBounds ?? US_WIDE_RECTANGLE;
+    if (!cityBounds) {
+      console.warn(
+        `  ⚠ ${city.name}, ${city.stateCode} has no coordinates — using US-wide search bounds; fix in /admin/cities`,
+      );
+    }
     let pageToken: string | undefined;
     let cityCount = 0;
     let cityUpdated = 0;
     let cityPhotos = 0;
+    let cityRejected = 0;
     citiesProcessed++;
 
     const taskLabel = needsPhotoBackfill
@@ -412,12 +432,19 @@ export async function fetchBusinessesFromPlaces(
 
     let cityFailed = false;
     for (let page = 0; page < pages; page++) {
-      // Cache key includes "photos-loc" so older Text Search caches (without photo
-      // resource names or location) are not reused after this feature was added.
-      const cacheKey = `${city.slug}-${city.stateCode.toLowerCase()}-p${page + 1}-photos-loc`;
+      // Cache key versioned so older unbounded / non-US-filtered responses are not reused.
+      const cacheKey = `${city.slug}-${city.stateCode.toLowerCase()}-p${page + 1}-us-v2`;
       let data: SearchResponse;
       try {
-        data = await searchTextPage(apiKey, query, cacheKey, useCache, stats, pageToken);
+        data = await searchTextPage(
+          apiKey,
+          query,
+          cacheKey,
+          useCache,
+          stats,
+          locationRestriction,
+          pageToken,
+        );
       } catch (err) {
         console.log(`failed`);
         console.warn(`  ⚠ Places search failed: ${(err as Error).message}`);
@@ -428,6 +455,24 @@ export async function fetchBusinessesFromPlaces(
 
       for (const place of data.places ?? []) {
         if (seen.has(place.id) || !isRelevant(place) || !place.displayName) continue;
+
+        const locationCheck = validateUsPlace({
+          lat: place.location?.latitude,
+          lng: place.location?.longitude,
+          address: place.formattedAddress,
+          city,
+        });
+        if (!locationCheck.ok) {
+          rejected++;
+          cityRejected++;
+          const label = place.displayName.text;
+          const addr = place.formattedAddress ?? 'no address';
+          console.warn(`  ⚠ skipped ${label} — ${locationCheck.reason} (${addr})`);
+          continue;
+        }
+        if (locationCheck.warning) {
+          console.warn(`  ℹ ${place.displayName.text} — ${locationCheck.warning}`);
+        }
 
         const business = toBusiness(place, city);
         const existingPhotos = await withTimeout(
@@ -477,16 +522,22 @@ export async function fetchBusinessesFromPlaces(
     }
 
     if (cityFailed) {
-      cityResults.push({ city: city.name, stateCode: city.stateCode, count: 0 });
+      cityResults.push({ city: city.name, stateCode: city.stateCode, count: 0, rejected: cityRejected });
       continue;
     }
 
     const parts = [`${cityCount} new`];
     if (cityUpdated > 0) parts.push(`${cityUpdated} updated`);
     if (cityPhotos > 0) parts.push(`${cityPhotos} photos`);
+    if (cityRejected > 0) parts.push(`${cityRejected} rejected`);
     console.log(`done (${parts.join(', ')})`);
 
-    cityResults.push({ city: city.name, stateCode: city.stateCode, count: cityCount });
+    cityResults.push({
+      city: city.name,
+      stateCode: city.stateCode,
+      count: cityCount,
+      rejected: cityRejected,
+    });
   }
 
   if (citiesFailed > 0) {
@@ -497,6 +548,7 @@ export async function fetchBusinessesFromPlaces(
     citiesProcessed,
     citiesSkipped,
     businessesFound,
+    rejected,
     created,
     updated,
     photosAdded,

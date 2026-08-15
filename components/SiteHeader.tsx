@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { ArrowLeft, Search, X } from 'lucide-react';
@@ -57,7 +58,14 @@ export default function SiteHeader() {
         )}
 
         <Link href="/" className="site-logo" aria-label="MobileTireRepair24 — Home">
-          MobileTireRepair24
+          <Image
+            src="/logo.png"
+            alt="MobileTireRepair24"
+            width={2172}
+            height={724}
+            priority
+            className="site-logo-img"
+          />
         </Link>
 
         <div className="site-header-search">

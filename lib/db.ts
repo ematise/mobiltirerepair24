@@ -1,4 +1,5 @@
 import { MongoClient, type Db } from 'mongodb';
+import { resolveMongoUri } from './mongodb-uri';
 
 const DB_NAME = 'mobiltirerepair24';
 
@@ -14,21 +15,40 @@ function getMongoUri(): string {
 declare global {
   // eslint-disable-next-line no-var
   var _mongoClient: MongoClient | undefined;
+  // eslint-disable-next-line no-var
+  var _mongoResolvedUri: string | undefined;
 }
 
 let client: MongoClient | null = null;
+let resolvedUriPromise: Promise<string> | null = null;
 
 const MONGO_OPTIONS = {
   serverSelectionTimeoutMS: 10_000,
   connectTimeoutMS: 10_000,
 } as const;
 
+function getResolvedUri(): Promise<string> {
+  if (!resolvedUriPromise) {
+    resolvedUriPromise = (async () => {
+      if (process.env.NODE_ENV === 'development' && global._mongoResolvedUri) {
+        return global._mongoResolvedUri;
+      }
+      const resolved = await resolveMongoUri(getMongoUri());
+      if (process.env.NODE_ENV === 'development') {
+        global._mongoResolvedUri = resolved;
+      }
+      return resolved;
+    })();
+  }
+  return resolvedUriPromise;
+}
+
 function createMongoClient(uri: string): MongoClient {
   return new MongoClient(uri, MONGO_OPTIONS);
 }
 
 export async function getDb(): Promise<Db> {
-  const uri = getMongoUri();
+  const uri = await getResolvedUri();
 
   if (!client) {
     if (process.env.NODE_ENV === 'development') {

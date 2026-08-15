@@ -78,6 +78,9 @@ async function main() {
     console.log(`Cities skipped (already have 3+): ${result.citiesSkipped}`);
   }
   console.log(`Businesses found: ${result.businessesFound}`);
+  if (result.rejected > 0) {
+    console.log(`Rejected (outside US / too far): ${result.rejected}`);
+  }
   if (!dryRun) {
     console.log(
       `Created: ${result.created} · Updated: ${result.updated} · Photos added: ${result.photosAdded}`,
