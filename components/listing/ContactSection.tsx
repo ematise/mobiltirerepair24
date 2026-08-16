@@ -1,12 +1,17 @@
+'use client';
+
 import { Phone, Mail, Globe, MapPin } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import SectionContainer from './SectionContainer';
+import { trackCallClick } from '@/lib/analytics';
 
 export interface ContactSectionProps {
   phone: string;
   phoneDisplay: string;
   address: string;
+  businessSlug: string;
+  citySlug: string;
   website?: string;
   email?: string;
 }
@@ -17,12 +22,14 @@ function ContactRow({
   value,
   href,
   ariaLabel,
+  onClick,
 }: {
   icon: LucideIcon;
   label: string;
   value: string;
   href?: string;
   ariaLabel?: string;
+  onClick?: () => void;
 }) {
   const inner = (
     <div className="flex items-center gap-3.5 px-3.5 py-3.5">
@@ -42,6 +49,7 @@ function ContactRow({
         href={href}
         className="block hover:bg-surface-hover transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-cta"
         aria-label={ariaLabel}
+        onClick={onClick}
       >
         {inner}
       </a>
@@ -55,9 +63,13 @@ export default function ContactSection({
   phone,
   phoneDisplay,
   address,
+  businessSlug,
+  citySlug,
   website,
   email,
 }: ContactSectionProps) {
+  const trackCall = () => trackCallClick(businessSlug, citySlug);
+
   return (
     <SectionContainer>
       <SectionHeading>Contact & location</SectionHeading>
@@ -68,6 +80,7 @@ export default function ContactSection({
           value={phoneDisplay}
           href={`tel:${phone}`}
           ariaLabel={`Call ${phoneDisplay}`}
+          onClick={trackCall}
         />
         <ContactRow icon={MapPin} label="Location" value={address} />
         {email && (

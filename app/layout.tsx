@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { EB_Garamond, Lato } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import Link from 'next/link';
 import { getAllCities, getAllStates } from '@/lib/data';
@@ -35,6 +37,11 @@ export const metadata: Metadata = {
     shortcut: '/favicon.png',
     apple: '/favicon.png',
   },
+  ...(process.env.GOOGLE_SITE_VERIFICATION && {
+    verification: {
+      google: process.env.GOOGLE_SITE_VERIFICATION,
+    },
+  }),
 };
 
 export default async function RootLayout({
@@ -92,6 +99,8 @@ export default async function RootLayout({
           </div>
         </footer>
         </AppShell>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

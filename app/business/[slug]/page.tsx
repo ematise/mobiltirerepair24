@@ -121,6 +121,7 @@ export default async function BusinessPage({ params }: Props) {
             <CTAButtonGroup
               phone={biz.phone}
               slug={biz.slug}
+              citySlug={city.slug}
               name={biz.name}
               address={biz.address}
               responseTime={biz.responseTime}
@@ -165,6 +166,8 @@ export default async function BusinessPage({ params }: Props) {
             phone={biz.phone}
             phoneDisplay={biz.phoneDisplay}
             address={biz.address}
+            businessSlug={biz.slug}
+            citySlug={city.slug}
             website={biz.website}
             email={biz.email}
           />
@@ -192,7 +195,7 @@ export default async function BusinessPage({ params }: Props) {
         </div>
       </div>
 
-      <StickyBusinessCTA phone={biz.phone} name={biz.name} />
+      <StickyBusinessCTA phone={biz.phone} name={biz.name} slug={biz.slug} citySlug={city.slug} />
     </>
   );
 }

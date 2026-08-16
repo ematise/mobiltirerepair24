@@ -3,10 +3,12 @@
 import { Phone, MessageSquare, MapPin, Share } from 'lucide-react';
 import { useState } from 'react';
 import Button from '@/components/ui/Button';
+import { trackCallClick } from '@/lib/analytics';
 
 export interface CTAButtonGroupProps {
   phone: string;
   slug: string;
+  citySlug: string;
   name: string;
   address: string;
   responseTime?: string;
@@ -14,11 +16,15 @@ export interface CTAButtonGroupProps {
 
 export default function CTAButtonGroup({
   phone,
+  slug,
+  citySlug,
   name,
   address,
   responseTime,
 }: CTAButtonGroupProps) {
   const [copied, setCopied] = useState(false);
+
+  const trackCall = () => trackCallClick(slug, citySlug);
 
   const handleShare = async () => {
     const url = window.location.href;
@@ -53,6 +59,7 @@ export default function CTAButtonGroup({
         size="lg"
         block
         aria-label={`Call ${name}`}
+        onClick={trackCall}
       >
         <Phone className="w-5 h-5" strokeWidth={2} fill="currentColor" aria-hidden="true" />
         Call now
@@ -63,7 +70,7 @@ export default function CTAButtonGroup({
       </p>
 
       <div className="grid grid-cols-3 gap-2.5 mt-4">
-        <Button href={`sms:${phone}`} variant="secondary" tile aria-label={`Text ${name}`}>
+        <Button href={`sms:${phone}`} variant="secondary" tile aria-label={`Text ${name}`} onClick={trackCall}>
           <MessageSquare className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" />
           Text
         </Button>

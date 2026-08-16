@@ -3,15 +3,22 @@
 import { useEffect, useState } from 'react';
 import { MessageSquare, Phone } from 'lucide-react';
 import Button from '@/components/ui/Button';
+import { trackCallClick } from '@/lib/analytics';
 
 export default function StickyBusinessCTA({
   phone,
   name,
+  slug,
+  citySlug,
 }: {
   phone: string;
   name: string;
+  slug: string;
+  citySlug: string;
 }) {
   const [visible, setVisible] = useState(false);
+
+  const trackCall = () => trackCallClick(slug, citySlug);
 
   useEffect(() => {
     const sentinel = document.getElementById('business-primary-cta');
@@ -39,11 +46,11 @@ export default function StickyBusinessCTA({
       aria-hidden={!visible}
     >
       <div className="max-w-lg mx-auto px-4 py-3 flex gap-2.5">
-        <Button href={`sms:${phone}`} variant="secondary" className="w-[32%]" aria-label={`Text ${name}`}>
+        <Button href={`sms:${phone}`} variant="secondary" className="w-[32%]" aria-label={`Text ${name}`} onClick={trackCall}>
           <MessageSquare className="w-[18px] h-[18px]" strokeWidth={2} aria-hidden="true" />
           Text
         </Button>
-        <Button href={`tel:${phone}`} variant="primary" className="flex-1" aria-label={`Call ${name}`}>
+        <Button href={`tel:${phone}`} variant="primary" className="flex-1" aria-label={`Call ${name}`} onClick={trackCall}>
           <Phone className="w-[18px] h-[18px]" strokeWidth={2} fill="currentColor" aria-hidden="true" />
           Call now
         </Button>
