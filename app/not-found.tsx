@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllStates } from '@/lib/data';
+
+export const metadata: Metadata = {
+  title: 'Page Not Found | MobileTireRepair24',
+  description:
+    'The page you are looking for does not exist. Browse mobile tire repair services by state on MobileTireRepair24.',
+  robots: { index: false, follow: true },
+};
 
 export default async function NotFound() {
   const states = await getAllStates();
