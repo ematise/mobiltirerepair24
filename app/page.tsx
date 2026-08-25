@@ -18,7 +18,7 @@ import {
   getBusinessCount,
   getTopRatedBusinesses,
   getPopularCities,
-  isCityIndexable,
+  getIndexableCityKeys,
 } from '@/lib/data';
 import { homeMetadata } from '@/lib/seo';
 import { buildWebSiteSchema, buildOrganizationSchema, buildFAQSchema } from '@/lib/schema';
@@ -99,10 +99,8 @@ export default async function HomePage() {
     getAllServices(),
   ]);
 
-  const indexableCities = await Promise.all(
-    allCities.map((c) => isCityIndexable(c.slug, c.state)),
-  );
-  const cities = allCities.filter((_, i) => indexableCities[i]);
+  const indexableCityKeys = await getIndexableCityKeys();
+  const cities = allCities.filter((c) => indexableCityKeys.has(`${c.slug}:${c.state}`));
   const cityNames = new Map(allCities.map((c) => [c.slug, c.name]));
 
   const popularCityLinks = popularCities.map((c) => ({
